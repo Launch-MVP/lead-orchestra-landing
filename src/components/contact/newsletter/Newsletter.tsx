@@ -206,7 +206,7 @@ export const Newsletter = () => {
 						</div>
 						<Button
 							type="submit"
-							className="h-12 whitespace-nowrap bg-gradient-to-r from-primary to-focus px-6 transition-opacity hover:opacity-90"
+							className="h-12 whitespace-nowrap bg-gradient-to-r from-primary to-focus px-6 text-white transition-opacity hover:opacity-90"
 							disabled={isSubmitting}
 						>
 							{isSubmitting ? 'Subscribing...' : 'Subscribe'}{' '}
