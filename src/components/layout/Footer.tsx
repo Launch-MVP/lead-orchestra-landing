@@ -157,7 +157,7 @@ export const Footer: React.FC<FooterProps> = ({
 								<a
 									target="_blank"
 									href={`mailto:${contactInfo.email}`}
-									className="flex items-center justify-center text-black transition-colors hover:text-primary dark:text-white dark:hover:text-primary"
+									className="flex items-center justify-center text-black transition-colors hover:text-primary md:justify-center lg:justify-center dark:text-white dark:hover:text-primary"
 									rel="noreferrer"
 								>
 									<Mail className="mr-2 h-4 w-4" />
@@ -168,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({
 								<a
 									target="_blank"
 									href={`tel:${contactInfo.phone}`}
-									className="flex items-center justify-center text-black transition-colors hover:text-primary dark:text-white dark:hover:text-primary"
+									className="flex items-center justify-center text-black transition-colors hover:text-primary md:justify-center lg:justify-center dark:text-white dark:hover:text-primary"
 									rel="noreferrer"
 								>
 									<Phone className="mr-2 h-4 w-4" />
@@ -176,7 +176,7 @@ export const Footer: React.FC<FooterProps> = ({
 								</a>
 							</li>
 							<li>
-								<div className="flex items-center justify-center text-black dark:text-white">
+								<div className="flex items-center justify-center text-black md:justify-center lg:justify-center dark:text-white">
 									<MapPin className="mr-2 h-4 w-4 flex-shrink-0" />
 									<span>{contactInfo.address}</span>
 								</div>

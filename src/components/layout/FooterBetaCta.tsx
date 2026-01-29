@@ -55,8 +55,8 @@ export function FooterBetaCta({ className = '' }: { className?: string }) {
 					href="/contact?utm_source=founders-circle-footer"
 					className="flex w-full justify-center lg:w-auto lg:justify-start"
 				>
-					<Button className="flex w-full items-center justify-center bg-gradient-to-r from-primary to-focus text-black transition-opacity hover:opacity-90 md:w-auto dark:text-white">
-						Get Free Leads <ArrowRight className="ml-2 h-4 w-4" />
+					<Button className="flex w-full items-center justify-center whitespace-nowrap bg-gradient-to-r from-primary to-focus text-black text-sm transition-opacity hover:opacity-90 md:w-auto dark:text-white">
+						Get Free Leads <ArrowRight className="ml-1 h-4 w-4" />
 					</Button>
 				</Link>
 				<a
