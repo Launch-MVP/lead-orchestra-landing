@@ -107,7 +107,7 @@ const HowItWorksCarousel: React.FC<HowItWorksCarouselProps> = ({
 				{/* Step content card */}
 				<div className="flex min-h-[320px] max-w-xl flex-1 flex-col items-center justify-center rounded-2xl border border-primary/10 bg-card p-8 shadow-xl">
 					<div className="mb-4 flex flex-col items-center gap-2">
-						<span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary font-bold text-card-foreground text-xl shadow">
+						<span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground text-xl shadow">
 							{howItWorks[activeIndex].stepNumber}
 						</span>
 						<h4 className="mt-2 mb-1 text-center font-semibold text-2xl text-primary">
@@ -143,7 +143,7 @@ const HowItWorksCarousel: React.FC<HowItWorksCarouselProps> = ({
 					onClick={prevStep}
 					disabled={activeIndex === 0}
 					type="button"
-					className={`flex h-10 w-10 items-center justify-center rounded-full p-0 shadow-md transition-colors ${activeIndex === 0 ? 'cursor-not-allowed bg-primary/30 text-card-foreground' : 'bg-primary text-card-foreground hover:bg-primary/80'}`}
+					className={`flex h-10 w-10 items-center justify-center rounded-full p-0 shadow-md transition-colors ${activeIndex === 0 ? 'cursor-not-allowed bg-muted text-muted-foreground' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
 					aria-label="Previous step"
 				>
 					<svg
@@ -167,7 +167,7 @@ const HowItWorksCarousel: React.FC<HowItWorksCarouselProps> = ({
 							key={uuidv4()}
 							type="button"
 							onClick={() => goToStep(i)}
-							className={`h-3 w-3 rounded-full transition-all duration-200 ${i === activeIndex ? 'w-6 bg-primary' : 'bg-gray-400'}`}
+							className={`h-3 w-3 rounded-full transition-all duration-200 ${i === activeIndex ? 'w-6 bg-primary' : 'bg-muted-foreground/40'}`}
 							aria-label={`Go to item ${i + 1}`}
 						/>
 					))}
@@ -176,7 +176,7 @@ const HowItWorksCarousel: React.FC<HowItWorksCarouselProps> = ({
 					type="button"
 					onClick={nextStep}
 					disabled={activeIndex === stepsCount - 1}
-					className={`flex h-10 w-10 items-center justify-center rounded-full p-0 shadow-md transition-colors ${activeIndex === stepsCount - 1 ? 'cursor-not-allowed bg-primary/30 text-card-foreground' : 'bg-primary text-card-foreground hover:bg-primary/80'}`}
+					className={`flex h-10 w-10 items-center justify-center rounded-full p-0 shadow-md transition-colors ${activeIndex === stepsCount - 1 ? 'cursor-not-allowed bg-muted text-muted-foreground' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
 					aria-label="Next step"
 				>
 					<svg
