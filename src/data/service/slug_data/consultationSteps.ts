@@ -7,27 +7,27 @@ export interface ConsultationStep {
 export const betaSignupSteps: ConsultationStep[] = [
 	{
 		number: 1,
-		title: 'Request Founders Circle Access',
+		title: 'Request Lead Orchestra Access',
 		description:
-			'Start your Founders Circle application. We only approve a limited number of operators so every member receives tailored support and direct influence over the roadmap.',
+			'Start your application and get 100 free high-intent leads. We only approve a limited number of operators so every member receives tailored support and direct influence over the roadmap.',
 	},
 	{
 		number: 2,
-		title: 'Unlock Founders Circle Perks',
+		title: 'Unlock Your 100 Free Leads',
 		description:
-			'Complete a short profile about your business goals. Unlock your Founders Circle perks—5 AI credits, exclusive newsletter access, locked pricing, and bonus credits upon approval.',
+			'Complete a short profile about your business goals. Unlock your Lead Orchestra perks—100 free leads, exclusive newsletter access, locked pricing, and bonus leads upon approval.',
 	},
 	{
 		number: 3,
-		title: 'Gain Early Access',
+		title: 'Launch Your Lead Gen Pilot',
 		description:
-			'As a Founders Circle member, your feedback directly shapes our roadmap. Vote on upcoming features and secure priority access to every release before public launch.',
+			'Once approved, we kick off a high-intent lead generation pilot tailored to your ICP. Optional automated outreach plan available to turn leads into booked calls.',
 	},
 	{
 		number: 4,
 		title: "You're In!",
 		description:
-			'Welcome aboard! Watch for your onboarding email with your 5 AI credits, Founders Circle community access, and everything you need to automate your deal flow.',
+			'Welcome aboard! Watch for your onboarding email with your 100 free leads, community access, and everything you need to automate your lead generation.',
 	},
 ];
 export const affiliateProgramSteps: ConsultationStep[] = [

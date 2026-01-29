@@ -1,6 +1,6 @@
 'use client';
 
-import AuthGuard from '@/components/auth/AuthGuard';
+import NotionEmbed from '@/components/contact/form/NotionEmbed';
 import ContactForm from '@/components/contact/form/ContactForm';
 import { ContactInfo } from '@/components/contact/form/ContactInfo';
 import { type ContactStep, ContactSteps } from '@/components/contact/form/ContactSteps';
@@ -256,11 +256,15 @@ const Contact = () => {
 	const shouldRenderExitIntent = exitIntentEnabled();
 
 	const content = (
-		<AuthGuard>
+		<>
 			<div className="container mx-auto px-6 py-24">
 				<div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
 					<div className="lg:col-span-7">
-						<ContactForm prefill={prefill} />
+						<NotionEmbed
+							src="https://garnet-pantry-446.notion.site/ebd/2bfe9c25ecb080ca8d6cf98208561b51"
+							height="700"
+							title="Contact Form"
+						/>
 					</div>
 					<div className="flex flex-col lg:col-span-5">
 						<ScheduleMeeting />
@@ -328,7 +332,7 @@ const Contact = () => {
 				)}
 				<Newsletter />
 			</div>
-		</AuthGuard>
+		</>
 	);
 
 	return shouldRenderExitIntent ? (

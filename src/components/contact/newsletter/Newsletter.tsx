@@ -29,7 +29,7 @@ const PERSONA_N8N_CONTENT: Record<
 	}
 > = {
 	developer: {
-		title: 'N8N Lead Gen Workflows',
+		title: 'The Growth Conductor N8N Lead Gen Workflows',
 		description:
 			'Ready-to-use n8n workflows for automating Lead Orchestra scraping jobs. Connect your MCP plugins to n8n for end-to-end automation, from scraping to data export.',
 		features: [
@@ -40,7 +40,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	agency: {
-		title: 'N8N Lead Gen Workflows',
+		title: 'The Growth Conductor N8N Lead Gen Workflows',
 		description:
 			'Automate your lead generation pipeline with n8n. Connect Lead Orchestra scraping to your CRM, automate data processing, and scale your client delivery.',
 		features: [
@@ -51,7 +51,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	startup: {
-		title: 'N8N Lead Gen Workflows',
+		title: 'The Growth Conductor N8N Lead Gen Workflows',
 		description:
 			'Build your MVP faster with pre-built n8n workflows. Automate lead scraping, data normalization, and export without building infrastructure from scratch.',
 		features: [
@@ -62,7 +62,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	enterprise: {
-		title: 'N8N Lead Gen Workflows',
+		title: 'The Growth Conductor N8N Lead Gen Workflows',
 		description:
 			'Enterprise-grade n8n workflows for scaling your data operations. Integrate Lead Orchestra with your existing stack, automate compliance, and ensure data quality.',
 		features: [

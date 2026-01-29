@@ -50,7 +50,7 @@ export function BetaStickyBanner() {
 					className="inline-flex w-full min-w-[10rem] items-center justify-center rounded-full bg-white px-4 py-2 font-semibold text-black text-xs transition hover:bg-white/90 sm:w-auto sm:px-5 sm:text-sm md:text-xs lg:text-sm"
 					href="/contact?utm_source=founders-circle"
 				>
-					Get 100 free leads
+					Get 100 free high intent leads
 				</Link>
 			</div>
 		</div>
