@@ -87,7 +87,7 @@ export const NewsletterFooter = () => {
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center">
-			<div className="flex min-h-[220px] w-full max-w-md flex-col gap-4 rounded-lg bg-white/5 p-5 shadow-black/10 shadow-lg dark:shadow-black/40">
+			<div className="flex w-full max-w-md flex-col gap-4 rounded-lg bg-white/5 p-5 shadow-black/10 shadow-lg dark:shadow-black/40">
 				{hydrated && isSubscribed ? (
 					<div className="flex w-full flex-col items-center justify-center text-center">
 						<p className="mb-2 font-semibold text-lg text-primary">You're subscribed! 🎉</p>
@@ -112,7 +112,7 @@ export const NewsletterFooter = () => {
 							</div>
 							<Button
 								type="submit"
-								className="flex h-10 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-primary to-focus font-semibold text-black shadow-lg transition-opacity hover:opacity-90 hover:shadow-primary/20 dark:text-white"
+								className="flex h-10 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-primary to-focus font-semibold text-white shadow-lg transition-opacity hover:opacity-90 hover:shadow-primary/20"
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? 'Subscribing...' : 'Subscribe'}
