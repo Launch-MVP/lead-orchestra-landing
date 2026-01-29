@@ -20,6 +20,193 @@ export type CaseStudyCopyright = {
 
 export const caseStudies: CaseStudy[] = [
 	{
+		id: "peridot-ig-activation-001",
+		title: "Peridot: Competitor Lead Capture + Instagram DM Activation Engine",
+		subtitle:
+			"A high-velocity acquisition loop combining competitor-adjacent sourcing with automated Instagram outreach and conversion-ready flows.",
+		referenceLink: "",
+		slug: "peridot-competitor-lead-capture-instagram-activation",
+		categories: ["acquisition", "activation", "lead-generation"],
+		industries: ["consumer-apps", "social", "dating"],
+		copyright: {
+			title: "Want a repeatable acquisition loop like this?",
+			subtitle:
+				"We build lead systems that source, qualify, and activate audiences with measurable conversion hooks.",
+			ctaText: "Talk to Us!",
+			ctaLink: "/contact",
+		},
+		tags: [
+			"Competitor Stream",
+			"Instagram Outreach",
+			"Aged Account Ops",
+			"ManyChat-Ready",
+			"Deduplication",
+			"Compliance-Aware",
+		],
+		clientName: "Peridot",
+		clientDescription:
+			"A consumer social app focused on real-world connections and community-driven matching.",
+		featuredImage:
+			"https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		thumbnailImage: "/case-studies/peridot/thumb.png",
+		businessChallenges: [
+			"Needed rapid user acquisition without hiring a large outbound team",
+			"Wanted competitor-adjacent targeting (competitor surfaces) while staying within approved/public sourcing constraints",
+			"Required consistent outreach volume despite platform messaging limits and rate restrictions",
+			"Needed a workflow that could scale with predictable weekly delivery and measurable activation steps",
+			"Had to keep data structure clean for dedupe, segmentation, and downstream CRM/activation",
+		],
+		lastModified: new Date("2026-01-29T00:00:00.000Z"),
+		howItWorks: [
+			{
+				stepNumber: 1,
+				title: "Define Targeting + Streams",
+				subtitle: "Lock targeting spec + volume plan",
+				description:
+					"We align on market radius, demographic filters, exclusion rules, and two-stream inputs: Competitor Stream (competitor surfaces) + Creator Stream (public IG/TikTok follower surfaces).",
+				label: "Spec + Inputs",
+				positionLabel: "Kickoff",
+				payload: [
+					{ name: "Targeting Spec", value: 30, fill: "#3b82f6" },
+					{ name: "Source List", value: 35, fill: "#22c55e" },
+					{ name: "Exclusions", value: 35, fill: "#f59e0b" },
+				],
+				indicator: "line",
+				icon: "SlidersHorizontal",
+			},
+			{
+				stepNumber: 2,
+				title: "Source + Normalize Leads",
+				subtitle: "Raw-only writes, then qualification",
+				description:
+					"Scrape to Raw tables only, create provisional dedupe keys, then run deterministic qualification using the Targeting Spec (market match, distance estimate, disqualification reasons).",
+				label: "Raw → Qualified",
+				positionLabel: "Pipeline",
+				payload: [
+					{ name: "Raw Capture", value: 40, fill: "#60a5fa" },
+					{ name: "Qualification", value: 35, fill: "#34d399" },
+					{ name: "Dedupe Prep", value: 25, fill: "#a78bfa" },
+				],
+				indicator: "line",
+				icon: "Database",
+			},
+			{
+				stepNumber: 3,
+				title: "Social Attribution + Identity Recovery",
+				subtitle: "IG handle + name fields when available",
+				description:
+					"For qualified competitor leads, we attempt social-first attribution (IG handle) and best-available name extraction when present on-source (no guessing).",
+				label: "Enrichment",
+				positionLabel: "Jobs A/B",
+				payload: [
+					{ name: "IG Attribution", value: 45, fill: "#22c55e" },
+					{ name: "Name Fields", value: 25, fill: "#f59e0b" },
+					{ name: "Confidence Tags", value: 30, fill: "#3b82f6" },
+				],
+				indicator: "dot",
+				icon: "Fingerprint",
+			},
+			{
+				stepNumber: 4,
+				title: "Automated Outreach Ops",
+				subtitle: "Aged account + controlled DM sending",
+				description:
+					"Outbound is executed from an aged Instagram account with controlled sending, throttling, and a standardized message prompt provided by Client. Client handles handoff + replies unless otherwise contracted.",
+				label: "Outbound",
+				positionLabel: "IG DMs",
+				payload: [
+					{ name: "Rate Limits", value: 35, fill: "#f59e0b" },
+					{ name: "Deliverability", value: 35, fill: "#22c55e" },
+					{ name: "Consistency", value: 30, fill: "#3b82f6" },
+				],
+				indicator: "line",
+				icon: "MessageSquare",
+			},
+			{
+				stepNumber: 5,
+				title: "Delivery + Reporting",
+				subtitle: "Weekly rollups + QA flags",
+				description:
+					"Deliver structured batches with tags (stream, platform, confidence) and clear rollups: volume delivered, dedupe rate, and attribution coverage. Maintain auditability for every record.",
+				label: "Delivery",
+				positionLabel: "Weekly",
+				payload: [
+					{ name: "Batches", value: 40, fill: "#3b82f6" },
+					{ name: "QA + Audit", value: 35, fill: "#a78bfa" },
+					{ name: "Coverage", value: 25, fill: "#22c55e" },
+				],
+				indicator: "dashed",
+				icon: "FileCheck",
+			},
+		],
+		businessOutcomes: [
+			{
+				title: "10,000+ Users",
+				subtitle: "Acquired in under a month",
+			},
+			{
+				title: "80% Discount",
+				subtitle: "Compared to running ads",
+			},
+			{
+				title: "Repeatable System",
+				subtitle: "Launch in other cities outside of Seattle in weeks, not months",
+			},
+			{
+				title: "Campaign Speed",
+				subtitle: "Launch seasonal pushes faster",
+			},
+		],
+		solutions: [
+			"Two-stream sourcing strategy: Competitor Stream (competitor surfaces) + Creator Stream (public IG/TikTok follower surfaces)",
+			"Deterministic qualification layer (market match, distance estimate, disqualification reasons)",
+			"Social-first attribution + confidence tagging for competitor leads",
+			"Aged Instagram account outbound ops with controlled pacing + platform-safe constraints",
+			"Delivery batches + weekly rollups to measure coverage and output quality",
+		],
+		techStacks: [
+			{
+				category: "Data + Ops",
+				libraries: [
+					{
+						name: "Notion / Sheet Delivery",
+						description: "Batch delivery + rollups for weekly drops.",
+					},
+					{
+						name: "Deduplication Rules",
+						description: "Provisional keys + canonical merge strategy.",
+					},
+				],
+			},
+			{
+				category: "Automation",
+				libraries: [
+					{
+						name: "Instagram DM Ops",
+						description: "Controlled message sending from aged account.",
+					},
+					{
+						name: "Qualification Jobs",
+						description: "Deterministic scoring from targeting spec.",
+					},
+				],
+			},
+		],
+		description:
+			"Peridot needed a scalable way to acquire users quickly using competitor-adjacent discovery while maintaining clean delivery structure and realistic platform constraints. Deal Scale implemented a two-stream sourcing model, added deterministic qualification, applied social-first attribution for competitor leads, and executed controlled Instagram outbound from an aged account. The result is a repeatable acquisition loop with auditability, clear confidence tagging, and weekly delivery cadence that supports fast campaign launches.",
+		results: [
+			{ title: "Generated", value: "20,000+ High Intent Leads" },
+			{ title: "Delivery structure", value: "Batched + tagged + deduped" },
+			{
+				title: "Attribution strategy",
+				value: "Social-first (IG handle) where available",
+			},
+			{ title: "Campaign readiness", value: "Seasonal/launch pushes supported" },
+		],
+		featured: true,
+		redirectToContact: true,
+	},
+	{
 		id: "bookt-custom-lead-engine-01",
 		title:
 			"How Bookt Closed 70% of Deals Using a Custom Lead Generation Engine",

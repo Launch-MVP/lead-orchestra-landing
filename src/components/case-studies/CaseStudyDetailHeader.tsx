@@ -70,7 +70,7 @@ const CaseStudyDetailHeader = ({ caseStudy }: CaseStudyDetailHeaderProps) => {
 							{caseStudy.tags.map((tag, index) => (
 								<span
 									key={uuidv4()}
-									className="rounded-full bg-white/5 px-3 py-1 text-black text-sm dark:text-white/70"
+									className="rounded-full bg-primary/10 px-3 py-1 font-medium text-primary text-sm"
 								>
 									{tag}
 								</span>

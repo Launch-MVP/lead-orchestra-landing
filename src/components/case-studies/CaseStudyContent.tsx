@@ -45,7 +45,7 @@ const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 					</div>
 				</motion.div>
 
-				<div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-2">
+				<div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
 					<motion.div
 						variants={container}
 						initial="hidden"
@@ -56,7 +56,7 @@ const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 							title="Business Challenges"
 							centered
 							description=""
-							className="mb-12"
+							className="mb-6"
 							size="small"
 						/>
 						<ul className="space-y-4">
@@ -85,7 +85,7 @@ const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 							title="Our Solutions"
 							centered
 							description=""
-							className="mb-12"
+							className="mb-6"
 							size="small"
 						/>
 						<ul className="space-y-4">
