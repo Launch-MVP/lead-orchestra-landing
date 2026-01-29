@@ -211,10 +211,10 @@ const Testimonials = ({ testimonials, title, subtitle }: TestimonialsProps) => {
 									{personaSpecificTestimonials.slice(0, 5).map((testimonial, index) => (
 										<motion.button
 											key={testimonial.id}
-											className={`h-2 w-2 rounded-full border border-white/20 transition-all duration-300 sm:h-3 sm:w-3 ${
+											className={`h-2 w-2 rounded-full border border-black/10 transition-all duration-300 sm:h-3 sm:w-3 dark:border-white/20 ${
 												currentIndex === index
 													? 'w-4 bg-primary sm:w-6'
-													: 'bg-white/10 hover:bg-white/20'
+													: 'bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20'
 											}`}
 											onClick={() => setCurrentIndex(index)}
 											aria-label={`View testimonial ${index + 1}`}
@@ -229,7 +229,7 @@ const Testimonials = ({ testimonials, title, subtitle }: TestimonialsProps) => {
 										<Button
 											variant="outline"
 											size="sm"
-											className="border-transparent bg-white/5 text-white hover:bg-white/10 dark:border-primary/30"
+											className="border-black/10 bg-black/5 text-black hover:bg-black/10 dark:border-primary/30 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
 											onClick={prevTestimonial}
 											aria-label="Previous testimonial"
 										>
@@ -240,7 +240,7 @@ const Testimonials = ({ testimonials, title, subtitle }: TestimonialsProps) => {
 										<Button
 											variant="outline"
 											size="sm"
-											className="border-transparent bg-white/5 text-white hover:bg-white/10 dark:border-primary/30"
+											className="border-black/10 bg-black/5 text-black hover:bg-black/10 dark:border-primary/30 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
 											onClick={nextTestimonial}
 											aria-label="Next testimonial"
 										>

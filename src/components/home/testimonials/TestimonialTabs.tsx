@@ -32,7 +32,7 @@ export function TestimonialTabs({
 							<TabsTrigger
 								key={tab}
 								value={tab}
-								className="flex min-w-[120px] flex-none items-center justify-center whitespace-nowrap rounded-full px-4 py-2 font-medium text-sm transition-colors data-[state=active]:bg-primary/25 data-[state=active]:text-black sm:min-w-[140px] sm:flex-1 sm:px-6 sm:text-base dark:text-white/70 data-[state=active]:dark:text-white"
+								className="flex min-w-[90px] flex-none items-center justify-center whitespace-nowrap rounded-full px-4 py-2 font-medium text-xs transition-colors data-[state=active]:bg-primary/25 data-[state=active]:text-black sm:min-w-[140px] sm:flex-1 sm:px-6 sm:text-base dark:text-white/70 data-[state=active]:dark:text-white"
 								data-active={isActive}
 							>
 								{TAB_LABELS[tab]}
