@@ -151,7 +151,7 @@ export const Footer: React.FC<FooterProps> = ({
 					</div>
 
 					<div className="flex flex-col items-center text-center md:col-span-2 md:items-center md:justify-center md:text-center lg:col-span-1 lg:items-start lg:text-left">
-						<h3 className="mb-4 font-semibold text-lg">Get in Touch</h3>
+						<h3 className="mb-4 text-center font-semibold text-lg md:text-center lg:text-left">Get in Touch</h3>
 						<ul className="w-full space-y-3">
 							<li>
 								<a
@@ -183,7 +183,7 @@ export const Footer: React.FC<FooterProps> = ({
 							</li>
 						</ul>
 						<div className="mt-4 flex w-full justify-center lg:justify-start">
-							<FooterBetaCta className="w-full max-w-sm" />
+							<FooterBetaCta className="w-full max-w-xs md:max-w-sm" />
 						</div>
 						<FooterPersonaPrompt className="mt-4 text-center md:mt-6 md:text-center lg:text-left" />
 					</div>
