@@ -81,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({
 			<div className="pointer-events-none absolute inset-0 bg-grid-lines opacity-10" />
 
 			<div className="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center md:justify-items-center md:text-center lg:grid-cols-4 lg:items-start lg:justify-items-start lg:gap-6 lg:text-left">
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center md:justify-items-center md:text-center lg:grid-cols-4 lg:items-start lg:gap-6 lg:text-left">
 					<div className="col-span-1 flex flex-col items-center text-center md:col-span-2 md:justify-center md:text-center lg:col-span-1 lg:items-start lg:text-left">
 						<div className="mb-4 flex w-full justify-center lg:justify-start">
 							<Link href="/" className="w-full max-w-[200px] lg:max-w-none">
