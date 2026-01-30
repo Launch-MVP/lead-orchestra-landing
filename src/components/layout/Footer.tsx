@@ -85,18 +85,18 @@ export const Footer: React.FC<FooterProps> = ({
 					<div className="col-span-1 flex flex-col items-center text-center md:col-span-2 md:justify-center md:text-center lg:col-span-1 lg:items-start lg:text-left">
 						<div className="mb-4 flex w-full justify-center lg:justify-start">
 							<Link href="/" className="w-full max-w-[200px] lg:max-w-none">
-								{/* Light logo for light mode */}
+								{/* Dark logo for light mode */}
 								<Image
-									src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Light%20Horizontal%20Lg.png"
+									src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png"
 									alt="Lead Orchestra"
 									width={300}
 									height={76}
 									className="block h-auto w-full dark:hidden"
 									priority
 								/>
-								{/* Dark logo for dark mode */}
+								{/* Light logo for dark mode */}
 								<Image
-									src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png"
+									src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Light%20Horizontal%20Lg.png"
 									alt="Lead Orchestra"
 									width={300}
 									height={76}

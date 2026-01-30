@@ -315,7 +315,7 @@ export const buildKnowledgeGraphSchema = () => {
 		legalName: companyData.companyLegalName ?? organization.legalName,
 		foundingDate: "2025-10-29",
 		logo: buildAbsoluteUrl(
-			"/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Light%20Horizontal%20Lg.png",
+			"/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png",
 		),
 		areaServed: AREA_SERVED,
 		knowsAbout: KNOWS_ABOUT,
