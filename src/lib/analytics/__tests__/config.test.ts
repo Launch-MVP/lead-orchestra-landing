@@ -1,10 +1,10 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const originalEnv = { ...process.env };
 
 const loadModule = async () => {
 	vi.resetModules();
-	return import('../config');
+	return import("../config");
 };
 
 beforeEach(() => {
@@ -15,73 +15,74 @@ afterEach(() => {
 	process.env = { ...originalEnv };
 });
 
-describe('getAnalyticsConfig', () => {
-	it('prefers NEXT_PUBLIC env vars when both scopes are present', async () => {
-		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = 'public-clarity';
-		process.env.CLARITY_PROJECT_ID = 'private-clarity';
-		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = 'ga-public';
-		process.env.GOOGLE_ANALYTICS_ID = 'ga-private';
-		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = 'gtm-public';
-		process.env.GOOGLE_TAG_MANAGER_ID = 'gtm-private';
-		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = 'zoho-public';
-		process.env.ZOHO_SALES_IQ_WIDGET_CODE = 'zoho-private';
-		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = 'fb-public';
-		process.env.FACEBOOK_PIXEL_ID = 'fb-private';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = 'public.example';
-		process.env.PLAUSIBLE_DOMAIN = 'private.example';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = 'https://public.example/event';
-		process.env.PLAUSIBLE_ENDPOINT = 'https://private.example/event';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = 'https://public.example/script.js';
-		process.env.PLAUSIBLE_SCRIPT_SRC = 'https://private.example/script.js';
+describe("getAnalyticsConfig", () => {
+	it("prefers NEXT_PUBLIC env vars when both scopes are present", async () => {
+		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = "public-clarity";
+		process.env.CLARITY_PROJECT_ID = "private-clarity";
+		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = "ga-public";
+		process.env.GOOGLE_ANALYTICS_ID = "ga-private";
+		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = "gtm-public";
+		process.env.GOOGLE_TAG_MANAGER_ID = "gtm-private";
+		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = "zoho-public";
+		process.env.ZOHO_SALES_IQ_WIDGET_CODE = "zoho-private";
+		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = "fb-public";
+		process.env.FACEBOOK_PIXEL_ID = "fb-private";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = "public.example";
+		process.env.PLAUSIBLE_DOMAIN = "private.example";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = "https://public.example/event";
+		process.env.PLAUSIBLE_ENDPOINT = "https://private.example/event";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC =
+			"https://public.example/script.js";
+		process.env.PLAUSIBLE_SCRIPT_SRC = "https://private.example/script.js";
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
 
 		expect(result.config).toEqual({
-			clarityId: 'public-clarity',
-			gaId: 'ga-public',
-			gtmId: 'gtm-public',
-			zohoCode: 'zoho-public',
-			facebookPixelId: 'fb-public',
-			plausibleDomain: 'public.example',
-			plausibleEndpoint: 'https://public.example/event',
-			plausibleScriptSrc: 'https://public.example/script.js',
+			clarityId: "public-clarity",
+			gaId: "ga-public",
+			gtmId: "gtm-public",
+			zohoCode: "zoho-public",
+			facebookPixelId: "fb-public",
+			plausibleDomain: "public.example",
+			plausibleEndpoint: "https://public.example/event",
+			plausibleScriptSrc: "https://public.example/script.js",
 		});
 		expect(result.fallbacksUsed).toEqual({});
 		expect(result.errors).toHaveLength(0);
 		expect(result.warnings).toHaveLength(0);
 	});
 
-	it('falls back to private env vars when NEXT_PUBLIC values are missing', async () => {
-		delete process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
-		delete process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
-		delete process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID;
-		delete process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE;
-		delete process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC;
-		process.env.CLARITY_PROJECT_ID = 'private-clarity';
-		process.env.GOOGLE_ANALYTICS_ID = 'ga-private';
-		process.env.GOOGLE_TAG_MANAGER_ID = 'gtm-private';
-		process.env.ZOHO_SALES_IQ_WIDGET_CODE = 'zoho-private';
-		process.env.FACEBOOK_PIXEL_ID = 'fb-private';
-		process.env.PLAUSIBLE_DOMAIN = 'private.example';
-		process.env.PLAUSIBLE_ENDPOINT = 'https://private.example/event';
-		process.env.PLAUSIBLE_SCRIPT_SRC = 'https://private.example/script.js';
+	it("falls back to private env vars when NEXT_PUBLIC values are missing", async () => {
+		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = undefined;
+		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = undefined;
+		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = undefined;
+		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = undefined;
+		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = undefined;
+		process.env.CLARITY_PROJECT_ID = "private-clarity";
+		process.env.GOOGLE_ANALYTICS_ID = "ga-private";
+		process.env.GOOGLE_TAG_MANAGER_ID = "gtm-private";
+		process.env.ZOHO_SALES_IQ_WIDGET_CODE = "zoho-private";
+		process.env.FACEBOOK_PIXEL_ID = "fb-private";
+		process.env.PLAUSIBLE_DOMAIN = "private.example";
+		process.env.PLAUSIBLE_ENDPOINT = "https://private.example/event";
+		process.env.PLAUSIBLE_SCRIPT_SRC = "https://private.example/script.js";
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
 
 		expect(result.config).toEqual({
-			clarityId: 'private-clarity',
-			gaId: 'ga-private',
-			gtmId: 'gtm-private',
-			zohoCode: 'zoho-private',
-			facebookPixelId: 'fb-private',
-			plausibleDomain: 'private.example',
-			plausibleEndpoint: 'https://private.example/event',
-			plausibleScriptSrc: 'https://private.example/script.js',
+			clarityId: "private-clarity",
+			gaId: "ga-private",
+			gtmId: "gtm-private",
+			zohoCode: "zoho-private",
+			facebookPixelId: "fb-private",
+			plausibleDomain: "private.example",
+			plausibleEndpoint: "https://private.example/event",
+			plausibleScriptSrc: "https://private.example/script.js",
 		});
 		expect(result.fallbacksUsed).toEqual({
 			clarityId: true,
@@ -96,87 +97,95 @@ describe('getAnalyticsConfig', () => {
 		expect(result.errors).toHaveLength(0);
 		expect(result.warnings).toEqual([
 			{
-				field: 'clarityId',
-				message: 'Using fallback environment variable CLARITY_PROJECT_ID for clarityId.',
-			},
-			{
-				field: 'gaId',
-				message: 'Using fallback environment variable GOOGLE_ANALYTICS_ID for gaId.',
-			},
-			{
-				field: 'gtmId',
-				message: 'Using fallback environment variable GOOGLE_TAG_MANAGER_ID for gtmId.',
-			},
-			{
-				field: 'zohoCode',
-				message: 'Using fallback environment variable ZOHO_SALES_IQ_WIDGET_CODE for zohoCode.',
-			},
-			{
-				field: 'facebookPixelId',
-				message: 'Using fallback environment variable FACEBOOK_PIXEL_ID for facebookPixelId.',
-			},
-			{
-				field: 'plausibleDomain',
-				message: 'Using fallback environment variable PLAUSIBLE_DOMAIN for plausibleDomain.',
-			},
-			{
-				field: 'plausibleEndpoint',
-				message: 'Using fallback environment variable PLAUSIBLE_ENDPOINT for plausibleEndpoint.',
-			},
-			{
-				field: 'plausibleScriptSrc',
+				field: "clarityId",
 				message:
-					'Using fallback environment variable PLAUSIBLE_SCRIPT_SRC for plausibleScriptSrc.',
+					"Using fallback environment variable CLARITY_PROJECT_ID for clarityId.",
+			},
+			{
+				field: "gaId",
+				message:
+					"Using fallback environment variable GOOGLE_ANALYTICS_ID for gaId.",
+			},
+			{
+				field: "gtmId",
+				message:
+					"Using fallback environment variable GOOGLE_TAG_MANAGER_ID for gtmId.",
+			},
+			{
+				field: "zohoCode",
+				message:
+					"Using fallback environment variable ZOHO_SALES_IQ_WIDGET_CODE for zohoCode.",
+			},
+			{
+				field: "facebookPixelId",
+				message:
+					"Using fallback environment variable FACEBOOK_PIXEL_ID for facebookPixelId.",
+			},
+			{
+				field: "plausibleDomain",
+				message:
+					"Using fallback environment variable PLAUSIBLE_DOMAIN for plausibleDomain.",
+			},
+			{
+				field: "plausibleEndpoint",
+				message:
+					"Using fallback environment variable PLAUSIBLE_ENDPOINT for plausibleEndpoint.",
+			},
+			{
+				field: "plausibleScriptSrc",
+				message:
+					"Using fallback environment variable PLAUSIBLE_SCRIPT_SRC for plausibleScriptSrc.",
 			},
 		]);
 	});
 
-	it('uses NEXT_PUBLIC values even when NODE_ENV is production', async () => {
-		process.env.NODE_ENV = 'production';
-		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = 'public-clarity';
-		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = 'ga-public';
-		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = 'gtm-public';
-		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = 'zoho-public';
-		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = 'fb-public';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = 'public.example';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = 'https://public.example/event';
-		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = 'https://public.example/script.js';
+	it("uses NEXT_PUBLIC values even when NODE_ENV is production", async () => {
+		process.env.NODE_ENV = "production";
+		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = "public-clarity";
+		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = "ga-public";
+		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = "gtm-public";
+		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = "zoho-public";
+		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = "fb-public";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = "public.example";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = "https://public.example/event";
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC =
+			"https://public.example/script.js";
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
 
 		expect(result.config).toEqual({
-			clarityId: 'public-clarity',
-			gaId: 'ga-public',
-			gtmId: 'gtm-public',
-			zohoCode: 'zoho-public',
-			facebookPixelId: 'fb-public',
-			plausibleDomain: 'public.example',
-			plausibleEndpoint: 'https://public.example/event',
-			plausibleScriptSrc: 'https://public.example/script.js',
+			clarityId: "public-clarity",
+			gaId: "ga-public",
+			gtmId: "gtm-public",
+			zohoCode: "zoho-public",
+			facebookPixelId: "fb-public",
+			plausibleDomain: "public.example",
+			plausibleEndpoint: "https://public.example/event",
+			plausibleScriptSrc: "https://public.example/script.js",
 		});
 		expect(result.fallbacksUsed).toEqual({});
 		expect(result.errors).toHaveLength(0);
 		expect(result.warnings).toEqual([]);
 	});
 
-	it('reports warnings when no environment variables are defined', async () => {
-		delete process.env.CLARITY_PROJECT_ID;
-		delete process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
-		delete process.env.GOOGLE_ANALYTICS_ID;
-		delete process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
-		delete process.env.GOOGLE_TAG_MANAGER_ID;
-		delete process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID;
-		delete process.env.ZOHO_SALES_IQ_WIDGET_CODE;
-		delete process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE;
-		delete process.env.FACEBOOK_PIXEL_ID;
-		delete process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
-		delete process.env.PLAUSIBLE_DOMAIN;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-		delete process.env.PLAUSIBLE_ENDPOINT;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT;
-		delete process.env.PLAUSIBLE_SCRIPT_SRC;
-		delete process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC;
+	it("reports warnings when no environment variables are defined", async () => {
+		process.env.CLARITY_PROJECT_ID = undefined;
+		process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID = undefined;
+		process.env.GOOGLE_ANALYTICS_ID = undefined;
+		process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS = undefined;
+		process.env.GOOGLE_TAG_MANAGER_ID = undefined;
+		process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = undefined;
+		process.env.ZOHO_SALES_IQ_WIDGET_CODE = undefined;
+		process.env.NEXT_PUBLIC_ZOHOSALESIQ_WIDGETCODE = undefined;
+		process.env.FACEBOOK_PIXEL_ID = undefined;
+		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = undefined;
+		process.env.PLAUSIBLE_DOMAIN = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = undefined;
+		process.env.PLAUSIBLE_ENDPOINT = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = undefined;
+		process.env.PLAUSIBLE_SCRIPT_SRC = undefined;
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = undefined;
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
@@ -186,36 +195,36 @@ describe('getAnalyticsConfig', () => {
 		expect(result.errors).toEqual([]);
 		expect(result.warnings).toEqual([
 			{
-				field: 'clarityId',
-				message: 'Analytics provider clarityId is not configured.',
+				field: "clarityId",
+				message: "Analytics provider clarityId is not configured.",
 			},
 			{
-				field: 'gaId',
-				message: 'Analytics provider gaId is not configured.',
+				field: "gaId",
+				message: "Analytics provider gaId is not configured.",
 			},
 			{
-				field: 'gtmId',
-				message: 'Analytics provider gtmId is not configured.',
+				field: "gtmId",
+				message: "Analytics provider gtmId is not configured.",
 			},
 			{
-				field: 'zohoCode',
-				message: 'Analytics provider zohoCode is not configured.',
+				field: "zohoCode",
+				message: "Analytics provider zohoCode is not configured.",
 			},
 			{
-				field: 'facebookPixelId',
-				message: 'Analytics provider facebookPixelId is not configured.',
+				field: "facebookPixelId",
+				message: "Analytics provider facebookPixelId is not configured.",
 			},
 			{
-				field: 'plausibleDomain',
-				message: 'Analytics provider plausibleDomain is not configured.',
+				field: "plausibleDomain",
+				message: "Analytics provider plausibleDomain is not configured.",
 			},
 			{
-				field: 'plausibleEndpoint',
-				message: 'Analytics provider plausibleEndpoint is not configured.',
+				field: "plausibleEndpoint",
+				message: "Analytics provider plausibleEndpoint is not configured.",
 			},
 			{
-				field: 'plausibleScriptSrc',
-				message: 'Analytics provider plausibleScriptSrc is not configured.',
+				field: "plausibleScriptSrc",
+				message: "Analytics provider plausibleScriptSrc is not configured.",
 			},
 		]);
 		expect(result.hasErrors).toBe(false);
