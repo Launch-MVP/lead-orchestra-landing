@@ -2,13 +2,6 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { type ReactNode, createElement } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const plausibleInit = vi.fn();
-
-vi.mock("@plausible-analytics/tracker", () => ({
-	__esModule: true,
-	init: plausibleInit,
-}));
-
 const analyticsSpy = vi.fn((props: { config: Record<string, unknown> }) =>
 	createElement("div", {
 		"data-testid": "analytics",
@@ -44,12 +37,12 @@ describe("DeferredThirdParties", () => {
 
 	beforeEach(() => {
 		analyticsSpy.mockClear();
-		plausibleInit.mockClear();
 		fetchMock = vi.fn();
 		globalThis.fetch = fetchMock as unknown as typeof fetch;
 		console.warn = vi.fn();
 		document.body.innerHTML = "";
 		document.head.innerHTML = "";
+		(window as { plausible?: unknown }).plausible = undefined;
 		// Reset consent to default (true) before each test
 		mockUseAnalyticsConsent.mockReturnValue({ hasConsented: true });
 	});
@@ -109,7 +102,7 @@ describe("DeferredThirdParties", () => {
 		}
 	});
 
-	it("initializes Plausible when a domain is configured", async () => {
+	it("injects Plausible when a domain is configured", async () => {
 		vi.useFakeTimers();
 		try {
 			const { DeferredThirdParties } = await import("../DeferredThirdParties");
@@ -131,14 +124,18 @@ describe("DeferredThirdParties", () => {
 				await Promise.resolve();
 			});
 
-			await waitFor(() =>
-				expect(plausibleInit).toHaveBeenCalledWith({
-					domain: "example.com",
-					endpoint: "https://plausible.io/api/event",
-					autoCapturePageviews: true,
-					captureOnLocalhost: false,
-				}),
-			);
+			await waitFor(() => {
+				const script = document.getElementById("plausible-script");
+				const plausibleWindow = window as Window & {
+					plausible?: { init?: () => void };
+				};
+				expect(script).not.toBeNull();
+				expect(script?.getAttribute("data-domain")).toBe("example.com");
+				expect(script?.getAttribute("src")).toBe(
+					"https://plausible.io/js/script.js",
+				);
+				expect(typeof plausibleWindow.plausible?.init).toBe("function");
+			});
 		} finally {
 			vi.useRealTimers();
 		}
@@ -171,7 +168,42 @@ describe("DeferredThirdParties", () => {
 			});
 
 			await waitFor(() => {
-				expect(plausibleInit).not.toHaveBeenCalled();
+				expect(document.getElementById("plausible-script")).toBeNull();
+			});
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+
+	it("uses the configured Plausible script src when provided", async () => {
+		vi.useFakeTimers();
+		try {
+			const { DeferredThirdParties } = await import("../DeferredThirdParties");
+
+			render(
+				<DeferredThirdParties
+					initialConfig={{
+						plausibleScriptSrc:
+							"https://plausible.io/js/pa-uzI24OsydHMNF3gBn4Trt.js",
+					}}
+				/>,
+			);
+
+			act(() => {
+				fireEvent.pointerMove(window);
+			});
+
+			await act(async () => {
+				vi.runOnlyPendingTimers();
+				await Promise.resolve();
+			});
+
+			await waitFor(() => {
+				const script = document.getElementById("plausible-script");
+				expect(script).not.toBeNull();
+				expect(script?.getAttribute("src")).toBe(
+					"https://plausible.io/js/pa-uzI24OsydHMNF3gBn4Trt.js",
+				);
 			});
 		} finally {
 			vi.useRealTimers();

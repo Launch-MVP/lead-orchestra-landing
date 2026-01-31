@@ -34,6 +34,7 @@ interface AppProvidersProps {
 	facebookPixelId?: string;
 	plausibleDomain?: string;
 	plausibleEndpoint?: string;
+	plausibleScriptSrc?: string;
 	initialAnalyticsConfig?: Partial<AnalyticsConfig>;
 }
 
@@ -52,6 +53,7 @@ export function AppProviders({
 	facebookPixelId,
 	plausibleDomain,
 	plausibleEndpoint,
+	plausibleScriptSrc,
 	initialAnalyticsConfig,
 }: AppProvidersProps) {
 	const [queryClient] = useState(() => new QueryClient());
@@ -97,6 +99,7 @@ export function AppProviders({
 			facebookPixelId,
 			plausibleDomain,
 			plausibleEndpoint,
+			plausibleScriptSrc,
 			initialAnalyticsConfig,
 		}),
 		[
@@ -105,6 +108,7 @@ export function AppProviders({
 			initialAnalyticsConfig,
 			plausibleDomain,
 			plausibleEndpoint,
+			plausibleScriptSrc,
 			zohoWidgetCode,
 		],
 	);

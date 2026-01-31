@@ -13,6 +13,7 @@ type ClientExperienceProps = {
 	facebookPixelId?: string;
 	plausibleDomain?: string;
 	plausibleEndpoint?: string;
+	plausibleScriptSrc?: string;
 	initialAnalyticsConfig?: Partial<AnalyticsConfig>;
 };
 
@@ -22,6 +23,7 @@ export function ClientExperience({
 	facebookPixelId,
 	plausibleDomain,
 	plausibleEndpoint,
+	plausibleScriptSrc,
 	initialAnalyticsConfig,
 }: ClientExperienceProps) {
 	return (
@@ -35,6 +37,7 @@ export function ClientExperience({
 				facebookPixelId={facebookPixelId}
 				plausibleDomain={plausibleDomain}
 				plausibleEndpoint={plausibleEndpoint}
+				plausibleScriptSrc={plausibleScriptSrc}
 				initialConfig={initialAnalyticsConfig}
 			/>
 		</>

@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { Analytics } from "@/components/analytics/Analytics";
+import { useAnalyticsConsent } from "@/contexts/analytics-consent-context";
 import type {
 	AnalyticsConfig,
 	AnalyticsField,
 	AnalyticsIssue,
 } from "@/lib/analytics/config";
-
-import { Analytics } from "@/components/analytics/Analytics";
-import { useAnalyticsConsent } from "@/contexts/analytics-consent-context";
 import { useDeferredLoad } from "./useDeferredLoad";
 
 const ANALYTICS_FIELDS: AnalyticsField[] = [
@@ -18,9 +17,12 @@ const ANALYTICS_FIELDS: AnalyticsField[] = [
 	"facebookPixelId",
 	"plausibleDomain",
 	"plausibleEndpoint",
+	"plausibleScriptSrc",
 ];
 
 const DEFAULT_PLAUSIBLE_ENDPOINT = "https://plausible.io/api/event";
+const DEFAULT_PLAUSIBLE_SCRIPT_SRC = "https://plausible.io/js/script.js";
+const PLAUSIBLE_SCRIPT_ID = "plausible-script";
 
 const DEFAULT_RETRY_DELAY_MS = 2000;
 const DEFAULT_MAX_RETRIES = 3;
@@ -62,40 +64,85 @@ const MicrosoftClarityScript = ({ projectId }: { projectId?: string }) => {
 const PlausibleScript = ({
 	domain,
 	endpoint,
+	scriptSrc,
 }: {
 	domain?: string;
 	endpoint?: string;
+	scriptSrc?: string;
 }) => {
 	useEffect(() => {
-		if (!domain || typeof window === "undefined") {
+		if (typeof window === "undefined") {
 			return;
 		}
 
-		let isMounted = true;
+		if (!domain && !scriptSrc) {
+			return;
+		}
 
-		const load = async () => {
-			try {
-				const { init } = await import("@plausible-analytics/tracker");
-				if (!isMounted) {
-					return;
-				}
-				init({
-					domain,
-					endpoint: endpoint || DEFAULT_PLAUSIBLE_ENDPOINT,
-					autoCapturePageviews: true,
-					captureOnLocalhost: false,
-				});
-			} catch (error) {
-				warnLog("Failed to initialize Plausible Analytics.", error);
-			}
+		let shouldCleanup = false;
+		const resolvedScriptSrc = scriptSrc || DEFAULT_PLAUSIBLE_SCRIPT_SRC;
+		const plausibleWindow = window as Window & {
+			plausible?: ((...args: unknown[]) => void) & {
+				q?: unknown[];
+				o?: Record<string, unknown>;
+				init?: (options?: Record<string, unknown>) => void;
+			};
 		};
 
-		void load();
+		const ensurePlausibleStub = () => {
+			if (!plausibleWindow.plausible) {
+				plausibleWindow.plausible = ((...args: unknown[]) => {
+					const queue = plausibleWindow.plausible?.q || [];
+					queue.push(args);
+					plausibleWindow.plausible =
+						plausibleWindow.plausible ?? (() => undefined);
+					plausibleWindow.plausible.q = queue;
+				}) as typeof plausibleWindow.plausible;
+			}
+
+			if (typeof plausibleWindow.plausible?.init !== "function") {
+				plausibleWindow.plausible =
+					plausibleWindow.plausible ?? (() => undefined);
+				plausibleWindow.plausible.init = (
+					options?: Record<string, unknown>,
+				) => {
+					plausibleWindow.plausible =
+						plausibleWindow.plausible ?? (() => undefined);
+					plausibleWindow.plausible.o = options || {};
+				};
+			}
+
+			plausibleWindow.plausible?.init?.();
+		};
+
+		try {
+			ensurePlausibleStub();
+
+			const existingScript = document.getElementById(PLAUSIBLE_SCRIPT_ID);
+			if (!existingScript) {
+				const script = document.createElement("script");
+				script.id = PLAUSIBLE_SCRIPT_ID;
+				script.async = true;
+				script.src = resolvedScriptSrc;
+				if (domain) {
+					script.setAttribute("data-domain", domain);
+				}
+				if (endpoint && endpoint !== DEFAULT_PLAUSIBLE_ENDPOINT) {
+					script.setAttribute("data-api", endpoint);
+				}
+				document.head.appendChild(script);
+				shouldCleanup = true;
+			}
+		} catch (error) {
+			warnLog("Failed to initialize Plausible Analytics.", error);
+		}
 
 		return () => {
-			isMounted = false;
+			if (shouldCleanup) {
+				document.getElementById(PLAUSIBLE_SCRIPT_ID)?.remove();
+			}
 		};
-	}, [domain, endpoint]);
+	}, [domain, endpoint, scriptSrc]);
 
 	return null;
 };
@@ -178,6 +225,7 @@ interface DeferredThirdPartiesProps {
 	facebookPixelId?: string;
 	plausibleDomain?: string;
 	plausibleEndpoint?: string;
+	plausibleScriptSrc?: string;
 	retryDelayMs?: number;
 	maxRetries?: number;
 	maxWaitMs?: number;
@@ -190,6 +238,7 @@ export function DeferredThirdParties({
 	facebookPixelId,
 	plausibleDomain,
 	plausibleEndpoint,
+	plausibleScriptSrc,
 	retryDelayMs = DEFAULT_RETRY_DELAY_MS,
 	maxRetries = DEFAULT_MAX_RETRIES,
 	maxWaitMs,
@@ -214,6 +263,7 @@ export function DeferredThirdParties({
 			facebookPixelId,
 			plausibleDomain,
 			plausibleEndpoint,
+			plausibleScriptSrc,
 		});
 
 		if (!base.plausibleEndpoint) {
@@ -227,6 +277,7 @@ export function DeferredThirdParties({
 		facebookPixelId,
 		plausibleDomain,
 		plausibleEndpoint,
+		plausibleScriptSrc,
 		zohoWidgetCode,
 	]);
 
@@ -371,12 +422,15 @@ export function DeferredThirdParties({
 		() => ({
 			domain: providerData?.plausibleDomain ?? config.plausibleDomain,
 			endpoint: providerData?.plausibleEndpoint ?? config.plausibleEndpoint,
+			scriptSrc: providerData?.plausibleScriptSrc ?? config.plausibleScriptSrc,
 		}),
 		[
 			config.plausibleDomain,
 			config.plausibleEndpoint,
+			config.plausibleScriptSrc,
 			providerData?.plausibleDomain,
 			providerData?.plausibleEndpoint,
+			providerData?.plausibleScriptSrc,
 		],
 	);
 	const analyticsConfig = useMemo<Pick<AnalyticsConfig, "gaId" | "gtmId">>(
@@ -396,7 +450,8 @@ export function DeferredThirdParties({
 				clarityId ||
 				zohoCode ||
 				resolvedFacebookPixelId ||
-				plausibleConfig.domain,
+				plausibleConfig.domain ||
+				plausibleConfig.scriptSrc,
 		);
 
 	// Debug logging to diagnose production issues (using console.warn so it's visible)
@@ -415,7 +470,8 @@ export function DeferredThirdParties({
 					clarityId ||
 					zohoCode ||
 					resolvedFacebookPixelId ||
-					plausibleConfig.domain,
+					plausibleConfig.domain ||
+					plausibleConfig.scriptSrc,
 			),
 			needsServerConfig,
 			initialConfigGaId: initialConfig?.gaId,
@@ -432,6 +488,7 @@ export function DeferredThirdParties({
 		zohoCode,
 		resolvedFacebookPixelId,
 		plausibleConfig.domain,
+		plausibleConfig.scriptSrc,
 		needsServerConfig,
 		initialConfig?.gaId,
 		config.gaId,
@@ -452,7 +509,8 @@ export function DeferredThirdParties({
 						clarityId ||
 						zohoCode ||
 						resolvedFacebookPixelId ||
-						plausibleConfig.domain,
+						plausibleConfig.domain ||
+						plausibleConfig.scriptSrc,
 				),
 				gaId: analyticsConfig.gaId,
 				gtmId: analyticsConfig.gtmId,
@@ -469,6 +527,7 @@ export function DeferredThirdParties({
 		zohoCode,
 		facebookPixelId: resolvedFacebookPixelId,
 		plausibleDomain: plausibleConfig.domain,
+		plausibleScriptSrc: plausibleConfig.scriptSrc,
 	});
 
 	return (
@@ -479,6 +538,7 @@ export function DeferredThirdParties({
 			<PlausibleScript
 				domain={plausibleConfig.domain}
 				endpoint={plausibleConfig.endpoint}
+				scriptSrc={plausibleConfig.scriptSrc}
 			/>
 		</>
 	);

@@ -31,6 +31,8 @@ describe('getAnalyticsConfig', () => {
 		process.env.PLAUSIBLE_DOMAIN = 'private.example';
 		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = 'https://public.example/event';
 		process.env.PLAUSIBLE_ENDPOINT = 'https://private.example/event';
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = 'https://public.example/script.js';
+		process.env.PLAUSIBLE_SCRIPT_SRC = 'https://private.example/script.js';
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
@@ -43,6 +45,7 @@ describe('getAnalyticsConfig', () => {
 			facebookPixelId: 'fb-public',
 			plausibleDomain: 'public.example',
 			plausibleEndpoint: 'https://public.example/event',
+			plausibleScriptSrc: 'https://public.example/script.js',
 		});
 		expect(result.fallbacksUsed).toEqual({});
 		expect(result.errors).toHaveLength(0);
@@ -57,6 +60,7 @@ describe('getAnalyticsConfig', () => {
 		delete process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
 		delete process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 		delete process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT;
+		delete process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC;
 		process.env.CLARITY_PROJECT_ID = 'private-clarity';
 		process.env.GOOGLE_ANALYTICS_ID = 'ga-private';
 		process.env.GOOGLE_TAG_MANAGER_ID = 'gtm-private';
@@ -64,6 +68,7 @@ describe('getAnalyticsConfig', () => {
 		process.env.FACEBOOK_PIXEL_ID = 'fb-private';
 		process.env.PLAUSIBLE_DOMAIN = 'private.example';
 		process.env.PLAUSIBLE_ENDPOINT = 'https://private.example/event';
+		process.env.PLAUSIBLE_SCRIPT_SRC = 'https://private.example/script.js';
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
@@ -76,6 +81,7 @@ describe('getAnalyticsConfig', () => {
 			facebookPixelId: 'fb-private',
 			plausibleDomain: 'private.example',
 			plausibleEndpoint: 'https://private.example/event',
+			plausibleScriptSrc: 'https://private.example/script.js',
 		});
 		expect(result.fallbacksUsed).toEqual({
 			clarityId: true,
@@ -85,6 +91,7 @@ describe('getAnalyticsConfig', () => {
 			facebookPixelId: true,
 			plausibleDomain: true,
 			plausibleEndpoint: true,
+			plausibleScriptSrc: true,
 		});
 		expect(result.errors).toHaveLength(0);
 		expect(result.warnings).toEqual([
@@ -116,6 +123,11 @@ describe('getAnalyticsConfig', () => {
 				field: 'plausibleEndpoint',
 				message: 'Using fallback environment variable PLAUSIBLE_ENDPOINT for plausibleEndpoint.',
 			},
+			{
+				field: 'plausibleScriptSrc',
+				message:
+					'Using fallback environment variable PLAUSIBLE_SCRIPT_SRC for plausibleScriptSrc.',
+			},
 		]);
 	});
 
@@ -128,6 +140,7 @@ describe('getAnalyticsConfig', () => {
 		process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID = 'fb-public';
 		process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN = 'public.example';
 		process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT = 'https://public.example/event';
+		process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC = 'https://public.example/script.js';
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
@@ -140,6 +153,7 @@ describe('getAnalyticsConfig', () => {
 			facebookPixelId: 'fb-public',
 			plausibleDomain: 'public.example',
 			plausibleEndpoint: 'https://public.example/event',
+			plausibleScriptSrc: 'https://public.example/script.js',
 		});
 		expect(result.fallbacksUsed).toEqual({});
 		expect(result.errors).toHaveLength(0);
@@ -161,6 +175,8 @@ describe('getAnalyticsConfig', () => {
 		delete process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 		delete process.env.PLAUSIBLE_ENDPOINT;
 		delete process.env.NEXT_PUBLIC_PLAUSIBLE_ENDPOINT;
+		delete process.env.PLAUSIBLE_SCRIPT_SRC;
+		delete process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC;
 
 		const { getAnalyticsConfig } = await loadModule();
 		const result = getAnalyticsConfig();
@@ -196,6 +212,10 @@ describe('getAnalyticsConfig', () => {
 			{
 				field: 'plausibleEndpoint',
 				message: 'Analytics provider plausibleEndpoint is not configured.',
+			},
+			{
+				field: 'plausibleScriptSrc',
+				message: 'Analytics provider plausibleScriptSrc is not configured.',
 			},
 		]);
 		expect(result.hasErrors).toBe(false);

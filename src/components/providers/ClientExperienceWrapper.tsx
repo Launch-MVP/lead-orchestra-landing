@@ -11,6 +11,7 @@ type ClientExperienceProps = {
 	facebookPixelId?: string;
 	plausibleDomain?: string;
 	plausibleEndpoint?: string;
+	plausibleScriptSrc?: string;
 	initialAnalyticsConfig?: Partial<AnalyticsConfig>;
 };
 

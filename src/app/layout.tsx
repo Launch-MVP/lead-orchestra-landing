@@ -26,6 +26,7 @@ const {
 	facebookPixelId,
 	plausibleDomain,
 	plausibleEndpoint,
+	plausibleScriptSrc,
 } = initialAnalyticsConfig;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					facebookPixelId={facebookPixelId}
 					plausibleDomain={plausibleDomain}
 					plausibleEndpoint={plausibleEndpoint}
+					plausibleScriptSrc={plausibleScriptSrc}
 					initialAnalyticsConfig={initialAnalyticsConfig}
 				>
 					{children}
