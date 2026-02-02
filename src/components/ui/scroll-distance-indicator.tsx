@@ -79,7 +79,7 @@ export function ScrollDistanceIndicator({
 			)}
 			aria-hidden="true"
 		>
-			<div className="pointer-events-auto relative w-full max-w-7xl px-3" style={{ height }}>
+			<div className="pointer-events-auto relative w-full" style={{ height }}>
 				<div className="absolute inset-0 rounded-full bg-border/40 backdrop-blur-[1px]" />
 				<motion.div
 					className="absolute inset-y-0 left-0 rounded-full bg-primary shadow-[0_0_12px_rgba(99,102,241,0.45)]"

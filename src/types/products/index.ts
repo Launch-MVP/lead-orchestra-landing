@@ -79,6 +79,8 @@ export enum ProductCategory {
 	SalesScripts = 'sales-scripts',
 	Prompts = 'prompts',
 	RemoteClosers = 'remote-closers',
+	Templates = 'Templates',
+	SeoAeo = 'SEO/AEO',
 }
 
 /** Metadata describing an associated downloadable file or external free resource. */

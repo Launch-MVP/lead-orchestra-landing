@@ -1,9 +1,10 @@
-const DEFAULT_HOST = 'https://dealscale.io';
+const DEFAULT_HOST = 'https://leadorchestra.com';
 const DEFAULT_KEY = 'fccf3556b5fa455699db2554f79a235e';
 const DEFAULT_ENDPOINT = 'https://www.bing.com/indexnow';
 
 function resolveHost(): string {
-	const fromEnv = process.env.INDEXNOW_HOST?.trim();
+	// Check INDEXNOW_HOST first, then NEXT_PUBLIC_SITE_URL
+	const fromEnv = (process.env.INDEXNOW_HOST || process.env.NEXT_PUBLIC_SITE_URL)?.trim();
 	if (fromEnv) {
 		try {
 			const url = new URL(fromEnv.startsWith('http') ? fromEnv : `https://${fromEnv}`);
@@ -11,7 +12,7 @@ function resolveHost(): string {
 			return url.toString().replace(/\/$/, '');
 		} catch (error) {
 			throw new Error(
-				`[indexnow] INDEXNOW_HOST is invalid (${fromEnv}): ${(error as Error).message}`
+				`[indexnow] Host URL is invalid (${fromEnv}): ${(error as Error).message}`
 			);
 		}
 	}

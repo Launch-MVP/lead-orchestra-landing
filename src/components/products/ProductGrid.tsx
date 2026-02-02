@@ -37,6 +37,8 @@ const CATEGORY_LABELS: Record<ProductCategory, string> = {
 	'sales-scripts': 'Sales Scripts',
 	prompts: 'Prompts',
 	'remote-closers': "Virtual Assistants (VA's)",
+	Templates: 'Templates',
+	'SEO/AEO': 'SEO/AEO',
 };
 
 const MONETIZE_PORTAL_URL = 'https://app.dealscale.io';
@@ -98,9 +100,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 	// On mount, check for #category=... in the hash and set activeCategory
 	useEffect(() => {
 		if (typeof window !== 'undefined' && window.location.hash.startsWith('#category=')) {
-			const cat = window.location.hash.replace('#category=', '');
+			const cat = decodeURIComponent(window.location.hash.replace('#category=', ''));
 			if (cat && cat !== 'all') {
-				setActiveCategory(cat.toLowerCase());
+				setActiveCategory(cat);
 			}
 		}
 	}, []);
@@ -160,7 +162,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 					p.categories
 						.map(String)
 						.map((s) => s.toLowerCase())
-						.includes(activeCategory)
+						.includes(activeCategory.toLowerCase())
 			);
 		}
 

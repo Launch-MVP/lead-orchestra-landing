@@ -1,4 +1,4 @@
-import { DEFAULT_SEO, STATIC_SEO_META } from '@/data/constants/seo';
+import { DEFAULT_SEO, SITE_URL, STATIC_SEO_META } from '@/data/constants/seo';
 import { buildLegalSeoMetaMap } from './legalSeo';
 import type { SeoMeta } from './seo';
 
@@ -39,7 +39,7 @@ export const staticSeoMeta: Record<string, SeoMeta> = {
 		changeFrequency: 'weekly',
 		title: 'Products | Deal Scale',
 		description: 'Browse our curated collection of digital and physical products from Deal Scale.',
-		canonical: 'https://dealscale.io/products',
+		canonical: `${SITE_URL}/products`,
 		image: DEFAULT_SEO.image,
 		keywords: [...DEFAULT_SEO.keywords, 'products', 'shop', 'catalog'],
 		siteName: DEFAULT_SEO.siteName,

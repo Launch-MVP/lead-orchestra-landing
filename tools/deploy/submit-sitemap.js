@@ -1,13 +1,16 @@
-const DEFAULT_CANONICAL = 'https://dealscale.io';
+const DEFAULT_CANONICAL = 'https://leadorchestra.com';
 
 /**
  * Resolve the canonical base URL for sitemap submissions.
  * @returns {string}
  */
 function resolveCanonicalBase() {
-	const fromEnv = process.env.SITEMAP_CANONICAL_BASE?.trim();
+	// Check SITEMAP_CANONICAL_BASE first, then NEXT_PUBLIC_SITE_URL
+	const fromEnv = (process.env.SITEMAP_CANONICAL_BASE || process.env.NEXT_PUBLIC_SITE_URL)?.trim();
 	if (fromEnv) {
-		return fromEnv.replace(/\/$/, '');
+		// Ensure https protocol and remove trailing slash
+		const normalized = fromEnv.startsWith('http') ? fromEnv : `https://${fromEnv}`;
+		return normalized.replace(/\/$/, '');
 	}
 	return DEFAULT_CANONICAL;
 }

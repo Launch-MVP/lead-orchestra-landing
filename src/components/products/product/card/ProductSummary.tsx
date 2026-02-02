@@ -56,67 +56,83 @@ const insightAccents: Record<
 > = {
 	fear: {
 		label: 'Fear Signal',
-		icon: buildIcon('Fear signal', 'h-4 w-4 text-red-400', [
-			<path
-				key="fear-x"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="m12 9.5 2 2m-2 0 2-2M9 15h6"
-			/>,
-			<path
-				key="fear-outline"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7Z"
-			/>,
-		]),
+		icon: buildIcon(
+			'Fear signal',
+			'h-4 w-4 text-red-600 dark:text-red-400',
+			[
+				<path
+					key="fear-x"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="m12 9.5 2 2m-2 0 2-2M9 15h6"
+				/>,
+				<path
+					key="fear-outline"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7Z"
+				/>,
+			]
+		),
 		trigger:
-			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-red-200 data-[state=open]:bg-red-950/60',
-		content: 'px-4 text-sm leading-relaxed text-red-100',
+			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-red-700 dark:text-red-200 data-[state=open]:bg-red-100 dark:data-[state=open]:bg-red-950/60',
+		content: 'px-4 text-sm leading-relaxed text-red-800 dark:text-red-100',
 	},
 	hope: {
 		label: 'Hope Moment',
-		icon: buildIcon('Hope moment', 'h-4 w-4 text-sky-400', [
-			<path key="hope-hand" strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l3 3" />,
-			<path
-				key="hope-circle"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-			/>,
-		]),
+		icon: buildIcon(
+			'Hope moment',
+			'h-4 w-4 text-sky-600 dark:text-sky-400',
+			[
+				<path key="hope-hand" strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l3 3" />,
+				<path
+					key="hope-circle"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+				/>,
+			]
+		),
 		trigger:
-			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-sky-200 data-[state=open]:bg-sky-950/40',
-		content: 'px-4 text-sm leading-relaxed text-sky-100',
+			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-200 data-[state=open]:bg-sky-100 dark:data-[state=open]:bg-sky-950/40',
+		content: 'px-4 text-sm leading-relaxed text-sky-800 dark:text-sky-100',
 	},
 	pain_point: {
 		label: 'Problem',
-		icon: buildIcon('Problem insight', 'h-4 w-4 text-amber-400', [
-			<path
-				key="pain-exclamation"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M12 9v4m0 4h.01"
-			/>,
-			<path
-				key="pain-circle"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-			/>,
-		]),
+		icon: buildIcon(
+			'Problem insight',
+			'h-4 w-4 text-amber-600 dark:text-amber-400',
+			[
+				<path
+					key="pain-exclamation"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M12 9v4m0 4h.01"
+				/>,
+				<path
+					key="pain-circle"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+				/>,
+			]
+		),
 		trigger:
-			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-amber-200 data-[state=open]:bg-amber-950/40',
-		content: 'px-4 text-sm leading-relaxed text-amber-100',
+			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-200 data-[state=open]:bg-amber-100 dark:data-[state=open]:bg-amber-950/40',
+		content: 'px-4 text-sm leading-relaxed text-amber-800 dark:text-amber-100',
 	},
 	solution: {
 		label: 'Solution',
-		icon: buildIcon('Solution insight', 'h-4 w-4 text-emerald-400', [
-			<path key="solution-check" strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />,
-		]),
+		icon: buildIcon(
+			'Solution insight',
+			'h-4 w-4 text-emerald-600 dark:text-emerald-400',
+			[
+				<path key="solution-check" strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />,
+			]
+		),
 		trigger:
-			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-emerald-200 data-[state=open]:bg-emerald-950/30',
-		content: 'px-4 text-sm leading-relaxed text-emerald-100',
+			'px-4 text-left text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-200 data-[state=open]:bg-emerald-100 dark:data-[state=open]:bg-emerald-950/30',
+		content: 'px-4 text-sm leading-relaxed text-emerald-800 dark:text-emerald-100',
 	},
 };
 

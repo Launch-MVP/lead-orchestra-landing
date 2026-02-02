@@ -66,6 +66,7 @@ const nextConfig: NextConfig = {
 		// Minimum Cache TTL (in seconds) for optimized images
 		minimumCacheTTL: isProd ? 60 : 0,
 		remotePatterns: [
+			{ protocol: 'https', hostname: 'leadorchestra.com' },
 			{ protocol: 'https', hostname: 'dealscale.io' },
 			{ protocol: 'https', hostname: 'vectorlogo.zone' },
 			{ protocol: 'https', hostname: 'placehold.co' },

@@ -4,6 +4,7 @@ import type { BeehiivPost } from '@/types/behiiv';
 import type { CaseStudy } from '@/types/case-study';
 import type { ServiceItemData } from '@/types/service/services';
 import * as React from 'react';
+import { SITE_URL } from '@/data/constants/seo';
 import { defaultSeo } from './staticSeo';
 
 import { getPostByGuid } from '@/lib/medium/get';
@@ -346,7 +347,7 @@ export function getCaseStudySeo(cs: CaseStudy): SeoMeta {
 	return {
 		title: `${cs.title} | Case Study | Deal Scale`,
 		description: cs.subtitle || defaultSeo.description,
-		canonical: `https://dealscale.io/case-studies/${cs.slug}`,
+		canonical: `${SITE_URL}/case-studies/${cs.slug}`,
 		keywords: defaultSeo.keywords,
 		image: cs.featuredImage || defaultSeo.image,
 		type: 'article',
@@ -358,7 +359,7 @@ export function getServiceSeo(service: ServiceItemData): SeoMeta {
 	return {
 		title: `${service.title} | Services | Lead Orchestra`,
 		description: service.description || defaultSeo.description,
-		canonical: `https://dealscale.io/features/${service.slugDetails.slug}`,
+		canonical: `${SITE_URL}/features/${service.slugDetails.slug}`,
 		keywords: defaultSeo.keywords,
 		image: defaultSeo.image,
 		type: 'article',

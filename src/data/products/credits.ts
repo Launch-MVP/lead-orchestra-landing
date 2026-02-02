@@ -193,7 +193,7 @@ export const leadProducts: ProductType[] = [
 		licenseName: LicenseType.Proprietary,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
-			"https://images.unsplash.com/photo-1515169067868-5387a2d0bfe4?w=1200&h=900&fit=crop&q=80",
+			"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=900&fit=crop&q=80",
 		],
 		types: [
 			{ name: "Basic Lead", value: "basic", price: 0.3 },
@@ -208,7 +208,7 @@ export const leadProducts: ProductType[] = [
 		name: "Dating Profile Leads",
 		description:
 			"Build datasets from publicly available profile pages where permitted. Choose Basic for core fields or Enriched for expanded fields when available.",
-		price: 0.1,
+		price: 0.25,
 		sku: "LO-LEADS-DATING",
 		slug: "dating-profile-leads",
 		licenseName: LicenseType.Proprietary,
@@ -217,8 +217,8 @@ export const leadProducts: ProductType[] = [
 			"https://images.unsplash.com/photo-1520975916090-3105956dac38?w=1200&h=900&fit=crop&q=80",
 		],
 		types: [
-			{ name: "Basic Lead", value: "basic", price: 0.1 },
-			{ name: "Enriched Lead", value: "enriched", price: 0.25 },
+			{ name: "Basic Lead", value: "basic", price: 0.25 },
+			{ name: "Enriched Lead", value: "enriched", price: 0.55 },
 		],
 		reviews: defaultLeadReviews,
 		colors: defaultLeadColors,

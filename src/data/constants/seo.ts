@@ -1,12 +1,15 @@
 import { timelineSummary } from '@/data/about/timelineSummary';
 import type { SeoMeta } from '../../utils/seo/seo';
 
+// Site URL from environment variable with fallback
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://leadorchestra.com');
+
 // Default SEO meta for Lead Orchestra
 export const DEFAULT_SEO: SeoMeta = {
 	title: 'Lead Orchestra | Open-Source Lead Scraping & Data Ingestion',
 	description:
 		'Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists. Built for developers, agencies, and data teams.',
-	canonical: 'https://dealscale.io',
+	canonical: SITE_URL,
 	image: '/banners/main.png',
 	keywords: [
 		'open-source lead scraping',
@@ -38,7 +41,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Lead Orchestra | Open-Source Lead Scraping & Data Ingestion',
 		description:
 			'Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists.',
-		canonical: 'https://dealscale.io',
+		canonical: SITE_URL,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 		ratingValue: 5,
@@ -48,7 +51,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Products | Lead Orchestra',
 		description:
 			'Browse our curated collection of lead magnets, MCP plugins, n8n workflows, and scraping tools from Lead Orchestra.',
-		canonical: 'https://dealscale.io/products',
+		canonical: `${SITE_URL}/products`,
 		keywords: [...DEFAULT_SEO.keywords, 'products', 'lead magnets', 'MCP plugins', 'n8n workflows'],
 		image: DEFAULT_SEO.image,
 	},
@@ -56,7 +59,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Blogs | Lead Orchestra',
 		description:
 			'See the latest insights, tutorials, and updates on lead scraping, data ingestion, and developer tools from the Lead Orchestra team.',
-		canonical: 'https://dealscale.io/blogs',
+		canonical: `${SITE_URL}/blogs`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
@@ -64,7 +67,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Pricing | Lead Orchestra',
 		description:
 			'Check out our pricing options and packages for lead scraping credits. Open-source free tier available. Sensible investments for maximal growth.',
-		canonical: 'https://dealscale.io/pricing',
+		canonical: `${SITE_URL}/pricing`,
 		keywords: [
 			'lead orchestra pricing',
 			'scraping credits pricing',
@@ -79,7 +82,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Case Studies | Lead Orchestra',
 		description:
 			'Check out real-world solutions and success stories from developers, agencies, and startups using Lead Orchestra for lead scraping and data ingestion.',
-		canonical: 'https://dealscale.io/case-studies',
+		canonical: `${SITE_URL}/case-studies`,
 		keywords: DEFAULT_SEO.keywords,
 		image: '/banners/CaseStudy2.png',
 	},
@@ -87,7 +90,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Contact | Lead Orchestra',
 		description:
 			'Get in touch with Lead Orchestra for expert lead scraping solutions, MCP plugin support, and developer tools.',
-		canonical: 'https://dealscale.io/contact',
+		canonical: `${SITE_URL}/contact`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
@@ -95,7 +98,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Pilot Priority Access | Deal Scale',
 		description:
 			'Get Pilot Priority Access: Instantly claim 1 free lookalike off-market real estate lead, unlock similarity-driven targeting features, and enjoy unlimited free skip tracing with exclusive early access to our AI-powered tools. Accelerate your deal flow with Deal Scale.',
-		canonical: 'https://dealscale.io/contact-pilot',
+		canonical: `${SITE_URL}/contact-pilot`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
@@ -103,7 +106,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'About Us | Lead Orchestra',
 		description:
 			"Learn about Lead Orchestra's mission to revolutionize lead generation with open-source scraping tools for developers, agencies, and data teams.",
-		canonical: 'https://dealscale.io/about',
+		canonical: `${SITE_URL}/about`,
 		keywords: [
 			'About Lead Orchestra',
 			'Our Mission',
@@ -118,7 +121,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Features | Lead Orchestra',
 		description:
 			"Check out powerful features of Lead Orchestra's scraping engine, including MCP plugins, data normalization, and multi-format export.",
-		canonical: 'https://dealscale.io/features',
+		canonical: `${SITE_URL}/features`,
 		keywords: [
 			'MCP scraping',
 			'data normalization',
@@ -132,7 +135,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'AI for Real Estate Agents | Deal Scale',
 		description:
 			'Supercharge your real estate business with AI-driven lookalike audience expansion inspired by How to Win Friends and Influence People and client management tools for agents.',
-		canonical: 'https://dealscale.io/agents',
+		canonical: `${SITE_URL}/agents`,
 		keywords: [
 			'real estate agent tools',
 			'AI for agents',
@@ -146,7 +149,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'AI for Wholesalers | Deal Scale',
 		description:
 			'The best wholesaling software to automate your outreach, pre-qualify leads, and find motivated sellers faster.',
-		canonical: 'https://dealscale.io/wholesalers',
+		canonical: `${SITE_URL}/wholesalers`,
 		keywords: [
 			'automation for wholesalers',
 			'best wholesaling software',
@@ -159,7 +162,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'AI for Real Estate Investors | Deal Scale',
 		description:
 			'Find and nurture lookalike off-market deals with AI-powered precision, audience expansion features, and similarity scoring. Close more deals and accelerate your sales cycle.',
-		canonical: 'https://dealscale.io/investors',
+		canonical: `${SITE_URL}/investors`,
 		keywords: [
 			'real estate investor tools',
 			'passive real estate lookalike audience expansion inspired by How to Win Friends and Influence People',
@@ -172,7 +175,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Events | Deal Scale',
 		description:
 			'Stay updated on upcoming Deal Scale events, webinars, and real estate industry opportunities powered by AI.',
-		canonical: 'https://dealscale.io/events',
+		canonical: `${SITE_URL}/events`,
 		keywords: [
 			'real estate events',
 			'deal scale webinars',
@@ -184,7 +187,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 	'/portfolio': {
 		title: 'Portfolio | Deal Scale',
 		description: "Browse Deal Scale's portfolio to see AI-powered real estate solutions in action.",
-		canonical: 'https://dealscale.io/portfolio',
+		canonical: `${SITE_URL}/portfolio`,
 		keywords: [
 			'deal scale portfolio',
 			'real estate case studies',
@@ -198,7 +201,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Partners | Deal Scale',
 		description:
 			"Meet Deal Scale's technology and channel partners powering AI-driven real estate growth.",
-		canonical: 'https://dealscale.io/partners',
+		canonical: `${SITE_URL}/partners`,
 		keywords: [
 			'deal scale partners',
 			'real estate technology partners',
@@ -227,14 +230,14 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 			'DealScale FAQ | AI Voice, SMS, and Skip Tracing Automation for Real Estate Agents & Investors',
 		description:
 			'Learn how DealScale automates skip tracing, AI voice outreach, SMS, and social lead qualification while staying TCPA and GDPR compliant. Discover ROI examples, voice cloning, CRM syncs, and compliance with the 2026 Colorado AI Act.',
-		canonical: 'https://dealscale.io/faq',
+		canonical: `${SITE_URL}/faq`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
 	'/tos': {
 		title: 'Terms of Service | Deal Scale',
 		description: 'Review the terms and conditions for using Deal Scale’s website and services.',
-		canonical: 'https://dealscale.io/tos',
+		canonical: `${SITE_URL}/tos`,
 		keywords: [
 			'Terms of Service',
 			'User Agreement',
@@ -247,7 +250,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Cookies Policy | Deal Scale',
 		description:
 			'Learn how Deal Scale uses cookies to enhance your experience and protect your privacy.',
-		canonical: 'https://dealscale.io/cookies',
+		canonical: `${SITE_URL}/cookies`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
@@ -255,35 +258,35 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Privacy Policy | Deal Scale',
 		description:
 			'Read our Privacy Policy to understand how Deal Scale collects, uses, and protects your personal information.',
-		canonical: 'https://dealscale.io/privacy',
+		canonical: `${SITE_URL}/privacy`,
 		keywords: ['Privacy Policy', 'Data Protection', 'GDPR Compliance', ...DEFAULT_SEO.keywords],
 		image: DEFAULT_SEO.image,
 	},
 	'/GDPR': {
 		title: 'GDPR | Deal Scale',
 		description: 'Read our GDPR policy to learn how Deal Scale protects your data.',
-		canonical: 'https://dealscale.io/GDPR',
+		canonical: `${SITE_URL}/GDPR`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	'/hippa': {
 		title: 'HIPPA | Deal Scale',
 		description: 'Read our HIPPA policy to learn how Deal Scale protects your data.',
-		canonical: 'https://dealscale.io/hippa',
+		canonical: `${SITE_URL}/hippa`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	'/PII': {
 		title: 'PII | Deal Scale',
 		description: 'Read our PII policy to learn how Deal Scale protects your data.',
-		canonical: 'https://dealscale.io/PII',
+		canonical: `${SITE_URL}/PII`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	'/tcpCompliance': {
 		title: 'TCP Compliance | Deal Scale',
 		description: 'Read our TCP Compliance policy to learn how Deal Scale protects your data.',
-		canonical: 'https://dealscale.io/tcpCompliance',
+		canonical: `${SITE_URL}/tcpCompliance`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
@@ -291,7 +294,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Legal Center | Deal Scale',
 		description:
 			"Access all of Deal Scale's legal documents including Privacy Policy, Terms of Service, and compliance information in one place.",
-		canonical: 'https://dealscale.io/legal',
+		canonical: `${SITE_URL}/legal`,
 		keywords: [
 			'Legal Documents',
 			'Compliance Center',
@@ -305,7 +308,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Link Tree | Deal Scale',
 		description:
 			"Quick access to DealScale's most important links, resources, and pages. Browse our products, services, blog posts, events, case studies, and more in one convenient place.",
-		canonical: 'https://dealscale.io/linktree',
+		canonical: `${SITE_URL}/linktree`,
 		keywords: [
 			'deal scale links',
 			'deal scale resources',
@@ -319,7 +322,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Real-Time Analytics Demo | Deal Scale',
 		description:
 			'Explore Deal Scale’s real-time analytics workspace. Preview dashboards, experimentation workflows, and live collaboration features inside an interactive MacBook showcase.',
-		canonical: 'https://dealscale.io/demos/real-time-analytics',
+		canonical: `${SITE_URL}/demos/real-time-analytics`,
 		keywords: [
 			'real-time analytics',
 			'ai dashboards',
@@ -334,7 +337,7 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		title: 'Affiliate Program | Deal Scale',
 		description:
 			'Join the Deal Scale Partner Circle to earn recurring commissions and unlock VIP benefits for your real estate audience.',
-		canonical: 'https://dealscale.io/affiliate',
+		canonical: `${SITE_URL}/affiliate`,
 		keywords: [
 			'deal scale affiliate program',
 			'real estate affiliate marketing',

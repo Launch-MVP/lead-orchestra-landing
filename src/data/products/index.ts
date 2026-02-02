@@ -1,5 +1,7 @@
 import type { ProductType } from "@/types/products";
 import { agentProducts } from "./agents";
+import { aeoProducts } from "./aeo";
+import { customGptProducts } from "./custom-gpt"; // Import new products
 import { closerProducts } from "./closers";
 import { creditProducts, leadProducts } from "./credits";
 import { freeResourceProducts } from "./free-resources";
@@ -18,6 +20,8 @@ export const mockProducts: ProductType[] = [
 	...agentProducts,
 	...closerProducts,
 	...monetizeProducts, // Marketplace entry points for monetization
+	...aeoProducts, // AEO landing page templates and services
+    ...customGptProducts, // Custom Blog GPT products
 ];
 
 export function getAllProducts(): ProductType[] {
