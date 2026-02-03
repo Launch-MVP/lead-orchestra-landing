@@ -514,7 +514,7 @@ export const intakeFormFields: FieldConfig[] = [
     type: "text",
     placeholder: " Name...",
     value: "",
-    description: undefined,
+    description: "Used so we know who to contact and personalize communication.",
     onChange: () => {},
   },
   {
@@ -552,7 +552,7 @@ export const intakeFormFields: FieldConfig[] = [
     type: "multiselect",
     placeholder: "Can we connect directly to your CRM?...",
     value: [],
-    description: undefined,
+    description: "This allows for seamless lead handoff.",
     onChange: () => {},
     options: crmConnectionOptions,
   },

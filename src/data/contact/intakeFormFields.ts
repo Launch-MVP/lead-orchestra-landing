@@ -731,7 +731,7 @@ export const intakeFormFields: FieldConfig[] = [
     type: "date",
     placeholder: "Schedule Kickoff Call...",
     value: "",
-    description: "If you qualify when can you hop on a kick off call to meet your start date deadlines?",
+    description: "If you qualify when can you hop on a kick off call to meet your start date deadlines? Book here: https://calendar.notion.so/meet/cyberoni/em2w42l93",
     onChange: () => {},
   },
   {

@@ -99,7 +99,26 @@ export default function IntakeForm() {
 										</FormLabel>
 										{field.description && (
 											<FormDescription className="text-sm text-muted-foreground pb-2">
-												{field.description}
+												{(() => {
+													const urlRegex = /(https?:\/\/[^\s]+)/g;
+													const parts = field.description.split(urlRegex);
+													return parts.map((part, index) => {
+														if (part.match(urlRegex)) {
+															return (
+																<a
+																	key={index}
+																	href={part}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																	className="text-primary underline hover:opacity-80 break-all"
+																>
+																	{part}
+																</a>
+															);
+														}
+														return part;
+													});
+												})()}
 											</FormDescription>
 										)}
 										<FormControl>
