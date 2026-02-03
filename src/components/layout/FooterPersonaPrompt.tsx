@@ -77,10 +77,13 @@ export function FooterPersonaPrompt({ className }: { className?: string }) {
 							return (
 								<Button
 									key={key}
-									variant={isActive ? "default" : "outline"}
+									variant="outline"
 									className={cn(
 										"justify-start rounded-xl border border-primary/20 bg-background/80 py-4 text-left text-sm transition hover:border-primary hover:bg-primary/10",
-										isActive && "shadow-lg",
+										isActive
+											? "bg-primary text-white hover:bg-primary/90"
+											: "text-foreground",
+										"shadow-sm",
 									)}
 									onClick={() => handleSelectPersona(key)}
 								>
