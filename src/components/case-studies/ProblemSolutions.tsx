@@ -1,5 +1,5 @@
-import type { CaseStudy } from '@/types/case-study';
-import { motion } from 'framer-motion';
+import type { CaseStudy } from "@/types/case-study";
+import { motion } from "framer-motion";
 
 interface ProblemSolutionsProps {
 	caseStudy: CaseStudy;
@@ -20,7 +20,9 @@ const item = {
 	show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-export const ProblemSolutions: React.FC<ProblemSolutionsProps> = ({ caseStudy }) => {
+export const ProblemSolutions: React.FC<ProblemSolutionsProps> = ({
+	caseStudy,
+}) => {
 	return (
 		<motion.div
 			initial="hidden"
@@ -52,7 +54,10 @@ export const ProblemSolutions: React.FC<ProblemSolutionsProps> = ({ caseStudy })
 						))}
 					</div>
 				) : (
-					<motion.p variants={item} className="text-center text-base text-muted-foreground">
+					<motion.p
+						variants={item}
+						className="text-center text-base text-muted-foreground"
+					>
 						No business outcomes available.
 					</motion.p>
 				)}

@@ -1,4 +1,4 @@
-import type { FacebookPixelUser } from '@/types/metrics/facebook_pixel';
+import type { FacebookPixelUser } from "@/types/metrics/facebook_pixel";
 
 export interface AbTestKpi {
 	name: string;
@@ -10,10 +10,12 @@ export interface AbTestKpi {
 export interface AbTestWarning {
 	code: string;
 	message: string;
-	severity: 'info' | 'warning' | 'error';
+	severity: "info" | "warning" | "error";
 	variantName?: string;
 	variantIndex?: number;
-	field?: keyof ABTestCopy | 'percentage' | 'cta';
+	field?: keyof ABTestCopy | "percentage" | "cta";
+	testId?: string;
+	suggestion?: string;
 }
 
 export interface AbTestAnalysisSummary {
@@ -24,9 +26,11 @@ export interface AbTestAnalysisSummary {
 }
 
 export interface AbTestAnalysis {
-	summary: AbTestAnalysisSummary;
+	summary?: AbTestAnalysisSummary;
 	warnings: AbTestWarning[];
-	normalized: boolean;
+	normalized?: boolean;
+	variantName?: string;
+	completenessScore?: number;
 }
 
 export interface ABTestCopy {

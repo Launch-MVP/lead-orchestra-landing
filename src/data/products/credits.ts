@@ -3,7 +3,16 @@ import {
 	ProductCategory,
 	type ProductType,
 } from "@/types/products";
-import { AIConversationCreditsABTest } from "./copy";
+import { AIConversationCreditsABTest } from "./credits-copy";
+import {
+	b2cConsumerLeadsABTest,
+	datingProfileLeadsABTest,
+	eventOrganizerLeadsABTest,
+	localBusinessLeadsABTest,
+	realEstateInvestorLeadsABTest,
+	realEstateOffMarketLeadsABTest,
+	targetedLeadCreditsABTest,
+} from "./leads-copy";
 
 const defaultLeadColors: ProductType["colors"] = [];
 const defaultLeadReviews: ProductType["reviews"] = [];
@@ -80,6 +89,7 @@ export const creditProducts: ProductType[] = [
 		sku: "DS-LEAD-CRED",
 		slug: "targeted-lead-credits",
 		licenseName: LicenseType.Proprietary,
+		abTest: targetedLeadCreditsABTest,
 		description:
 			"Purchase new, high-quality leads directly from our database of over 140M+ properties. Use Lead Credits to build hyper-targeted lists based on your specific investment criteria, such as location, property type, and owner details.",
 		categories: [
@@ -121,6 +131,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-RE-OFFMARKET",
 		slug: "real-estate-off-market-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: realEstateOffMarketLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=900&fit=crop&q=80",
@@ -149,6 +160,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-RE-B2B",
 		slug: "real-estate-investor-b2b-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: realEstateInvestorLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=1200&h=900&fit=crop&q=80",
@@ -170,6 +182,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-LOCAL-BIZ",
 		slug: "local-business-listing-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: localBusinessLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=900&fit=crop&q=80",
@@ -191,6 +204,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-EVENTS",
 		slug: "event-organizer-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: eventOrganizerLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=900&fit=crop&q=80",
@@ -212,6 +226,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-DATING",
 		slug: "dating-profile-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: datingProfileLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1520975916090-3105956dac38?w=1200&h=900&fit=crop&q=80",
@@ -233,6 +248,7 @@ export const leadProducts: ProductType[] = [
 		sku: "LO-LEADS-B2C",
 		slug: "b2c-consumer-leads",
 		licenseName: LicenseType.Proprietary,
+		abTest: b2cConsumerLeadsABTest,
 		categories: [ProductCategory.Leads, ProductCategory.Data],
 		images: [
 			"https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=1200&h=900&fit=crop&q=80",

@@ -151,7 +151,9 @@ export const Footer: React.FC<FooterProps> = ({
 					</div>
 
 					<div className="flex flex-col items-center text-center md:col-span-2 md:items-center md:justify-center md:text-center lg:col-span-1">
-						<h3 className="mb-4 text-center font-semibold text-lg">Get in Touch</h3>
+						<h3 className="mb-4 text-center font-semibold text-lg">
+							Get in Touch
+						</h3>
 						<ul className="w-full space-y-3">
 							<li>
 								<a

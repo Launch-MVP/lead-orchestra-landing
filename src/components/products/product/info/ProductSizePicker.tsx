@@ -4,14 +4,14 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useProductSelection } from '@/contexts/ProductSelectionContext';
-import { sizingChart } from '@/data/products/sizingChart';
-import { cn } from '@/lib/utils';
-import { ProductCategory, type ProductType } from '@/types/products';
-import { v4 as uuid } from 'uuid';
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useProductSelection } from "@/contexts/ProductSelectionContext";
+import { sizingChart } from "@/data/products/sizingChart";
+import { cn } from "@/lib/utils";
+import { ProductCategory, type ProductType } from "@/types/products";
+import { v4 as uuid } from "uuid";
 
 /**
  * * ProductSizePicker: Size selection radio group
@@ -28,8 +28,8 @@ export default function ProductSizePicker({
 
 	// * Determine if we should use "Type" terminology based on category
 	const isLeadsProduct = product.categories.includes(ProductCategory.Leads);
-	const labelText = isLeadsProduct ? 'Type' : 'Size';
-	const guideButtonText = isLeadsProduct ? 'Type guide' : 'Size guide';
+	const labelText = isLeadsProduct ? "Type" : "Size";
+	const guideButtonText = isLeadsProduct ? "Type guide" : "Size guide";
 
 	return (
 		<div className="mt-8">
@@ -87,7 +87,9 @@ export default function ProductSizePicker({
 										<tr>
 											<th className="border px-3 py-2 text-left">Label</th>
 											<th className="border px-3 py-2 text-left">Value</th>
-											<th className="border px-3 py-2 text-left">Measurement</th>
+											<th className="border px-3 py-2 text-left">
+												Measurement
+											</th>
 											<th className="border px-3 py-2 text-left">Unit</th>
 										</tr>
 									</thead>
@@ -124,10 +126,10 @@ export default function ProductSizePicker({
 							<Label
 								htmlFor={`size-${size.value}`}
 								className={cn(
-									'flex w-auto min-w-[3rem] cursor-pointer items-center justify-center rounded-md border border-card bg-muted px-4 py-3 font-semibold text-sm text-primary shadow-sm transition-colors hover:bg-background-darker focus:outline-none sm:px-4 sm:py-3 dark:border-card dark:bg-muted/60 dark:text-primary dark:hover:bg-background-darker',
+									"flex w-auto min-w-[3rem] cursor-pointer items-center justify-center rounded-md border border-card bg-muted px-4 py-3 font-semibold text-primary text-sm shadow-sm transition-colors hover:bg-background-darker focus:outline-none sm:px-4 sm:py-3 dark:border-card dark:bg-muted/60 dark:text-primary dark:hover:bg-background-darker",
 									selection.size === size.value
-										? 'border-primary bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground'
-										: ''
+										? "border-primary bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground"
+										: "",
 								)}
 							>
 								{size.name}

@@ -48,7 +48,8 @@ export const caseStudies: CaseStudy[] = [
 			"A consumer social app focused on real-world connections and community-driven matching.",
 		featuredImage:
 			"https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		thumbnailImage: "https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		thumbnailImage:
+			"https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		businessChallenges: [
 			"Needed rapid user acquisition without hiring a large outbound team",
 			"Wanted competitor-adjacent targeting (competitor surfaces) while staying within approved/public sourcing constraints",
@@ -150,7 +151,8 @@ export const caseStudies: CaseStudy[] = [
 			},
 			{
 				title: "Repeatable System",
-				subtitle: "Launch in other cities outside of Seattle in weeks, not months",
+				subtitle:
+					"Launch in other cities outside of Seattle in weeks, not months",
 			},
 			{
 				title: "Campaign Speed",
@@ -201,7 +203,10 @@ export const caseStudies: CaseStudy[] = [
 				title: "Attribution strategy",
 				value: "Social-first (IG handle) where available",
 			},
-			{ title: "Campaign readiness", value: "Seasonal/launch pushes supported" },
+			{
+				title: "Campaign readiness",
+				value: "Seasonal/launch pushes supported",
+			},
 		],
 		featured: true,
 		redirectToContact: true,

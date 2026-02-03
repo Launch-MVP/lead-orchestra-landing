@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface NotionEmbedProps {
 	src: string;
@@ -12,9 +12,9 @@ interface NotionEmbedProps {
  */
 const NotionEmbed = ({
 	src,
-	width = '100%',
-	height = '600',
-	title = 'Notion Embed',
+	width = "100%",
+	height = "600",
+	title = "Notion Embed",
 }: NotionEmbedProps) => {
 	return (
 		<div className="w-full overflow-hidden rounded-xl border border-white/10 bg-background-dark/50 backdrop-blur-sm">

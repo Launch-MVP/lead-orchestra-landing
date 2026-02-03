@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import type { BeehiivPost } from '@/types/behiiv';
-import { motion } from 'framer-motion';
-import { RssIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { NewsletterFooter } from '../contact/newsletter/NewsletterFooter';
-import { RecentPostsSection } from './RecentPostsSection';
+import { Button } from "@/components/ui/button";
+import type { BeehiivPost } from "@/types/behiiv";
+import { motion } from "framer-motion";
+import { RssIcon } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { NewsletterFooter } from "../contact/newsletter/NewsletterFooter";
+import { RecentPostsSection } from "./RecentPostsSection";
 
 interface BlogSidebarProps {
 	posts: BeehiivPost[];
@@ -23,8 +23,8 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 		const fetchRecent = async () => {
 			try {
 				const res = await fetch(
-					'/api/beehiiv/posts?limit=3&order_by=publish_date&direction=desc&include_scheduled=true',
-					{ cache: 'no-store', signal: controller.signal }
+					"/api/beehiiv/posts?limit=3&order_by=publish_date&direction=desc&include_scheduled=true",
+					{ cache: "no-store", signal: controller.signal },
 				);
 				if (!res.ok) return;
 				const data = await res.json();
@@ -46,11 +46,11 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 
 	const toTime = (v: unknown): number => {
 		// Handles: ISO strings, ms timestamps, and unix seconds
-		if (typeof v === 'number') {
+		if (typeof v === "number") {
 			const ms = v < 1e12 ? v * 1000 : v; // seconds -> ms if too small
 			return Number.isFinite(ms) ? ms : 0;
 		}
-		if (typeof v === 'string') {
+		if (typeof v === "string") {
 			const num = Number(v);
 			if (!Number.isNaN(num)) {
 				const ms = num < 1e12 ? num * 1000 : num;
@@ -79,7 +79,7 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 			.sort(
 				(a, b) =>
 					toTime((b as any).published_at ?? b.publish_date) -
-					toTime((a as any).published_at ?? a.publish_date)
+					toTime((a as any).published_at ?? a.publish_date),
 			)
 			.slice(0, 3);
 	}, [visibleSource]);
@@ -87,15 +87,25 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 	const popularityScore = (p: BeehiivPost): number => {
 		const webViews = Number((p as any)?.stats?.web?.views) || 0;
 		const webClicks = Number((p as any)?.stats?.web?.clicks) || 0;
-		const emailUniqueClicks = Number((p as any)?.stats?.email?.unique_clicks) || 0;
-		const emailUniqueOpens = Number((p as any)?.stats?.email?.unique_opens) || 0;
+		const emailUniqueClicks =
+			Number((p as any)?.stats?.email?.unique_clicks) || 0;
+		const emailUniqueOpens =
+			Number((p as any)?.stats?.email?.unique_opens) || 0;
 		// Weighted score: prioritize views, then clicks, then opens
-		return webViews * 1 + webClicks * 0.8 + emailUniqueClicks * 0.7 + emailUniqueOpens * 0.4;
+		return (
+			webViews * 1 +
+			webClicks * 0.8 +
+			emailUniqueClicks * 0.7 +
+			emailUniqueOpens * 0.4
+		);
 	};
 
 	const popularPosts = useMemo(() => {
 		return [...visibleSource]
-			.sort((a, b) => popularityScore(b as BeehiivPost) - popularityScore(a as BeehiivPost))
+			.sort(
+				(a, b) =>
+					popularityScore(b as BeehiivPost) - popularityScore(a as BeehiivPost),
+			)
 			.slice(0, 3);
 	}, [visibleSource]);
 
@@ -105,7 +115,7 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="rounded-2xl border border-white/10 bg-background-dark/90 p-6 shadow-black/10 shadow-lg backdrop-blur"
+				className="rounded-2xl border border-slate-200/50 bg-white/80 p-6 shadow-black/5 shadow-lg backdrop-blur dark:border-white/10 dark:bg-background-dark/90 dark:shadow-black/10"
 			>
 				<NewsletterFooter />
 			</motion.div>
@@ -142,14 +152,22 @@ const BlogSidebar = ({ posts }: BlogSidebarProps) => {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5, delay: 0.3 }}
-				className="glass-card flex items-center justify-between rounded-xl p-6"
+				className="flex items-center justify-between rounded-xl border border-slate-200/50 bg-white/80 p-6 shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-background-dark/90 dark:shadow-black/10"
 			>
 				<div>
-					<h3 className="mb-1 font-semibold text-black text-xl dark:text-white">RSS Feed</h3>
-					<p className="text-black text-sm dark:text-white/70">Subscribe to our RSS feed</p>
+					<h3 className="mb-1 font-semibold text-gray-900 text-xl dark:text-white">
+						RSS Feed
+					</h3>
+					<p className="text-gray-600 text-sm dark:text-white/70">
+						Subscribe to our RSS feed
+					</p>
 				</div>
 				<Link href="/rss" target="_blank" rel="noopener noreferrer">
-					<Button variant="outline" size="default" className="border-primary/30 text-primary">
+					<Button
+						variant="outline"
+						size="default"
+						className="border-primary/30 text-primary"
+					>
 						<RssIcon className="h-4 w-4" />
 					</Button>
 				</Link>
