@@ -46,7 +46,7 @@ export function FooterPersonaPrompt({ className }: { className?: string }) {
 					size="sm"
 					className={cn(
 						"relative flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-semibold text-primary text-xs uppercase tracking-[0.12em] shadow-sm transition-all hover:border-primary hover:bg-primary/20 focus-visible:ring-2 focus-visible:ring-primary/60 dark:border-emerald-200/40 dark:bg-emerald-200/10 dark:text-emerald-200",
-						"after:-inset-[3px] after:pointer-events-none after:absolute after:rounded-full after:bg-primary/30 after:opacity-0 after:blur-lg after:transition-opacity after:content-[''] hover:after:opacity-40",
+						"after:pointer-events-none after:absolute after:-inset-[3px] after:rounded-full after:bg-primary/30 after:opacity-0 after:blur-lg after:transition-opacity after:content-[''] hover:after:opacity-40",
 					)}
 					onClick={() => setOpen(true)}
 				>
