@@ -109,7 +109,7 @@ export function NewsletterEmailInput({
 			<Button
 				type="submit"
 				className={cn(
-					"h-12 min-w-[120px] bg-primary text-black dark:text-white",
+					"h-12 min-w-[120px] bg-primary text-white dark:text-white",
 					layout === "stacked" && "w-full md:w-full",
 				)}
 				disabled={isSubmitting}

@@ -1034,6 +1034,7 @@ export const CatalogPricing = ({
 										selfHostedPlan?.ctaSecondary.label ??
 										"Estimate ROI & Setup Cost"
 									}
+									pricingTiers={selfHostedPlan?.pricingTiers}
 								/>
 							</div>
 							<div className="lg:col-span-7">

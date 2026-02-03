@@ -101,7 +101,7 @@ const DesktopNav = () => {
 									{item.title}
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<div className="grid w-[400px] gap-3 bg-popover p-4 text-popover-foreground md:w-[600px] md:grid-cols-2 dark:border dark:border-primary/60 dark:shadow-2xl">
+									<div className="grid w-[400px] gap-3 p-4 text-popover-foreground md:w-[600px] md:grid-cols-2 dark:border dark:border-primary/60 dark:shadow-2xl">
 										{item.children.map((child) =>
 											child.image ||
 											child.ctaTitle ||

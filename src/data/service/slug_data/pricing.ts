@@ -130,7 +130,7 @@ export const pricingCatalog: PricingCatalog = {
 			{
 				id: "selfHosted",
 				name: "Self-Hosted Enterprise License",
-				pricingModel: "$7,999/year — Contact Sales",
+				pricingModel: "Starting at $24,000/year",
 				ctaPrimary: {
 					label: "Contact Sales",
 					type: "contactSales",
@@ -153,6 +153,24 @@ export const pricingCatalog: PricingCatalog = {
 					"Standard modules: MCP server, connector library, normalization engine",
 					"Basic support (business hours)",
 					"Minor updates (bug fixes, minor features)",
+				],
+				pricingTiers: [
+					{
+						name: "Private Deployment",
+						price: "$24,000/year",
+						description: "Full source access, dockerized deployment, self-hosted license",
+					},
+					{
+						name: "Private Deployment + SLA",
+						price: "$48,000/year",
+						description: "Includes priority support, guided onboarding, and shared Slack channel",
+						highlighted: true,
+					},
+					{
+						name: "Regulated / On-Prem / Gov",
+						price: "$75,000 – $120,000/year",
+						description: "Air-gapped support, custom compliance (FedRAMP/HIPAA), dedicated engineering",
+					},
 				],
 				aiCredits: {
 					plan: "Optional Credit Packs",
@@ -178,9 +196,9 @@ export const pricingCatalog: PricingCatalog = {
 				],
 				roiEstimator: ROI_ESTIMATOR,
 				notes: [
-					"Self-hosted model positions Lead Orchestra as enterprise-grade for agencies/data teams needing control and compliance.",
-					"High license fee + modules + credits ensure 80-120% margin: license covers fixed costs, credits cover variable with margin.",
-					"Tie-in with Deal Scale remains clear: ingestion from Lead Orchestra → export → AI workflows in Deal Scale.",
+					"Total Control: Run entirely within your VPC or on-prem. No data leaves your network.",
+					"Positive ROI in < 6 Months: One-time setup vs. perpetual SaaS fees scaling with usage.",
+					"Unlimited Scale: No per-seat or per-record limits. Pay for infrastructure, not API calls.",
 				],
 				requirements: [
 					"Executive alignment on data governance and compliance",

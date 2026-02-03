@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
-import type React from "react";
+import * as React from "react";
 
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
 	highlighted?: boolean;
 	children: React.ReactNode;
+	className?: string;
 }
 
 export function GlassCard({

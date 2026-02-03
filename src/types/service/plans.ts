@@ -115,6 +115,13 @@ export interface ROIEstimator {
 	defaultTier?: string;
 }
 
+export interface PricingTier {
+	name: string;
+	price: string;
+	description?: string;
+	highlighted?: boolean;
+}
+
 export interface SelfHostedPlan {
 	id: string;
 	name: string;
@@ -131,6 +138,7 @@ export interface SelfHostedPlan {
 	roiEstimator: ROIEstimator;
 	notes: string[];
 	requirements?: string[];
+	pricingTiers?: PricingTier[];
 }
 
 export interface PartnershipPlan {

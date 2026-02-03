@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
-import type { PartnershipPlan } from "@/types/service/plans";
+import type { PartnershipPlan, PricingTier } from "@/types/service/plans";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -25,6 +25,7 @@ interface SelfHostedProps extends BaseProps {
 	secondaryLabel: string;
 	summary: string[];
 	requirements?: string[];
+	pricingTiers?: PricingTier[];
 }
 
 interface PartnershipProps extends BaseProps {
@@ -44,6 +45,43 @@ const List = ({ items }: { items: string[] }) => (
 			</li>
 		))}
 	</ul>
+);
+
+const PricingTable = ({ tiers }: { tiers: PricingTier[] }) => (
+	<div className="overflow-hidden rounded-lg border border-border/50">
+		<table className="w-full text-sm">
+			<thead className="bg-muted/50">
+				<tr>
+					<th className="px-4 py-3 text-left font-medium text-muted-foreground">
+						Tier
+					</th>
+					<th className="px-4 py-3 text-right font-medium text-muted-foreground">
+						Price
+					</th>
+				</tr>
+			</thead>
+			<tbody className="divide-y divide-border/50">
+				{tiers.map((tier) => (
+					<tr
+						key={tier.name}
+						className={tier.highlighted ? "bg-primary/5" : undefined}
+					>
+						<td className="px-4 py-3">
+							<div className="font-medium text-foreground">{tier.name}</div>
+							{tier.description ? (
+								<div className="text-muted-foreground text-xs">
+									{tier.description}
+								</div>
+							) : null}
+						</td>
+						<td className="whitespace-nowrap px-4 py-3 text-right font-medium text-foreground">
+							{tier.price}
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
 );
 
 const renderBadge = ({
@@ -91,6 +129,7 @@ export const SelfHostedCard = ({
 	badge,
 	badgeLabel,
 	badgeVariant,
+	pricingTiers,
 }: SelfHostedProps) => (
 	<GlassCard highlighted>
 		<div className="flex flex-col gap-6 p-6">
@@ -108,6 +147,11 @@ export const SelfHostedCard = ({
 				</div>
 				{renderBadge({ badge, badgeLabel, badgeVariant })}
 			</div>
+			
+			{pricingTiers && pricingTiers.length > 0 ? (
+				<PricingTable tiers={pricingTiers} />
+			) : null}
+
 			<List items={features} />
 			{requirements ? (
 				<div className="rounded-lg border border-border/60 bg-muted/20 p-4 text-sm">

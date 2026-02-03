@@ -120,7 +120,7 @@ export const NewsletterFooter = () => {
 							</div>
 							<Button
 								type="submit"
-								className="flex h-10 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-primary to-focus font-semibold text-white shadow-lg transition-opacity hover:opacity-90 hover:shadow-primary/20"
+								className="flex h-10 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-primary to-focus font-semibold !text-white shadow-lg transition-opacity hover:opacity-90 hover:shadow-primary/20"
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? "Subscribing..." : "Subscribe"}
