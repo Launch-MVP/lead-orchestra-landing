@@ -1,37 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { default_cal_slug } from "@/data/constants/booking";
-import { useCal } from "@/hooks/use-calendly";
 import { motion } from "framer-motion";
-import { Calendar, Info, Loader2 } from "lucide-react";
+import { Calendar, Info } from "lucide-react";
 import * as React from "react";
 // * For accessibility and animation
 
-interface ScheduleMeetingProps {
-	calendarLink?: string;
-}
-
-const tourBenefits = [
-	"Personalized walkthrough of Deal Scale ",
-	"See real use cases tailored to your business",
-	"Live Q&A with a product expert",
-	"Shape Deal Scale To Your Needs",
-];
-
-export function ScheduleMeeting({
-	calendarLink = default_cal_slug,
-}: ScheduleMeetingProps) {
-	useCal();
-	const [loading, setLoading] = React.useState(false);
+export function ScheduleMeeting() {
+	const calendarLink = "https://calendar.notion.so/meet/cyberoni/em2w42l93";
 	const [showBenefits, setShowBenefits] = React.useState(false);
-
-	// ! Handler for opening the calendar
-	const handleBookClick = React.useCallback(() => {
-		setLoading(true);
-		// Let calendly widget open, then stop loading after a short delay
-		setTimeout(() => setLoading(false), 2000);
-	}, []);
 
 	return (
 		<div className="mb-8 flex flex-col items-center rounded-xl border border-white/10 bg-background-dark/50 p-8 text-center shadow-xl backdrop-blur-sm">
@@ -40,11 +17,11 @@ export function ScheduleMeeting({
 					<Calendar className="h-6 w-6 text-primary" aria-hidden="true" />
 				</div>
 				<h2 className="font-bold text-2xl text-black dark:text-white">
-					Schedule Product Tour
+					Schedule a Consultation
 				</h2>
 				<p className="text-black dark:text-white">
-					Book a tour of our platform to see how it can help you scale your
-					business.
+					Book a consultation to discuss your specific needs and see how we can
+					help you scale your lead generation.
 				</p>
 			</div>
 			{/* * Collapsible: What to expect on your tour */}
@@ -56,17 +33,18 @@ export function ScheduleMeeting({
 				onClick={() => setShowBenefits((v) => !v)}
 			>
 				<Info className="h-4 w-4" aria-hidden="true" />
-				What to expect on your tour
+				What to expect from the consultation
 			</button>
 			{showBenefits && (
 				<ul
 					id="tour-benefits"
-					className="mb-4 ml-1 list-disc space-y-1 text-muted-foreground text-xs"
-					aria-live="polite" // * Accessibility: announce benefits when shown
+					className="mb-4 ml-1 list-disc space-y-1 text-muted-foreground text-xs text-left"
+					aria-live="polite"
 				>
-					{tourBenefits.map((b) => (
-						<li key={b}>{b}</li>
-					))}
+					<li>Deep dive into your current lead generation process</li>
+					<li>Identify bottlenecks and automation opportunities</li>
+					<li>Live demo of relevant scraping and enrichment workflows</li>
+					<li>Custom strategy plan for your niche</li>
 				</ul>
 			)}
 
@@ -78,25 +56,16 @@ export function ScheduleMeeting({
 				className="w-full"
 			>
 				<Button
-					data-cal-link={calendarLink}
-					data-cal-config='{"theme":"dark"}'
+					asChild
 					className="mt-4 w-full bg-gradient-to-r from-primary to-focus transition-opacity hover:opacity-90 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-					aria-label="Book a product tour with Torus"
-					onClick={handleBookClick}
-					disabled={loading}
+					aria-label="Book a consultation"
 					data-testid="schedule-meeting-cta"
 				>
-					{loading ? (
-						<span className="flex items-center justify-center gap-2">
-							<Loader2 className="h-4 w-4 animate-spin" />
-							Booking...
-						</span>
-					) : (
-						"Book a Tour"
-					)}
+					<a href={calendarLink} target="_blank" rel="noopener noreferrer">
+						Book a Consultation
+					</a>
 				</Button>
 			</motion.div>
-			{/* todo: Optionally add a secondary action here (e.g., Contact Sales) */}
 		</div>
 	);
 }
