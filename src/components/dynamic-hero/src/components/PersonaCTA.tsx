@@ -1,6 +1,6 @@
 "use client";
 
-import type { FC, ReactNode } from "react";
+import type { FC, MouseEvent, ReactNode } from "react";
 import { useCallback, useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -71,6 +71,21 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 		: "items-center text-center";
 	const secondaryCopy = useMemo(() => secondary, [secondary]);
 
+	const handleMicrocopyLink = useCallback(
+		(event: MouseEvent<HTMLAnchorElement>, href: string) => {
+			if (!href.startsWith("#")) {
+				return;
+			}
+			const target = document.getElementById(href.slice(1));
+			if (!target) {
+				return;
+			}
+			event.preventDefault();
+			target.scrollIntoView({ behavior: "smooth", block: "center" });
+		},
+		[],
+	);
+
 	const renderMicrocopy = useCallback((copy?: string): ReactNode[] | null => {
 		if (!copy) {
 			return null;
@@ -92,6 +107,7 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 				>
 					<a
 						href={href}
+						onClick={(event) => handleMicrocopyLink(event, href)}
 						className={cn(
 							"bg-primary/10",
 							"font-semibold",
@@ -127,7 +143,7 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 			elements.push(copy.slice(lastIndex));
 		}
 		return elements;
-	}, []);
+	}, [handleMicrocopyLink]);
 
 	const microcopyContent = useMemo(
 		() => renderMicrocopy(microcopy),

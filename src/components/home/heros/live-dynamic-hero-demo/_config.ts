@@ -212,7 +212,7 @@ export const LIVE_SECONDARY_CTA = {
 };
 
 export const LIVE_MICROCOPY =
-	'Scrape Anything. Export Everywhere. <link href="#live-hero-details">See how it works</link>. Fresh leads, not rented lists.';
+	'Scrape Anything. Export Everywhere. <link href="#hero-video-section">See how it works</link>. Fresh leads, not rented lists.';
 
 export const LIVE_SOCIAL_PROOF = {
 	...DEFAULT_HERO_SOCIAL_PROOF,
