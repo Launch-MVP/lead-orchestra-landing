@@ -2,7 +2,6 @@
 
 import { ProductCheckoutForm } from "@/components/checkout/product/ProductCheckoutForm";
 import { ProductSelectionProvider } from "@/contexts/ProductSelectionContext";
-import { abTestExample } from "@/data/products/copy";
 import { useWaitCursor } from "@/hooks/useWaitCursor";
 import { startStripeToast } from "@/lib/ui/stripeToast";
 import type { ProductType } from "@/types/products";
