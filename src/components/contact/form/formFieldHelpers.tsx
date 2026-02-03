@@ -60,6 +60,9 @@ export const createFieldProps = <
 
 // Helper to render the correct UI component based on field type
 export const renderFormField = (field: RenderFieldProps<FieldConfig>) => {
+	// Must be at top level to avoid hydration mismatch - hooks cannot be inside switch/case
+	const [showPassword, setShowPassword] = useState(false);
+
 	switch (field.type) {
 		case "select":
 			return (
@@ -167,13 +170,18 @@ export const renderFormField = (field: RenderFieldProps<FieldConfig>) => {
 			);
 		}
 		default: {
-			const [showPassword, setShowPassword] = useState(false);
 			const isSensitive = field.sensitive;
 
 			return (
 				<div className="relative">
 					<Input
-						type={isSensitive && !showPassword ? "password" : "text"}
+						type={
+							isSensitive && !showPassword
+								? "password"
+								: field.type === "date" || field.type === "number"
+									? field.type
+									: "text"
+						}
 						placeholder={field.placeholder}
 						className="border-white/10 bg-white/5 focus:border-primary"
 						value={field.value as string}

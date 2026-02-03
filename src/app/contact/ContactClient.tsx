@@ -1,12 +1,11 @@
 "use client";
 
-import ContactForm from "@/components/contact/form/ContactForm";
 import { ContactInfo } from "@/components/contact/form/ContactInfo";
 import {
 	type ContactStep,
 	ContactSteps,
 } from "@/components/contact/form/ContactSteps";
-import NotionEmbed from "@/components/contact/form/NotionEmbed";
+import IntakeForm from "@/components/contact/form/IntakeForm";
 import { Newsletter } from "@/components/contact/newsletter/Newsletter";
 import { ScheduleMeeting } from "@/components/contact/schedule/ScheduleMeeting";
 import TrustedByMarquee from "@/components/contact/utils/TrustedByScroller";
@@ -19,12 +18,13 @@ import { useDataModule } from "@/stores/useDataModuleStore";
 import type { MultiselectField } from "@/types/contact/formFields";
 import type { CompanyLogoDictType } from "@/types/service/trusted-companies";
 import type { Testimonial } from "@/types/testimonial";
+import { event } from "@/utils/seo/fbpixel";
 import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
 import { getStaticSeo } from "@/utils/seo/staticSeo";
 import type { Metadata } from "next";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useDataModuleGuardTelemetry } from "@/hooks/useDataModuleGuardTelemetry";
 
@@ -37,6 +37,13 @@ export async function generateMetadata(): Promise<Metadata> {
 const Contact = () => {
 	const searchParams = useSearchParams();
 	const { data: session } = useSession();
+
+	// * Fire ViewContent pixel event on mount
+	useEffect(() => {
+		event("ViewContent", {
+			content_name: "Contact Page",
+		});
+	}, []);
 
 	const profilePrefill = useMemo<Partial<BetaTesterFormValues>>(() => {
 		const user = session?.user;
@@ -294,11 +301,7 @@ const Contact = () => {
 			<div className="container mx-auto px-6 py-24">
 				<div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
 					<div className="lg:col-span-7">
-						<NotionEmbed
-							src="https://garnet-pantry-446.notion.site/ebd/2bfe9c25ecb080ca8d6cf98208561b51"
-							height="700"
-							title="Contact Form"
-						/>
+						<IntakeForm />
 					</div>
 					<div className="flex flex-col lg:col-span-5">
 						<ScheduleMeeting />
