@@ -298,7 +298,7 @@ const Contact = () => {
 
 	const content = (
 		<>
-			<div className="container mx-auto px-6 py-24">
+			<div className="container mx-auto px-6 py-24 md:mt-10 lg:mt-20">
 				<div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
 					<div className="lg:col-span-7">
 						<IntakeForm />

@@ -173,7 +173,7 @@ export const renderFormField = (field: RenderFieldProps<FieldConfig>) => {
 			const isSensitive = field.sensitive;
 
 			return (
-				<div className="relative">
+				<div className="relative" suppressHydrationWarning>
 					<Input
 						type={
 							isSensitive && !showPassword
