@@ -5,29 +5,30 @@ import {
 	resolveHeroThumbnailSrc,
 	useHeroVideoConfig,
 } from "@external/dynamic-hero";
-import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import PersonaCTA from "@/components/cta/PersonaCTA";
+import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialCheckout";
 import type { BadgeMetrics } from "@/components/home/ReactivateCampaignBadges";
 import { ReactivateCampaignInput } from "@/components/home/ReactivateCampaignInput";
-import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialCheckout";
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Particles } from "@/components/ui/particles";
+import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useTheme } from "next-themes";
+import { usePersonaStore } from "@/stores/usePersonaStore";
 
 import {
-	LIVE_COPY,
+	DEFAULT_PERSONA,
+	HERO_COPY_V7,
 	LIVE_MICROCOPY,
 	LIVE_PRIMARY_CTA,
 	LIVE_SECONDARY_CTA,
 	LIVE_SOCIAL_PROOF,
 	LIVE_VIDEO,
-	PERSONA_LABEL,
 } from "./_config";
 
 const HERO_POSTER_FALLBACK = resolveHeroThumbnailSrc(
@@ -93,6 +94,12 @@ export default function HeroSideBySide(): JSX.Element {
 	const [particleColor, setParticleColor] = useState("#ffffff");
 	const [particleSize, setParticleSize] = useState(2);
 	const [particleQuantity, setParticleQuantity] = useState(isMobile ? 60 : 120);
+	const { persona } = usePersonaStore();
+	const personaLabel =
+		PERSONA_LABELS[persona] ?? PERSONA_LABELS[DEFAULT_PERSONA_KEY];
+	const heroPersona =
+		persona in HERO_COPY_V7.personas ? persona : DEFAULT_PERSONA;
+	const heroPersonaConfig = HERO_COPY_V7.personas[heroPersona];
 
 	// Update particle color and properties based on theme
 	useEffect(() => {
@@ -130,20 +137,37 @@ export default function HeroSideBySide(): JSX.Element {
 		}
 	}, []);
 
-	// Extract problem and solution from LIVE_COPY
+	// Extract problem and solution based on selected persona
 	const problem =
-		LIVE_COPY?.values?.problem ??
+		heroPersonaConfig?.problem?.[0] ??
 		"buying stale lead lists from Apollo and ZoomInfo";
 	const solution =
-		LIVE_COPY?.values?.solution ??
+		heroPersonaConfig?.solution?.[0] ??
 		"scraping your own fresh leads from any website";
+	const subtitleByPersona: Partial<Record<string, string>> = {
+		agency:
+			"Stop burning budget on ads and rented databases like ZoomInfo. Build an owned lead engine that delivers unique sources weekly, often cutting acquisition costs up to 80%.",
+		startup:
+			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid dependence as the system scales.",
+		developer:
+			"Replace brittle one-off scrapers with a standardized ingestion pipeline: scrape, normalize (LSF), dedupe/tag, export anywhere. Auditable, repeatable, production-friendly.",
+		enterprise:
+			"Own your lead sourcing with audit-ready pipelines: controlled ingestion, clean schemas, segmentation, and exports into your CRM built for scale and governance.",
+	};
 	const description =
-		typeof LIVE_COPY?.subtitle === "string"
-			? LIVE_COPY.subtitle
-			: "Stop buying stale lead lists. Scrape your own fresh leads. Fresh leads, not rented lists.";
+		subtitleByPersona[heroPersona] ??
+		`Stop ${problem}. Start ${solution}. Fresh leads, not rented lists.`;
 
 	// Single combined statement
-	const combinedStatement = `Stop ${problem}. Start ${solution}`;
+	const heroTitleByPersona: Partial<Record<string, string>> = {
+		agency: "Stop buying leads. Build a lead engine you own.",
+		startup: "Own your pipeline. Stop renting growth.",
+		developer: "Standardize lead ingestion. Export anywhere.",
+		enterprise: "Enterprise-grade lead ingestion you can audit.",
+	};
+	const combinedStatement =
+		heroTitleByPersona[heroPersona] ??
+		"Stop buying leads. Build a lead engine you own.";
 
 	return (
 		<div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-background via-muted/40 to-background text-foreground">
@@ -187,7 +211,7 @@ export default function HeroSideBySide(): JSX.Element {
 					<div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 overflow-x-visible text-center md:gap-8">
 						{/* Persona Badge */}
 						<span className="inline-flex max-w-[calc(100vw-2rem)] shrink-0 items-center justify-center rounded-full border border-border/40 bg-background/70 px-2 py-1.5 font-semibold text-[8px] text-foreground/80 uppercase leading-tight tracking-[0.05em] sm:max-w-fit sm:px-3 sm:text-[10px] sm:tracking-[0.15em] md:px-4 md:text-xs md:tracking-[0.25em]">
-							<span className="whitespace-nowrap">{PERSONA_LABEL}</span>
+							<span className="whitespace-nowrap">{personaLabel}</span>
 						</span>
 
 						{/* Single Combined Statement */}

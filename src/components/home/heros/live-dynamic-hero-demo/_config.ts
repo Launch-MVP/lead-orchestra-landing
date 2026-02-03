@@ -54,13 +54,13 @@ const HERO_COPY_V7 = {
 		},
 		startup: {
 			problem: [
-				"spending engineering time on data ingestion instead of core features",
+				"spending thousands on ads and stale lists from Apollo & ZoomInfo",
 				"paying for enterprise tools you don't need yet",
 				"needing scraping without compliance-heavy infrastructure",
 			],
 			solution: [
 				"open-source scraping that plugs into anything",
-				"free tier with no credit card required",
+				"generating unlimited, fresh leads for free",
 				"focus on product-market fit, not scraping infrastructure",
 			],
 			fear: [
@@ -141,11 +141,11 @@ const HERO_COPY_V7 = {
 
 export type HeroPersonaKey = keyof typeof HERO_COPY_V7.personas;
 
-export const DEFAULT_PERSONA: HeroPersonaKey = "developer";
+export const DEFAULT_PERSONA: HeroPersonaKey = "startup";
 export const DEFAULT_PERSONA_DISPLAY = "Open-Source Scraping Engine";
 
-const PERSONA_LABEL = "For Developers, Agencies & Data Teams";
-const PERSONA_GOAL = "Scrape, normalize, and export lead data";
+const PERSONA_LABEL = "For Founders, Startups & Product Teams";
+const PERSONA_GOAL = "Focus on product-market fit";
 const PERSONA_SOCIAL_PROOF =
 	"Fresh leads, not rented lists. Open-source scraping with unlimited data, zero credit limits.";
 

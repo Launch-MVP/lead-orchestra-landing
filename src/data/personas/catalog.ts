@@ -1,6 +1,5 @@
 import {
 	HERO_COPY_V7,
-	DEFAULT_PERSONA as HERO_DEFAULT_PERSONA,
 	PERSONA_GOAL as HERO_INVESTOR_GOAL,
 	type HeroPersonaKey,
 } from "@/components/home/heros/live-dynamic-hero-demo/_config";
@@ -30,7 +29,7 @@ const HERO_PERSONA_LABELS: Record<PersonaKey, string> = {
 const GOAL_OVERRIDES: Partial<Record<PersonaKey, string>> = {
 	developer: "Scrape, normalize, and export lead data",
 	agency: "Scrape niche sources your competitors ignore",
-	startup: "Focus on product-market fit, not scraping infrastructure",
+	startup: "Focus on product-market fit",
 	enterprise: "Integrate scraping into your existing stack",
 	// Legacy real estate personas
 	investor: HERO_INVESTOR_GOAL,
@@ -81,4 +80,4 @@ export const ALL_PERSONA_KEYS = Object.keys(
 	HERO_COPY_V7.personas,
 ) as PersonaKey[];
 
-export const DEFAULT_PERSONA_KEY: PersonaKey = HERO_DEFAULT_PERSONA;
+export const DEFAULT_PERSONA_KEY: PersonaKey = "startup";

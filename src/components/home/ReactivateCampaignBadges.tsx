@@ -1,8 +1,7 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { type Variants, motion } from "framer-motion";
 
 export interface BadgeMetrics {
 	dollarAmount: number;
@@ -37,25 +36,25 @@ export function ReactivateCampaignBadges({
 	const badges = [
 		{
 			id: "dollar",
-			label: `+$${metrics.dollarAmount.toLocaleString()} this month`,
+			label: `+$${metrics.dollarAmount.toLocaleString()} Saved On Ad Spend`,
 			color:
 				"bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-100 dark:border-green-700",
 		},
 		{
 			id: "time",
-			label: `${metrics.timeSavedHours} hours saved month`,
+			label: "+3 Months Runway Added",
 			color:
 				"bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-100 dark:border-blue-700",
 		},
 		{
 			id: "contacts",
-			label: `${metrics.contactsActivated} deals closed`,
+			label: `100+ Hours Saved This Month`,
 			color:
 				"bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-100 dark:border-purple-700",
 		},
 		{
 			id: "hobby",
-			label: `+${metrics.hobbyTimeHours} hours hobby time by the week`,
+			label: "+5k Customers Gathered & Enriched",
 			color:
 				"bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-100 dark:border-orange-700",
 		},

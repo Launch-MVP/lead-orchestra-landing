@@ -5,11 +5,14 @@ import Link from "next/link";
 
 import { useDeferredLoad } from "@/components/providers/useDeferredLoad";
 
+import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
+import { usePersonaStore } from "@/stores/usePersonaStore";
+
 import {
-	LIVE_COPY,
+	DEFAULT_PERSONA,
+	HERO_COPY_V7,
 	LIVE_PRIMARY_CTA,
 	LIVE_SECONDARY_CTA,
-	PERSONA_LABEL,
 } from "./_config";
 
 // Keep for potential future use
@@ -27,14 +30,31 @@ const HeroSideBySide = dynamic(() => import("./HeroSideBySide"), {
 });
 
 function HeroStaticFallback() {
-	const {
-		problem: problemPhrase = "buying stale lead lists from Apollo and ZoomInfo",
-		solution: solutionPhrase = "scraping your own fresh leads from any website",
-	} = LIVE_COPY?.values ?? {};
+	const { persona } = usePersonaStore();
+	const personaLabel =
+		PERSONA_LABELS[persona] ?? PERSONA_LABELS[DEFAULT_PERSONA_KEY];
+	const heroPersona =
+		persona in HERO_COPY_V7.personas ? persona : DEFAULT_PERSONA;
+	const heroPersonaConfig = HERO_COPY_V7.personas[heroPersona];
+	const problemPhrase =
+		heroPersonaConfig?.problem?.[0] ??
+		"buying stale lead lists from Apollo and ZoomInfo";
+	const solutionPhrase =
+		heroPersonaConfig?.solution?.[0] ??
+		"scraping your own fresh leads from any website";
+	const subtitleByPersona: Partial<Record<string, string>> = {
+		agency:
+			"Stop burning budget on ads and rented databases like ZoomInfo. Build an owned lead engine that delivers unique sources weekly, often cutting acquisition costs up to 80%.",
+		startup:
+			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid dependence as the system scales.",
+		developer:
+			"Replace brittle one-off scrapers with a standardized ingestion pipeline: scrape, normalize (LSF), dedupe/tag, export anywhere. Auditable, repeatable, production-friendly.",
+		enterprise:
+			"Own your lead sourcing with audit-ready pipelines: controlled ingestion, clean schemas, segmentation, and exports into your CRM built for scale and governance.",
+	};
 	const description =
-		typeof LIVE_COPY?.subtitle === "string"
-			? LIVE_COPY.subtitle
-			: "Stop buying stale lead lists. Scrape your own fresh leads. Fresh leads, not rented lists.";
+		subtitleByPersona[heroPersona] ??
+		`Stop ${problemPhrase}. Start ${solutionPhrase}. Fresh leads, not rented lists.`;
 
 	return (
 		<section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-gradient-to-b from-background via-muted/40 to-background text-foreground">
@@ -45,10 +65,21 @@ function HeroStaticFallback() {
 
 			<div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 py-16 text-center sm:px-10">
 				<span className="inline-flex items-center justify-center rounded-full border border-border/40 bg-background/70 px-5 py-1.5 font-semibold text-foreground/80 text-xs uppercase tracking-[0.4em]">
-					{PERSONA_LABEL}
+					{personaLabel}
 				</span>
 				<h1 className="font-bold text-4xl text-foreground leading-tight sm:text-5xl md:text-6xl">
-					Stop {problemPhrase}, start {solutionPhrase}
+					{(() => {
+						const heroTitleByPersona: Partial<Record<string, string>> = {
+							agency: "Stop buying leads. Build a lead engine you own.",
+							startup: "Own your pipeline. Stop renting growth.",
+							developer: "Standardize lead ingestion. Export anywhere.",
+							enterprise: "Enterprise-grade lead ingestion you can audit.",
+						};
+						return (
+							heroTitleByPersona[heroPersona] ??
+							"Stop buying leads. Build a lead engine you own."
+						);
+					})()}
 				</h1>
 				<p className="max-w-3xl text-base text-muted-foreground sm:text-lg">
 					{description}
