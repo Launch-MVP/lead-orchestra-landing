@@ -15,7 +15,7 @@ export const betaSignupSteps: ConsultationStep[] = [
 		number: 2,
 		title: "Unlock Your 100 Free Leads",
 		description:
-			"Complete a short profile about your business goals. Unlock your Lead Orchestra perks—100 free leads, exclusive newsletter access, locked pricing, and bonus leads upon approval.",
+			"Complete a short profile about your business goals. Unlock your Lead Orchestra perks 100 free leads, exclusive newsletter access, locked pricing, and bonus leads upon approval.",
 	},
 	{
 		number: 3,
