@@ -86,64 +86,67 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 		[],
 	);
 
-	const renderMicrocopy = useCallback((copy?: string): ReactNode[] | null => {
-		if (!copy) {
-			return null;
-		}
-		const elements: ReactNode[] = [];
-		let lastIndex = 0;
-		const linkRegex = /<link\s+href="([^"]+)">(.*?)<\/link>/gi;
-		let match: RegExpExecArray | null = linkRegex.exec(copy);
-
-		while (match !== null) {
-			const [fullMatch, href, text] = match;
-			if (match.index > lastIndex) {
-				elements.push(copy.slice(lastIndex, match.index));
+	const renderMicrocopy = useCallback(
+		(copy?: string): ReactNode[] | null => {
+			if (!copy) {
+				return null;
 			}
-			elements.push(
-				<span
-					key={`cta-link-${match.index}`}
-					className={cn("inline-flex", "items-center", "relative")}
-				>
-					<a
-						href={href}
-						onClick={(event) => handleMicrocopyLink(event, href)}
-						className={cn(
-							"bg-primary/10",
-							"font-semibold",
-							"gap-1",
-							"hover:bg-primary/15",
-							"inline-flex",
-							"items-center",
-							"no-underline",
-							"px-2.5",
-							"py-1",
-							"relative",
-							"rounded-full",
-							"text-primary",
-							"text-sm",
-							"transition",
-						)}
+			const elements: ReactNode[] = [];
+			let lastIndex = 0;
+			const linkRegex = /<link\s+href="([^"]+)">(.*?)<\/link>/gi;
+			let match: RegExpExecArray | null = linkRegex.exec(copy);
+
+			while (match !== null) {
+				const [fullMatch, href, text] = match;
+				if (match.index > lastIndex) {
+					elements.push(copy.slice(lastIndex, match.index));
+				}
+				elements.push(
+					<span
+						key={`cta-link-${match.index}`}
+						className={cn("inline-flex", "items-center", "relative")}
 					>
-						{text}
-					</a>
-					<Pointer
-						className="text-primary"
-						initial={{ opacity: 0, scale: 0 }}
-						animate={{ opacity: 0.9, scale: 1 }}
-						exit={{ opacity: 0, scale: 0 }}
-						transition={{ type: "spring", stiffness: 160, damping: 20 }}
-					/>
-				</span>,
-			);
-			lastIndex = match.index + fullMatch.length;
-			match = linkRegex.exec(copy);
-		}
-		if (lastIndex < copy.length) {
-			elements.push(copy.slice(lastIndex));
-		}
-		return elements;
-	}, [handleMicrocopyLink]);
+						<a
+							href={href}
+							onClick={(event) => handleMicrocopyLink(event, href)}
+							className={cn(
+								"bg-primary/10",
+								"font-semibold",
+								"gap-1",
+								"hover:bg-primary/15",
+								"inline-flex",
+								"items-center",
+								"no-underline",
+								"px-2.5",
+								"py-1",
+								"relative",
+								"rounded-full",
+								"text-primary",
+								"text-sm",
+								"transition",
+							)}
+						>
+							{text}
+						</a>
+						<Pointer
+							className="text-primary"
+							initial={{ opacity: 0, scale: 0 }}
+							animate={{ opacity: 0.9, scale: 1 }}
+							exit={{ opacity: 0, scale: 0 }}
+							transition={{ type: "spring", stiffness: 160, damping: 20 }}
+						/>
+					</span>,
+				);
+				lastIndex = match.index + fullMatch.length;
+				match = linkRegex.exec(copy);
+			}
+			if (lastIndex < copy.length) {
+				elements.push(copy.slice(lastIndex));
+			}
+			return elements;
+		},
+		[handleMicrocopyLink],
+	);
 
 	const microcopyContent = useMemo(
 		() => renderMicrocopy(microcopy),
