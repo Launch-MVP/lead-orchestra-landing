@@ -208,7 +208,7 @@ export const LIVE_SECONDARY_CTA = {
 	label: HERO_COPY_V7.ctas.secondary[0],
 	description: "See how open-source scraping works. One command = fresh leads.",
 	emphasis: "outline" as const,
-	badge: "View on GitHub",
+	badge: "See Live Demo",
 };
 
 export const LIVE_MICROCOPY =
