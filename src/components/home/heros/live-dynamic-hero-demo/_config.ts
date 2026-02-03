@@ -197,9 +197,9 @@ export const LIVE_COPY = resolveHeroCopy(
 );
 
 export const LIVE_PRIMARY_CTA = {
-	label: "Scrape Your First Site",
+	label: "Get 100 Free Leads",
 	description:
-		"Paste a URL → scrape all the leads → clean them → export instantly. Fresh leads, not rented lists.",
+		"Scrape your first site in 60 seconds. We’ll clean, dedupe, and export your first 100 leads for free.",
 	emphasis: "solid" as const,
 	badge: "100% Free",
 };
