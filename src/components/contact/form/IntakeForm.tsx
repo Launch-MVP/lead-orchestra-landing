@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -96,6 +97,11 @@ export default function IntakeForm() {
 											{field.label}{" "}
 											{/* Very basic 'required' check for UI if needed, but Zod valid handles it */}
 										</FormLabel>
+										{field.description && (
+											<FormDescription className="text-sm text-muted-foreground pb-2">
+												{field.description}
+											</FormDescription>
+										)}
 										<FormControl>
 											{renderFormField(
 												createFieldProps<FieldConfig>(field, formField),

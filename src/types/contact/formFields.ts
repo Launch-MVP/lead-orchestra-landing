@@ -11,6 +11,8 @@ export interface BaseField {
 	sensitive?: boolean;
 	// * Optional regex pattern for validating input on the frontend
 	pattern?: string;
+	// * Optional description/helper text to display below the label
+	description?: string;
 }
 
 export type TextInputField = BaseField & {

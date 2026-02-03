@@ -8,131 +8,255 @@ import { z } from "zod";
 // * Options definitions
 const paidPilotOptions = [
   {
-    "value": "✅ Yes",
-    "label": "✅ Yes"
+    "value": "❌ No — we only test free",
+    "label": "❌ No — we only test free"
   },
   {
     "value": "⚠️ Depends on price",
     "label": "⚠️ Depends on price"
   },
   {
-    "value": "❌ No",
-    "label": "❌ No"
+    "value": "✅ Yes — paid pilot is fine",
+    "label": "✅ Yes — paid pilot is fine"
+  },
+  {
+    "value": "Yes",
+    "label": "Yes"
   }
 ];
 
 const businessTypeOptions = [
   {
-    "value": "🧑‍💻 Tech & SaaS Niche",
-    "label": "🧑‍💻 Tech & SaaS Niche"
+    "value": "🏘️Real Estate",
+    "label": "🏘️Real Estate"
   },
   {
     "value": "💼 B2B  Niche",
     "label": "💼 B2B  Niche"
   },
   {
-    "value": "🛍️ E-commerce & Retail",
-    "label": "🛍️ E-commerce & Retail"
-  },
-  {
-    "value": "🎤 Event & Creative Niche",
-    "label": "🎤 Event & Creative Niche"
-  },
-  {
-    "value": "🧘 Health / Wellness",
-    "label": "🧘 Health / Wellness"
+    "value": "💹Marketplace",
+    "label": "💹Marketplace"
   },
   {
     "value": "🛠️ Contractor / Home Service",
     "label": "🛠️ Contractor / Home Service"
   },
   {
+    "value": "🧪 Herbal / Botanical Niche",
+    "label": "🧪 Herbal / Botanical Niche"
+  },
+  {
+    "value": "🎤 Event & Creative Niche",
+    "label": "🎤 Event & Creative Niche"
+  },
+  {
+    "value": "🙌🏽Coaching Niche",
+    "label": "🙌🏽Coaching Niche"
+  },
+  {
+    "value": "🧑‍💻 Tech & SaaS Niche",
+    "label": "🧑‍💻 Tech & SaaS Niche"
+  },
+  {
+    "value": "🛍️ E-commerce & Retail",
+    "label": "🛍️ E-commerce & Retail"
+  },
+  {
+    "value": "🧘 Health / Wellness",
+    "label": "🧘 Health / Wellness"
+  },
+  {
+    "value": "🧾 Professional Services",
+    "label": "🧾 Professional Services"
+  },
+  {
+    "value": "🌱 Alternative / Mission-Driven",
+    "label": "🌱 Alternative / Mission-Driven"
+  },
+  {
     "value": "♎ B2C High Virality",
     "label": "♎ B2C High Virality"
   },
   {
-    "value": "💹Marketplace",
-    "label": "💹Marketplace"
+    "value": "🔧 Misc. Flexible Options",
+    "label": "🔧 Misc. Flexible Options"
   },
   {
-    "value": "🏢 Real Estate",
-    "label": "🏢 Real Estate"
+    "value": "Agency",
+    "label": "Agency"
   },
   {
-    "value": "📚 Education",
-    "label": "📚 Education"
-  },
-  {
-    "value": "💰 Finance & Insurance",
-    "label": "💰 Finance & Insurance"
+    "value": "SaaS",
+    "label": "SaaS"
   }
 ];
 
 const crmConnectionOptions = [
   {
+    "value": "Yes i dont want to manually upload leads",
+    "label": "Yes i dont want to manually upload leads"
+  },
+  {
     "value": "No id rather manually upload the generated leads",
     "label": "No id rather manually upload the generated leads"
   },
   {
-    "value": "Yes i dont want to manually upload leads",
-    "label": "Yes i dont want to manually upload leads"
+    "value": "Yes",
+    "label": "Yes"
   }
 ];
 
 const existingLeadListsOptions = [
   {
+    "value": "Yes — Clean",
+    "label": "Yes — Clean"
+  },
+  {
+    "value": "Yes — Messy",
+    "label": "Yes — Messy"
+  },
+  {
     "value": "No",
     "label": "No"
   },
   {
-    "value": "Yes — Clean",
-    "label": "Yes — Clean"
+    "value": "Yes",
+    "label": "Yes"
   }
 ];
 
 const icpCategoryOptions = [
   {
-    "value": "Event Curator / Event Organizer",
-    "label": "Event Curator / Event Organizer"
+    "value": "Real Estate Agencies",
+    "label": "Real Estate Agencies"
+  },
+  {
+    "value": "Residential Real Estate Agents",
+    "label": "Residential Real Estate Agents"
+  },
+  {
+    "value": "Commercial Real Estate Agents",
+    "label": "Commercial Real Estate Agents"
+  },
+  {
+    "value": "Residential Real Estate Brokers",
+    "label": "Residential Real Estate Brokers"
+  },
+  {
+    "value": "Commercial Real Estate Brokers",
+    "label": "Commercial Real Estate Brokers"
+  },
+  {
+    "value": "Commercial Real Estate Investors",
+    "label": "Commercial Real Estate Investors"
+  },
+  {
+    "value": "Residential Real Estate Investors",
+    "label": "Residential Real Estate Investors"
+  },
+  {
+    "value": "Residential Real Estate Wholesalers",
+    "label": "Residential Real Estate Wholesalers"
+  },
+  {
+    "value": "Commercial Real Estate Wholesalers",
+    "label": "Commercial Real Estate Wholesalers"
+  },
+  {
+    "value": "SaaS Founders",
+    "label": "SaaS Founders"
   },
   {
     "value": "Tech Startups",
     "label": "Tech Startups"
   },
   {
-    "value": "Home Services (HVAC Plumbing Roofing etc.)",
-    "label": "Home Services (HVAC Plumbing Roofing etc.)"
+    "value": "B2B Service Providers",
+    "label": "B2B Service Providers"
   },
   {
-    "value": "Consumers with inherent virality",
-    "label": "Consumers with inherent virality"
+    "value": "Local Business Owners",
+    "label": "Local Business Owners"
   },
   {
     "value": "E-commerce Brands",
     "label": "E-commerce Brands"
   },
   {
-    "value": "SaaS Companies",
-    "label": "SaaS Companies"
+    "value": "Consultant / Coachs",
+    "label": "Consultant / Coachs"
   },
   {
-    "value": "Marketing Agencies",
-    "label": "Marketing Agencies"
+    "value": "Solopreneurs",
+    "label": "Solopreneurs"
   },
   {
-    "value": "Recruiters / HR",
-    "label": "Recruiters / HR"
+    "value": "Construction / Contractors",
+    "label": "Construction / Contractors"
   },
   {
-    "value": "Coaches / Consultants",
-    "label": "Coaches / Consultants"
+    "value": "Home Services (HVAC Plumbing Roofing etc.)",
+    "label": "Home Services (HVAC Plumbing Roofing etc.)"
+  },
+  {
+    "value": "Marketing Agency",
+    "label": "Marketing Agency"
+  },
+  {
+    "value": "Freelancer",
+    "label": "Freelancer"
+  },
+  {
+    "value": "Nonprofit / Community Org",
+    "label": "Nonprofit / Community Org"
+  },
+  {
+    "value": "Event Curator / Event Organizer",
+    "label": "Event Curator / Event Organizer"
+  },
+  {
+    "value": "Herbalist / Botanical Products",
+    "label": "Herbalist / Botanical Products"
+  },
+  {
+    "value": "Dating App Users",
+    "label": "Dating App Users"
+  },
+  {
+    "value": "Consumers with inherent virality",
+    "label": "Consumers with inherent virality"
+  },
+  {
+    "value": "Other",
+    "label": "Other"
+  },
+  {
+    "value": "B2B",
+    "label": "B2B"
   }
 ];
 
 const speedOptions = [
   {
+    "value": "⏱ Not sure / depends",
+    "label": "⏱ Not sure / depends"
+  },
+  {
+    "value": "⏱ 2–4 weeks",
+    "label": "⏱ 2–4 weeks"
+  },
+  {
+    "value": "⏱ Within 7–10 business days",
+    "label": "⏱ Within 7–10 business days"
+  },
+  {
     "value": "⏱ Within 3–5 business days",
     "label": "⏱ Within 3–5 business days"
+  },
+  {
+    "value": "Immediately",
+    "label": "Immediately"
   }
 ];
 
@@ -148,6 +272,18 @@ const interestedFeaturesOptions = [
   {
     "value": "Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)",
     "label": "Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)"
+  },
+  {
+    "value": "Search Engine Optimization (Get Discovered On Search Engines)",
+    "label": "Search Engine Optimization (Get Discovered On Search Engines)"
+  },
+  {
+    "value": "AI  Engine Optimization (Get suggested by AI)",
+    "label": "AI  Engine Optimization (Get suggested by AI)"
+  },
+  {
+    "value": "Lead Enrichment",
+    "label": "Lead Enrichment"
   }
 ];
 
@@ -157,47 +293,119 @@ const painPointsOptions = [
     "label": "Not enough high-quality leads"
   },
   {
+    "value": "Hard to find high-intent leads",
+    "label": "Hard to find high-intent leads"
+  },
+  {
+    "value": "Don't know which websites to scrape",
+    "label": "Don't know which websites to scrape"
+  },
+  {
+    "value": "Lead lists are outdated",
+    "label": "Lead lists are outdated"
+  },
+  {
     "value": "Lead lists are incomplete",
     "label": "Lead lists are incomplete"
   },
   {
-    "value": "Hard to find high-intent leads",
-    "label": "Hard to find high-intent leads"
+    "value": "Missing phone numbers",
+    "label": "Missing phone numbers"
+  },
+  {
+    "value": "Missing emails",
+    "label": "Missing emails"
+  },
+  {
+    "value": "Missing social profiles",
+    "label": "Missing social profiles"
+  },
+  {
+    "value": "Data is messy or inconsistent",
+    "label": "Data is messy or inconsistent"
+  },
+  {
+    "value": "Need accurate contact information",
+    "label": "Need accurate contact information"
+  },
+  {
+    "value": "Need verified leads only",
+    "label": "Need verified leads only"
   },
   {
     "value": "Need more targeted prospects",
     "label": "Need more targeted prospects"
   },
   {
+    "value": "Hard to identify ideal customers",
+    "label": "Hard to identify ideal customers"
+  },
+  {
+    "value": "Need lookalike audience generation",
+    "label": "Need lookalike audience generation"
+  },
+  {
+    "value": "Need lead scoring or ranking",
+    "label": "Need lead scoring or ranking"
+  },
+  {
+    "value": "Leads are scattered across too many places",
+    "label": "Leads are scattered across too many places"
+  },
+  {
     "value": "Need centralized lead database",
     "label": "Need centralized lead database"
   },
   {
-    "value": "Don’t know which websites to scrape",
-    "label": "Don’t know which websites to scrape"
+    "value": "Want automated recurring scraping",
+    "label": "Want automated recurring scraping"
+  },
+  {
+    "value": "Need bulk enrichment for large lists",
+    "label": "Need bulk enrichment for large lists"
+  },
+  {
+    "value": "Hard to qualify leads quickly",
+    "label": "Hard to qualify leads quickly"
+  },
+  {
+    "value": "Need faster data collection",
+    "label": "Need faster data collection"
+  },
+  {
+    "value": "Lead Quality",
+    "label": "Lead Quality"
+  },
+  {
+    "value": "Volume",
+    "label": "Volume"
   }
 ];
 
 const monthlyBudgetOptions = [
   {
-    "value": "<$250",
-    "label": "<$250"
-  },
-  {
-    "value": "$250–$500",
-    "label": "$250–$500"
-  },
-  {
-    "value": "$500–$1k",
-    "label": "$500–$1k"
+    "value": "$3k+",
+    "label": "$3k+"
   },
   {
     "value": "$1k–$3k",
     "label": "$1k–$3k"
   },
   {
-    "value": "$3k+",
-    "label": "$3k+"
+    "value": "$250–$1k",
+    "label": "$250–$1k"
+  },
+  {
+    "value": "<$250",
+    "label": "<$250"
+  },
+  {
+    "value": "$1k - $3k",
+    "label": "$1k - $3k"
+  },
+  {
+    "value": "$3k - $5k",
+    "label": "$3k - $5k"
   }
 ];
 
@@ -218,16 +426,24 @@ const priorityLevelOptions = [
 
 const validationExpectationOptions = [
   {
-    "value": "📊 One-time test batch before decision",
-    "label": "📊 One-time test batch before decision"
+    "value": "❌ Not sure",
+    "label": "❌ Not sure"
   },
   {
-    "value": "📊 Ongoing conversion over 30–60 days",
-    "label": "📊 Ongoing conversion over 30–60 days"
+    "value": "💰 Closed revenue required",
+    "label": "💰 Closed revenue required"
   },
   {
-    "value": "📊 Immediate performance feedback",
-    "label": "📊 Immediate performance feedback"
+    "value": "📊 Conversion over 30–60 days",
+    "label": "📊 Conversion over 30–60 days"
+  },
+  {
+    "value": "📈 Directional signal (reply / interest rate)",
+    "label": "📈 Directional signal (reply / interest rate)"
+  },
+  {
+    "value": "10 Verified Leads",
+    "label": "10 Verified Leads"
   }
 ];
 
@@ -235,6 +451,22 @@ const leadOwnerOptions = [
   {
     "value": "❌ No dedicated owner yet",
     "label": "❌ No dedicated owner yet"
+  },
+  {
+    "value": "🤖 Automation / outbound system (Deal Scale)",
+    "label": "🤖 Automation / outbound system (Deal Scale)"
+  },
+  {
+    "value": "👥 Sales rep / SDR",
+    "label": "👥 Sales rep / SDR"
+  },
+  {
+    "value": "👤 Founder",
+    "label": "👤 Founder"
+  },
+  {
+    "value": "Myself",
+    "label": "Myself"
   }
 ];
 
