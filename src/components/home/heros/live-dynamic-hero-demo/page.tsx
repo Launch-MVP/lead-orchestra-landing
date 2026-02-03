@@ -46,7 +46,7 @@ function HeroStaticFallback() {
 		agency:
 			"Stop burning budget on ads and rented databases like ZoomInfo. Build an owned lead engine that delivers unique sources weekly, often cutting acquisition costs up to 80%.",
 		startup:
-			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid dependence as the system scales.",
+			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid spend by 80-90%",
 		developer:
 			"Replace brittle one-off scrapers with a standardized ingestion pipeline: scrape, normalize (LSF), dedupe/tag, export anywhere. Auditable, repeatable, production-friendly.",
 		enterprise:
