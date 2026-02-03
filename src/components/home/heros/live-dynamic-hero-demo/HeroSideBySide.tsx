@@ -250,13 +250,13 @@ export default function HeroSideBySide(): JSX.Element {
 								className="w-full sm:w-auto"
 								displayMode="both"
 								orientation="horizontal"
-							primary={LIVE_PRIMARY_CTA}
-							secondary={LIVE_SECONDARY_CTA}
-							microcopy={LIVE_MICROCOPY}
-							onPrimaryClick={handlePrimaryClick}
-							onSecondaryClick={handlePreviewDemo}
-							primaryLoading={isTrialLoading}
-						/>
+								primary={LIVE_PRIMARY_CTA}
+								secondary={LIVE_SECONDARY_CTA}
+								microcopy={LIVE_MICROCOPY}
+								onPrimaryClick={handlePrimaryClick}
+								onSecondaryClick={handlePreviewDemo}
+								primaryLoading={isTrialLoading}
+							/>
 						</div>
 
 						{/* Social Proof */}
