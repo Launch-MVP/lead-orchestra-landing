@@ -29,9 +29,11 @@ import {
 } from "@/data/contact/intakeFormFields";
 import type { FieldConfig } from "@/types/contact/formFields";
 import { generateMetaEventId, trackIntakeFormSubmit } from "@/utils/seo/fbpixel";
+import { useRouter } from "next/navigation";
 
 export default function IntakeForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const router = useRouter();
 
 	const form = useForm<IntakeFormValues>({
 		resolver: zodResolver(intakeFormSchema),
@@ -69,9 +71,7 @@ export default function IntakeForm() {
 					: undefined,
 				eventId: metaEventId,
 			});
-
-			toast.success("Application received! We'll be in touch shortly.");
-			form.reset();
+			router.push("/contact/thank-you?source=intake");
 		} catch (err) {
 			console.error("Submission failed:", err);
 			toast.error("Submission failed. Please try again.");

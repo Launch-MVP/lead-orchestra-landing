@@ -47,6 +47,7 @@ import {
 } from "@/data/contact/formFields";
 import type { FieldConfig, RenderFieldProps } from "@/types/contact/formFields";
 import { generateMetaEventId, trackLead } from "@/utils/seo/fbpixel";
+import { useRouter } from "next/navigation";
 import { mapBetaTesterApplication } from "./testerApplicationMappers";
 
 export default function ContactForm({
@@ -55,6 +56,7 @@ export default function ContactForm({
 	prefill?: Partial<BetaTesterFormValues>;
 }) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const router = useRouter();
 
 	const baseDefaults = useMemo<Partial<BetaTesterFormValues>>(
 		() => ({
@@ -193,9 +195,7 @@ export default function ContactForm({
 			});
 
 			if (beehiivResponse.ok) {
-				toast.success(
-					"Thanks for applying! You've also been subscribed to our newsletter.",
-				);
+				toast.success("Thanks for applying!");
 			} else {
 				const errorData = await beehiivResponse.json();
 				if (
@@ -211,8 +211,7 @@ export default function ContactForm({
 					);
 				}
 			}
-
-			form.reset(computeMergedDefaults(prefill));
+			router.push("/contact/thank-you?source=application");
 		} catch (err) {
 			console.error("Submission failed:", err);
 			toast.error("Submission failed. Please try again.");
