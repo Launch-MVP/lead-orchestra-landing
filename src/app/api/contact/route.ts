@@ -1,9 +1,22 @@
 import { type Lead, addToSendGrid } from "@/lib/externalRequests/sendgrid";
 import { NextResponse } from "next/server";
 
+import {
+	buildMetaUserDataFromRequest,
+	sendMetaConversionEvent,
+} from "@/lib/analytics/meta-conversions-api";
+
 export async function POST(request: Request) {
 	try {
 		const body = await request.json();
+		const metaEventId =
+			typeof body.metaEventId === "string" ? body.metaEventId : undefined;
+		const eventSourceUrl =
+			typeof body.eventSourceUrl === "string" ? body.eventSourceUrl : undefined;
+		const metaOnlyTestMode =
+			(process.env.CONTACT_CAPI_TEST_MODE === "true" ||
+				body.metaOnlyTestMode === true) &&
+			process.env.NODE_ENV !== "production";
 
 		// * Basic validation to ensure email is present
 		if (!body.email) {
@@ -35,22 +48,63 @@ export async function POST(request: Request) {
 			pilot_member: body.pilot_member ?? false,
 		};
 
-		// * Add the contact to your main SendGrid list
-		const listName = "Deal Scale"; // ? Using the global contact list as requested
-		const statusCode = await addToSendGrid(lead, listName);
+		const metaPayload = {
+			eventName: "Lead" as const,
+			eventId: metaEventId,
+			eventSourceUrl,
+			actionSource: "website" as const,
+			userData: buildMetaUserDataFromRequest(request, {
+				email: lead.email,
+				phone: lead.phone,
+				firstName: lead.firstName,
+				lastName: lead.lastName,
+			}),
+			customData: {
+				currency: "USD",
+				contentName: lead.selectedService || "Contact Form",
+				contentCategory: lead.beta_tester ? "Beta Tester" : "General Contact",
+			},
+		};
 
-		if (statusCode !== 202) {
+		if (metaOnlyTestMode) {
+			const metaResult = await sendMetaConversionEvent(metaPayload);
 			return NextResponse.json(
 				{
-					error: "Failed to add contact to SendGrid.",
-					details: `Status code: ${statusCode}`,
+					message:
+						"Meta CAPI test mode: event attempted and SendGrid was skipped.",
+					metaResult,
 				},
-				{ status: 500 },
+				{ status: 200 },
 			);
 		}
 
+		// SendGrid is best-effort and should never block contact capture/CAPI.
+		const listName = "Deal Scale";
+		const sendgridStatusCode = await addToSendGrid(lead, listName).catch(
+			(error: unknown) => {
+				console.error("[contact] SendGrid request failed", error);
+				return 500;
+			},
+		);
+		const sendgridAccepted = sendgridStatusCode === 202;
+		if (!sendgridAccepted) {
+			console.warn("[contact] SendGrid skipped/failed", {
+				statusCode: sendgridStatusCode,
+				email: lead.email,
+			});
+		}
+
+		void sendMetaConversionEvent(metaPayload);
+
 		return NextResponse.json(
-			{ message: "Contact added to SendGrid successfully." },
+			{
+				message: "Contact captured successfully.",
+				sendgrid: {
+					attempted: true,
+					accepted: sendgridAccepted,
+					statusCode: sendgridStatusCode,
+				},
+			},
 			{ status: 200 },
 		);
 	} catch (error) {

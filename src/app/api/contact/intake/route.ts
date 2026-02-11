@@ -1,6 +1,11 @@
 import { Client } from "@notionhq/client";
 import { NextResponse } from "next/server";
 
+import {
+	buildMetaUserDataFromRequest,
+	sendMetaConversionEvent,
+} from "@/lib/analytics/meta-conversions-api";
+
 // * Initialize Notion Client
 const notion = new Client({
 	auth: process.env.NOTION_API_KEY,
@@ -19,6 +24,10 @@ export async function POST(request: Request) {
 
 	try {
 		const body = await request.json();
+		const metaEventId =
+			typeof body.metaEventId === "string" ? body.metaEventId : undefined;
+		const eventSourceUrl =
+			typeof body.eventSourceUrl === "string" ? body.eventSourceUrl : undefined;
 
 		// Helper to safely format multiselect/select/text for Notion properties
 		// * Note: This mapping depends on the EXACT property names in your Notion DB.
@@ -179,6 +188,24 @@ export async function POST(request: Request) {
 		await notion.pages.create({
 			parent: { database_id: DATABASE_ID },
 			properties: properties,
+		});
+
+		void sendMetaConversionEvent({
+			eventName: "Lead",
+			eventId: metaEventId,
+			eventSourceUrl,
+			actionSource: "website",
+			userData: buildMetaUserDataFromRequest(request, {
+				email: body.email,
+				phone: body.phone,
+				firstName: body.name,
+			}),
+			customData: {
+				currency: "USD",
+				value: typeof body.avgDealAmount === "number" ? body.avgDealAmount : 0,
+				contentName: "Lead Orchestra Intake",
+				contentCategory: "Lead Form",
+			},
 		});
 
 		return NextResponse.json({ success: true }, { status: 200 });

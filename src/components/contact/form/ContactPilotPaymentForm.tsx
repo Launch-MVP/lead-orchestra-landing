@@ -2,6 +2,7 @@
 import type { PriorityPilotFormValues } from "@/data/contact/pilotFormFields";
 import { mockDiscountCodes } from "@/data/discount/mockDiscountCodes";
 import type { DiscountCode } from "@/types/discount/discountCode"; // * Discount code type
+import { generateMetaEventId, trackLead } from "@/utils/seo/fbpixel";
 import {
 	PaymentElement,
 	useElements,
@@ -82,13 +83,33 @@ export default function ContactPilotPaymentForm({
 				redirect: "if_required",
 			});
 			if (error) throw error;
+			const metaEventId = generateMetaEventId();
 			// SendGrid email after payment
 			const sgRes = await fetch("/api/contact", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(formData),
+				body: JSON.stringify({
+					...formData,
+					metaEventId,
+					eventSourceUrl: window.location.href,
+				}),
 			});
 			if (!sgRes.ok) throw new Error("Failed to send confirmation email");
+			const paidValue =
+				discountApplied?.discountPercent === 100
+					? 0
+					: discountApplied?.discountAmount
+						? (5000 - discountApplied.discountAmount) / 100
+						: discountApplied?.discountPercent
+							? 50 * (1 - discountApplied.discountPercent / 100)
+							: 50;
+			trackLead({
+				contentName: "Priority Pilot Payment",
+				contentCategory: "Checkout",
+				currency: "USD",
+				value: paidValue,
+				eventId: metaEventId,
+			});
 			toast.success("Payment and application successful! Check your email.");
 			onSuccess();
 		} catch (err: unknown) {

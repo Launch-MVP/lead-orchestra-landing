@@ -46,6 +46,7 @@ import {
 	betaTesterFormSchema,
 } from "@/data/contact/formFields";
 import type { FieldConfig, RenderFieldProps } from "@/types/contact/formFields";
+import { generateMetaEventId, trackLead } from "@/utils/seo/fbpixel";
 import { mapBetaTesterApplication } from "./testerApplicationMappers";
 
 export default function ContactForm({
@@ -149,12 +150,18 @@ export default function ContactForm({
 			}
 
 			// * Send form data to the new contact endpoint for SendGrid integration
+			const metaEventId = generateMetaEventId();
 			const response = await fetch("/api/contact", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ ...submission, beta_tester: true }),
+				body: JSON.stringify({
+					...submission,
+					beta_tester: true,
+					metaEventId,
+					eventSourceUrl: window.location.href,
+				}),
 			});
 
 			if (!response.ok) {
@@ -164,6 +171,14 @@ export default function ContactForm({
 					await response.json(),
 				);
 			}
+
+			trackLead({
+				contentName: "Founders Circle Application",
+				contentCategory: "Beta Tester",
+				currency: "USD",
+				value: 0,
+				eventId: metaEventId,
+			});
 
 			// Subscribe to Beehiiv
 			const beehiivResponse = await fetch("/api/beehiiv/subscribe", {

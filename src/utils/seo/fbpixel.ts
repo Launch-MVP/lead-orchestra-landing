@@ -16,6 +16,10 @@
 
 export const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
 
+interface MetaTrackingOptions {
+	eventID?: string;
+}
+
 // Check if Facebook Pixel is loaded
 const isFbqAvailable = (): boolean => {
 	return typeof window !== "undefined" && typeof window.fbq === "function";
@@ -28,16 +32,24 @@ export const pageView = (): void => {
 	}
 };
 
-export const event = (name: string, options: Record<string, unknown> = {}): void => {
+export const event = (
+	name: string,
+	options: Record<string, unknown> = {},
+	trackingOptions?: MetaTrackingOptions,
+): void => {
 	if (isFbqAvailable()) {
-		window.fbq("track", name, options);
+		window.fbq("track", name, options, trackingOptions);
 	}
 };
 
 // Custom event for non-standard events
-export const customEvent = (name: string, options: Record<string, unknown> = {}): void => {
+export const customEvent = (
+	name: string,
+	options: Record<string, unknown> = {},
+	trackingOptions?: MetaTrackingOptions,
+): void => {
 	if (isFbqAvailable()) {
-		window.fbq("trackCustom", name, options);
+		window.fbq("trackCustom", name, options, trackingOptions);
 	}
 };
 
@@ -54,6 +66,7 @@ export const trackLead = (options?: {
 	contentCategory?: string;
 	value?: number;
 	currency?: string;
+	eventId?: string;
 }): void => {
 	if (isFbqAvailable()) {
 		window.fbq("track", "Lead", {
@@ -61,7 +74,7 @@ export const trackLead = (options?: {
 			content_category: options?.contentCategory || "Intake",
 			value: options?.value || 0,
 			currency: options?.currency || "USD",
-		});
+		}, options?.eventId ? { eventID: options.eventId } : undefined);
 	}
 };
 
@@ -173,12 +186,14 @@ export const trackIntakeFormSubmit = (options?: {
 	businessType?: string[];
 	monthlyBudget?: string;
 	priority?: string;
+	eventId?: string;
 }): void => {
 	trackLead({
 		contentName: "Lead Orchestra Intake",
 		contentCategory: "B2B Lead Generation",
 		value: getLeadValue(options?.monthlyBudget),
 		currency: "USD",
+		eventId: options?.eventId,
 	});
 	
 	// Also fire a custom event with more details
@@ -188,7 +203,15 @@ export const trackIntakeFormSubmit = (options?: {
 		monthly_budget: options?.monthlyBudget,
 		priority: options?.priority,
 		timestamp: new Date().toISOString(),
-	});
+	}, options?.eventId ? { eventID: options.eventId } : undefined);
+};
+
+export const generateMetaEventId = (): string => {
+	if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+		return crypto.randomUUID();
+	}
+
+	return `meta_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
 };
 
 /**

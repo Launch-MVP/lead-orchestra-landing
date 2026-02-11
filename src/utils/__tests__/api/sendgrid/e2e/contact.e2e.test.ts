@@ -50,7 +50,7 @@ describe("POST /api/contact (E2E)", () => {
 		// Assert
 		expect(response.status).toBe(200);
 		expect(responseBody.message).toBe(
-			"Contact added to SendGrid successfully.",
+			"Contact captured successfully.",
 		);
 		expect(mockedAddToSendGrid).toHaveBeenCalledTimes(1);
 		expect(mockedAddToSendGrid).toHaveBeenCalledWith(
@@ -89,7 +89,7 @@ describe("POST /api/contact (E2E)", () => {
 		// Assert
 		expect(response.status).toBe(200);
 		expect(responseBody.message).toBe(
-			"Contact added to SendGrid successfully.",
+			"Contact captured successfully.",
 		);
 		expect(mockedAddToSendGrid).toHaveBeenCalledTimes(1);
 		expect(mockedAddToSendGrid).toHaveBeenCalledWith(
@@ -121,7 +121,7 @@ describe("POST /api/contact (E2E)", () => {
 		expect(mockedAddToSendGrid).not.toHaveBeenCalled();
 	});
 
-	it("should return a 500 error if SendGrid fails", async () => {
+	it("should still succeed if SendGrid fails", async () => {
 		// Arrange: Mock a failed SendGrid response
 		mockedAddToSendGrid.mockResolvedValue(500);
 
@@ -137,8 +137,8 @@ describe("POST /api/contact (E2E)", () => {
 		const responseBody = await response.json();
 
 		// Assert
-		expect(response.status).toBe(500);
-		expect(responseBody.error).toBe("Failed to add contact to SendGrid.");
+		expect(response.status).toBe(200);
+		expect(responseBody.message).toBe("Contact captured successfully.");
 		expect(mockedAddToSendGrid).toHaveBeenCalledTimes(1);
 	});
 });

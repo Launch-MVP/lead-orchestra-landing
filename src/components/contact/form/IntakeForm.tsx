@@ -28,7 +28,7 @@ import {
 	intakeFormSchema,
 } from "@/data/contact/intakeFormFields";
 import type { FieldConfig } from "@/types/contact/formFields";
-import { trackIntakeFormSubmit } from "@/utils/seo/fbpixel";
+import { generateMetaEventId, trackIntakeFormSubmit } from "@/utils/seo/fbpixel";
 
 export default function IntakeForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,13 +41,18 @@ export default function IntakeForm() {
 	const onSubmit = async (data: IntakeFormValues) => {
 		setIsSubmitting(true);
 		try {
+			const metaEventId = generateMetaEventId();
 			// * Submit to Notion API
 			const response = await fetch("/api/contact/intake", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(data),
+				body: JSON.stringify({
+					...data,
+					metaEventId,
+					eventSourceUrl: window.location.href,
+				}),
 			});
 
 			if (!response.ok) {
@@ -57,9 +62,12 @@ export default function IntakeForm() {
 
 			// * Fire Facebook Pixel Lead Event with form data
 			trackIntakeFormSubmit({
-				businessType: data["Business Type / Niche"] as string[] | undefined,
-				monthlyBudget: data["Average Monthly Lead Gen Budget"] as string | undefined,
-				priority: data["Priority Level"] as string | undefined,
+				businessType: data.businessType,
+				monthlyBudget: data.monthlyBudget,
+				priority: Array.isArray(data.priorityLevel)
+					? data.priorityLevel[0]
+					: undefined,
+				eventId: metaEventId,
 			});
 
 			toast.success("Application received! We'll be in touch shortly.");
