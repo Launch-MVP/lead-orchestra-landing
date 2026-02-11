@@ -17,14 +17,6 @@ const notion = new Client({
 const DATABASE_ID = process.env.NOTION_DATABASE_ID || process.env.NOTION_DB_ID;
 
 export async function POST(request: Request) {
-	if (!DATABASE_ID) {
-		console.error("NOTION_DATABASE_ID is not defined");
-		return NextResponse.json(
-			{ error: "Server configuration error: Missing Notion ID" },
-			{ status: 500 },
-		);
-	}
-
 	try {
 		const body = await request.json();
 		const providedEventId =
@@ -193,10 +185,25 @@ export async function POST(request: Request) {
 			};
 		}
 
-		await notion.pages.create({
-			parent: { database_id: DATABASE_ID },
-			properties: properties,
-		});
+		let notionSynced = false;
+		if (!DATABASE_ID) {
+			console.error(
+				"[contact/intake] NOTION_DATABASE_ID is not defined; skipping Notion sync.",
+			);
+		} else {
+			try {
+				await notion.pages.create({
+					parent: { database_id: DATABASE_ID },
+					properties: properties,
+				});
+				notionSynced = true;
+			} catch (notionError: any) {
+				console.error(
+					"[contact/intake] Notion sync failed; continuing with successful intake response.",
+					notionError,
+				);
+			}
+		}
 
 		void sendMetaConversionEvent({
 			eventName: "Lead",
@@ -217,7 +224,7 @@ export async function POST(request: Request) {
 			},
 		});
 
-		return NextResponse.json({ success: true }, { status: 200 });
+		return NextResponse.json({ success: true, notionSynced }, { status: 200 });
 	} catch (error: any) {
 		console.error("Notion API Error:", error);
 		return NextResponse.json(

@@ -81,7 +81,7 @@ describe("POST /api/contact/intake Meta CAPI integration (E2E)", () => {
 		);
 	});
 
-	it("does not fire CAPI when intake persistence fails", async () => {
+	it("still fires CAPI and returns success when intake persistence fails", async () => {
 		mockedPagesCreate.mockRejectedValue(new Error("Notion unavailable"));
 
 		const payload = {
@@ -97,8 +97,18 @@ describe("POST /api/contact/intake Meta CAPI integration (E2E)", () => {
 		});
 
 		const response = await POST(request);
+		const responseBody = await response.json();
 
-		expect(response.status).toBe(500);
-		expect(mockedSendMetaConversionEvent).not.toHaveBeenCalled();
+		expect(response.status).toBe(200);
+		expect(responseBody.success).toBe(true);
+		expect(responseBody.notionSynced).toBe(false);
+		expect(mockedSendMetaConversionEvent).toHaveBeenCalledTimes(1);
+		expect(mockedSendMetaConversionEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				eventName: "Lead",
+				eventId: "evt_intake_2",
+				actionSource: "website",
+			}),
+		);
 	});
 });
