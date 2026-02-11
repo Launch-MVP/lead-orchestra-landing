@@ -27,6 +27,7 @@ vi.mock("@/lib/analytics/meta-events-client", () => ({
 
 describe("ThankYouTrackingClient (e2e)", () => {
 	beforeEach(() => {
+		window.fbq = vi.fn();
 		pageViewMock.mockReset();
 		eventMock.mockReset();
 		generateMetaEventIdMock.mockReset();

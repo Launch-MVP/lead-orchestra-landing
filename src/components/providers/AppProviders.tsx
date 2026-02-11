@@ -65,20 +65,25 @@ export function AppProviders({
 	// Fallback: If autoload variable is undefined but GA ID is present, enable autoload
 	// This provides a safety net if the variable is missing but analytics should load
 	const hasGoogleAnalytics = Boolean(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS);
+	const hasFacebookPixelConfig = Boolean(
+		facebookPixelId || process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
+	);
 	const defaultAnalyticsConsent =
 		explicitAutoload ||
 		(process.env.NEXT_PUBLIC_ANALYTICS_AUTOLOAD === undefined &&
-			hasGoogleAnalytics);
+			(hasGoogleAnalytics || hasFacebookPixelConfig));
 
 	// Verify environment variables at runtime (using console.warn so it's visible in production)
 	useEffect(() => {
 		const usingFallback =
 			process.env.NEXT_PUBLIC_ANALYTICS_AUTOLOAD === undefined &&
-			hasGoogleAnalytics;
+			(hasGoogleAnalytics || hasFacebookPixelConfig);
 		console.warn("[AppProviders] Environment Variables Check:", {
 			NEXT_PUBLIC_ANALYTICS_AUTOLOAD:
 				process.env.NEXT_PUBLIC_ANALYTICS_AUTOLOAD,
 			NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
+			NEXT_PUBLIC_FACEBOOK_PIXEL_ID:
+				process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
 			defaultAnalyticsConsent,
 			explicitAutoload,
 			usingFallback,
@@ -87,10 +92,15 @@ export function AppProviders({
 		});
 		if (usingFallback) {
 			console.warn(
-				"[AppProviders] WARNING: NEXT_PUBLIC_ANALYTICS_AUTOLOAD is undefined. Using fallback: enabling autoload because NEXT_PUBLIC_GOOGLE_ANALYTICS is present. Please set NEXT_PUBLIC_ANALYTICS_AUTOLOAD=true in Vercel Production environment.",
+				"[AppProviders] WARNING: NEXT_PUBLIC_ANALYTICS_AUTOLOAD is undefined. Using fallback: enabling autoload because NEXT_PUBLIC_GOOGLE_ANALYTICS or NEXT_PUBLIC_FACEBOOK_PIXEL_ID is present. Please set NEXT_PUBLIC_ANALYTICS_AUTOLOAD=true in production environment.",
 			);
 		}
-	}, [defaultAnalyticsConsent, explicitAutoload, hasGoogleAnalytics]);
+	}, [
+		defaultAnalyticsConsent,
+		explicitAutoload,
+		hasGoogleAnalytics,
+		hasFacebookPixelConfig,
+	]);
 
 	const analyticsProps = useMemo(
 		() => ({
