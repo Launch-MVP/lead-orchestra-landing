@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
+import { event, generateMetaEventId } from "@/utils/seo/fbpixel";
 import { motion } from "framer-motion";
 import { Calendar, Info } from "lucide-react";
 import * as React from "react";
@@ -9,6 +11,21 @@ import * as React from "react";
 export function ScheduleMeeting() {
 	const calendarLink = "https://calendar.notion.so/meet/cyberoni/em2w42l93";
 	const [showBenefits, setShowBenefits] = React.useState(false);
+	const handleScheduleClick = React.useCallback(() => {
+		const eventId = generateMetaEventId();
+		event(
+			"Schedule",
+			{
+				content_name: "Consultation Booking",
+			},
+			{ eventID: eventId },
+		);
+		void trackMetaServerEvent({
+			eventName: "Schedule",
+			eventId,
+			eventSourceUrl: typeof window !== "undefined" ? window.location.href : undefined,
+		});
+	}, []);
 
 	return (
 		<div className="mb-8 flex flex-col items-center rounded-xl border border-white/10 bg-background-dark/50 p-8 text-center shadow-xl backdrop-blur-sm">
@@ -61,7 +78,12 @@ export function ScheduleMeeting() {
 					aria-label="Book a consultation"
 					data-testid="schedule-meeting-cta"
 				>
-					<a href={calendarLink} target="_blank" rel="noopener noreferrer">
+					<a
+						href={calendarLink}
+						target="_blank"
+						rel="noopener noreferrer"
+						onClick={handleScheduleClick}
+					>
 						Book a Consultation
 					</a>
 				</Button>

@@ -42,8 +42,39 @@ interface MetaCapiConfig {
 	enabled: boolean;
 	accessToken?: string;
 	pixelId?: string;
-	defaultTestEventCode?: string;
 }
+
+export const generateServerEventId = (): string => {
+	if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+		return crypto.randomUUID();
+	}
+
+	return `meta_srv_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
+};
+
+export const splitFullName = (
+	fullName?: string,
+): { firstName?: string; lastName?: string } => {
+	if (!fullName) {
+		return {};
+	}
+
+	const trimmed = fullName.trim();
+	if (!trimmed) {
+		return {};
+	}
+
+	const parts = trimmed.split(/\s+/);
+	if (parts.length === 1) {
+		return { firstName: parts[0] };
+	}
+
+	const [firstName, ...rest] = parts;
+	return {
+		firstName,
+		lastName: rest.join(" "),
+	};
+};
 
 const getMetaCapiConfig = (): MetaCapiConfig => {
 	const enabled =
@@ -56,7 +87,6 @@ const getMetaCapiConfig = (): MetaCapiConfig => {
 			process.env.META_CAPI_ACCESS_TOKEN ||
 			process.env.FACEBOOK_CONVERSIONS_API_ACCESS_TOKEN,
 		pixelId: process.env.META_PIXEL_ID || process.env.FACEBOOK_PIXEL_ID,
-		defaultTestEventCode: process.env.META_TEST_EVENT_CODE,
 	};
 };
 
@@ -113,6 +143,27 @@ export const resolveMetaCookieValues = (
 		fbc: cookies._fbc,
 		fbp: cookies._fbp,
 	};
+};
+
+export const resolveEventSourceUrl = (
+	request: Request,
+	explicitUrl?: string,
+): string | undefined => {
+	if (explicitUrl?.trim()) {
+		return explicitUrl.trim();
+	}
+
+	const referer = request.headers.get("referer");
+	if (referer?.trim()) {
+		return referer.trim();
+	}
+
+	const origin = request.headers.get("origin");
+	if (origin?.trim()) {
+		return origin.trim();
+	}
+
+	return undefined;
 };
 
 export const buildMetaUserDataFromRequest = (
@@ -199,9 +250,8 @@ export const sendMetaConversionEvent = async (
 			config.pixelId,
 		).setEvents([serverEvent]);
 
-		const testEventCode = input.testEventCode || config.defaultTestEventCode;
-		if (testEventCode) {
-			eventRequest.setTestEventCode(testEventCode);
+		if (input.testEventCode) {
+			eventRequest.setTestEventCode(input.testEventCode);
 		}
 
 		const response = await eventRequest.execute();

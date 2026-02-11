@@ -17,6 +17,9 @@ vi.mock("@/lib/analytics/meta-conversions-api", () => ({
 		clientIpAddress: "127.0.0.1",
 		clientUserAgent: "vitest",
 	})),
+	generateServerEventId: vi.fn(() => "evt_generated_mock"),
+	resolveEventSourceUrl: vi.fn((_: Request, explicit?: string) => explicit),
+	splitFullName: vi.fn(() => ({ firstName: "Jane", lastName: "Doe" })),
 	sendMetaConversionEvent: vi.fn().mockResolvedValue({ ok: true }),
 }));
 
@@ -99,4 +102,3 @@ describe("POST /api/contact/intake Meta CAPI integration (E2E)", () => {
 		expect(mockedSendMetaConversionEvent).not.toHaveBeenCalled();
 	});
 });
-

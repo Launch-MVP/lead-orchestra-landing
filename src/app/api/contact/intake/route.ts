@@ -3,7 +3,10 @@ import { NextResponse } from "next/server";
 
 import {
 	buildMetaUserDataFromRequest,
+	generateServerEventId,
+	resolveEventSourceUrl,
 	sendMetaConversionEvent,
+	splitFullName,
 } from "@/lib/analytics/meta-conversions-api";
 
 // * Initialize Notion Client
@@ -24,10 +27,15 @@ export async function POST(request: Request) {
 
 	try {
 		const body = await request.json();
-		const metaEventId =
+		const providedEventId =
 			typeof body.metaEventId === "string" ? body.metaEventId : undefined;
-		const eventSourceUrl =
+		const metaEventId = providedEventId || generateServerEventId();
+		const providedEventSourceUrl =
 			typeof body.eventSourceUrl === "string" ? body.eventSourceUrl : undefined;
+		const eventSourceUrl = resolveEventSourceUrl(request, providedEventSourceUrl);
+		const { firstName, lastName } = splitFullName(
+			typeof body.name === "string" ? body.name : undefined,
+		);
 
 		// Helper to safely format multiselect/select/text for Notion properties
 		// * Note: This mapping depends on the EXACT property names in your Notion DB.
@@ -198,7 +206,8 @@ export async function POST(request: Request) {
 			userData: buildMetaUserDataFromRequest(request, {
 				email: body.email,
 				phone: body.phone,
-				firstName: body.name,
+				firstName,
+				lastName,
 			}),
 			customData: {
 				currency: "USD",

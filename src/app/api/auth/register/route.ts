@@ -1,4 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
+import {
+	buildMetaUserDataFromRequest,
+	generateServerEventId,
+	resolveEventSourceUrl,
+	sendMetaConversionEvent,
+} from "@/lib/analytics/meta-conversions-api";
 
 const DEALSCALE_API_BASE =
 	process.env.DEALSCALE_API_BASE || "https://api.dealscale.io";
@@ -105,6 +111,19 @@ export async function POST(request: NextRequest) {
 		}
 
 		const data: DealScaleSignUpResponse = await res.json();
+
+		const eventSourceUrl = resolveEventSourceUrl(request);
+		void sendMetaConversionEvent({
+			eventName: "CompleteRegistration",
+			eventId: generateServerEventId(),
+			eventSourceUrl,
+			actionSource: "website",
+			userData: buildMetaUserDataFromRequest(request, {
+				email,
+				firstName: first_name,
+				lastName: last_name,
+			}),
+		});
 
 		// Return success response (tokens will be handled by NextAuth after auto-login)
 		return NextResponse.json({

@@ -13,12 +13,13 @@ import ExitIntentBoundary from "@/components/exit-intent/ExitIntentBoundary";
 import Testimonials from "@/components/home/Testimonials";
 import { betaTesterFormFields } from "@/data/contact/formFields";
 import type { BetaTesterFormValues } from "@/data/contact/formFields";
+import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
 import { exitIntentEnabled } from "@/lib/config/exitIntent";
 import { useDataModule } from "@/stores/useDataModuleStore";
 import type { MultiselectField } from "@/types/contact/formFields";
 import type { CompanyLogoDictType } from "@/types/service/trusted-companies";
 import type { Testimonial } from "@/types/testimonial";
-import { event } from "@/utils/seo/fbpixel";
+import { event, generateMetaEventId } from "@/utils/seo/fbpixel";
 import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
 import { getStaticSeo } from "@/utils/seo/staticSeo";
 import type { Metadata } from "next";
@@ -40,8 +41,14 @@ const Contact = () => {
 
 	// * Fire ViewContent pixel event on mount
 	useEffect(() => {
+		const eventId = generateMetaEventId();
 		event("ViewContent", {
 			content_name: "Contact Page",
+		}, { eventID: eventId });
+		void trackMetaServerEvent({
+			eventName: "ViewContent",
+			eventId,
+			eventSourceUrl: typeof window !== "undefined" ? window.location.href : undefined,
 		});
 	}, []);
 

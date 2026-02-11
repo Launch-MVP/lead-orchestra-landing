@@ -3,16 +3,27 @@ import { NextResponse } from "next/server";
 
 import {
 	buildMetaUserDataFromRequest,
+	generateServerEventId,
+	resolveEventSourceUrl,
 	sendMetaConversionEvent,
+	splitFullName,
 } from "@/lib/analytics/meta-conversions-api";
 
 export async function POST(request: Request) {
 	try {
 		const body = await request.json();
-		const metaEventId =
+		const providedEventId =
 			typeof body.metaEventId === "string" ? body.metaEventId : undefined;
-		const eventSourceUrl =
+		const metaEventId = providedEventId || generateServerEventId();
+		const providedEventSourceUrl =
 			typeof body.eventSourceUrl === "string" ? body.eventSourceUrl : undefined;
+		const eventSourceUrl = resolveEventSourceUrl(request, providedEventSourceUrl);
+		const testEventCode =
+			typeof body.testEventCode === "string" ? body.testEventCode : undefined;
+		const useTestEventCode = body.useTestEventCode === true;
+		const resolvedTestEventCode =
+			testEventCode ||
+			(useTestEventCode ? process.env.META_TEST_EVENT_CODE : undefined);
 		const metaOnlyTestMode =
 			(process.env.CONTACT_CAPI_TEST_MODE === "true" ||
 				body.metaOnlyTestMode === true) &&
@@ -27,9 +38,12 @@ export async function POST(request: Request) {
 		}
 
 		// * Construct the lead object, providing default values for non-required fields
+		const nameFromSingleField = splitFullName(
+			typeof body.name === "string" ? body.name : undefined,
+		);
 		const lead: Lead = {
-			firstName: body.firstName ?? "",
-			lastName: body.lastName ?? "",
+			firstName: body.firstName ?? nameFromSingleField.firstName ?? "",
+			lastName: body.lastName ?? nameFromSingleField.lastName ?? "",
 			companyName: body.companyName ?? "",
 			landingPage: body.landingPage ?? "",
 			email: body.email,
@@ -53,6 +67,7 @@ export async function POST(request: Request) {
 			eventId: metaEventId,
 			eventSourceUrl,
 			actionSource: "website" as const,
+			testEventCode: resolvedTestEventCode,
 			userData: buildMetaUserDataFromRequest(request, {
 				email: lead.email,
 				phone: lead.phone,
@@ -65,14 +80,25 @@ export async function POST(request: Request) {
 				contentCategory: lead.beta_tester ? "Beta Tester" : "General Contact",
 			},
 		};
+		const contactMetaPayload = {
+			...metaPayload,
+			eventName: "Contact" as const,
+		};
 
 		if (metaOnlyTestMode) {
-			const metaResult = await sendMetaConversionEvent(metaPayload);
+			const [leadMetaResult, contactMetaResult] = await Promise.all([
+				sendMetaConversionEvent(metaPayload),
+				sendMetaConversionEvent(contactMetaPayload),
+			]);
 			return NextResponse.json(
 				{
 					message:
-						"Meta CAPI test mode: event attempted and SendGrid was skipped.",
-					metaResult,
+						"Meta CAPI test mode: events attempted and SendGrid was skipped.",
+					eventId: metaEventId,
+					metaResult: {
+						lead: leadMetaResult,
+						contact: contactMetaResult,
+					},
 				},
 				{ status: 200 },
 			);
@@ -94,11 +120,15 @@ export async function POST(request: Request) {
 			});
 		}
 
-		void sendMetaConversionEvent(metaPayload);
+		void Promise.allSettled([
+			sendMetaConversionEvent(metaPayload),
+			sendMetaConversionEvent(contactMetaPayload),
+		]);
 
 		return NextResponse.json(
 			{
 				message: "Contact captured successfully.",
+				eventId: metaEventId,
 				sendgrid: {
 					attempted: true,
 					accepted: sendgridAccepted,
