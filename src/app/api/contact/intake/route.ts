@@ -19,12 +19,42 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID || process.env.NOTION_DB_ID;
 export async function POST(request: Request) {
 	try {
 		const body = await request.json();
+
+		const parseMidpointNumber = (value: unknown): number => {
+			if (typeof value === "number" && Number.isFinite(value)) return value;
+			if (typeof value !== "string") return 0;
+			const raw = value.trim().toLowerCase();
+			if (raw.length === 0 || raw === "unknown") return 0;
+
+			// Format: "2000+", "50+", "10+"
+			const plusMatch = raw.match(/^(\d+(?:\.\d+)?)\+$/);
+			if (plusMatch) return Number(plusMatch[1]);
+
+			// Format: "0-500", "500-2000", "1-3"
+			const rangeMatch = raw.match(/^(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)$/);
+			if (rangeMatch) {
+				const a = Number(rangeMatch[1]);
+				const b = Number(rangeMatch[2]);
+				if (!Number.isFinite(a) || !Number.isFinite(b)) return 0;
+				return Math.round((a + b) / 2);
+			}
+
+			// Money formats: "<1000", "1000-5000", "10000+"
+			const moneyLessThan = raw.match(/^<\s*(\d+(?:\.\d+)?)$/);
+			if (moneyLessThan) return Math.max(0, Number(moneyLessThan[1]) - 1);
+
+			const asNumber = Number(raw.replace(/[^0-9.]/g, ""));
+			return Number.isFinite(asNumber) ? asNumber : 0;
+		};
 		const providedEventId =
 			typeof body.metaEventId === "string" ? body.metaEventId : undefined;
 		const metaEventId = providedEventId || generateServerEventId();
 		const providedEventSourceUrl =
 			typeof body.eventSourceUrl === "string" ? body.eventSourceUrl : undefined;
-		const eventSourceUrl = resolveEventSourceUrl(request, providedEventSourceUrl);
+		const eventSourceUrl = resolveEventSourceUrl(
+			request,
+			providedEventSourceUrl,
+		);
 		const { firstName, lastName } = splitFullName(
 			typeof body.name === "string" ? body.name : undefined,
 		);
@@ -34,13 +64,16 @@ export async function POST(request: Request) {
 		// * If a property doesn't exist, the API call will fail.
 		// * I've mapped the keys from intakeFormFields.ts to likely Notion Property names.
 
-
-		const properties: Record<string, any> = {
+		const properties: Record<string, unknown> = {
 			" Name": {
 				title: [
 					{
 						text: {
-							content: body.name || "Untitled Lead",
+							content:
+								typeof body.companyName === "string" &&
+								body.companyName.trim().length > 0
+									? `${body.name || "Untitled Lead"} - ${body.companyName.trim()}`
+									: body.name || "Untitled Lead",
 						},
 					},
 				],
@@ -60,16 +93,16 @@ export async function POST(request: Request) {
 				})),
 			},
 			"Avg Deal Amount ($)": {
-				number: Number(body.avgDealAmount) || 0,
+				number: parseMidpointNumber(body.avgDealAmount),
 			},
 			"Deals / Month": {
-				number: Number(body.dealsPerMonth) || 0,
+				number: parseMidpointNumber(body.dealsPerMonth),
 			},
 			"Lead Volume / Month": {
-				number: Number(body.leadVolumePerMonth) || 0,
+				number: parseMidpointNumber(body.leadVolumePerMonth),
 			},
 			"Conversion Rate %": {
-				number: Number(body.conversionRate) || 0,
+				number: parseMidpointNumber(body.conversionRate),
 			},
 			"Current CRM": {
 				rich_text: [
@@ -106,7 +139,7 @@ export async function POST(request: Request) {
 
 		// * Optional fields
 		if (body.phone) {
-			properties["Phone"] = {
+			properties.Phone = {
 				rich_text: [
 					{
 						text: {
@@ -180,8 +213,14 @@ export async function POST(request: Request) {
 			};
 		}
 		if (body.notes) {
-			properties["Notes"] = {
-				rich_text: [{ text: { content: body.notes } }],
+			properties.Notes = {
+				rich_text: [
+					{
+						text: {
+							content: String(body.notes),
+						},
+					},
+				],
 			};
 		}
 
@@ -197,7 +236,7 @@ export async function POST(request: Request) {
 					properties: properties,
 				});
 				notionSynced = true;
-			} catch (notionError: any) {
+			} catch (notionError: unknown) {
 				console.error(
 					"[contact/intake] Notion sync failed; continuing with successful intake response.",
 					notionError,
@@ -225,10 +264,15 @@ export async function POST(request: Request) {
 		});
 
 		return NextResponse.json({ success: true, notionSynced }, { status: 200 });
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("Notion API Error:", error);
 		return NextResponse.json(
-			{ error: error?.message || "Failed to create lead in Notion" },
+			{
+				error:
+					error instanceof Error
+						? error.message
+						: "Failed to create lead in Notion",
+			},
 			{ status: 500 },
 		);
 	}

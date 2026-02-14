@@ -130,6 +130,7 @@ const mockFormSubmission = (submittedData: Record<string, unknown>) => {
 		control: {},
 		register: () => ({ name: "mock" }),
 		reset: vi.fn(),
+		watch: (key: string) => submittedData[key],
 		handleSubmit:
 			(cb: (data: Record<string, unknown>) => Promise<void> | void) =>
 			async (event?: { preventDefault?: () => void }) => {

@@ -7,761 +7,1032 @@ import { z } from "zod";
 
 // * Options definitions
 const businessTypeOptions = [
-  {
-    "value": "🏘️Real Estate",
-    "label": "🏘️Real Estate"
-  },
-  {
-    "value": "💼 B2B  Niche",
-    "label": "💼 B2B  Niche"
-  },
-  {
-    "value": "💹Marketplace",
-    "label": "💹Marketplace"
-  },
-  {
-    "value": "🛠️ Contractor / Home Service",
-    "label": "🛠️ Contractor / Home Service"
-  },
-  {
-    "value": "🧪 Herbal / Botanical Niche",
-    "label": "🧪 Herbal / Botanical Niche"
-  },
-  {
-    "value": "🎤 Event & Creative Niche",
-    "label": "🎤 Event & Creative Niche"
-  },
-  {
-    "value": "🙌🏽Coaching Niche",
-    "label": "🙌🏽Coaching Niche"
-  },
-  {
-    "value": "🧑‍💻 Tech & SaaS Niche",
-    "label": "🧑‍💻 Tech & SaaS Niche"
-  },
-  {
-    "value": "🛍️ E-commerce & Retail",
-    "label": "🛍️ E-commerce & Retail"
-  },
-  {
-    "value": "🧘 Health / Wellness",
-    "label": "🧘 Health / Wellness"
-  },
-  {
-    "value": "🧾 Professional Services",
-    "label": "🧾 Professional Services"
-  },
-  {
-    "value": "🌱 Alternative / Mission-Driven",
-    "label": "🌱 Alternative / Mission-Driven"
-  },
-  {
-    "value": "♎ B2C High Virality",
-    "label": "♎ B2C High Virality"
-  },
-  {
-    "value": "🔧 Misc. Flexible Options",
-    "label": "🔧 Misc. Flexible Options"
-  },
-  {
-    "value": "Agency",
-    "label": "Agency"
-  },
-  {
-    "value": "SaaS",
-    "label": "SaaS"
-  }
+	{
+		value: "🏘️Real Estate",
+		label: "🏘️Real Estate",
+	},
+	{
+		value: "💼 B2B  Niche",
+		label: "💼 B2B  Niche",
+	},
+	{
+		value: "💹Marketplace",
+		label: "💹Marketplace",
+	},
+	{
+		value: "🛠️ Contractor / Home Service",
+		label: "🛠️ Contractor / Home Service",
+	},
+	{
+		value: "🧪 Herbal / Botanical Niche",
+		label: "🧪 Herbal / Botanical Niche",
+	},
+	{
+		value: "🎤 Event & Creative Niche",
+		label: "🎤 Event & Creative Niche",
+	},
+	{
+		value: "🙌🏽Coaching Niche",
+		label: "🙌🏽Coaching Niche",
+	},
+	{
+		value: "🧑‍💻 Tech & SaaS Niche",
+		label: "🧑‍💻 Tech & SaaS Niche",
+	},
+	{
+		value: "🛍️ E-commerce & Retail",
+		label: "🛍️ E-commerce & Retail",
+	},
+	{
+		value: "🧘 Health / Wellness",
+		label: "🧘 Health / Wellness",
+	},
+	{
+		value: "🧾 Professional Services",
+		label: "🧾 Professional Services",
+	},
+	{
+		value: "🌱 Alternative / Mission-Driven",
+		label: "🌱 Alternative / Mission-Driven",
+	},
+	{
+		value: "♎ B2C High Virality",
+		label: "♎ B2C High Virality",
+	},
+	{
+		value: "🔧 Misc. Flexible Options",
+		label: "🔧 Misc. Flexible Options",
+	},
+	{
+		value: "Agency",
+		label: "Agency",
+	},
+	{
+		value: "SaaS",
+		label: "SaaS",
+	},
 ];
 
 const monthlyBudgetOptions = [
-  {
-    "value": "$3k+",
-    "label": "$3k+"
-  },
-  {
-    "value": "$1k–$3k",
-    "label": "$1k–$3k"
-  },
-  {
-    "value": "$250–$1k",
-    "label": "$250–$1k"
-  },
-  {
-    "value": "<$250",
-    "label": "<$250"
-  },
-  {
-    "value": "$1k - $3k",
-    "label": "$1k - $3k"
-  },
-  {
-    "value": "$3k - $5k",
-    "label": "$3k - $5k"
-  }
+	{
+		value: "$3k+",
+		label: "$3k+",
+	},
+	{
+		value: "$1k–$3k",
+		label: "$1k–$3k",
+	},
+	{
+		value: "$250–$1k",
+		label: "$250–$1k",
+	},
+	{
+		value: "<$250",
+		label: "<$250",
+	},
+	{
+		value: "$1k - $3k",
+		label: "$1k - $3k",
+	},
+	{
+		value: "$3k - $5k",
+		label: "$3k - $5k",
+	},
 ];
 
 const painPointsOptions = [
-  {
-    "value": "Not enough high-quality leads",
-    "label": "Not enough high-quality leads"
-  },
-  {
-    "value": "Hard to find high-intent leads",
-    "label": "Hard to find high-intent leads"
-  },
-  {
-    "value": "Don't know which websites to scrape",
-    "label": "Don't know which websites to scrape"
-  },
-  {
-    "value": "Lead lists are outdated",
-    "label": "Lead lists are outdated"
-  },
-  {
-    "value": "Lead lists are incomplete",
-    "label": "Lead lists are incomplete"
-  },
-  {
-    "value": "Missing phone numbers",
-    "label": "Missing phone numbers"
-  },
-  {
-    "value": "Missing emails",
-    "label": "Missing emails"
-  },
-  {
-    "value": "Missing social profiles",
-    "label": "Missing social profiles"
-  },
-  {
-    "value": "Data is messy or inconsistent",
-    "label": "Data is messy or inconsistent"
-  },
-  {
-    "value": "Need accurate contact information",
-    "label": "Need accurate contact information"
-  },
-  {
-    "value": "Need verified leads only",
-    "label": "Need verified leads only"
-  },
-  {
-    "value": "Need more targeted prospects",
-    "label": "Need more targeted prospects"
-  },
-  {
-    "value": "Hard to identify ideal customers",
-    "label": "Hard to identify ideal customers"
-  },
-  {
-    "value": "Need lookalike audience generation",
-    "label": "Need lookalike audience generation"
-  },
-  {
-    "value": "Need lead scoring or ranking",
-    "label": "Need lead scoring or ranking"
-  },
-  {
-    "value": "Leads are scattered across too many places",
-    "label": "Leads are scattered across too many places"
-  },
-  {
-    "value": "Need centralized lead database",
-    "label": "Need centralized lead database"
-  },
-  {
-    "value": "Want automated recurring scraping",
-    "label": "Want automated recurring scraping"
-  },
-  {
-    "value": "Need bulk enrichment for large lists",
-    "label": "Need bulk enrichment for large lists"
-  },
-  {
-    "value": "Hard to qualify leads quickly",
-    "label": "Hard to qualify leads quickly"
-  },
-  {
-    "value": "Need faster data collection",
-    "label": "Need faster data collection"
-  },
-  {
-    "value": "Lead Quality",
-    "label": "Lead Quality"
-  },
-  {
-    "value": "Volume",
-    "label": "Volume"
-  }
+	{
+		value: "Not enough high-quality leads",
+		label: "Not enough high-quality leads",
+	},
+	{
+		value: "Hard to find high-intent leads",
+		label: "Hard to find high-intent leads",
+	},
+	{
+		value: "Don't know which websites to scrape",
+		label: "Don't know which websites to scrape",
+	},
+	{
+		value: "Lead lists are outdated",
+		label: "Lead lists are outdated",
+	},
+	{
+		value: "Lead lists are incomplete",
+		label: "Lead lists are incomplete",
+	},
+	{
+		value: "Missing phone numbers",
+		label: "Missing phone numbers",
+	},
+	{
+		value: "Missing emails",
+		label: "Missing emails",
+	},
+	{
+		value: "Missing social profiles",
+		label: "Missing social profiles",
+	},
+	{
+		value: "Data is messy or inconsistent",
+		label: "Data is messy or inconsistent",
+	},
+	{
+		value: "Need accurate contact information",
+		label: "Need accurate contact information",
+	},
+	{
+		value: "Need verified leads only",
+		label: "Need verified leads only",
+	},
+	{
+		value: "Need more targeted prospects",
+		label: "Need more targeted prospects",
+	},
+	{
+		value: "Hard to identify ideal customers",
+		label: "Hard to identify ideal customers",
+	},
+	{
+		value: "Need lookalike audience generation",
+		label: "Need lookalike audience generation",
+	},
+	{
+		value: "Need lead scoring or ranking",
+		label: "Need lead scoring or ranking",
+	},
+	{
+		value: "Leads are scattered across too many places",
+		label: "Leads are scattered across too many places",
+	},
+	{
+		value: "Need centralized lead database",
+		label: "Need centralized lead database",
+	},
+	{
+		value: "Want automated recurring scraping",
+		label: "Want automated recurring scraping",
+	},
+	{
+		value: "Need bulk enrichment for large lists",
+		label: "Need bulk enrichment for large lists",
+	},
+	{
+		value: "Hard to qualify leads quickly",
+		label: "Hard to qualify leads quickly",
+	},
+	{
+		value: "Need faster data collection",
+		label: "Need faster data collection",
+	},
+	{
+		value: "Lead Quality",
+		label: "Lead Quality",
+	},
+	{
+		value: "Volume",
+		label: "Volume",
+	},
 ];
 
-const priorityLevelOptions = [
-  {
-    "value": "High",
-    "label": "High"
-  },
-  {
-    "value": "Medium",
-    "label": "Medium"
-  },
-  {
-    "value": "Low",
-    "label": "Low"
-  }
+const _priorityLevelOptions = [
+	{
+		value: "High",
+		label: "High",
+	},
+	{
+		value: "Medium",
+		label: "Medium",
+	},
+	{
+		value: "Low",
+		label: "Low",
+	},
 ];
 
 const icpCategoryOptions = [
-  {
-    "value": "Real Estate Agencies",
-    "label": "Real Estate Agencies"
-  },
-  {
-    "value": "Residential Real Estate Agents",
-    "label": "Residential Real Estate Agents"
-  },
-  {
-    "value": "Commercial Real Estate Agents",
-    "label": "Commercial Real Estate Agents"
-  },
-  {
-    "value": "Residential Real Estate Brokers",
-    "label": "Residential Real Estate Brokers"
-  },
-  {
-    "value": "Commercial Real Estate Brokers",
-    "label": "Commercial Real Estate Brokers"
-  },
-  {
-    "value": "Commercial Real Estate Investors",
-    "label": "Commercial Real Estate Investors"
-  },
-  {
-    "value": "Residential Real Estate Investors",
-    "label": "Residential Real Estate Investors"
-  },
-  {
-    "value": "Residential Real Estate Wholesalers",
-    "label": "Residential Real Estate Wholesalers"
-  },
-  {
-    "value": "Commercial Real Estate Wholesalers",
-    "label": "Commercial Real Estate Wholesalers"
-  },
-  {
-    "value": "SaaS Founders",
-    "label": "SaaS Founders"
-  },
-  {
-    "value": "Tech Startups",
-    "label": "Tech Startups"
-  },
-  {
-    "value": "B2B Service Providers",
-    "label": "B2B Service Providers"
-  },
-  {
-    "value": "Local Business Owners",
-    "label": "Local Business Owners"
-  },
-  {
-    "value": "E-commerce Brands",
-    "label": "E-commerce Brands"
-  },
-  {
-    "value": "Consultant / Coachs",
-    "label": "Consultant / Coachs"
-  },
-  {
-    "value": "Solopreneurs",
-    "label": "Solopreneurs"
-  },
-  {
-    "value": "Construction / Contractors",
-    "label": "Construction / Contractors"
-  },
-  {
-    "value": "Home Services (HVAC Plumbing Roofing etc.)",
-    "label": "Home Services (HVAC Plumbing Roofing etc.)"
-  },
-  {
-    "value": "Marketing Agency",
-    "label": "Marketing Agency"
-  },
-  {
-    "value": "Freelancer",
-    "label": "Freelancer"
-  },
-  {
-    "value": "Nonprofit / Community Org",
-    "label": "Nonprofit / Community Org"
-  },
-  {
-    "value": "Event Curator / Event Organizer",
-    "label": "Event Curator / Event Organizer"
-  },
-  {
-    "value": "Herbalist / Botanical Products",
-    "label": "Herbalist / Botanical Products"
-  },
-  {
-    "value": "Dating App Users",
-    "label": "Dating App Users"
-  },
-  {
-    "value": "Consumers with inherent virality",
-    "label": "Consumers with inherent virality"
-  },
-  {
-    "value": "Other",
-    "label": "Other"
-  },
-  {
-    "value": "B2B",
-    "label": "B2B"
-  }
+	{
+		value: "Real Estate Agencies",
+		label: "Real Estate Agencies",
+	},
+	{
+		value: "Residential Real Estate Agents",
+		label: "Residential Real Estate Agents",
+	},
+	{
+		value: "Commercial Real Estate Agents",
+		label: "Commercial Real Estate Agents",
+	},
+	{
+		value: "Residential Real Estate Brokers",
+		label: "Residential Real Estate Brokers",
+	},
+	{
+		value: "Commercial Real Estate Brokers",
+		label: "Commercial Real Estate Brokers",
+	},
+	{
+		value: "Commercial Real Estate Investors",
+		label: "Commercial Real Estate Investors",
+	},
+	{
+		value: "Residential Real Estate Investors",
+		label: "Residential Real Estate Investors",
+	},
+	{
+		value: "Residential Real Estate Wholesalers",
+		label: "Residential Real Estate Wholesalers",
+	},
+	{
+		value: "Commercial Real Estate Wholesalers",
+		label: "Commercial Real Estate Wholesalers",
+	},
+	{
+		value: "SaaS Founders",
+		label: "SaaS Founders",
+	},
+	{
+		value: "Tech Startups",
+		label: "Tech Startups",
+	},
+	{
+		value: "B2B Service Providers",
+		label: "B2B Service Providers",
+	},
+	{
+		value: "Local Business Owners",
+		label: "Local Business Owners",
+	},
+	{
+		value: "E-commerce Brands",
+		label: "E-commerce Brands",
+	},
+	{
+		value: "Consultant / Coachs",
+		label: "Consultant / Coachs",
+	},
+	{
+		value: "Solopreneurs",
+		label: "Solopreneurs",
+	},
+	{
+		value: "Construction / Contractors",
+		label: "Construction / Contractors",
+	},
+	{
+		value: "Home Services (HVAC Plumbing Roofing etc.)",
+		label: "Home Services (HVAC Plumbing Roofing etc.)",
+	},
+	{
+		value: "Marketing Agency",
+		label: "Marketing Agency",
+	},
+	{
+		value: "Freelancer",
+		label: "Freelancer",
+	},
+	{
+		value: "Nonprofit / Community Org",
+		label: "Nonprofit / Community Org",
+	},
+	{
+		value: "Event Curator / Event Organizer",
+		label: "Event Curator / Event Organizer",
+	},
+	{
+		value: "Herbalist / Botanical Products",
+		label: "Herbalist / Botanical Products",
+	},
+	{
+		value: "Dating App Users",
+		label: "Dating App Users",
+	},
+	{
+		value: "Consumers with inherent virality",
+		label: "Consumers with inherent virality",
+	},
+	{
+		value: "Other",
+		label: "Other",
+	},
+	{
+		value: "B2B",
+		label: "B2B",
+	},
 ];
 
-const crmConnectionOptions = [
-  {
-    "value": "Yes i dont want to manually upload leads",
-    "label": "Yes i dont want to manually upload leads"
-  },
-  {
-    "value": "No id rather manually upload the generated leads",
-    "label": "No id rather manually upload the generated leads"
-  },
-  {
-    "value": "Yes",
-    "label": "Yes"
-  }
+const _crmConnectionOptions = [
+	{
+		value: "Yes i dont want to manually upload leads",
+		label: "Yes i dont want to manually upload leads",
+	},
+	{
+		value: "No id rather manually upload the generated leads",
+		label: "No id rather manually upload the generated leads",
+	},
+	{
+		value: "Yes",
+		label: "Yes",
+	},
 ];
 
 const existingLeadListsOptions = [
-  {
-    "value": "Yes — Clean",
-    "label": "Yes — Clean"
-  },
-  {
-    "value": "Yes — Messy",
-    "label": "Yes — Messy"
-  },
-  {
-    "value": "No",
-    "label": "No"
-  },
-  {
-    "value": "Yes",
-    "label": "Yes"
-  }
+	{
+		value: "Yes — Clean",
+		label: "Yes — Clean",
+	},
+	{
+		value: "Yes — Messy",
+		label: "Yes — Messy",
+	},
+	{
+		value: "No",
+		label: "No",
+	},
+	{
+		value: "Yes",
+		label: "Yes",
+	},
 ];
 
-const leadOwnerOptions = [
-  {
-    "value": "❌ No dedicated owner yet",
-    "label": "❌ No dedicated owner yet"
-  },
-  {
-    "value": "🤖 Automation / outbound system (Deal Scale)",
-    "label": "🤖 Automation / outbound system (Deal Scale)"
-  },
-  {
-    "value": "👥 Sales rep / SDR",
-    "label": "👥 Sales rep / SDR"
-  },
-  {
-    "value": "👤 Founder",
-    "label": "👤 Founder"
-  },
-  {
-    "value": "Myself",
-    "label": "Myself"
-  }
+const _leadOwnerOptions = [
+	{
+		value: "❌ No dedicated owner yet",
+		label: "❌ No dedicated owner yet",
+	},
+	{
+		value: "🤖 Automation / outbound system (Deal Scale)",
+		label: "🤖 Automation / outbound system (Deal Scale)",
+	},
+	{
+		value: "👥 Sales rep / SDR",
+		label: "👥 Sales rep / SDR",
+	},
+	{
+		value: "👤 Founder",
+		label: "👤 Founder",
+	},
+	{
+		value: "Myself",
+		label: "Myself",
+	},
 ];
 
-const validationExpectationOptions = [
-  {
-    "value": "❌ Not sure",
-    "label": "❌ Not sure"
-  },
-  {
-    "value": "💰 Closed revenue required",
-    "label": "💰 Closed revenue required"
-  },
-  {
-    "value": "📊 Conversion over 30–60 days",
-    "label": "📊 Conversion over 30–60 days"
-  },
-  {
-    "value": "📈 Directional signal (reply / interest rate)",
-    "label": "📈 Directional signal (reply / interest rate)"
-  },
-  {
-    "value": "10 Verified Leads",
-    "label": "10 Verified Leads"
-  }
+const _validationExpectationOptions = [
+	{
+		value: "❌ Not sure",
+		label: "❌ Not sure",
+	},
+	{
+		value: "💰 Closed revenue required",
+		label: "💰 Closed revenue required",
+	},
+	{
+		value: "📊 Conversion over 30–60 days",
+		label: "📊 Conversion over 30–60 days",
+	},
+	{
+		value: "📈 Directional signal (reply / interest rate)",
+		label: "📈 Directional signal (reply / interest rate)",
+	},
+	{
+		value: "10 Verified Leads",
+		label: "10 Verified Leads",
+	},
 ];
 
-const speedOptions = [
-  {
-    "value": "⏱ Not sure / depends",
-    "label": "⏱ Not sure / depends"
-  },
-  {
-    "value": "⏱ 2–4 weeks",
-    "label": "⏱ 2–4 weeks"
-  },
-  {
-    "value": "⏱ Within 7–10 business days",
-    "label": "⏱ Within 7–10 business days"
-  },
-  {
-    "value": "⏱ Within 3–5 business days",
-    "label": "⏱ Within 3–5 business days"
-  },
-  {
-    "value": "Immediately",
-    "label": "Immediately"
-  }
+const _speedOptions = [
+	{
+		value: "⏱ Not sure / depends",
+		label: "⏱ Not sure / depends",
+	},
+	{
+		value: "⏱ 2–4 weeks",
+		label: "⏱ 2–4 weeks",
+	},
+	{
+		value: "⏱ Within 7–10 business days",
+		label: "⏱ Within 7–10 business days",
+	},
+	{
+		value: "⏱ Within 3–5 business days",
+		label: "⏱ Within 3–5 business days",
+	},
+	{
+		value: "Immediately",
+		label: "Immediately",
+	},
 ];
 
 const paidPilotOptions = [
-  {
-    "value": "❌ No — we only test free",
-    "label": "❌ No — we only test free"
-  },
-  {
-    "value": "⚠️ Depends on price",
-    "label": "⚠️ Depends on price"
-  },
-  {
-    "value": "✅ Yes — paid pilot is fine",
-    "label": "✅ Yes — paid pilot is fine"
-  },
-  {
-    "value": "Yes",
-    "label": "Yes"
-  }
+	{
+		value: "❌ No — we only test free",
+		label: "❌ No — we only test free",
+	},
+	{
+		value: "⚠️ Depends on price",
+		label: "⚠️ Depends on price",
+	},
+	{
+		value: "✅ Yes — paid pilot is fine",
+		label: "✅ Yes — paid pilot is fine",
+	},
+	{
+		value: "Yes",
+		label: "Yes",
+	},
 ];
 
 const interestedFeaturesOptions = [
-  {
-    "value": "Look-A-like Audinece Generation (Find leads similar to your top closed clients)",
-    "label": "Look-A-like Audinece Generation (Find leads similar to your top closed clients)"
-  },
-  {
-    "value": "Lead Enrichment - Find Phone numbers emails and socials of leads.",
-    "label": "Lead Enrichment - Find Phone numbers emails and socials of leads."
-  },
-  {
-    "value": "Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)",
-    "label": "Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)"
-  },
-  {
-    "value": "Search Engine Optimization (Get Discovered On Search Engines)",
-    "label": "Search Engine Optimization (Get Discovered On Search Engines)"
-  },
-  {
-    "value": "AI  Engine Optimization (Get suggested by AI)",
-    "label": "AI  Engine Optimization (Get suggested by AI)"
-  },
-  {
-    "value": "Lead Enrichment",
-    "label": "Lead Enrichment"
-  }
+	{
+		value:
+			"Look-A-like Audinece Generation (Find leads similar to your top closed clients)",
+		label:
+			"Look-A-like Audinece Generation (Find leads similar to your top closed clients)",
+	},
+	{
+		value: "Lead Enrichment - Find Phone numbers emails and socials of leads.",
+		label: "Lead Enrichment - Find Phone numbers emails and socials of leads.",
+	},
+	{
+		value:
+			"Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)",
+		label:
+			"Automated Outreach Text/Call/Linkedin-Instagram-Facebook  (Deal Scale)",
+	},
+	{
+		value: "Search Engine Optimization (Get Discovered On Search Engines)",
+		label: "Search Engine Optimization (Get Discovered On Search Engines)",
+	},
+	{
+		value: "AI  Engine Optimization (Get suggested by AI)",
+		label: "AI  Engine Optimization (Get suggested by AI)",
+	},
+	{
+		value: "Lead Enrichment",
+		label: "Lead Enrichment",
+	},
 ];
 
+const leadVolumeOptions = [
+	{ value: "0-500", label: "0-500 / month" },
+	{ value: "500-2000", label: "500-2000 / month" },
+	{ value: "2000+", label: "2000+ / month" },
+];
 
+const avgDealValueOptions = [
+	{ value: "unknown", label: "Unknown" },
+	{ value: "<1000", label: "< $1,000" },
+	{ value: "1000-5000", label: "$1k-$5k" },
+	{ value: "5000-10000", label: "$5k-$10k" },
+	{ value: "10000+", label: "$10k+" },
+];
+
+const dealsPerMonthOptions = [
+	{ value: "unknown", label: "Unknown" },
+	{ value: "0-5", label: "0-5" },
+	{ value: "6-15", label: "6-15" },
+	{ value: "16-50", label: "16-50" },
+	{ value: "50+", label: "50+" },
+];
+
+const conversionRateOptions = [
+	{ value: "unknown", label: "Unknown" },
+	{ value: "0-1", label: "0-1%" },
+	{ value: "1-3", label: "1-3%" },
+	{ value: "3-10", label: "3-10%" },
+	{ value: "10+", label: "10%+" },
+];
+
+const sourceKnowledgeOptions = [
+	{ value: "known", label: "I know the sources" },
+	{ value: "unknown", label: "Not sure yet" },
+];
+
+const highIntentSourcesOptions = [
+	{ value: "google_maps", label: "Google Maps categories" },
+	{ value: "directories", label: "Directories" },
+	{ value: "job_boards", label: "Job boards" },
+	{ value: "zillow_fsbo", label: "Zillow FSBO" },
+	{ value: "marketplaces", label: "Marketplaces" },
+	{ value: "linkedin", label: "LinkedIn searches" },
+	{ value: "other", label: "Other (describe below)" },
+];
+
+const crmConnectionYesNoOptions = [
+	{ value: "yes", label: "Yes" },
+	{ value: "no", label: "No" },
+];
+
+const leadDeliveryDestinationOptions = [
+	{ value: "google_sheet", label: "Google Sheet" },
+	{ value: "airtable", label: "Airtable" },
+	{ value: "email", label: "Email" },
+	{ value: "hubspot_later", label: "HubSpot later" },
+];
+
+const leadOpsReadyOptions = [
+	{ value: "yes", label: "Yes" },
+	{ value: "no", label: "No" },
+];
+
+const acquisitionChannelOptions = [
+	{ value: "ads", label: "Ads" },
+	{ value: "email", label: "Email" },
+	{ value: "organic", label: "Organic" },
+	{ value: "partnerships", label: "Partnerships" },
+];
 
 // * Zod Schema
-export const intakeFormSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  website: z.string().optional(),
-  businessType: z.array(z.string()).optional(),
-  monthlyBudget: z.string().optional(),
-  painPoints: z.array(z.string()).optional(),
-  startDate: z.string().optional(),
-  priorityLevel: z.array(z.string()).optional(),
-  icpCategory: z.array(z.string()).optional(),
-  icpDescription: z.string().optional(),
-  highIntentSources: z.string().optional(),
-  scrapingInstructions: z.string().optional(),
-  leadVolumePerMonth: z.preprocess((val) => Number(val), z.number().optional()),
-  dealsPerMonth: z.preprocess((val) => Number(val), z.number().optional()),
-  avgDealAmount: z.preprocess((val) => Number(val), z.number().optional()),
-  conversionRate: z.preprocess((val) => Number(val), z.number().optional()),
-  currentCrm: z.string().optional(),
-  crmConnection: z.array(z.string()).optional(),
-  existingLeadLists: z.array(z.string()).optional(),
-  leadOwner: z.string().optional(),
-  validationExpectation: z.string().optional(),
-  speed: z.string().optional(),
-  paidPilot: z.string().optional(),
-  interestedFeatures: z.array(z.string()).optional(),
-  notes: z.string().optional(),
-  kickoffDate: z.string().optional(),
+export const intakeFormSchema = z
+	.object({
+		// Contact + routing
+		name: z.string().min(2, "Name is required"),
+		companyName: z.string().min(2, "Company / brand name is required"),
+		email: z.string().email("Invalid email address"),
+		phone: z.string().optional(),
+		noWebsite: z.boolean().optional(),
+		website: z.string().optional(),
 
-});
+		// Ownership + activation
+		leadOwner: z.string().min(1, "Lead owner is required"),
+		speed: z.string().min(1, "Activation speed is required"),
+
+		// Money + commitment
+		monthlyBudget: z.string().min(1, "Monthly budget is required"),
+		paidPilot: z.string().min(1, "Paid pilot is required"),
+
+		// ICP + offer clarity
+		businessType: z
+			.array(z.string())
+			.min(1, "Business type / niche is required"),
+		icpCategory: z.string().min(1, "ICP category is required"),
+		icpDescription: z
+			.string()
+			.min(10, "Describe your ideal customer (at least a few sentences)"),
+
+		// Lead volume + economics
+		leadVolumePerMonth: z.string().min(1, "Lead volume is required"),
+		avgDealAmount: z.string().min(1, "Avg deal value is required"),
+		dealsPerMonth: z.string().min(1, "Deals per month is required"),
+		conversionRate: z.string().min(1, "Conversion rate is required"),
+
+		// Target sources
+		sourceKnowledge: z.string().min(1, "Please choose one option"),
+		highIntentSources: z.array(z.string()).optional(),
+		currentLeadSources: z.string().optional(),
+		scrapingInstructions: z.string().optional(),
+
+		// CRM readiness
+		currentCrm: z.string().min(1, "Current CRM is required"),
+		crmConnection: z.string().min(1, "CRM connection preference is required"),
+		leadDeliveryDestination: z.string().optional(),
+
+		// Conditional required
+		leadOpsReady: z.string().optional(),
+		acquisitionChannel: z.string().optional(),
+
+		// Helpful (optional)
+		painPoints: z.array(z.string()).optional(),
+		existingLeadLists: z.array(z.string()).optional(),
+		notes: z.string().optional(),
+		kickoffDate: z.string().optional(),
+		interestedFeatures: z.array(z.string()).optional(),
+		startDate: z.string().optional(),
+		priorityLevel: z.array(z.string()).optional(),
+	})
+	.superRefine((data, ctx) => {
+		// Website: required unless "noWebsite" checked
+		const noWebsite = data.noWebsite === true;
+		const website = (data.website ?? "").trim();
+		if (!noWebsite && website.length === 0) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				path: ["website"],
+				message: "Website is required (or check 'no website')",
+			});
+		}
+
+		// Sources: require either highIntentSources (known) or currentLeadSources (unknown)
+		if (data.sourceKnowledge === "known") {
+			if (
+				!Array.isArray(data.highIntentSources) ||
+				data.highIntentSources.length < 1
+			) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					path: ["highIntentSources"],
+					message: "Choose at least one high-intent source",
+				});
+			}
+		}
+		if (data.sourceKnowledge === "unknown") {
+			if ((data.currentLeadSources ?? "").trim().length < 5) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					path: ["currentLeadSources"],
+					message:
+						"Tell us where you currently get leads (or what lists you use)",
+				});
+			}
+		}
+
+		// If CRM = none -> require delivery destination
+		const crm = (data.currentCrm ?? "").toLowerCase().trim();
+		if (crm === "none" || crm === "no" || crm === "n/a") {
+			if ((data.leadDeliveryDestination ?? "").trim().length === 0) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					path: ["leadDeliveryDestination"],
+					message: "Where should leads go?",
+				});
+			}
+		}
+
+		// If lead volume > 2000/mo -> require ops readiness
+		if (data.leadVolumePerMonth === "2000+") {
+			if ((data.leadOpsReady ?? "").trim().length === 0) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					path: ["leadOpsReady"],
+					message: "Do you have an SDR/team or automation running already?",
+				});
+			}
+		}
+
+		// If B2C -> require acquisition channel
+		const b2cSignals = ["♎ b2c high virality", "consumers", "dating", "b2c"];
+		const businessJoined = Array.isArray(data.businessType)
+			? data.businessType.join(" ").toLowerCase()
+			: "";
+		const icp = (data.icpCategory ?? "").toLowerCase();
+		const isB2C =
+			b2cSignals.some((s) => businessJoined.includes(s)) ||
+			b2cSignals.some((s) => icp.includes(s));
+
+		if (isB2C) {
+			if ((data.acquisitionChannel ?? "").trim().length === 0) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					path: ["acquisitionChannel"],
+					message: "Acquisition channel is required for B2C",
+				});
+			}
+		}
+	});
 
 export type IntakeFormValues = z.infer<typeof intakeFormSchema>;
 
 // * Field Configurations
 export const intakeFormFields: FieldConfig[] = [
-  {
-    name: "name",
-    label: " Name",
-    type: "text",
-    placeholder: " Name...",
-    value: "",
-    description: "Used so we know who to contact and personalize communication.",
-    onChange: () => {},
-  },
-  {
-    name: "email",
-    label: "Email",
-    type: "text",
-    placeholder: "Email...",
-    value: "",
-    description: "Your best email to receive follow-ups, reports, and onboarding details.",
-    onChange: () => {},
-  },
-  {
-    name: "phone",
-    label: "Phone",
-    type: "text",
-    placeholder: "Phone...",
-    value: "",
-    description: "Optional — if you'd like us to text or call you with updates or appointment confirmations.",
-    onChange: () => {},
-  },
-  {
-    name: "website",
-    label: "Company Website ?",
-    type: "url",
-    placeholder: "Company Website ?...",
-    value: "",
-    description: "Your primary business website URL.",
-    onChange: () => {},
-  },
-  {
-    name: "businessType",
-    label: "Business Type / Niche",
-    type: "multiselect",
-    placeholder: "Business Type / Niche...",
-    value: [],
-    description: "“What specific niche does your business operate in?” Example: wholesaling, Airbnb, botanicals, SaaS apps, e-commerce, event management, coaching, etc.",
-    onChange: () => {},
-    options: businessTypeOptions,
-  },
-  {
-    name: "monthlyBudget",
-    label: "Monthly Budget",
-    type: "select",
-    placeholder: "Monthly Budget...",
-    value: "",
-    description: "This helps us match you with the right plan or solution.",
-    onChange: () => {},
-    options: monthlyBudgetOptions,
-  },
-  {
-    name: "painPoints",
-    label: "Main Pain Point(s)",
-    type: "multiselect",
-    placeholder: "Main Pain Point(s)...",
-    value: [],
-    description: "“What’s the biggest challenge you want solved right now?” Examples: lead quality, inconsistent appointments, too much manual work, bad data, etc.",
-    onChange: () => {},
-    options: painPointsOptions,
-  },
-  {
-    name: "startDate",
-    label: "Start Date ",
-    type: "date",
-    placeholder: "Start Date ...",
-    value: "",
-    description: "What date would you like to begin? Please enter your ideal start date for onboarding, setup, or automation work.",
-    onChange: () => {},
-  },
-  {
-    name: "priorityLevel",
-    label: "Priority Level",
-    type: "multiselect",
-    placeholder: "Priority Level...",
-    value: [],
-    description: "How urgent is this problem for your business?",
-    onChange: () => {},
-    options: priorityLevelOptions,
-  },
-  {
-    name: "icpCategory",
-    label: "ICP Category",
-    type: "multiselect",
-    placeholder: "ICP Category...",
-    value: [],
-    description: "Who is your ideal customer? The type of people or businesses you aim to serve or sell to.",
-    onChange: () => {},
-    options: icpCategoryOptions,
-  },
-  {
-    name: "icpDescription",
-    label: "Describe Your Ideal Customer Profile",
-    type: "text",
-    placeholder: "Describe Your Ideal Customer Profile...",
-    value: "",
-    description: "Tell us who your ideal customer is. Describe the type of person or business you want to attract, serve, or sell to including demographics, behavior, buying intent, and any specific traits that define a perfect-fit client",
-    onChange: () => {},
-  },
-  {
-    name: "highIntentSources",
-    label: "High-Intent Lead Sources",
-    type: "text",
-    placeholder: "High-Intent Lead Sources...",
-    value: "",
-    description: "“List any websites, URLs, or platforms you believe would have high-value leads for your business. These are the places you’d want us to scrape, monitor, or extract leads from.” Examples: Zillow links, MLS boards, competitor sites, directory pages, Google Maps, LinkedIn searches, etc.",
-    onChange: () => {},
-  },
-  {
-    name: "scrapingInstructions",
-    label: "Detailed Scraping Instructions ?",
-    type: "text",
-    placeholder: "Detailed Scraping Instructions ?...",
-    value: "",
-    description: "“Please describe exactly what you want us to scrape. Include any URLs, keywords, filters, pages, or specific data points you want captured.”",
-    onChange: () => {},
-  },
-  {
-    name: "leadVolumePerMonth",
-    label: "Lead Volume / Month",
-    type: "number",
-    placeholder: "Lead Volume / Month...",
-    value: "",
-    description: "“How many new leads do you want generated monthly across all channels?” Useful for scoring lead flow and automation capacity.",
-    onChange: () => {},
-  },
-  {
-    name: "dealsPerMonth",
-    label: "Deals / Month",
-    type: "number",
-    placeholder: "Deals / Month...",
-    value: "",
-    description: "“How many deals or clients do you typically close each month?” This helps us estimate your sales velocity.",
-    onChange: () => {},
-  },
-  {
-    name: "avgDealAmount",
-    label: "Avg Deal Amount ($)",
-    type: "number",
-    placeholder: "Avg Deal Amount ($)...",
-    value: "",
-    description: "“On average, how much do you earn per deal, appointment, or closed customer?” Used to estimate ROI and automation impact.",
-    onChange: () => {},
-  },
-  {
-    name: "conversionRate",
-    label: "Conversion Rate %",
-    type: "number",
-    placeholder: "Conversion Rate %...",
-    value: "",
-    description: "What percent of leads do you convert",
-    onChange: () => {},
-  },
-  {
-    name: "currentCrm",
-    label: "Current CRM",
-    type: "text",
-    placeholder: "Current CRM...",
-    value: "",
-    description: "“What CRM or system do you use today to manage your leads?” Examples: HubSpot, Zoho, GHL, Lofty, spreadsheets, none.",
-    onChange: () => {},
-  },
-  {
-    name: "crmConnection",
-    label: "Can we connect directly to your CRM?",
-    type: "multiselect",
-    placeholder: "Can we connect directly to your CRM?...",
-    value: [],
-    description: "This allows for seamless lead handoff.",
-    onChange: () => {},
-    options: crmConnectionOptions,
-  },
-  {
-    name: "existingLeadLists",
-    label: "Existing Lead Lists?",
-    type: "multiselect",
-    placeholder: "Existing Lead Lists?...",
-    value: [],
-    description: "“Do you already have spreadsheets or contact lists you'd like us to clean, enrich, or import?”",
-    onChange: () => {},
-    options: existingLeadListsOptions,
-  },
-  {
-    name: "leadOwner",
-    label: "Who will be responsible for reviewing and acting on the leads?",
-    type: "select",
-    placeholder: "Who will be responsible for reviewing and acting on the leads?...",
-    value: "",
-    description: "Select the primary person or system handling these leads.",
-    onChange: () => {},
-    options: leadOwnerOptions,
-  },
-  {
-    name: "validationExpectation",
-    label: "What is your expectation for initial validation?",
-    type: "select",
-    placeholder: "What is your expectation for initial validation?...",
-    value: "",
-    description: "Define what a successful pilot looks like for you.",
-    onChange: () => {},
-    options: validationExpectationOptions,
-  },
-  {
-    name: "speed",
-    label: "If approved, how soon can you actively work and test a new lead list?",
-    type: "select",
-    placeholder: "If approved, how soon can you actively work and test a new lead list?...",
-    value: "",
-    description: "This helps us schedule your onboarding timeline.",
-    onChange: () => {},
-    options: speedOptions,
-  },
-  {
-    name: "paidPilot",
-    label: "Are you willing to pay for a small pilot to validate lead quality before scaling",
-    type: "select",
-    placeholder: "Are you willing to pay for a small pilot to validate lead quality before scaling...",
-    value: "",
-    description: "Paid pilots help us ensure high-quality data tailored to your needs.",
-    onChange: () => {},
-    options: paidPilotOptions,
-  },
-  {
-    name: "interestedFeatures",
-    label: "Interested in these features?",
-    type: "multiselect",
-    placeholder: "Interested in these features?...",
-    value: [],
-    description: "Select any features you’re interested in using. This helps us tailor your setup, automation, and pricing to the tools that matter most for your business.",
-    onChange: () => {},
-    options: interestedFeaturesOptions,
-  },
-  {
-    name: "notes",
-    label: "Notes",
-    type: "text",
-    placeholder: "Notes...",
-    value: "",
-    description: "Add any additional context, goals, or details about your business we should know.",
-    onChange: () => {},
-  },
-  {
-    name: "kickoffDate",
-    label: "Schedule Kickoff Call",
-    type: "date",
-    placeholder: "Schedule Kickoff Call...",
-    value: "",
-    description: "If you qualify when can you hop on a kick off call to meet your start date deadlines? Book here: https://calendar.notion.so/meet/cyberoni/em2w42l93",
-    onChange: () => {},
-  },
+	{
+		name: "name",
+		label: "Name",
+		type: "text",
+		placeholder: "Your name...",
+		value: "",
+		description:
+			"Used so we know who to contact and personalize communication.",
+		onChange: () => {},
+	},
+	{
+		name: "companyName",
+		label: "Company / Brand name",
+		type: "text",
+		placeholder: "Company name...",
+		value: "",
+		description: "Used for routing, scoping, and personalization.",
+		onChange: () => {},
+	},
+	{
+		name: "email",
+		label: "Email",
+		type: "text",
+		placeholder: "Email...",
+		value: "",
+		description:
+			"Your best email to receive follow-ups, reports, and onboarding details.",
+		onChange: () => {},
+	},
+	{
+		name: "phone",
+		label: "Phone",
+		type: "text",
+		placeholder: "Phone...",
+		value: "",
+		description:
+			"Optional — if you'd like us to text or call you with updates or appointment confirmations.",
+		onChange: () => {},
+	},
+	{
+		name: "website",
+		label: "Website / primary URL",
+		type: "url",
+		placeholder: "https://example.com",
+		value: "",
+		description: "If you don't have a website, check the box below.",
+		onChange: () => {},
+	},
+	{
+		name: "noWebsite",
+		label: "We don't have a website",
+		type: "checkbox",
+		value: false,
+		description: "Check this if you don't have a website yet.",
+		onChange: () => {},
+	},
+	{
+		name: "businessType",
+		label: "Business Type / Niche",
+		type: "multiselect",
+		placeholder: "Business Type / Niche...",
+		value: [],
+		description:
+			"“What specific niche does your business operate in?” Example: wholesaling, Airbnb, botanicals, SaaS apps, e-commerce, event management, coaching, etc.",
+		onChange: () => {},
+		options: businessTypeOptions,
+	},
+	{
+		name: "monthlyBudget",
+		label: "Monthly Budget",
+		type: "select",
+		placeholder: "Monthly Budget...",
+		value: "",
+		description: "This helps us match you with the right plan or solution.",
+		onChange: () => {},
+		options: monthlyBudgetOptions,
+	},
+	{
+		name: "paidPilot",
+		label: "Are you willing to run a paid pilot?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description:
+			"This is the biggest filter for prioritization and speed of execution.",
+		onChange: () => {},
+		options: paidPilotOptions,
+	},
+	{
+		name: "leadOwner",
+		label: "Who will be responsible for working the leads?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Founder / SDR / Ops / Automation system.",
+		onChange: () => {},
+		options: [
+			{ value: "Founder", label: "Founder" },
+			{ value: "SDR", label: "SDR" },
+			{ value: "Ops", label: "Ops" },
+			{ value: "Automation", label: "Automation system" },
+		],
+	},
+	{
+		name: "speed",
+		label: "If approved, how soon can you activate?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "35 days / 710 days / 24 weeks / unsure.",
+		onChange: () => {},
+		options: [
+			{ value: "3-5", label: "3-5 days" },
+			{ value: "7-10", label: "7-10 days" },
+			{ value: "2-4w", label: "2-4 weeks" },
+			{ value: "unsure", label: "Unsure" },
+		],
+	},
+	{
+		name: "icpCategory",
+		label: "ICP Category",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Choose the closest match for your ideal customer.",
+		onChange: () => {},
+		options: icpCategoryOptions,
+	},
+	{
+		name: "icpDescription",
+		label: "Describe Your Ideal Customer Profile",
+		type: "textarea",
+		placeholder: "Describe Your Ideal Customer Profile...",
+		value: "",
+		minLength: 10,
+		description:
+			"1-3 sentences is fine. Focus on buying intent, role, and what makes them a perfect fit.",
+		onChange: () => {},
+	},
+	{
+		name: "leadVolumePerMonth",
+		label: "Lead volume needed per month",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Used for feasibility and pricing.",
+		onChange: () => {},
+		options: leadVolumeOptions,
+	},
+	{
+		name: "avgDealAmount",
+		label: "Avg deal value ($)",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Choose an estimate (or Unknown).",
+		onChange: () => {},
+		options: avgDealValueOptions,
+	},
+	{
+		name: "dealsPerMonth",
+		label: "Deals per month",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Choose a range (or Unknown).",
+		onChange: () => {},
+		options: dealsPerMonthOptions,
+	},
+	{
+		name: "conversionRate",
+		label: "Current conversion rate",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Choose a range (or Unknown).",
+		onChange: () => {},
+		options: conversionRateOptions,
+	},
+	{
+		name: "validationExpectation",
+		label: "What success do you need to see?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description:
+			"Directional signal / conversion in 30-60 days / closed revenue / not sure.",
+		onChange: () => {},
+		options: [
+			{ value: "directional", label: "Directional signal" },
+			{ value: "30-60", label: "Conversion in 30-60 days" },
+			{ value: "revenue", label: "Closed revenue" },
+			{ value: "not_sure", label: "Not sure" },
+		],
+	},
+	{
+		name: "sourceKnowledge",
+		label: "Do you already know the lead sources?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Pick one. We'll tailor the rest of the form.",
+		onChange: () => {},
+		options: sourceKnowledgeOptions,
+	},
+	{
+		name: "highIntentSources",
+		label: "High-intent lead sources",
+		type: "multiselect",
+		placeholder: "Choose at least 1...",
+		value: [],
+		description:
+			"Examples: Google Maps categories, directories, job boards, Zillow FSBO, etc.",
+		onChange: () => {},
+		options: highIntentSourcesOptions,
+	},
+	{
+		name: "currentLeadSources",
+		label: "Where do you currently get leads (or what lists do you use)?",
+		type: "textarea",
+		placeholder:
+			"Example: purchased list, scraped X directory, referrals, etc.",
+		value: "",
+		minLength: 5,
+		description:
+			"If you don't know sources yet, describe what you're doing today.",
+		onChange: () => {},
+	},
+	{
+		name: "scrapingInstructions",
+		label: "Detailed Scraping Instructions ?",
+		type: "textarea",
+		placeholder: "Detailed Scraping Instructions ?...",
+		value: "",
+		description:
+			"“Please describe exactly what you want us to scrape. Include any URLs, keywords, filters, pages, or specific data points you want captured.”",
+		onChange: () => {},
+	},
+	{
+		name: "currentCrm",
+		label: "What CRM do you use today?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Examples: HubSpot, Zoho, GHL, Airtable, spreadsheet, none.",
+		onChange: () => {},
+		options: [
+			{ value: "HubSpot", label: "HubSpot" },
+			{ value: "Zoho", label: "Zoho" },
+			{ value: "GHL", label: "GHL" },
+			{ value: "Airtable", label: "Airtable" },
+			{ value: "Spreadsheet", label: "Spreadsheet" },
+			{ value: "None", label: "None" },
+		],
+	},
+	{
+		name: "crmConnection",
+		label: "Can we connect directly to your CRM?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Yes/No. This affects setup time and deliverables.",
+		onChange: () => {},
+		options: crmConnectionYesNoOptions,
+	},
+	{
+		name: "leadDeliveryDestination",
+		label: "Where should leads go?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Required only if you selected CRM = None.",
+		onChange: () => {},
+		options: leadDeliveryDestinationOptions,
+	},
+	{
+		name: "leadOpsReady",
+		label: "Do you have an SDR/team or automation running already?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Required only if you need 2000+ leads/month.",
+		onChange: () => {},
+		options: leadOpsReadyOptions,
+	},
+	{
+		name: "acquisitionChannel",
+		label: "What acquisition channel will you use?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description:
+			"Required only for B2C. Compliance note: we do not build cold SMS lists.",
+		onChange: () => {},
+		options: acquisitionChannelOptions,
+	},
 
+	// Optional questions
+	{
+		name: "existingLeadLists",
+		label: "Do you have an existing list?",
+		type: "multiselect",
+		placeholder: "Optional...",
+		value: [],
+		description:
+			"Optional. If you already have a list, we can clean/enrich it.",
+		onChange: () => {},
+		options: existingLeadListsOptions,
+	},
+	{
+		name: "painPoints",
+		label: "Main pain points",
+		type: "multiselect",
+		placeholder: "Optional...",
+		value: [],
+		description: "Optional. Helps us prioritize what to solve first.",
+		onChange: () => {},
+		options: painPointsOptions,
+	},
+	{
+		name: "interestedFeatures",
+		label: "Interested in these features?",
+		type: "multiselect",
+		placeholder: "Interested in these features?...",
+		value: [],
+		description:
+			"Select any features you’re interested in using. This helps us tailor your setup, automation, and pricing to the tools that matter most for your business.",
+		onChange: () => {},
+		options: interestedFeaturesOptions,
+	},
+	{
+		name: "notes",
+		label: "Notes",
+		type: "textarea",
+		placeholder: "Notes...",
+		value: "",
+		description:
+			"Add any additional context, goals, or details about your business we should know.",
+		onChange: () => {},
+	},
+	{
+		name: "kickoffDate",
+		label: "Schedule Kickoff Call",
+		type: "date",
+		placeholder: "Schedule Kickoff Call...",
+		value: "",
+		description:
+			"If you qualify when can you hop on a kick off call to meet your start date deadlines? Book here: https://calendar.notion.so/meet/cyberoni/em2w42l93",
+		onChange: () => {},
+	},
 ];

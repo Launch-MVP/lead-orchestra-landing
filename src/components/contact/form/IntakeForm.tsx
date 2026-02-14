@@ -5,7 +5,7 @@ import {
 	renderFormField,
 } from "@/components/contact/form/formFieldHelpers";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -28,7 +28,10 @@ import {
 	intakeFormSchema,
 } from "@/data/contact/intakeFormFields";
 import type { FieldConfig } from "@/types/contact/formFields";
-import { generateMetaEventId, trackIntakeFormSubmit } from "@/utils/seo/fbpixel";
+import {
+	generateMetaEventId,
+	trackIntakeFormSubmit,
+} from "@/utils/seo/fbpixel";
 import { useRouter } from "next/navigation";
 
 export default function IntakeForm() {
@@ -39,6 +42,50 @@ export default function IntakeForm() {
 		resolver: zodResolver(intakeFormSchema),
 		defaultValues: {},
 	});
+
+	const noWebsite = form.watch("noWebsite") === true;
+	const sourceKnowledge = form.watch("sourceKnowledge");
+	const currentCrm = form.watch("currentCrm");
+	const leadVolume = form.watch("leadVolumePerMonth");
+	const businessType = form.watch("businessType") ?? [];
+	const icpCategory = form.watch("icpCategory") ?? "";
+	const isB2C = useMemo(() => {
+		const b2cSignals = ["b2c", "consumers", "dating"];
+		const bt = Array.isArray(businessType)
+			? businessType.join(" ").toLowerCase()
+			: "";
+		const icp = String(icpCategory).toLowerCase();
+		return (
+			b2cSignals.some((s) => bt.includes(s)) ||
+			b2cSignals.some((s) => icp.includes(s))
+		);
+	}, [businessType, icpCategory]);
+
+	const visibleFields = useMemo(() => {
+		return intakeFormFields.filter((field) => {
+			// Hide website input if "noWebsite" is checked.
+			if (field.name === "website") return !noWebsite;
+
+			// Sources branching
+			if (field.name === "highIntentSources")
+				return sourceKnowledge === "known";
+			if (field.name === "currentLeadSources")
+				return sourceKnowledge === "unknown";
+
+			// CRM none branching
+			if (field.name === "leadDeliveryDestination")
+				return currentCrm === "None";
+
+			// Lead volume branching
+			if (field.name === "leadOpsReady") return leadVolume === "2000+";
+
+			// B2C branching
+			if (field.name === "acquisitionChannel") return isB2C;
+
+			// Keep everything else visible.
+			return true;
+		});
+	}, [currentCrm, isB2C, leadVolume, noWebsite, sourceKnowledge]);
 
 	const onSubmit = async (data: IntakeFormValues) => {
 		setIsSubmitting(true);
@@ -94,19 +141,19 @@ export default function IntakeForm() {
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 						{/* Render Fields */}
-						{intakeFormFields.map((field) => (
+						{visibleFields.map((field) => (
 							<FormField
 								key={field.name}
 								control={form.control}
 								name={field.name as keyof IntakeFormValues}
 								render={({ field: formField }) => (
 									<FormItem className="space-y-1">
-										<FormLabel className="text-sm font-medium text-black dark:text-white/80">
+										<FormLabel className="font-medium text-black text-sm dark:text-white/80">
 											{field.label}{" "}
 											{/* Very basic 'required' check for UI if needed, but Zod valid handles it */}
 										</FormLabel>
 										{field.description && (
-											<FormDescription className="text-sm text-muted-foreground pb-2">
+											<FormDescription className="pb-2 text-muted-foreground text-sm">
 												{(() => {
 													const urlRegex = /(https?:\/\/[^\s]+)/g;
 													const parts = field.description.split(urlRegex);
@@ -114,11 +161,11 @@ export default function IntakeForm() {
 														if (part.match(urlRegex)) {
 															return (
 																<a
-																	key={index}
+																	key={`${field.name}-${part}-${index}`}
 																	href={part}
 																	target="_blank"
 																	rel="noopener noreferrer"
-																	className="text-primary underline hover:opacity-80 break-all"
+																	className="break-all text-primary underline hover:opacity-80"
 																>
 																	{part}
 																</a>
@@ -143,7 +190,7 @@ export default function IntakeForm() {
 						<Button
 							type="submit"
 							disabled={isSubmitting}
-							className="mt-6 w-full bg-gradient-to-r from-primary to-focus py-6 text-lg font-semibold shadow-lg transition-transform hover:scale-[1.01]"
+							className="mt-6 w-full bg-gradient-to-r from-primary to-focus py-6 font-semibold text-lg shadow-lg transition-transform hover:scale-[1.01]"
 						>
 							{isSubmitting ? (
 								<span className="flex items-center justify-center gap-2">
