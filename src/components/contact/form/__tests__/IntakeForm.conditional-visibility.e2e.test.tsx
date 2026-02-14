@@ -98,7 +98,9 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		expect(screen.queryByText("Website / primary URL")).not.toBeInTheDocument();
+		expect(
+			screen.queryByText(/Website \/ primary URL/),
+		).not.toBeInTheDocument();
 		expect(screen.getByText("We don't have a website")).toBeInTheDocument();
 	});
 
@@ -115,7 +117,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		expect(screen.getByText("High-intent lead sources")).toBeInTheDocument();
+		expect(screen.getByText(/High-intent lead sources/)).toBeInTheDocument();
 		expect(
 			screen.queryByText(
 				"Where do you currently get leads (or what lists do you use)?",
@@ -136,7 +138,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		expect(screen.getByText("Where should leads go?")).toBeInTheDocument();
+		expect(screen.getByText(/Where should leads go\?/)).toBeInTheDocument();
 	});
 
 	it("shows leadOpsReady only when leadVolumePerMonth=2000+", async () => {
@@ -154,7 +156,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 
 		expect(
 			screen.getByText(
-				"Do you have an SDR/team or automation running already?",
+				/Do you have an SDR\/team or automation running already\?/,
 			),
 		).toBeInTheDocument();
 	});
@@ -173,7 +175,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		render(<IntakeForm />);
 
 		expect(
-			screen.getByText("What acquisition channel will you use?"),
+			screen.getByText(/What acquisition channel will you use\?/),
 		).toBeInTheDocument();
 	});
 });

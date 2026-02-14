@@ -60,6 +60,44 @@ export default function IntakeForm() {
 		);
 	}, [businessType, icpCategory]);
 
+	const isRequiredField = useMemo(() => {
+		const alwaysRequired = new Set<string>([
+			"name",
+			"companyName",
+			"email",
+			"phone",
+			"leadOwner",
+			"speed",
+			"monthlyBudget",
+			"paidPilot",
+			"businessType",
+			"icpCategory",
+			"icpDescription",
+			"leadVolumePerMonth",
+			"avgDealAmount",
+			"dealsPerMonth",
+			"conversionRate",
+			"currentCrm",
+			"crmConnection",
+			"validationExpectation",
+			"sourceKnowledge",
+			"painPoints",
+			"interestedFeatures",
+		]);
+
+		return (fieldName: string) => {
+			if (alwaysRequired.has(fieldName)) return true;
+			if (fieldName === "website") return !noWebsite;
+			if (fieldName === "highIntentSources") return sourceKnowledge === "known";
+			if (fieldName === "currentLeadSources")
+				return sourceKnowledge === "unknown";
+			if (fieldName === "leadDeliveryDestination") return currentCrm === "None";
+			if (fieldName === "leadOpsReady") return leadVolume === "2000+";
+			if (fieldName === "acquisitionChannel") return isB2C;
+			return false;
+		};
+	}, [currentCrm, isB2C, leadVolume, noWebsite, sourceKnowledge]);
+
 	const visibleFields = useMemo(() => {
 		return intakeFormFields.filter((field) => {
 			// Hide website input if "noWebsite" is checked.
@@ -148,8 +186,10 @@ export default function IntakeForm() {
 								render={({ field: formField }) => (
 									<FormItem className="space-y-1">
 										<FormLabel className="font-medium text-black text-sm dark:text-white/80">
-											{field.label}{" "}
-											{/* Very basic 'required' check for UI if needed, but Zod valid handles it */}
+											{field.label}
+											{isRequiredField(field.name) ? (
+												<span className="ml-1 text-destructive">*</span>
+											) : null}
 										</FormLabel>
 										{field.description && (
 											<FormDescription className="pb-2 text-muted-foreground text-sm">
