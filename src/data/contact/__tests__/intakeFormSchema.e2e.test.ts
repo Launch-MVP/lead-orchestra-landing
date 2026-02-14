@@ -9,6 +9,8 @@ const baseValid = () => ({
 	phone: "+15555550123",
 	noWebsite: false,
 	website: "https://example.com",
+	painPoints: ["Not enough high-quality leads"],
+	interestedFeatures: ["Lead Enrichment"],
 
 	leadOwner: "Founder",
 	speed: "7-10",

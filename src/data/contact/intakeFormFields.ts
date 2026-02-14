@@ -550,7 +550,7 @@ export const intakeFormSchema = z
 		name: z.string().min(2, "Name is required"),
 		companyName: z.string().min(2, "Company / brand name is required"),
 		email: z.string().email("Invalid email address"),
-		phone: z.string().optional(),
+		phone: z.string().min(7, "Phone number is required"),
 		noWebsite: z.boolean().optional(),
 		website: z.string().optional(),
 
@@ -593,11 +593,13 @@ export const intakeFormSchema = z
 		acquisitionChannel: z.string().optional(),
 
 		// Helpful (optional)
-		painPoints: z.array(z.string()).optional(),
+		painPoints: z.array(z.string()).min(1, "Pain points are required"),
 		existingLeadLists: z.array(z.string()).optional(),
 		notes: z.string().optional(),
 		kickoffDate: z.string().optional(),
-		interestedFeatures: z.array(z.string()).optional(),
+		interestedFeatures: z
+			.array(z.string())
+			.min(1, "Interested features are required"),
 		startDate: z.string().optional(),
 		priorityLevel: z.array(z.string()).optional(),
 	})
@@ -721,7 +723,7 @@ export const intakeFormFields: FieldConfig[] = [
 		placeholder: "Phone...",
 		value: "",
 		description:
-			"Optional — if you'd like us to text or call you with updates or appointment confirmations.",
+			"Required. Used for faster onboarding + verification if needed.",
 		onChange: () => {},
 	},
 	{
@@ -998,9 +1000,9 @@ export const intakeFormFields: FieldConfig[] = [
 		name: "painPoints",
 		label: "Main pain points",
 		type: "multiselect",
-		placeholder: "Optional...",
+		placeholder: "Choose at least 1...",
 		value: [],
-		description: "Optional. Helps us prioritize what to solve first.",
+		description: "Required. Helps us prioritize what to solve first.",
 		onChange: () => {},
 		options: painPointsOptions,
 	},
@@ -1011,7 +1013,7 @@ export const intakeFormFields: FieldConfig[] = [
 		placeholder: "Interested in these features?...",
 		value: [],
 		description:
-			"Select any features you’re interested in using. This helps us tailor your setup, automation, and pricing to the tools that matter most for your business.",
+			"Required. Select the features you care about so we can scope the right build.",
 		onChange: () => {},
 		options: interestedFeaturesOptions,
 	},
