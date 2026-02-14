@@ -1,14 +1,17 @@
 "use client";
 
-import {
-	createFieldProps,
-	renderFormField,
-} from "@/components/contact/form/formFieldHelpers";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import Header from "@/components/common/Header";
+import {
+	createFieldProps,
+	renderFormField,
+} from "@/components/contact/form/formFieldHelpers";
 import { Button } from "@/components/ui/button";
 import {
 	Form,
@@ -19,9 +22,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Loader2 } from "lucide-react";
-
-import Header from "@/components/common/Header";
 import {
 	type IntakeFormValues,
 	intakeFormFields,
@@ -32,7 +32,6 @@ import {
 	generateMetaEventId,
 	trackIntakeFormSubmit,
 } from "@/utils/seo/fbpixel";
-import { useRouter } from "next/navigation";
 
 export default function IntakeForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
