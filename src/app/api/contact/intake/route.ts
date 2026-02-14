@@ -1,4 +1,5 @@
 import { Client } from "@notionhq/client";
+import type { CreatePageParameters } from "@notionhq/client/build/src/api-endpoints";
 import { NextResponse } from "next/server";
 
 import {
@@ -64,7 +65,7 @@ export async function POST(request: Request) {
 		// * If a property doesn't exist, the API call will fail.
 		// * I've mapped the keys from intakeFormFields.ts to likely Notion Property names.
 
-		const properties: Record<string, unknown> = {
+		const properties: CreatePageParameters["properties"] = {
 			" Name": {
 				title: [
 					{
@@ -149,9 +150,12 @@ export async function POST(request: Request) {
 				],
 			};
 		}
-		if (body.icpCategory && body.icpCategory.length > 0) {
+		if (
+			typeof body.icpCategory === "string" &&
+			body.icpCategory.trim().length > 0
+		) {
 			properties["ICP Category"] = {
-				multi_select: body.icpCategory.map((v: string) => ({ name: v })),
+				select: { name: body.icpCategory.trim() },
 			};
 		}
 		if (body.icpDescription) {
@@ -159,9 +163,12 @@ export async function POST(request: Request) {
 				rich_text: [{ text: { content: body.icpDescription } }],
 			};
 		}
-		if (body.highIntentSources) {
+		if (
+			Array.isArray(body.highIntentSources) &&
+			body.highIntentSources.length > 0
+		) {
 			properties["High-Intent Lead Sources"] = {
-				rich_text: [{ text: { content: body.highIntentSources } }],
+				rich_text: [{ text: { content: body.highIntentSources.join(", ") } }],
 			};
 		}
 		if (body.validationExpectation) {
@@ -181,11 +188,12 @@ export async function POST(request: Request) {
 				rich_text: [{ text: { content: body.scrapingInstructions } }],
 			};
 		}
-		if (body.crmConnection && body.crmConnection.length > 0) {
+		if (
+			typeof body.crmConnection === "string" &&
+			body.crmConnection.trim().length > 0
+		) {
 			properties["Can we connect directly to your CRM?"] = {
-				multi_select: body.crmConnection.map((v: string) => ({
-					name: v,
-				})),
+				select: { name: body.crmConnection.trim() },
 			};
 		}
 		if (body.interestedFeatures && body.interestedFeatures.length > 0) {
@@ -257,7 +265,7 @@ export async function POST(request: Request) {
 			}),
 			customData: {
 				currency: "USD",
-				value: typeof body.avgDealAmount === "number" ? body.avgDealAmount : 0,
+				value: parseMidpointNumber(body.avgDealAmount),
 				contentName: "Lead Orchestra Intake",
 				contentCategory: "Lead Form",
 			},
