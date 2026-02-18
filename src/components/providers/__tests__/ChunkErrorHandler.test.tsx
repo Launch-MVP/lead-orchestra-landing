@@ -160,6 +160,25 @@ describe("ChunkErrorHandler", () => {
 			expect(mockReload).toHaveBeenCalledTimes(1);
 		});
 
+		it("should detect Firefox webpack originalFactory runtime error", () => {
+			(mockSessionStorage.getItem as ReturnType<typeof vi.fn>).mockReturnValue(
+				null,
+			);
+
+			render(<ChunkErrorHandler />);
+
+			const errorEvent = new ErrorEvent("error", {
+				message: `can't access property "call", originalFactory is undefined`,
+				error: new Error(
+					`can't access property "call", originalFactory is undefined`,
+				),
+			});
+
+			window.dispatchEvent(errorEvent);
+
+			expect(mockReload).toHaveBeenCalledTimes(1);
+		});
+
 		it("should handle chunk error as string in error event", () => {
 			(mockSessionStorage.getItem as ReturnType<typeof vi.fn>).mockReturnValue(
 				null,
@@ -211,6 +230,30 @@ describe("ChunkErrorHandler", () => {
 			const reason = "Loading chunk 7895 failed";
 			const promise = Promise.reject(reason);
 			// Catch the rejection to prevent unhandled rejection warning
+			promise.catch(() => {});
+
+			const rejectionEvent = new MockPromiseRejectionEvent(
+				"unhandledrejection",
+				{
+					reason,
+					promise,
+				},
+			);
+
+			window.dispatchEvent(rejectionEvent);
+
+			expect(mockReload).toHaveBeenCalledTimes(1);
+		});
+
+		it("should handle originalFactory runtime error in promise rejection", async () => {
+			(mockSessionStorage.getItem as ReturnType<typeof vi.fn>).mockReturnValue(
+				null,
+			);
+
+			render(<ChunkErrorHandler />);
+
+			const reason = `can't access property "call", originalFactory is undefined`;
+			const promise = Promise.reject(reason);
 			promise.catch(() => {});
 
 			const rejectionEvent = new MockPromiseRejectionEvent(

@@ -1,11 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import {
 	isSessionStorageAvailable,
 	safeSessionStorageGetItem,
 	safeSessionStorageSetItem,
 } from "@/utils/storage/safeStorage";
-import { useEffect } from "react";
+
+const CHUNK_ERROR_PATTERNS = [
+	"Loading chunk",
+	"Failed to fetch dynamically imported module",
+	"ChunkLoadError",
+	"Loading CSS chunk",
+	"originalFactory is undefined",
+] as const;
+
+const isChunkRuntimeError = (message: string): boolean => {
+	return (
+		CHUNK_ERROR_PATTERNS.some((pattern) => message.includes(pattern)) ||
+		/Loading chunk \d+ failed/i.test(message)
+	);
+};
 
 /**
  * Handles Next.js chunk loading errors that occur when:
@@ -28,19 +43,8 @@ export function ChunkErrorHandler() {
 				// Check if this is a chunk loading error
 				const isChunkError =
 					typeof error === "string"
-						? error.includes("Loading chunk") ||
-							error.includes("Failed to fetch dynamically imported module") ||
-							error.includes("ChunkLoadError") ||
-							error.includes("Loading CSS chunk") ||
-							/Loading chunk \d+ failed/i.test(error)
-						: error instanceof Error &&
-							(error.message.includes("Loading chunk") ||
-								error.message.includes(
-									"Failed to fetch dynamically imported module",
-								) ||
-								error.message.includes("ChunkLoadError") ||
-								error.message.includes("Loading CSS chunk") ||
-								/Loading chunk \d+ failed/i.test(error.message));
+						? isChunkRuntimeError(error)
+						: error instanceof Error && isChunkRuntimeError(error.message);
 
 				if (!isChunkError) {
 					return;
@@ -153,14 +157,7 @@ export function ChunkErrorHandler() {
 							? reason.message
 							: String(reason);
 
-				const isChunkError =
-					errorMessage.includes("Loading chunk") ||
-					errorMessage.includes(
-						"Failed to fetch dynamically imported module",
-					) ||
-					errorMessage.includes("ChunkLoadError") ||
-					errorMessage.includes("Loading CSS chunk") ||
-					/Loading chunk \d+ failed/i.test(errorMessage);
+				const isChunkError = isChunkRuntimeError(errorMessage);
 
 				if (!isChunkError) {
 					return;
