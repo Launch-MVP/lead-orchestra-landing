@@ -155,7 +155,7 @@ export async function POST(request: Request) {
 			body.icpCategory.trim().length > 0
 		) {
 			properties["ICP Category"] = {
-				select: { name: body.icpCategory.trim() },
+				multi_select: [{ name: body.icpCategory.trim() }],
 			};
 		}
 		if (body.icpDescription) {

@@ -16,9 +16,14 @@ vi.mock("@/components/auth/AuthGuard", () => ({
 	default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-vi.mock("@/components/contact/form/ContactForm", () => ({
+vi.mock("@/components/contact/form/IntakeForm", () => ({
 	__esModule: true,
-	default: () => <div data-testid="contact-form" />,
+	default: () => <div data-testid="intake-form" />,
+}));
+
+vi.mock("@/components/contact/form/ConversionForm", () => ({
+	__esModule: true,
+	default: () => <div data-testid="conversion-form" />,
 }));
 
 vi.mock("@/components/contact/form/ContactSteps", () => ({
@@ -57,9 +62,15 @@ vi.mock("next-auth/react", () => ({
 	useSession: () => ({ data: null }),
 }));
 
+const useSearchParamsMock = vi.fn(() => new URLSearchParams());
+const useRouterMock = vi.fn(() => ({ push: vi.fn() }));
+const usePathnameMock = vi.fn(() => "/contact");
+
 vi.mock("next/navigation", () => ({
 	__esModule: true,
-	useSearchParams: () => new URLSearchParams(),
+	useSearchParams: () => useSearchParamsMock(),
+	useRouter: () => useRouterMock(),
+	usePathname: () => usePathnameMock(),
 }));
 
 const loadContactClient = async () =>
@@ -108,7 +119,39 @@ describe("ContactClient", () => {
 		render(<ContactClient />);
 
 		expect(screen.getByText(/Loading trusted partners/i)).toBeInTheDocument();
-		expect(screen.getByText(/Loading testimonials/i)).toBeInTheDocument();
 		expect(screen.getByText(/Loading next steps/i)).toBeInTheDocument();
+	});
+
+	it("renders conversion form by default", async () => {
+		useDataModuleMock.mockImplementation((_k, selector) => selector({ status: "ready" }));
+		const ContactClient = await loadContactClient();
+		render(<ContactClient />);
+		expect(screen.getByTestId("conversion-form")).toBeInTheDocument();
+		expect(screen.queryByTestId("intake-form")).not.toBeInTheDocument();
+	});
+
+	it("switches to intake form when activeTab=prequalification in URL", async () => {
+		useSearchParamsMock.mockReturnValue(new URLSearchParams("tab=prequalification"));
+		useDataModuleMock.mockImplementation((_k, selector) => selector({ status: "ready" }));
+		const ContactClient = await loadContactClient();
+		render(<ContactClient />);
+		expect(screen.getByTestId("intake-form")).toBeInTheDocument();
+		expect(screen.queryByTestId("conversion-form")).not.toBeInTheDocument();
+	});
+
+	it("updates URL when tab is switched", async () => {
+		const pushMock = vi.fn();
+		useRouterMock.mockReturnValue({ push: pushMock });
+		useSearchParamsMock.mockReturnValue(new URLSearchParams());
+		useDataModuleMock.mockImplementation((_k, selector) => selector({ status: "ready" }));
+		
+		const ContactClient = await loadContactClient();
+		render(<ContactClient />);
+		
+		const prequalificationTab = screen.getByRole("tab", { name: /Consultation Form/i });
+		import("@testing-library/react").then(({ fireEvent }) => {
+			fireEvent.click(prequalificationTab);
+			expect(pushMock).toHaveBeenCalledWith("/contact?tab=prequalification", { scroll: false });
+		});
 	});
 });

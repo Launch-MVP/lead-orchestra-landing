@@ -24,10 +24,14 @@ import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
 import { getStaticSeo } from "@/utils/seo/staticSeo";
 import type { Metadata } from "next";
 import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo } from "react";
 
 import { useDataModuleGuardTelemetry } from "@/hooks/useDataModuleGuardTelemetry";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ConversionForm from "@/components/contact/form/ConversionForm";
+import { useState } from "react";
 
 // * Centralized SEO for /contact using getStaticSeo helper
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,7 +41,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const Contact = () => {
 	const searchParams = useSearchParams();
+	const router = useRouter();
+	const pathname = usePathname();
 	const { data: session } = useSession();
+
+	const urlTab = searchParams?.get("tab") || searchParams?.get("activeTab");
+	const [activeTab, setActiveTab] = useState(
+		urlTab === "prequalification" ? "prequalification" : "conversion",
+	);
 
 	// * Fire ViewContent pixel event on mount
 	useEffect(() => {
@@ -51,6 +62,22 @@ const Contact = () => {
 			eventSourceUrl: typeof window !== "undefined" ? window.location.href : undefined,
 		});
 	}, []);
+
+	const handleTabChange = useCallback((value: string) => {
+		setActiveTab(value as "conversion" | "prequalification");
+		
+		const params = new URLSearchParams(searchParams?.toString() ?? "");
+		params.set("tab", value);
+		
+		router.push(`${pathname}?${params.toString()}`, { scroll: false });
+	}, [pathname, router, searchParams]);
+
+	// Sync active tab with URL if it changes (optional but good for UX)
+	useEffect(() => {
+		if (urlTab === "prequalification" || urlTab === "conversion") {
+			setActiveTab(urlTab);
+		}
+	}, [urlTab]);
 
 	const profilePrefill = useMemo<Partial<BetaTesterFormValues>>(() => {
 		const user = session?.user;
@@ -308,7 +335,26 @@ const Contact = () => {
 			<div className="container mx-auto px-6 py-24 md:mt-10 lg:mt-20">
 				<div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
 					<div className="lg:col-span-7">
-						<IntakeForm />
+						<Tabs
+							value={activeTab}
+							onValueChange={handleTabChange}
+							className="w-full"
+						>
+							<TabsList className="mb-8 grid w-full grid-cols-2">
+								<TabsTrigger value="conversion" className="py-3">
+									Quick Form
+								</TabsTrigger>
+								<TabsTrigger value="prequalification" className="py-3">
+									Consultation Form
+								</TabsTrigger>
+							</TabsList>
+							<TabsContent value="conversion" className="mt-0 outline-none">
+								<ConversionForm />
+							</TabsContent>
+							<TabsContent value="prequalification" className="mt-0 outline-none">
+								<IntakeForm />
+							</TabsContent>
+						</Tabs>
 					</div>
 					<div className="flex flex-col lg:col-span-5">
 						<ScheduleMeeting />
