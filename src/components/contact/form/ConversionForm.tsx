@@ -1,14 +1,17 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import Header from "@/components/common/Header";
-import { getAttributionFieldsFromUrl } from "@/components/contact/form/attributionFields";
+import {
+	getAttributionFieldsFromUrl,
+	resolveUtmIcpFromUrlOrState,
+} from "@/components/contact/form/attributionFields";
 import {
 	createFieldProps,
 	renderFormField,
@@ -58,7 +61,12 @@ export default function ConversionForm() {
 		setIsSubmitting(true);
 		try {
 			const metaEventId = generateMetaEventId();
-			
+			const attribution = getAttributionFieldsFromUrl(window.location.href);
+			const utmIcp = resolveUtmIcpFromUrlOrState(
+				window.location.href,
+				data.icpCategory,
+			);
+
 			// Submit to intake API
 			const response = await fetch("/api/contact/intake", {
 				method: "POST",
@@ -67,7 +75,8 @@ export default function ConversionForm() {
 				},
 				body: JSON.stringify({
 					...data,
-					...getAttributionFieldsFromUrl(window.location.href),
+					...attribution,
+					utm_icp: utmIcp,
 					metaEventId,
 					eventSourceUrl: window.location.href,
 					// Flag as conversion/quick-apply
@@ -99,7 +108,7 @@ export default function ConversionForm() {
 	return (
 		<div className="relative mx-auto max-w-3xl rounded-2xl border border-primary/40 bg-gradient-to-br from-white via-background to-primary-50 p-6 shadow-xl ring-1 ring-primary/10 transition-all sm:p-10 dark:bg-gradient-to-br dark:from-background dark:via-background-dark dark:to-primary/10">
 			<div className="-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20" />
-			
+
 			<Header
 				title="Quick Application"
 				subtitle="Grab your spot in the queue with the basics. Takes less than 60 seconds."
@@ -117,13 +126,19 @@ export default function ConversionForm() {
 									control={form.control}
 									name={field.name as keyof QuickApplyValues}
 									render={({ field: formField }) => (
-										<FormItem className={field.name === "name" || field.name === "email" ? "md:col-span-1" : "md:col-span-2"}>
+										<FormItem
+											className={
+												field.name === "name" || field.name === "email"
+													? "md:col-span-1"
+													: "md:col-span-2"
+											}
+										>
 											<FormLabel className="font-medium text-black text-sm dark:text-white/80">
 												{field.label}
 												<span className="ml-1 text-destructive">*</span>
 											</FormLabel>
 											{field.description && (
-												<FormDescription className="pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all">
+												<FormDescription className="line-clamp-1 pb-1 text-muted-foreground text-xs leading-relaxed transition-all hover:line-clamp-none">
 													{field.description}
 												</FormDescription>
 											)}

@@ -4,6 +4,7 @@ export interface IntakeAttributionFields {
 	utm_campaign?: string;
 	utm_term?: string;
 	utm_content?: string;
+	utm_icp?: string;
 }
 
 const TRACKING_KEYS = [
@@ -12,7 +13,10 @@ const TRACKING_KEYS = [
 	"utm_campaign",
 	"utm_term",
 	"utm_content",
+	"utm_icp",
 ] as const;
+
+const ICP_URL_KEYS = ["utm_icp", "icp", "icpCategory", "icp_type"] as const;
 
 const toNonEmptyString = (value: string | null): string | undefined => {
 	if (typeof value !== "string") return undefined;
@@ -40,3 +44,22 @@ export const getAttributionFieldsFromUrl = (
 	}
 };
 
+export const resolveUtmIcpFromUrlOrState = (
+	url: string,
+	selectedIcp?: string,
+): string | undefined => {
+	const selected = toNonEmptyString(selectedIcp ?? null);
+
+	try {
+		const parsed = new URL(url);
+		for (const key of ICP_URL_KEYS) {
+			const value = toNonEmptyString(parsed.searchParams.get(key));
+			if (value) {
+				return value;
+			}
+		}
+		return selected;
+	} catch {
+		return selected;
+	}
+};

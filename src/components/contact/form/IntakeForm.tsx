@@ -8,7 +8,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import Header from "@/components/common/Header";
-import { getAttributionFieldsFromUrl } from "@/components/contact/form/attributionFields";
+import {
+	getAttributionFieldsFromUrl,
+	resolveUtmIcpFromUrlOrState,
+} from "@/components/contact/form/attributionFields";
 import {
 	createFieldProps,
 	renderFormField,
@@ -129,6 +132,11 @@ export default function IntakeForm() {
 		setIsSubmitting(true);
 		try {
 			const metaEventId = generateMetaEventId();
+			const attribution = getAttributionFieldsFromUrl(window.location.href);
+			const utmIcp = resolveUtmIcpFromUrlOrState(
+				window.location.href,
+				data.icpCategory,
+			);
 			// * Submit to Notion API
 			const response = await fetch("/api/contact/intake", {
 				method: "POST",
@@ -137,7 +145,8 @@ export default function IntakeForm() {
 				},
 				body: JSON.stringify({
 					...data,
-					...getAttributionFieldsFromUrl(window.location.href),
+					...attribution,
+					utm_icp: utmIcp,
 					metaEventId,
 					eventSourceUrl: window.location.href,
 				}),

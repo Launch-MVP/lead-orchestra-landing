@@ -160,7 +160,7 @@ describe("contact form redirects", () => {
 		window.history.pushState(
 			{},
 			"",
-			"/contact?gclid=intake-gclid&utm_source=facebook&utm_campaign=intake-flow&utm_term=lead&utm_content=form",
+			"/contact?gclid=intake-gclid&utm_source=facebook&utm_campaign=intake-flow&utm_term=lead&utm_content=form&utm_icp=high-ticket",
 		);
 
 		mockFormSubmission({
@@ -189,6 +189,39 @@ describe("contact form redirects", () => {
 		expect(payload.utm_campaign).toBe("intake-flow");
 		expect(payload.utm_term).toBe("lead");
 		expect(payload.utm_content).toBe("form");
+		expect(payload.utm_icp).toBe("high-ticket");
+	});
+
+	it("uses ICP URL param for utm_icp when present", async () => {
+		window.history.pushState(
+			{},
+			"",
+			"/contact?gclid=intake-gclid&utm_source=facebook&utm_campaign=intake-flow&utm_term=lead&utm_content=form&icpCategory=URL-ICP",
+		);
+
+		mockFormSubmission({
+			name: "Test Person",
+			email: "test@example.com",
+			phone: "5551239999",
+			businessType: ["Real Estate"],
+			monthlyBudget: "$250-$1k",
+			priorityLevel: ["High"],
+			icpCategory: "State-ICP",
+		});
+		vi.mocked(fetch).mockResolvedValue(mockOkResponse() as Response);
+
+		const IntakeForm = (await import("../IntakeForm")).default;
+		render(<IntakeForm />);
+
+		fireEvent.click(screen.getByRole("button", { name: /submit request/i }));
+
+		await waitFor(() => {
+			expect(pushMock).toHaveBeenCalledWith("/contact/thank-you?source=intake");
+		});
+
+		const requestInit = vi.mocked(fetch).mock.calls[0]?.[1];
+		const payload = JSON.parse(String(requestInit?.body ?? "{}"));
+		expect(payload.utm_icp).toBe("URL-ICP");
 	});
 
 	it("redirects beta application submissions to /contact/thank-you", async () => {
