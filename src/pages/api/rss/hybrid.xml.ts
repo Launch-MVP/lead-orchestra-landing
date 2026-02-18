@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { XMLParser } from "fast-xml-parser";
 
 const SITE_URL = "https://dealscale.io";
-const BEEHIIV_FEED = "https://rss.beehiiv.com/feeds/th0QQipR7J.xml";
+const BEEHIIV_FEED = "https://rss.beehiiv.com/feeds/rsU6YI0l4Z.xml";
 // Try multiple YouTube feed formats - YouTube may have changed their feed URLs
 // Note: Channel ID should include the -A suffix: UCphkra97DMNIAIvA1y8hZ-A
 const YOUTUBE_CHANNEL_ID =

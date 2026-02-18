@@ -29,12 +29,14 @@ export default function ContactThankYouPage() {
 					>
 						Back to Home
 					</Link>
-					<Link
-						href="/contact"
-						className="inline-flex items-center justify-center rounded-lg border border-primary/30 px-5 py-3 font-medium text-foreground transition-colors hover:bg-primary/5"
+					<a
+						href="https://calendar.notion.so/meet/cyberoni/em2w42l93"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="inline-flex items-center justify-center rounded-lg border border-primary/30 px-5 py-3 font-medium text-foreground transition-colors hover:bg-primary/5 shadow-sm"
 					>
-						Submit Another Response
-					</Link>
+						Schedule Consultation
+					</a>
 				</div>
 			</section>
 		</main>
