@@ -157,6 +157,12 @@ describe("contact form redirects", () => {
 	});
 
 	it("redirects intake submissions to /contact/thank-you", async () => {
+		window.history.pushState(
+			{},
+			"",
+			"/contact?gclid=intake-gclid&utm_source=facebook&utm_campaign=intake-flow&utm_term=lead&utm_content=form",
+		);
+
 		mockFormSubmission({
 			name: "Test Person",
 			email: "test@example.com",
@@ -175,6 +181,14 @@ describe("contact form redirects", () => {
 		await waitFor(() => {
 			expect(pushMock).toHaveBeenCalledWith("/contact/thank-you?source=intake");
 		});
+
+		const requestInit = vi.mocked(fetch).mock.calls[0]?.[1];
+		const payload = JSON.parse(String(requestInit?.body ?? "{}"));
+		expect(payload.gclid).toBe("intake-gclid");
+		expect(payload.utm_source).toBe("facebook");
+		expect(payload.utm_campaign).toBe("intake-flow");
+		expect(payload.utm_term).toBe("lead");
+		expect(payload.utm_content).toBe("form");
 	});
 
 	it("redirects beta application submissions to /contact/thank-you", async () => {

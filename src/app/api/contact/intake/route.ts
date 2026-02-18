@@ -137,6 +137,25 @@ export async function POST(request: Request) {
 				date: body.startDate ? { start: body.startDate } : null,
 			},
 		};
+		const addRichTextProperty = (propertyName: string, value: unknown) => {
+			if (typeof value !== "string" || value.trim().length === 0) {
+				return;
+			}
+			properties[propertyName] = {
+				rich_text: [
+					{
+						text: {
+							content: value.trim(),
+						},
+					},
+				],
+			};
+		};
+		addRichTextProperty("gclid", body.gclid);
+		addRichTextProperty("utm_source", body.utm_source);
+		addRichTextProperty("utm_campaign", body.utm_campaign);
+		addRichTextProperty("utm_term", body.utm_term);
+		addRichTextProperty("utm_content", body.utm_content);
 
 		// * Optional fields
 		if (body.phone) {

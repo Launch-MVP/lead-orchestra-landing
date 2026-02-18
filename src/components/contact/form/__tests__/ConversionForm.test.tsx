@@ -81,6 +81,12 @@ describe("ConversionForm", () => {
   });
 
   it("submits the form successfully and redirects", async () => {
+    window.history.pushState(
+      {},
+      "",
+      "/contact?gclid=test-gclid&utm_source=google&utm_campaign=spring&utm_term=lead-gen&utm_content=cta-a",
+    );
+
     render(<ConversionForm />);
     
     // Fill text fields - use placeholder or display value if label is ambiguous
@@ -108,5 +114,13 @@ describe("ConversionForm", () => {
       }));
       expect(pushMock).toHaveBeenCalledWith("/contact/thank-you?source=conversion");
     });
+
+    const requestInit = (global.fetch as any).mock.calls[0]?.[1];
+    const payload = JSON.parse(requestInit.body);
+    expect(payload.gclid).toBe("test-gclid");
+    expect(payload.utm_source).toBe("google");
+    expect(payload.utm_campaign).toBe("spring");
+    expect(payload.utm_term).toBe("lead-gen");
+    expect(payload.utm_content).toBe("cta-a");
   });
 });

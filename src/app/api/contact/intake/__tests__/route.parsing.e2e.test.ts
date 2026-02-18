@@ -43,6 +43,11 @@ describe("POST /api/contact/intake parsing (e2e)", () => {
 			email: "intake@example.com",
 			metaEventId: "evt_intake_parse_1",
 			eventSourceUrl: "https://www.leadorchestra.com/contact",
+			gclid: "EAIaIQobChMI_mock",
+			utm_source: "google",
+			utm_campaign: "brand_search",
+			utm_term: "deal scale",
+			utm_content: "headline_a",
 
 			leadVolumePerMonth: "500-2000",
 			dealsPerMonth: "50+",
@@ -64,10 +69,23 @@ describe("POST /api/contact/intake parsing (e2e)", () => {
 		const properties = call?.properties as Record<string, unknown>;
 		const getNumber = (key: string) =>
 			(properties[key] as { number?: number } | undefined)?.number;
+		const getRichText = (key: string) =>
+			(
+				properties[key] as
+					| {
+							rich_text?: Array<{ text?: { content?: string } }>;
+					  }
+					| undefined
+			)?.rich_text?.[0]?.text?.content;
 
 		expect(getNumber("Lead Volume / Month")).toBe(1250);
 		expect(getNumber("Deals / Month")).toBe(50);
 		expect(getNumber("Avg Deal Amount ($)")).toBe(0);
 		expect(getNumber("Conversion Rate %")).toBe(7);
+		expect(getRichText("gclid")).toBe("EAIaIQobChMI_mock");
+		expect(getRichText("utm_source")).toBe("google");
+		expect(getRichText("utm_campaign")).toBe("brand_search");
+		expect(getRichText("utm_term")).toBe("deal scale");
+		expect(getRichText("utm_content")).toBe("headline_a");
 	});
 });

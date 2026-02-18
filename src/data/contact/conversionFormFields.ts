@@ -32,6 +32,11 @@ export const quickApplySchema = z.object({
 	name: z.string().min(2, "Name is required"),
 	email: z.string().email("Invalid email address"),
 	website: z.string().min(1, "Website is required"),
+	gclid: z.string().optional(),
+	utm_source: z.string().optional(),
+	utm_campaign: z.string().optional(),
+	utm_term: z.string().optional(),
+	utm_content: z.string().optional(),
 	businessType: z
 		.array(z.string())
 		.min(1, "Business type / niche is required"),

@@ -115,4 +115,18 @@ describe("intakeFormSchema (e2e)", () => {
 		const ok = intakeFormSchema.safeParse(payload);
 		expect(ok.success).toBe(true);
 	});
+
+	it("allows optional attribution fields", () => {
+		const payload = baseValid();
+		const withAttribution = intakeFormSchema.safeParse({
+			...payload,
+			gclid: "test-gclid-123",
+			utm_source: "google",
+			utm_campaign: "brand",
+			utm_term: "lead orchestration",
+			utm_content: "hero_cta",
+		});
+
+		expect(withAttribution.success).toBe(true);
+	});
 });

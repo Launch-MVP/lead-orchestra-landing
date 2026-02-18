@@ -8,6 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import Header from "@/components/common/Header";
+import { getAttributionFieldsFromUrl } from "@/components/contact/form/attributionFields";
 import {
 	createFieldProps,
 	renderFormField,
@@ -32,7 +33,6 @@ import {
 	generateMetaEventId,
 	trackIntakeFormSubmit,
 } from "@/utils/seo/fbpixel";
-import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
 
 export default function ConversionForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,6 +67,7 @@ export default function ConversionForm() {
 				},
 				body: JSON.stringify({
 					...data,
+					...getAttributionFieldsFromUrl(window.location.href),
 					metaEventId,
 					eventSourceUrl: window.location.href,
 					// Flag as conversion/quick-apply
