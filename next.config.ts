@@ -4,6 +4,7 @@ import type { NextConfig } from 'next';
 
 const isProd = process.env.NODE_ENV === 'production';
 const ANALYZE = process.env.ANALYZE === 'true';
+const DIST_DIR = process.env.NEXT_DIST_DIR?.trim() || '.next';
 
 const require = createRequire(import.meta.url);
 
@@ -29,7 +30,7 @@ const createBundleAnalyzer = (): ((config: NextConfig) => NextConfig) => {
 const withBundleAnalyzer = createBundleAnalyzer();
 
 const nextConfig: NextConfig = {
-	// distDir: ".next", // Default
+	distDir: DIST_DIR,
 	// Optimize package imports to reduce bundle size
 	experimental: {
 		// optimizePackageImports: [
