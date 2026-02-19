@@ -1,0 +1,1375 @@
+﻿
+> dealscale@0.0.0 test:vitest C:\Users\tyriq\Documents\Github\deal-scale-lead-scraper\landing
+> pnpm exec vitest run "src/components/contact/form/__tests__/ConversionForm.test.tsx"
+
+node.exe : [33mThe 
+CJS build of Vite's 
+Node API is 
+deprecated. See https:
+//vite.dev/guide/troub
+leshooting.html#vite-c
+js-node-api-deprecated
+ for more 
+details.[39m
+At C:\Users\tyriq\AppD
+ata\Roaming\npm\pnpm.p
+s1:24 char:5
++     & "node$exe"  "$
+basedir/node_modules/p
+npm/bin/pnpm.cjs" 
+$args
++     ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: ([33mThe C   
+ JS bu...e details    
+.[39m:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/tyriq/Documents/Github/deal-scale-lead-scraper/landing[39m
+
+ [31mΓ¥»[39m src/components/contact/form/__tests__/ConversionForm.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[90m 207[2mms[22m[39m
+[31m   [31m├ù[31m ConversionForm[2m > [22mrenders all required fields[90m 149[2mms[22m[31m[39m
+[31m     ΓåÆ Found multiple elements with the text: /Email/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<label[31m
+  [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+  [33mfor[31m=[32m":r1:-form-item"[31m
+[36m>[31m
+  [0mEmail[0m
+  [36m<span[31m
+    [33mclass[31m=[32m"ml-1 text-destructive"[31m
+  [36m>[31m
+    [0m*[0m
+  [36m</span>[31m
+[36m</label>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+  [33mid[31m=[32m":r1:-form-description"[31m
+[36m>[31m
+  [0mYour best email to receive follow-ups, reports, and onboarding details.[0m
+[36m</p>[31m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"relative mx-auto max-w-3xl rounded-2xl border border-primary/40 bg-gradient-to-br from-white via-background to-primary-50 p-6 shadow-xl ring-1 ring-primary/10 transition-all sm:p-10 dark:bg-gradient-to-br dark:from-background dark:via-background-dark dark:to-primary/10"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20"[31m
+      [36m/>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"text-center mb-8 text-center"[31m
+      [36m>[31m
+        [36m<h2[31m
+          [33mclass[31m=[32m"relative z-10 mb-2 break-words font-bold text-black leading-normal dark:text-white text-xl sm:text-2xl md:text-3xl pt-2 pb-2 mb-1 mt-2"[31m
+          [33mstyle[31m=[32m"opacity: 0; transform: translateY(-20px);"[31m
+        [36m>[31m
+          [0mQuick Application[0m
+        [36m</h2>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"mx-auto max-w-2xl text-black leading-normal dark:text-white/80 text-sm sm:text-base md:text-lg mt-2 pb-2 mb-1 mt-2"[31m
+          [33mstyle[31m=[32m"opacity: 0; transform: translateY(-20px);"[31m
+        [36m>[31m
+          [0mGrab your spot in the queue with the basics. Takes less than 60 seconds.[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<form[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"grid grid-cols-1 gap-6 md:grid-cols-2"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-1"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r0:-form-item"[31m
+            [36m>[31m
+              [0mName[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r0:-form-description"[31m
+            [36m>[31m
+              [0mUsed so we know who to contact and personalize communication.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r0:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r0:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mclass[31m=[32m"text- flex h-10 w-full rounded-md border px-3 py-2 text-base black file:text ring-offset-background transition-colors file:border-0 file:bg-transparent file:font-medium file:text-foreground -sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring -offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:text-white/70 border-white/10 bg-white/5 focus:border-primary"[31m
+                [33mplaceholder[31m=[32m"Your name..."[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-1"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r1:-form-item"[31m
+            [36m>[31m
+              [0mEmail[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r1:-form-description"[31m
+            [36m>[31m
+              [0mYour best email to receive follow-ups, reports, and onboarding details.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r1:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r1:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mclass[31m=[32m"text- flex h-10 w-full rounded-md border px-3 py-2 text-base black file:text ring-offset-background transition-colors file:border-0 file:bg-transparent file:font-medium file:text-foreground -sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring -offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:text-white/70 border-white/10 bg-white/5 focus:border-primary"[31m
+                [33mplaceholder[31m=[32m"Email..."[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-2"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r2:-form-item"[31m
+            [36m>[31m
+              [0mWebsite / primary URL[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r2:-form-description"[31m
+            [36m>[31m
+              [0mIf you don't have a website, check the box below.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r2:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r2:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mcl...[39m
+[31m   [31m├ù[31m ConversionForm[2m > [22msubmits the form successfully and redirects[90m 56[2mms[22m[31m[39m
+[31m     ΓåÆ Found a label with the text of: /Name/i, however the element associated with this label (<div />) is non-labellable [https://html.spec.whatwg.org/multipage/forms.html#category-label]. If you really need to label a <div />, you can use aria-label or aria-labelledby instead.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"relative mx-auto max-w-3xl rounded-2xl border border-primary/40 bg-gradient-to-br from-white via-background to-primary-50 p-6 shadow-xl ring-1 ring-primary/10 transition-all sm:p-10 dark:bg-gradient-to-br dark:from-background dark:via-background-dark dark:to-primary/10"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20"[31m
+      [36m/>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"text-center mb-8 text-center"[31m
+      [36m>[31m
+        [36m<h2[31m
+          [33mclass[31m=[32m"relative z-10 mb-2 break-words font-bold text-black leading-normal dark:text-white text-xl sm:text-2xl md:text-3xl pt-2 pb-2 mb-1 mt-2"[31m
+          [33mstyle[31m=[32m"opacity: 0; transform: translateY(-20px);"[31m
+        [36m>[31m
+          [0mQuick Application[0m
+        [36m</h2>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"mx-auto max-w-2xl text-black leading-normal dark:text-white/80 text-sm sm:text-base md:text-lg mt-2 pb-2 mb-1 mt-2"[31m
+          [33mstyle[31m=[32m"opacity: 0; transform: translateY(-20px);"[31m
+        [36m>[31m
+          [0mGrab your spot in the queue with the basics. Takes less than 60 seconds.[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<form[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"grid grid-cols-1 gap-6 md:grid-cols-2"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-1"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r7:-form-item"[31m
+            [36m>[31m
+              [0mName[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r7:-form-description"[31m
+            [36m>[31m
+              [0mUsed so we know who to contact and personalize communication.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r7:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r7:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mclass[31m=[32m"text- flex h-10 w-full rounded-md border px-3 py-2 text-base black file:text ring-offset-background transition-colors file:border-0 file:bg-transparent file:font-medium file:text-foreground -sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring -offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:text-white/70 border-white/10 bg-white/5 focus:border-primary"[31m
+                [33mplaceholder[31m=[32m"Your name..."[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-1"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r8:-form-item"[31m
+            [36m>[31m
+              [0mEmail[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r8:-form-description"[31m
+            [36m>[31m
+              [0mYour best email to receive follow-ups, reports, and onboarding details.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r8:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r8:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mclass[31m=[32m"text- flex h-10 w-full rounded-md border px-3 py-2 text-base black file:text ring-offset-background transition-colors file:border-0 file:bg-transparent file:font-medium file:text-foreground -sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring -offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:text-white/70 border-white/10 bg-white/5 focus:border-primary"[31m
+                [33mplaceholder[31m=[32m"Email..."[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-2 md:col-span-2"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-black text-sm dark:text-white/80"[31m
+              [33mfor[31m=[32m":r9:-form-item"[31m
+            [36m>[31m
+              [0mWebsite / primary URL[0m
+              [36m<span[31m
+                [33mclass[31m=[32m"ml-1 text-destructive"[31m
+              [36m>[31m
+                [0m*[0m
+              [36m</span>[31m
+            [36m</label>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"pb-1 text-muted-foreground text-xs leading-relaxed line-clamp-1 hover:line-clamp-none transition-all"[31m
+              [33mid[31m=[32m":r9:-form-description"[31m
+            [36m>[31m
+              [0mIf you don't have a website, check the box below.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-describedby[31m=[32m":r9:-form-description"[31m
+              [33maria-invalid[31m=[32m"false"[31m
+              [33mclass[31m=[32m"relative"[31m
+              [33mid[31m=[32m":r9:-form-item"[31m
+            [36m>[31m
+              [36m<input[31m
+                [33mcl...[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»[1m[7m Failed 
+Tests 2 [27m[22mΓÄ»Γ
+Ä»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL 
+[27m[22m[39m src/co
+mponents/contact/form/
+__tests__/ConversionFo
+rm.test.tsx[2m > [22
+mConversionForm[2m > 
+[22mrenders all 
+required fields
+[31m[1mTestingLibrar
+yElementError[22m[39
+m: Found multiple 
+elements with the 
+text: /Email/i
+
+Here are the matching 
+elements:
+
+Ignored nodes: 
+comments, script, 
+style
+[36m<label[39m
+  [33mclass[39m=[32
+m"peer-disabled:cursor
+-not-allowed peer-disa
+bled:opacity-70 
+font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+  [33mfor[39m=[32m"
+:r1:-form-item"[39m
+[36m>[39m
+  [0mEmail[0m
+  [36m<span[39m
+    [33mclass[39m=[
+32m"ml-1 
+text-destructive"[39m
+  [36m>[39m
+    [0m*[0m
+  [36m</span>[39m
+[36m</label>[39m
+
+Ignored nodes: 
+comments, script, 
+style
+[36m<p[39m
+  [33mclass[39m=[32
+m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+  [33mid[39m=[32m":
+r1:-form-description"
+[39m
+[36m>[39m
+  [0mYour best email 
+to receive 
+follow-ups, reports, 
+and onboarding 
+details.[0m
+[36m</p>[39m
+
+(If this is 
+intentional, then use 
+the `*AllBy*` variant 
+of the query (like 
+`queryAllByText`, 
+`getAllByText`, or 
+`findAllByText`)).
+
+Ignored nodes: 
+comments, script, 
+style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=
+[32m"relative 
+mx-auto max-w-3xl 
+rounded-2xl border 
+border-primary/40 
+bg-gradient-to-br 
+from-white 
+via-background 
+to-primary-50 p-6 
+shadow-xl ring-1 
+ring-primary/10 
+transition-all 
+sm:p-10 dark:bg-gradie
+nt-to-br 
+dark:from-background d
+ark:via-background-dar
+k dark:to-primary/10"
+[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39
+m=[32m"-z-10 
+absolute inset-0 
+rounded-2xl 
+bg-gradient-to-br 
+from-primary/10 
+to-focus/10 
+opacity-60 blur-lg 
+dark:from-primary/30 
+dark:to-focus/20"[39m
+      [36m/>[39m
+      [36m<div[39m
+        [33mclass[39
+m=[32m"text-center 
+mb-8 text-center"[39m
+      [36m>[39m
+        [36m<h2[39m
+          [33mclass[
+39m=[32m"relative 
+z-10 mb-2 break-words 
+font-bold text-black 
+leading-normal 
+dark:text-white 
+text-xl sm:text-2xl 
+md:text-3xl pt-2 pb-2 
+mb-1 mt-2"[39m
+          [33mstyle[
+39m=[32m"opacity: 0; 
+transform: translateY(
+-20px);"[39m
+        [36m>[39m
+          [0mQuick 
+Application[0m
+        
+[36m</h2>[39m
+        [36m<p[39m
+          [33mclass[
+39m=[32m"mx-auto 
+max-w-2xl text-black 
+leading-normal 
+dark:text-white/80 
+text-sm sm:text-base 
+md:text-lg mt-2 pb-2 
+mb-1 mt-2"[39m
+          [33mstyle[
+39m=[32m"opacity: 0; 
+transform: translateY(
+-20px);"[39m
+        [36m>[39m
+          [0mGrab 
+your spot in the 
+queue with the 
+basics. Takes less 
+than 60 seconds.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<form[39m
+        [33mclass[39
+m=[32m"space-y-6"[39
+m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[
+39m=[32m"grid 
+grid-cols-1 gap-6 
+md:grid-cols-2"[39m
+        [36m>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-1"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r0:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mName[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r0:-form-d
+escription"[39m
+            
+[36m>[39m
+              
+[0mUsed so we know 
+who to contact and 
+personalize 
+communication.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r0:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r0:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                [33mc
+lass[39m=[32m"text- 
+flex h-10 w-full 
+rounded-md border 
+px-3 py-2 text-base 
+black file:text ring-o
+ffset-background 
+transition-colors 
+file:border-0 
+file:bg-transparent 
+file:font-medium 
+file:text-foreground 
+-sm placeholder:text-m
+uted-foreground focus-
+visible:outline-none 
+focus-visible:ring-2 f
+ocus-visible:ring-ring
+ -offset-2 disabled:cu
+rsor-not-allowed 
+disabled:opacity-50 
+md:text-sm 
+dark:text-white/70 
+border-white/10 
+bg-white/5 focus:borde
+r-primary"[39m
+                [33mp
+laceholder[39m=[32m"
+Your name..."[39m
+                [33mt
+ype[39m=[32m"text"[
+39m
+                [33mv
+alue[39m=[32m""[39m
+              
+[36m/>[39m
+            
+[36m</div>[39m
+          
+[36m</div>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-1"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r1:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mEmail[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r1:-form-d
+escription"[39m
+            
+[36m>[39m
+              
+[0mYour best email 
+to receive 
+follow-ups, reports, 
+and onboarding 
+details.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r1:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r1:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                [33mc
+lass[39m=[32m"text- 
+flex h-10 w-full 
+rounded-md border 
+px-3 py-2 text-base 
+black file:text ring-o
+ffset-background 
+transition-colors 
+file:border-0 
+file:bg-transparent 
+file:font-medium 
+file:text-foreground 
+-sm placeholder:text-m
+uted-foreground focus-
+visible:outline-none 
+focus-visible:ring-2 f
+ocus-visible:ring-ring
+ -offset-2 disabled:cu
+rsor-not-allowed 
+disabled:opacity-50 
+md:text-sm 
+dark:text-white/70 
+border-white/10 
+bg-white/5 focus:borde
+r-primary"[39m
+                [33mp
+laceholder[39m=[32m"
+Email..."[39m
+                [33mt
+ype[39m=[32m"text"[
+39m
+                [33mv
+alue[39m=[32m""[39m
+              
+[36m/>[39m
+            
+[36m</div>[39m
+          
+[36m</div>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-2"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r2:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mWebsite / primary 
+URL[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r2:-form-d
+escription"[39m
+            
+[36m>[39m
+              [0mIf 
+you don't have a 
+website, check the 
+box below.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r2:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r2:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                
+[33mcl...
+[90m [2mΓ¥»[22m Obj
+ect.getElementError no
+de_modules/@testing-li
+brary/dom/dist/config.
+js:[2m37:19[22m[39m
+[90m [2mΓ¥»[22m 
+getElementError node_m
+odules/@testing-librar
+y/dom/dist/query-helpe
+rs.js:[2m20:35[22m[
+39m
+[90m [2mΓ¥»[22m get
+MultipleElementsFoundE
+rror node_modules/@tes
+ting-library/dom/dist/
+query-helpers.js:[2m2
+3:10[22m[39m
+[90m [2mΓ¥»[22m nod
+e_modules/@testing-lib
+rary/dom/dist/query-he
+lpers.js:[2m55:13[22
+m[39m
+[90m [2mΓ¥»[22m 
+getByText node_modules
+/@testing-library/dom/
+dist/query-helpers.js:
+[2m95:19[22m[39m
+[36m [2mΓ¥»[22m src
+/components/contact/fo
+rm/__tests__/Conversio
+nForm.test.tsx:[2m76:
+19[22m[39m
+    [90m 74| [39m   
+ 
+    [90m 75| [39m   
+ [34mexpect[39m(scre
+en[33m.[39m[34mgetB
+yText[39m([36m/Name/
+i[39m))[33m.[39m[3
+4mtoBeInTheDocument[3
+9m()[33m;[39m
+    [90m 76| [39m   
+ [34mexpect[39m(scre
+en[33m.[39m[34mgetB
+yText[39m([36m/Email
+/i[39m))[33m.[39m[
+34mtoBeInTheDocument[
+39m()[33m;[39m
+    [90m   | [39m   
+               
+[31m^[39m
+    [90m 77| [39m   
+ [34mexpect[39m(scre
+en[33m.[39m[34mgetB
+yText[39m([36m/Websi
+te \/ primary URL/i[3
+9m))[33m.[39m[34mto
+BeInTheDocum[39mΓÇª
+    [90m 78| [39m   
+ [34mexpect[39m(scre
+en[33m.[39m[34mgetB
+yText[39m([36m/Month
+ly Budget/i[39m))[33
+m.[39m[34mtoBeInTheD
+ocument[39m()[33m;[
+39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/2]ΓÄ
+»[22m[39m
+
+[31m[1m[7m FAIL 
+[27m[22m[39m src/co
+mponents/contact/form/
+__tests__/ConversionFo
+rm.test.tsx[2m > [22
+mConversionForm[2m > 
+[22msubmits the form 
+successfully and 
+redirects
+[31m[1mTestingLibrar
+yElementError[22m[39
+m: Found a label with 
+the text of: /Name/i, 
+however the element 
+associated with this 
+label (<div />) is 
+non-labellable [https:
+//html.spec.whatwg.org
+/multipage/forms.html#
+category-label]. If 
+you really need to 
+label a <div />, you 
+can use aria-label or 
+aria-labelledby 
+instead.
+
+Ignored nodes: 
+comments, script, 
+style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=
+[32m"relative 
+mx-auto max-w-3xl 
+rounded-2xl border 
+border-primary/40 
+bg-gradient-to-br 
+from-white 
+via-background 
+to-primary-50 p-6 
+shadow-xl ring-1 
+ring-primary/10 
+transition-all 
+sm:p-10 dark:bg-gradie
+nt-to-br 
+dark:from-background d
+ark:via-background-dar
+k dark:to-primary/10"
+[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39
+m=[32m"-z-10 
+absolute inset-0 
+rounded-2xl 
+bg-gradient-to-br 
+from-primary/10 
+to-focus/10 
+opacity-60 blur-lg 
+dark:from-primary/30 
+dark:to-focus/20"[39m
+      [36m/>[39m
+      [36m<div[39m
+        [33mclass[39
+m=[32m"text-center 
+mb-8 text-center"[39m
+      [36m>[39m
+        [36m<h2[39m
+          [33mclass[
+39m=[32m"relative 
+z-10 mb-2 break-words 
+font-bold text-black 
+leading-normal 
+dark:text-white 
+text-xl sm:text-2xl 
+md:text-3xl pt-2 pb-2 
+mb-1 mt-2"[39m
+          [33mstyle[
+39m=[32m"opacity: 0; 
+transform: translateY(
+-20px);"[39m
+        [36m>[39m
+          [0mQuick 
+Application[0m
+        
+[36m</h2>[39m
+        [36m<p[39m
+          [33mclass[
+39m=[32m"mx-auto 
+max-w-2xl text-black 
+leading-normal 
+dark:text-white/80 
+text-sm sm:text-base 
+md:text-lg mt-2 pb-2 
+mb-1 mt-2"[39m
+          [33mstyle[
+39m=[32m"opacity: 0; 
+transform: translateY(
+-20px);"[39m
+        [36m>[39m
+          [0mGrab 
+your spot in the 
+queue with the 
+basics. Takes less 
+than 60 seconds.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<form[39m
+        [33mclass[39
+m=[32m"space-y-6"[39
+m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[
+39m=[32m"grid 
+grid-cols-1 gap-6 
+md:grid-cols-2"[39m
+        [36m>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-1"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r7:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mName[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r7:-form-d
+escription"[39m
+            
+[36m>[39m
+              
+[0mUsed so we know 
+who to contact and 
+personalize 
+communication.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r7:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r7:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                [33mc
+lass[39m=[32m"text- 
+flex h-10 w-full 
+rounded-md border 
+px-3 py-2 text-base 
+black file:text ring-o
+ffset-background 
+transition-colors 
+file:border-0 
+file:bg-transparent 
+file:font-medium 
+file:text-foreground 
+-sm placeholder:text-m
+uted-foreground focus-
+visible:outline-none 
+focus-visible:ring-2 f
+ocus-visible:ring-ring
+ -offset-2 disabled:cu
+rsor-not-allowed 
+disabled:opacity-50 
+md:text-sm 
+dark:text-white/70 
+border-white/10 
+bg-white/5 focus:borde
+r-primary"[39m
+                [33mp
+laceholder[39m=[32m"
+Your name..."[39m
+                [33mt
+ype[39m=[32m"text"[
+39m
+                [33mv
+alue[39m=[32m""[39m
+              
+[36m/>[39m
+            
+[36m</div>[39m
+          
+[36m</div>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-1"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r8:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mEmail[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r8:-form-d
+escription"[39m
+            
+[36m>[39m
+              
+[0mYour best email 
+to receive 
+follow-ups, reports, 
+and onboarding 
+details.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r8:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r8:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                [33mc
+lass[39m=[32m"text- 
+flex h-10 w-full 
+rounded-md border 
+px-3 py-2 text-base 
+black file:text ring-o
+ffset-background 
+transition-colors 
+file:border-0 
+file:bg-transparent 
+file:font-medium 
+file:text-foreground 
+-sm placeholder:text-m
+uted-foreground focus-
+visible:outline-none 
+focus-visible:ring-2 f
+ocus-visible:ring-ring
+ -offset-2 disabled:cu
+rsor-not-allowed 
+disabled:opacity-50 
+md:text-sm 
+dark:text-white/70 
+border-white/10 
+bg-white/5 focus:borde
+r-primary"[39m
+                [33mp
+laceholder[39m=[32m"
+Email..."[39m
+                [33mt
+ype[39m=[32m"text"[
+39m
+                [33mv
+alue[39m=[32m""[39m
+              
+[36m/>[39m
+            
+[36m</div>[39m
+          
+[36m</div>[39m
+          
+[36m<div[39m
+            [33mclass
+[39m=[32m"space-y-2 
+md:col-span-2"[39m
+          [36m>[39m
+            
+[36m<label[39m
+              [33mcla
+ss[39m=[32m"peer-dis
+abled:cursor-not-allow
+ed peer-disabled:opaci
+ty-70 font-medium 
+text-black text-sm dar
+k:text-white/80"[39m
+              [33mfor
+[39m=[32m":r9:-form-
+item"[39m
+            
+[36m>[39m
+              
+[0mWebsite / primary 
+URL[0m
+              
+[36m<span[39m
+                [33mc
+lass[39m=[32m"ml-1 
+text-destructive"[39m
+              
+[36m>[39m
+                
+[0m*[0m
+              
+[36m</span>[39m
+            
+[36m</label>[39m
+            
+[36m<p[39m
+              [33mcla
+ss[39m=[32m"pb-1 
+text-muted-foreground 
+text-xs 
+leading-relaxed 
+line-clamp-1 
+hover:line-clamp-none 
+transition-all"[39m
+              [33mid
+[39m=[32m":r9:-form-d
+escription"[39m
+            
+[36m>[39m
+              [0mIf 
+you don't have a 
+website, check the 
+box below.[0m
+            
+[36m</p>[39m
+            
+[36m<div[39m
+              [33mari
+a-describedby[39m=[3
+2m":r9:-form-descripti
+on"[39m
+              [33mari
+a-invalid[39m=[32m"f
+alse"[39m
+              [33mcla
+ss[39m=[32m"relative
+"[39m
+              [33mid
+[39m=[32m":r9:-form-i
+tem"[39m
+            
+[36m>[39m
+              
+[36m<input[39m
+                
+[33mcl...
+[90m [2mΓ¥»[22m Obj
+ect.getElementError no
+de_modules/@testing-li
+brary/dom/dist/config.
+js:[2m37:19[22m[39m
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m   Start at [22m 11:51:20
+[2m   Duration [22m 4.26s[2m (transform 248ms, setup 418ms, collect 1.29s, tests 207ms, environment 898ms, prepare 231ms)[22m
+[90m [2mΓ¥»[22m 
+getAllByLabelText node
+_modules/@testing-libr
+ary/dom/dist/queries/l
+abel-text.js:[2m106:4
+0[22m[39m
+[90m [2mΓ¥»[22m nod
+e_modules/@testing-lib
+rary/dom/dist/query-he
+lpers.js:[2m52:17[22
+m[39m
+[90m [2mΓ¥»[22m 
+getByLabelText node_mo
+dules/@testing-library
+/dom/dist/query-helper
+s.js:[2m95:19[22m[3
+9m
+[36m [2mΓ¥»[22m src
+/components/contact/fo
+rm/__tests__/Conversio
+nForm.test.tsx:[2m86:
+29[22m[39m
+    [90m 84| [39m   
+ 
+    [90m 85| [39m   
+ [90m// Fill text 
+fields[39m
+    [90m 86| [39m   
+ fireEvent[33m.[39m
+[34mchange[39m(screen
+[33m.[39m[34mgetByL
+abelText[39m([36m/Na
+me/i[39m)[33m,[39m 
+{ target[33m:[39m { 
+valueΓÇª
+    [90m   | [39m   
+                      
+   [31m^[39m
+    [90m 87| [39m   
+ fireEvent[33m.[39m
+[34mchange[39m(screen
+[33m.[39m[34mgetByL
+abelText[39m([36m/Em
+ail/i[39m)[33m,[39m
+ { target[33m:[39m 
+{ valuΓÇª
+    [90m 88| [39m   
+ fireEvent[33m.[39m
+[34mchange[39m(screen
+[33m.[39m[34mgetByL
+abelText[39m([36m/We
+bsite \/ primary URL/i
+[39m)[33m,[39mΓÇª
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/2]ΓÄ
+»[22m[39m
+
+
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.

