@@ -34,11 +34,14 @@ import {
 import type { FieldConfig } from "@/types/contact/formFields";
 import {
 	generateMetaEventId,
+	trackIntakeFormStart,
 	trackIntakeFormSubmit,
 } from "@/utils/seo/fbpixel";
+import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
 
 export default function ConversionForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [hasStarted, setHasStarted] = useState(false);
 	const router = useRouter();
 
 	const form = useForm<QuickApplyValues>({
@@ -56,6 +59,21 @@ export default function ConversionForm() {
 	});
 
 	const { handleSubmit } = form;
+
+	const handleFormInteraction = () => {
+		if (!hasStarted) {
+			setHasStarted(true);
+			// Track "StartApplication" (CAPI + Pixel)
+			// Client-side custom event
+			trackIntakeFormStart();
+			// Server-side CAPI event
+			void trackMetaServerEvent({
+				eventName: "StartApplication",
+				eventId: generateMetaEventId(),
+				eventSourceUrl: window.location.href,
+			});
+		}
+	};
 
 	const onSubmit = async (data: QuickApplyValues) => {
 		setIsSubmitting(true);
@@ -118,7 +136,11 @@ export default function ConversionForm() {
 
 			<FormProvider {...form}>
 				<Form {...form}>
-					<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="space-y-6"
+						onFocusCapture={handleFormInteraction}
+					>
 						<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 							{quickApplyFields.map((field) => (
 								<FormField

@@ -12,6 +12,7 @@ const ALLOWED_EVENT_NAMES = new Set([
 	"Contact",
 	"Lead",
 	"Schedule",
+	"StartApplication",
 	"ViewContent",
 ]);
 

@@ -5,6 +5,7 @@ type MetaTrackableEvent =
 	| "Contact"
 	| "Lead"
 	| "Schedule"
+	| "StartApplication"
 	| "ViewContent";
 
 interface TrackMetaServerEventInput {
