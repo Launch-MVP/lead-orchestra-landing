@@ -37,6 +37,7 @@ export const quickApplySchema = z.object({
 	utm_campaign: z.string().optional(),
 	utm_term: z.string().optional(),
 	utm_content: z.string().optional(),
+	utm_icp: z.string().optional(),
 	businessType: z
 		.array(z.string())
 		.min(1, "Business type / niche is required"),

@@ -125,6 +125,7 @@ describe("intakeFormSchema (e2e)", () => {
 			utm_campaign: "brand",
 			utm_term: "lead orchestration",
 			utm_content: "hero_cta",
+			utm_icp: "agency-owner",
 		});
 
 		expect(withAttribution.success).toBe(true);

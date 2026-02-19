@@ -558,6 +558,7 @@ export const intakeFormSchema = z
 		utm_campaign: z.string().optional(),
 		utm_term: z.string().optional(),
 		utm_content: z.string().optional(),
+		utm_icp: z.string().optional(),
 
 		// Ownership + activation
 		leadOwner: z.string().min(1, "Lead owner is required"),

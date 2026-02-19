@@ -48,6 +48,7 @@ describe("POST /api/contact/intake parsing (e2e)", () => {
 			utm_campaign: "brand_search",
 			utm_term: "deal scale",
 			utm_content: "headline_a",
+			utm_icp: "enterprise_buyers",
 
 			leadVolumePerMonth: "500-2000",
 			dealsPerMonth: "50+",
@@ -87,5 +88,6 @@ describe("POST /api/contact/intake parsing (e2e)", () => {
 		expect(getRichText("utm_campaign")).toBe("brand_search");
 		expect(getRichText("utm_term")).toBe("deal scale");
 		expect(getRichText("utm_content")).toBe("headline_a");
+		expect(getRichText("utm_icp")).toBe("enterprise_buyers");
 	});
 });

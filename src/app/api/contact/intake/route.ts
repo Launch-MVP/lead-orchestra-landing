@@ -156,6 +156,7 @@ export async function POST(request: Request) {
 		addRichTextProperty("utm_campaign", body.utm_campaign);
 		addRichTextProperty("utm_term", body.utm_term);
 		addRichTextProperty("utm_content", body.utm_content);
+		addRichTextProperty("utm_icp", body.utm_icp);
 
 		// * Optional fields
 		if (body.phone) {
