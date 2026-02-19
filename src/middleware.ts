@@ -1,3 +1,7 @@
+import {
+	isTrackingQueryKey,
+	mergeRedirectQueryParams,
+} from "@/utils/tracking/redirectQuery";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -393,76 +397,62 @@ export async function middleware(req: NextRequest) {
 		}
 
 		const url = isRelative ? new URL(dest, req.nextUrl.origin) : new URL(dest);
-		// First, remove any existing utm_* on the destination to avoid leaking defaults from source links
-		for (const [k] of url.searchParams.entries()) {
-			if (k.startsWith("utm_")) url.searchParams.delete(k);
-		}
-		// Append UTM if present (from Notion)
-		if (found.utm_source) url.searchParams.set("utm_source", found.utm_source);
-		if (found.utm_campaign)
-			url.searchParams.set("utm_campaign", found.utm_campaign);
-		if (found.utm_medium) url.searchParams.set("utm_medium", found.utm_medium);
-		if (found.utm_content)
-			url.searchParams.set("utm_content", found.utm_content);
-		if (found.utm_term) url.searchParams.set("utm_term", found.utm_term);
-		if (found.utm_offer) url.searchParams.set("utm_offer", found.utm_offer);
-		if (found.utm_id) url.searchParams.set("utm_id", found.utm_id);
-		if (found.utm_redirect_url)
-			url.searchParams.set("utm_redirect_url", found.utm_redirect_url);
+		const mergedUrl = mergeRedirectQueryParams({
+			destinationUrl: url,
+			incomingSearchParams: req.nextUrl.searchParams,
+			storedParams: {
+				utm_source: found.utm_source,
+				utm_campaign: found.utm_campaign,
+				utm_medium: found.utm_medium,
+				utm_content: found.utm_content,
+				utm_term: found.utm_term,
+				utm_offer: found.utm_offer,
+				utm_id: found.utm_id,
+				utm_redirect_url: found.utm_redirect_url,
+			},
+		});
 
 		// Debug: show the UTMs we are about to use (helps verify Notion -> URL mapping)
 		console.log("[middleware] UTMs (after Notion + optional overrides):", {
-			source: url.searchParams.get("utm_source"),
-			campaign: url.searchParams.get("utm_campaign"),
-			medium: url.searchParams.get("utm_medium"),
-			content: url.searchParams.get("utm_content"),
-			term: url.searchParams.get("utm_term"),
-			offer: url.searchParams.get("utm_offer"),
-			id: url.searchParams.get("utm_id"),
-			redirect_url: url.searchParams.get("utm_redirect_url"),
+			source: mergedUrl.searchParams.get("utm_source"),
+			campaign: mergedUrl.searchParams.get("utm_campaign"),
+			medium: mergedUrl.searchParams.get("utm_medium"),
+			content: mergedUrl.searchParams.get("utm_content"),
+			term: mergedUrl.searchParams.get("utm_term"),
+			offer: mergedUrl.searchParams.get("utm_offer"),
+			id: mergedUrl.searchParams.get("utm_id"),
+			redirect_url: mergedUrl.searchParams.get("utm_redirect_url"),
 		});
 
-		// Optional: allow incoming request UTMs to override Notion (off by default)
-		if ((process.env.ALLOW_INCOMING_UTM || "").trim() === "1") {
-			for (const [key, value] of req.nextUrl.searchParams.entries()) {
-				if (!key.startsWith("utm_")) continue;
-				const v = (value ?? "").trim();
-				if (!v) continue; // skip empty
-				if (v.toLowerCase() === "undefined" || v.toLowerCase() === "null")
-					continue; // skip placeholders
-				url.searchParams.set(key, v);
-			}
-		}
-
 		// If we have a second-stage utm_redirect_url, embed the same UTM params into it
-		const rawSecond = url.searchParams.get("utm_redirect_url");
+		const rawSecond = mergedUrl.searchParams.get("utm_redirect_url");
 		if (rawSecond) {
 			try {
 				const secondUrl = new URL(rawSecond, req.nextUrl.origin);
-				// Remove any existing utm_* on the second-stage URL first
+				// Remove existing tracking keys on the second-stage URL.
 				for (const [k] of secondUrl.searchParams.entries()) {
-					if (k.startsWith("utm_")) secondUrl.searchParams.delete(k);
+					if (isTrackingQueryKey(k)) secondUrl.searchParams.delete(k);
 				}
-				// Copy over all utm_ params from the outer URL to the inner second-stage URL
-				for (const [k, v] of url.searchParams.entries()) {
-					if (k.startsWith("utm_") && k !== "utm_redirect_url") {
+				// Copy tracking params from the outer URL to the inner second-stage URL.
+				for (const [k, v] of mergedUrl.searchParams.entries()) {
+					if (isTrackingQueryKey(k) && k !== "utm_redirect_url") {
 						secondUrl.searchParams.set(k, v);
 					}
 				}
-				url.searchParams.set("utm_redirect_url", secondUrl.toString());
+				mergedUrl.searchParams.set("utm_redirect_url", secondUrl.toString());
 			} catch {
 				// leave as-is if it wasn't a valid URL
 			}
 		}
 
-		console.log("[middleware] Final redirect:", url.toString());
+		console.log("[middleware] Final redirect:", mergedUrl.toString());
 
 		// Add RedirectSource based on referer
 		const referer = req.headers.get("referer");
 		const isFromLinkTree =
 			referer && new URL(referer).pathname.includes("/linktree");
 		const redirectSource = isFromLinkTree ? "Linktree" : "Direct";
-		url.searchParams.set("RedirectSource", redirectSource);
+		mergedUrl.searchParams.set("RedirectSource", redirectSource);
 
 		// Increment Notion counter (fire-and-forget best-effort)
 		const NOTION_KEY = process.env.NOTION_KEY;
@@ -508,7 +498,7 @@ export async function middleware(req: NextRequest) {
 			})();
 		}
 
-		return NextResponse.redirect(url);
+		return NextResponse.redirect(mergedUrl);
 	} catch (_error) {
 		// Fail open
 		return NextResponse.next();

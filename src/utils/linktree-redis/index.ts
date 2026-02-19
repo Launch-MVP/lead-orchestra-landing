@@ -82,7 +82,7 @@ function coerceBool(v: unknown): boolean {
 	return false;
 }
 
-async function fetchFromRedis(): Promise<LinkTreeItem[]> {
+async function _fetchFromRedis(): Promise<LinkTreeItem[]> {
 	const redis = Redis.fromEnv();
 	const keys = await redis.keys("campaign:*");
 	const items: LinkTreeItem[] = [];
@@ -500,7 +500,12 @@ export function withUtm(
 		utm_content?: string;
 		utm_term?: string;
 		utm_offer?: string;
+		utm_id?: string;
 		gclid?: string;
+		wbraid?: string;
+		gbraid?: string;
+		msclkid?: string;
+		fbclid?: string;
 		utm_icp?: string;
 	},
 ): string {
@@ -525,56 +530,42 @@ export function withUtm(
 			return url;
 		}
 
-		// If Notion UTMs are provided, remove all existing UTM parameters first
-		// to ensure clean replacement and avoid conflicts
-		if (notionUtms) {
-			const utmKeysToDelete: string[] = [];
-			for (const [key] of u.searchParams.entries()) {
-				if (key.startsWith("utm_")) {
-					utmKeysToDelete.push(key);
-				}
+		const setIfMissing = (key: string, value: string | undefined) => {
+			if (typeof value !== "string") return;
+			const trimmed = value.trim();
+			if (!trimmed) return;
+			if (!u.searchParams.get(key)) {
+				u.searchParams.set(key, trimmed);
 			}
-			for (const key of utmKeysToDelete) {
-				u.searchParams.delete(key);
-			}
-		}
+		};
 
-		// Use Notion UTM values if provided, otherwise use defaults
-		if (notionUtms?.utm_source) {
-			u.searchParams.set("utm_source", notionUtms.utm_source);
-		} else if (!u.searchParams.get("utm_source")) {
+		// Append tracking params without overwriting existing destination params.
+		if (!u.searchParams.get("utm_source")) {
+			setIfMissing("utm_source", notionUtms?.utm_source);
+		}
+		if (!u.searchParams.get("utm_source")) {
 			u.searchParams.set("utm_source", sourceHost);
 		}
 
-		if (notionUtms?.utm_campaign) {
-			u.searchParams.set("utm_campaign", notionUtms.utm_campaign);
-		} else if (!u.searchParams.get("utm_campaign")) {
+		if (!u.searchParams.get("utm_campaign")) {
+			setIfMissing("utm_campaign", notionUtms?.utm_campaign);
+		}
+		if (!u.searchParams.get("utm_campaign")) {
 			u.searchParams.set("utm_campaign", slug);
 		}
 
-		if (notionUtms?.utm_medium && !u.searchParams.get("utm_medium")) {
-			u.searchParams.set("utm_medium", notionUtms.utm_medium);
-		}
+		setIfMissing("utm_medium", notionUtms?.utm_medium);
+		setIfMissing("utm_content", notionUtms?.utm_content);
+		setIfMissing("utm_term", notionUtms?.utm_term);
+		setIfMissing("utm_offer", notionUtms?.utm_offer);
+		setIfMissing("utm_id", notionUtms?.utm_id);
+		setIfMissing("utm_icp", notionUtms?.utm_icp);
 
-		if (notionUtms?.utm_content && !u.searchParams.get("utm_content")) {
-			u.searchParams.set("utm_content", notionUtms.utm_content);
-		}
-
-		if (notionUtms?.utm_term && !u.searchParams.get("utm_term")) {
-			u.searchParams.set("utm_term", notionUtms.utm_term);
-		}
-
-		if (notionUtms?.utm_offer && !u.searchParams.get("utm_offer")) {
-			u.searchParams.set("utm_offer", notionUtms.utm_offer);
-		}
-
-		if (notionUtms?.gclid && !u.searchParams.get("gclid")) {
-			u.searchParams.set("gclid", notionUtms.gclid);
-		}
-
-		if (notionUtms?.utm_icp && !u.searchParams.get("utm_icp")) {
-			u.searchParams.set("utm_icp", notionUtms.utm_icp);
-		}
+		setIfMissing("gclid", notionUtms?.gclid);
+		setIfMissing("wbraid", notionUtms?.wbraid);
+		setIfMissing("gbraid", notionUtms?.gbraid);
+		setIfMissing("msclkid", notionUtms?.msclkid);
+		setIfMissing("fbclid", notionUtms?.fbclid);
 
 		return u.toString();
 	} catch {

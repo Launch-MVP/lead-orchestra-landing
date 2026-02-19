@@ -123,24 +123,29 @@ describe("redirect route with UTM parameter preservation", () => {
 		}
 	});
 
-	test("destination URL params take priority over incoming params", async () => {
+	test("incoming tracking params override destination tracking params", async () => {
 		const searchParams = new URLSearchParams();
 		searchParams.set("utm_source", "incoming-source");
 		searchParams.set("utm_campaign", "incoming-campaign");
+		searchParams.set("gclid", "incoming-gclid");
 
 		// Destination already has UTM params
 		const req = createRequest(
-			"https://example.com/target?utm_source=destination-source&utm_content=destination-content",
+			"https://example.com/target?utm_source=destination-source&utm_content=destination-content&gclid=destination-gclid",
 			searchParams,
 		);
 		const response = await GET(req);
 
 		const location = response.headers.get("location");
-		// Destination params should be kept
-		expect(location).toContain("utm_source=destination-source");
-		expect(location).toContain("utm_content=destination-content");
-		// Incoming params that don't conflict should be added
+		// Incoming tracking params should win.
+		expect(location).toContain("utm_source=incoming-source");
 		expect(location).toContain("utm_campaign=incoming-campaign");
+		expect(location).toContain("gclid=incoming-gclid");
+		// Destination tracking params should be replaced.
+		expect(location).not.toContain("utm_source=destination-source");
+		expect(location).not.toContain("gclid=destination-gclid");
+		// Destination non-overridden params should still be kept.
+		expect(location).toContain("utm_content=destination-content");
 	});
 
 	test("preserves non-UTM query parameters", async () => {
@@ -156,17 +161,18 @@ describe("redirect route with UTM parameter preservation", () => {
 		expect(location).toContain("affiliate_id=12345");
 	});
 
-	test("does not preserve params for relative paths (should use middleware)", async () => {
+	test("preserves incoming params for relative paths", async () => {
 		const searchParams = new URLSearchParams();
 		searchParams.set("utm_source", "test-source");
+		searchParams.set("gclid", "test-gclid");
 
 		const req = createRequest("/signup", searchParams);
 		const response = await GET(req);
 
 		const location = response.headers.get("location");
-		// Relative paths should not have params preserved (middleware handles this)
-		expect(location).toMatch(/^https:\/\/example\.com\/signup$/);
-		expect(location).not.toContain("utm_source");
+		expect(location).toContain("https://example.com/signup");
+		expect(location).toContain("utm_source=test-source");
+		expect(location).toContain("gclid=test-gclid");
 	});
 
 	test("handles URL encoding correctly", async () => {
@@ -183,6 +189,23 @@ describe("redirect route with UTM parameter preservation", () => {
 			/utm_source=test[\s+%20]source[\s+%20]with[\s+%20]spaces/,
 		);
 		expect(location).toContain("utm_campaign=campaign%26special%3Dchars");
+	});
+
+	test("preserves click id params", async () => {
+		const searchParams = new URLSearchParams();
+		searchParams.set("wbraid", "wbraid-1");
+		searchParams.set("gbraid", "gbraid-1");
+		searchParams.set("msclkid", "msclkid-1");
+		searchParams.set("fbclid", "fbclid-1");
+
+		const req = createRequest("https://example.com/target", searchParams);
+		const response = await GET(req);
+		const location = response.headers.get("location");
+
+		expect(location).toContain("wbraid=wbraid-1");
+		expect(location).toContain("gbraid=gbraid-1");
+		expect(location).toContain("msclkid=msclkid-1");
+		expect(location).toContain("fbclid=fbclid-1");
 	});
 
 	test("increments call counter when pageId is provided", async () => {
@@ -273,8 +296,8 @@ describe("redirect route with UTM parameter preservation", () => {
 		const location = response.headers.get("location");
 		// Existing params should be preserved
 		expect(location).toContain("existing=param");
-		// Existing utm_source should take priority
-		expect(location).toContain("utm_source=old-source");
-		expect(location).not.toContain("utm_source=new-source");
+		// Incoming tracking params should take priority
+		expect(location).toContain("utm_source=new-source");
+		expect(location).not.toContain("utm_source=old-source");
 	});
 });

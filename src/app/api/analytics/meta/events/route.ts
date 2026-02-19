@@ -10,6 +10,7 @@ import {
 const ALLOWED_EVENT_NAMES = new Set([
 	"CompleteRegistration",
 	"Contact",
+	"FullApplicationSubmitted",
 	"Lead",
 	"Schedule",
 	"StartApplication",

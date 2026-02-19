@@ -3,6 +3,7 @@
 type MetaTrackableEvent =
 	| "CompleteRegistration"
 	| "Contact"
+	| "FullApplicationSubmitted"
 	| "Lead"
 	| "Schedule"
 	| "StartApplication"
@@ -32,4 +33,3 @@ export const trackMetaServerEvent = async (
 		console.error("[meta-events-client] Failed to track server event", error);
 	}
 };
-

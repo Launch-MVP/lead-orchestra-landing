@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import {
 	getAttributionFieldsFromUrl,
@@ -6,18 +6,57 @@ import {
 } from "../attributionFields";
 
 describe("attributionFields", () => {
+	beforeEach(() => {
+		window.localStorage.clear();
+	});
+
 	it("reads tracking fields including utm_icp from URL", () => {
 		const result = getAttributionFieldsFromUrl(
-			"https://example.com/contact?gclid=abc&utm_source=google&utm_campaign=spring&utm_term=lead&utm_content=hero&utm_icp=b2b",
+			"https://example.com/contact?gclid=abc&wbraid=w1&gbraid=g1&msclkid=m1&fbclid=f1&utm_source=google&utm_medium=cpc&utm_campaign=spring&utm_term=lead&utm_content=hero&utm_icp=b2b",
 		);
 
+		expect(result).toEqual({
+			gclid: "abc",
+			wbraid: "w1",
+			gbraid: "g1",
+			msclkid: "m1",
+			fbclid: "f1",
+			utm_source: "google",
+			utm_medium: "cpc",
+			utm_campaign: "spring",
+			utm_term: "lead",
+			utm_content: "hero",
+			utm_icp: "b2b",
+		});
+	});
+
+	it("persists and reuses attribution fields when URL has none", () => {
+		getAttributionFieldsFromUrl(
+			"https://example.com/contact?gclid=abc&utm_source=google&utm_campaign=spring&utm_term=lead",
+		);
+
+		const result = getAttributionFieldsFromUrl("https://example.com/contact");
 		expect(result).toEqual({
 			gclid: "abc",
 			utm_source: "google",
 			utm_campaign: "spring",
 			utm_term: "lead",
-			utm_content: "hero",
-			utm_icp: "b2b",
+		});
+	});
+
+	it("prefers URL values over stored attribution", () => {
+		getAttributionFieldsFromUrl(
+			"https://example.com/contact?gclid=old&utm_source=google&utm_campaign=old-campaign",
+		);
+
+		const result = getAttributionFieldsFromUrl(
+			"https://example.com/contact?gclid=new&utm_campaign=new-campaign",
+		);
+
+		expect(result).toEqual({
+			gclid: "new",
+			utm_source: "google",
+			utm_campaign: "new-campaign",
 		});
 	});
 

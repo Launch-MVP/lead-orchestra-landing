@@ -27,15 +27,18 @@ describe("POST /api/analytics/meta/events", () => {
 	});
 
 	it("sends allowed events", async () => {
-		const request = new NextRequest("http://localhost/api/analytics/meta/events", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				eventName: "ViewContent",
-				eventId: "evt_1",
-				eventSourceUrl: "https://dealscale.io/contact",
-			}),
-		});
+		const request = new NextRequest(
+			"http://localhost/api/analytics/meta/events",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					eventName: "ViewContent",
+					eventId: "evt_1",
+					eventSourceUrl: "https://dealscale.io/contact",
+				}),
+			},
+		);
 
 		const response = await POST(request);
 		const payload = await response.json();
@@ -54,14 +57,17 @@ describe("POST /api/analytics/meta/events", () => {
 
 	it("uses META_TEST_EVENT_CODE only when useTestEventCode=true", async () => {
 		process.env.META_TEST_EVENT_CODE = "TEST123";
-		const request = new NextRequest("http://localhost/api/analytics/meta/events", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				eventName: "Lead",
-				useTestEventCode: true,
-			}),
-		});
+		const request = new NextRequest(
+			"http://localhost/api/analytics/meta/events",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					eventName: "Lead",
+					useTestEventCode: true,
+				}),
+			},
+		);
 
 		const response = await POST(request);
 		expect(response.status).toBe(200);
@@ -72,14 +78,47 @@ describe("POST /api/analytics/meta/events", () => {
 		);
 	});
 
-	it("rejects unsupported events", async () => {
-		const request = new NextRequest("http://localhost/api/analytics/meta/events", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				eventName: "Purchase",
+	it("accepts FullApplicationSubmitted events", async () => {
+		const request = new NextRequest(
+			"http://localhost/api/analytics/meta/events",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					eventName: "FullApplicationSubmitted",
+					eventId: "evt_full_app_1",
+					eventSourceUrl:
+						"https://dealscale.io/contact/thank-you?source=intake",
+				}),
+			},
+		);
+
+		const response = await POST(request);
+		const payload = await response.json();
+
+		expect(response.status).toBe(200);
+		expect(payload.ok).toBe(true);
+		expect(payload.eventName).toBe("FullApplicationSubmitted");
+		expect(payload.eventId).toBe("evt_full_app_1");
+		expect(mockedSendMetaConversionEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				eventName: "FullApplicationSubmitted",
+				eventId: "evt_full_app_1",
 			}),
-		});
+		);
+	});
+
+	it("rejects unsupported events", async () => {
+		const request = new NextRequest(
+			"http://localhost/api/analytics/meta/events",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					eventName: "Purchase",
+				}),
+			},
+		);
 
 		const response = await POST(request);
 

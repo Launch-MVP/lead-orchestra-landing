@@ -147,6 +147,7 @@ const mockOkResponse = () => ({
 
 describe("contact form redirects", () => {
 	beforeEach(() => {
+		window.localStorage.clear();
 		pushMock.mockReset();
 		trackIntakeFormSubmitMock.mockReset();
 		trackLeadMock.mockReset();

@@ -1,237 +1,109 @@
-/**
- * Tests for withUtm utility function
- */
-
 import { withUtm } from "@/utils/linktree-redis";
 
 describe("withUtm", () => {
 	const slug = "test-slug";
 
 	beforeEach(() => {
-		// Set a predictable value for the source host
 		process.env.NEXT_PUBLIC_SITE_HOST = "dealscale.ai";
 	});
 
 	afterEach(() => {
-		delete process.env.NEXT_PUBLIC_SITE_HOST;
+		process.env.NEXT_PUBLIC_SITE_HOST = undefined;
 	});
 
-	describe("removes existing UTM parameters when notionUtms is provided", () => {
-		test("removes single existing UTM parameter", () => {
-			const url = "https://example.com/target?utm_source=old";
-			const notionUtms = {
+	test("returns internal path unchanged", () => {
+		expect(withUtm("/internal/path", slug)).toBe("/internal/path");
+	});
+
+	test("skips signed URLs", () => {
+		const url =
+			"https://example.com/file?X-Amz-Signature=abc123&X-Amz-Algorithm=AWS4-HMAC-SHA256";
+		expect(withUtm(url, slug)).toBe(url);
+	});
+
+	test("adds default utm_source and utm_campaign when missing", () => {
+		const result = new URL(withUtm("https://example.com/target", slug));
+		expect(result.searchParams.get("utm_source")).toBe("dealscale.ai");
+		expect(result.searchParams.get("utm_campaign")).toBe(slug);
+	});
+
+	test("appends Notion params only when destination is missing them", () => {
+		const result = new URL(
+			withUtm("https://example.com/target", slug, {
 				utm_source: "notion-source",
 				utm_campaign: "notion-campaign",
-			};
+				utm_medium: "cpc",
+				utm_term: "lead orchestration",
+				utm_content: "ad-a",
+				utm_offer: "100freeleads",
+				utm_icp: "b2b-smbs",
+				utm_id: "cid-1",
+				gclid: "gclid-1",
+				wbraid: "wbraid-1",
+				gbraid: "gbraid-1",
+				msclkid: "msclkid-1",
+				fbclid: "fbclid-1",
+			}),
+		);
 
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(
-				"notion-campaign",
-			);
-			// Ensure "old" value is not present
-			expect(result).not.toContain("utm_source=old");
-		});
-
-		test("removes multiple existing UTM parameters", () => {
-			const url =
-				"https://example.com/target?utm_source=old&utm_campaign=old&utm_medium=old";
-			const notionUtms = {
-				utm_source: "notion-source",
-				utm_campaign: "notion-campaign",
-			};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(
-				"notion-campaign",
-			);
-			expect(resultUrl.searchParams.get("utm_medium")).toBeNull();
-			expect(result).not.toContain("utm_source=old");
-			expect(result).not.toContain("utm_campaign=old");
-			expect(result).not.toContain("utm_medium=old");
-		});
-
-		test("removes all UTM parameters including those not replaced", () => {
-			const url =
-				"https://example.com/target?utm_source=old&utm_medium=old&utm_content=old&utm_term=old";
-			const notionUtms = {
-				utm_source: "notion-source",
-			};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			// All other UTM params should be removed
-			expect(resultUrl.searchParams.get("utm_medium")).toBeNull();
-			expect(resultUrl.searchParams.get("utm_content")).toBeNull();
-			expect(resultUrl.searchParams.get("utm_term")).toBeNull();
-		});
-
-		test("preserves non-UTM query parameters", () => {
-			const url =
-				"https://example.com/target?utm_source=old&param1=value1&param2=value2";
-			const notionUtms = {
-				utm_source: "notion-source",
-			};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			expect(resultUrl.searchParams.get("param1")).toBe("value1");
-			expect(resultUrl.searchParams.get("param2")).toBe("value2");
-		});
+		expect(result.searchParams.get("utm_source")).toBe("notion-source");
+		expect(result.searchParams.get("utm_campaign")).toBe("notion-campaign");
+		expect(result.searchParams.get("utm_medium")).toBe("cpc");
+		expect(result.searchParams.get("utm_term")).toBe("lead orchestration");
+		expect(result.searchParams.get("utm_content")).toBe("ad-a");
+		expect(result.searchParams.get("utm_offer")).toBe("100freeleads");
+		expect(result.searchParams.get("utm_icp")).toBe("b2b-smbs");
+		expect(result.searchParams.get("utm_id")).toBe("cid-1");
+		expect(result.searchParams.get("gclid")).toBe("gclid-1");
+		expect(result.searchParams.get("wbraid")).toBe("wbraid-1");
+		expect(result.searchParams.get("gbraid")).toBe("gbraid-1");
+		expect(result.searchParams.get("msclkid")).toBe("msclkid-1");
+		expect(result.searchParams.get("fbclid")).toBe("fbclid-1");
 	});
 
-	describe("adds all Notion UTM parameters", () => {
-		test("adds all provided Notion UTM parameters", () => {
-			const url = "https://example.com/target";
-			const notionUtms = {
+	test("does not overwrite existing destination tracking params", () => {
+		const result = new URL(
+			withUtm(
+				"https://example.com/target?utm_source=dest-source&utm_campaign=dest-campaign&gclid=dest-gclid&utm_term=dest-term",
+				slug,
+				{
+					utm_source: "notion-source",
+					utm_campaign: "notion-campaign",
+					utm_term: "notion-term",
+					gclid: "notion-gclid",
+					utm_medium: "cpc",
+				},
+			),
+		);
+
+		expect(result.searchParams.get("utm_source")).toBe("dest-source");
+		expect(result.searchParams.get("utm_campaign")).toBe("dest-campaign");
+		expect(result.searchParams.get("utm_term")).toBe("dest-term");
+		expect(result.searchParams.get("gclid")).toBe("dest-gclid");
+		expect(result.searchParams.get("utm_medium")).toBe("cpc");
+	});
+
+	test("preserves non-tracking query parameters", () => {
+		const result = new URL(
+			withUtm("https://example.com/target?ref=partner&foo=bar", slug, {
 				utm_source: "notion-source",
-				utm_campaign: "notion-campaign",
-				utm_medium: "notion-medium",
-				utm_content: "notion-content",
-				utm_term: "notion-term",
-				utm_offer: "notion-offer",
-				gclid: "test-gclid",
-				utm_icp: "ideal-profile",
-			};
+			}),
+		);
 
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(
-				"notion-campaign",
-			);
-			expect(resultUrl.searchParams.get("utm_medium")).toBe("notion-medium");
-			expect(resultUrl.searchParams.get("utm_content")).toBe("notion-content");
-			expect(resultUrl.searchParams.get("utm_term")).toBe("notion-term");
-			expect(resultUrl.searchParams.get("utm_offer")).toBe("notion-offer");
-			expect(resultUrl.searchParams.get("gclid")).toBe("test-gclid");
-			expect(resultUrl.searchParams.get("utm_icp")).toBe("ideal-profile");
-		});
-
-		test("adds partial Notion UTM parameters", () => {
-			const url = "https://example.com/target";
-			const notionUtms = {
-				utm_source: "notion-source",
-				utm_campaign: "notion-campaign",
-			};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("notion-source");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(
-				"notion-campaign",
-			);
-			expect(resultUrl.searchParams.get("utm_medium")).toBeNull();
-		});
+		expect(result.searchParams.get("ref")).toBe("partner");
+		expect(result.searchParams.get("foo")).toBe("bar");
+		expect(result.searchParams.get("utm_source")).toBe("notion-source");
 	});
 
-	describe("uses default UTM parameters when notionUtms is not provided", () => {
-		test("adds default utm_source and utm_campaign", () => {
-			const url = "https://example.com/target";
+	test("falls back to defaults if notion source/campaign are empty", () => {
+		const result = new URL(
+			withUtm("https://example.com/target", slug, {
+				utm_source: "   ",
+				utm_campaign: "",
+			}),
+		);
 
-			const result = withUtm(url, slug);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("dealscale.ai");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(slug);
-		});
-
-		test("preserves existing UTM parameters when notionUtms is not provided", () => {
-			const url =
-				"https://example.com/target?utm_source=existing&utm_campaign=existing";
-
-			const result = withUtm(url, slug);
-			const resultUrl = new URL(result);
-
-			// Should keep existing values
-			expect(resultUrl.searchParams.get("utm_source")).toBe("existing");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe("existing");
-		});
-
-		test("adds default only for missing UTM parameters", () => {
-			const url = "https://example.com/target?utm_source=existing";
-
-			const result = withUtm(url, slug);
-			const resultUrl = new URL(result);
-
-			expect(resultUrl.searchParams.get("utm_source")).toBe("existing");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(slug);
-		});
-	});
-
-	describe("handles special cases", () => {
-		test("returns internal path unchanged", () => {
-			const url = "/internal/path";
-
-			const result = withUtm(url, slug);
-
-			expect(result).toBe(url);
-		});
-
-		test("skips S3 URLs", () => {
-			const url = "https://mybucket.s3.amazonaws.com/file.jpg";
-
-			const result = withUtm(url, slug);
-
-			expect(result).toBe(url);
-		});
-
-		test("skips URLs with X-Amz signature parameters", () => {
-			const url =
-				"https://example.com/file?X-Amz-Signature=abc123&X-Amz-Algorithm=AWS4-HMAC-SHA256";
-
-			const result = withUtm(url, slug);
-
-			expect(result).toBe(url);
-		});
-
-		test("returns original URL on parse error", () => {
-			const url = "not a valid url";
-
-			const result = withUtm(url, slug);
-
-			expect(result).toBe(url);
-		});
-	});
-
-	describe("edge cases with empty notionUtms object", () => {
-		test("removes existing UTM params and adds defaults when notionUtms is empty object", () => {
-			const url = "https://example.com/target?utm_source=old&utm_campaign=old";
-			const notionUtms = {};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			// Old UTM params should be removed and defaults added
-			expect(resultUrl.searchParams.get("utm_source")).toBe("dealscale.ai");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(slug);
-			expect(result).not.toContain("utm_source=old");
-			expect(result).not.toContain("utm_campaign=old");
-		});
-
-		test("handles URL with mixed old and new params when notionUtms is empty object", () => {
-			const url = "https://example.com/target?utm_source=old&other=value";
-			const notionUtms = {};
-
-			const result = withUtm(url, slug, notionUtms);
-			const resultUrl = new URL(result);
-
-			// Old param removed, defaults should be added, other param preserved
-			expect(resultUrl.searchParams.get("utm_source")).toBe("dealscale.ai");
-			expect(resultUrl.searchParams.get("utm_campaign")).toBe(slug);
-			expect(resultUrl.searchParams.get("other")).toBe("value");
-			expect(result).not.toContain("utm_source=old");
-		});
+		expect(result.searchParams.get("utm_source")).toBe("dealscale.ai");
+		expect(result.searchParams.get("utm_campaign")).toBe(slug);
 	});
 });

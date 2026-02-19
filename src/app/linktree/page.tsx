@@ -64,6 +64,7 @@ export default async function LinkTreePage() {
 			utm_content: it.utm_content,
 			utm_term: it.utm_term,
 			utm_offer: it.utm_offer,
+			utm_icp: it.utm_icp,
 		};
 		const target = withUtm(it.destination, it.slug, notionUtms);
 		const to = encodeURIComponent(target);

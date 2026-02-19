@@ -45,7 +45,10 @@ vi.mock("@/components/ui/select", () => ({
 	SelectItem: ({
 		children,
 		value,
-	}: { children?: ReactNode; value?: string }) => (
+	}: {
+		children?: ReactNode;
+		value?: string;
+	}) => (
 		<div data-testid="mock-select-item" data-value={value}>
 			{children}
 		</div>
@@ -87,6 +90,7 @@ describe("ConversionForm", () => {
 
 	beforeEach(() => {
 		vi.clearAllMocks();
+		window.localStorage.clear();
 		useRouterMock.mockReturnValue({ push: pushMock });
 
 		global.fetch = vi.fn().mockResolvedValue({
