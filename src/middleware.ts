@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 type Found = {
 	destination: string;
@@ -38,7 +38,7 @@ function sanitizeUrlLike(input: string | undefined | null): string {
 function pickProp(props: Record<string, unknown>, aliases: string[]): unknown {
 	// 1) Exact alias match
 	for (const a of aliases) {
-		if (Object.prototype.hasOwnProperty.call(props, a)) return props[a];
+		if (Object.hasOwn(props, a)) return props[a];
 	}
 	// 2) Case-insensitive exact
 	const lowerMap = new Map<string, string>();
@@ -180,7 +180,6 @@ function getDestinationStrict(prop: unknown): string | undefined {
 async function findRedirectBySlug(slug: string): Promise<Found | null> {
 	console.log(`[middleware] findRedirectBySlug searching for: '${slug}'`);
 	// Prefer Notion when credentials exist (even in development) so we can increment counters.
-	const isProd = process.env.NODE_ENV === "production";
 	const NOTION_KEY = process.env.NOTION_KEY;
 	const DB_ID = process.env.NOTION_REDIRECTS_ID;
 	const devFallback = (() => {
@@ -207,10 +206,17 @@ async function findRedirectBySlug(slug: string): Promise<Found | null> {
 	const add = (s?: string) => {
 		if (s && !uniq.has(s)) uniq.add(s);
 	};
-	add(slug);
-	add(`/${slug}`);
-	add(slug.replace(/^\//, ""));
-	add(`/${slug}`.replace(/^\//, ""));
+	const normalized = slug.replace(/^\//, "").toLowerCase();
+	add(normalized);
+	add(`/${normalized}`);
+	add(normalized.replace(/^\//, ""));
+	add(`/${normalized}`.replace(/^\//, ""));
+	// Backward-compatible alias: allow old "tree-*" slugs to match canonical slugs.
+	if (normalized.startsWith("tree-")) {
+		const unprefixed = normalized.slice("tree-".length);
+		add(unprefixed);
+		add(`/${unprefixed}`);
+	}
 	const candidates = Array.from(uniq);
 	const filters = [
 		(s: string) => ({ property: "Slug", rich_text: { equals: s } }),
@@ -503,12 +509,23 @@ export async function middleware(req: NextRequest) {
 		}
 
 		return NextResponse.redirect(url);
-	} catch (error) {
+	} catch (_error) {
 		// Fail open
 		return NextResponse.next();
 	}
 }
 
+console.log("Middleware loaded");
+
 export const config = {
-	matcher: "/:slug*",
+	matcher: [
+		/*
+		 * Match all request paths except for the ones starting with:
+		 * - api (API routes)
+		 * - _next/static (static files)
+		 * - _next/image (image optimization files)
+		 * - favicon.ico (favicon file)
+		 */
+		"/((?!api|_next/static|_next/image|favicon.ico).*)",
+	],
 };

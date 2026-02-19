@@ -40,13 +40,24 @@ export type MappedLinkTree = {
 	utm_content?: string;
 	utm_term?: string;
 	utm_offer?: string;
+	gclid?: string;
+	utm_icp?: string;
 };
 
 export function mapNotionPageToLinkTree(page: NotionPage): MappedLinkTree {
 	const props = page.properties ?? {};
-	const rawSlug = (props.Slug as NotionRichTextProperty | undefined)
-		?.rich_text?.[0]?.plain_text;
-	const slug = rawSlug?.startsWith("/") ? rawSlug.substring(1) : rawSlug;
+	const slugFromTitle = (props.Slug as NotionTitleProperty | undefined)?.title
+		?.map((t) => t?.plain_text ?? "")
+		.join("");
+	const slugFromRichText = (
+		props.Slug as NotionRichTextProperty | undefined
+	)?.rich_text
+		?.map((t) => t?.plain_text ?? "")
+		.join("");
+	const rawSlug = (slugFromTitle || slugFromRichText || "").trim();
+	const slug = rawSlug.startsWith("/")
+		? rawSlug.substring(1)
+		: rawSlug || undefined;
 	// Destination can be URL or rich_text — prefer URL first
 	let destination =
 		(props.Destination as NotionUrlProperty | undefined)?.url ??
@@ -307,16 +318,14 @@ export function mapNotionPageToLinkTree(page: NotionPage): MappedLinkTree {
 		}
 	}
 
-	// Extract UTM parameters from Notion properties
-	const getSelectValue = (prop: unknown): string | undefined => {
+	// Extract UTM parameters from Notion
+	// We now use straight properties as they are renamed in Notion to camelCase "utm_campaign"
+	// If there is legacy logic for relation, we can keep it or remove it.
+	// Assuming the user renamed the actual properties to camelCase.
+	const getUtmValue = (prop: unknown): string | undefined => {
 		const sel = prop as NotionSelectProperty | undefined;
 		return sel?.type === "select" ? sel.select?.name : undefined;
 	};
-
-	// Handle "UTM Campaign (Relation)" property name - use it if available, otherwise fallback to "UTM Campaign"
-	const utmCampaignRelation = getSelectValue(props["UTM Campaign (Relation)"]);
-	const utmCampaignRegular = getSelectValue(props["UTM Campaign"]);
-	const utm_campaign = utmCampaignRelation || utmCampaignRegular;
 
 	return {
 		pageId: page.id,
@@ -335,11 +344,16 @@ export function mapNotionPageToLinkTree(page: NotionPage): MappedLinkTree {
 		linkTreeEnabled,
 		highlighted,
 		// UTM parameters from Notion
-		utm_source: getSelectValue(props["UTM Source"]),
-		utm_medium: getSelectValue(props["UTM Medium"]),
-		utm_campaign,
-		utm_content: getSelectValue(props["UTM Content"]),
-		utm_term: getSelectValue(props["UTM Term"]),
-		utm_offer: getSelectValue(props["UTM Offer"]),
+		// UTM parameters from Notion
+		// The Notion database properties have been renamed to camelCase:
+		// "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_offer", "utm_icp", "gclid"
+		utm_source: getUtmValue(props.utm_source),
+		utm_medium: getUtmValue(props.utm_medium),
+		utm_campaign: getUtmValue(props.utm_campaign),
+		utm_content: getUtmValue(props.utm_content),
+		utm_term: getUtmValue(props.utm_term),
+		utm_offer: getUtmValue(props.utm_offer),
+		utm_icp: getUtmValue(props.utm_icp),
+		gclid: getUtmValue(props.gclid),
 	};
 }
