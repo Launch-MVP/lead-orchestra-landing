@@ -2,7 +2,7 @@
  * Notion Linktree Database Schema
  *
  * Auto-generated from Notion API
- * Database ID: 26ee9c25-ecb0-80ae-9128-e7565860bb64
+ * Database ID: 2b2e9c25-ecb0-81f0-94aa-e7cd9e714a85
  *
  * Last updated: 2025-11-01T13:46:45.528Z
  */
@@ -46,11 +46,11 @@ export interface LinkTreeNotionDatabaseProperties {
 	// Property: "Status" (status)
 	Status: NotionStatusProperty;
 
-	// Property: "UTM Offer" (select)
-	"UTM Offer": NotionSelectProperty; // Options: "ai5skipUnlimited" | "Get Free AI  Calling Credits" | "Early Access" | "trending-zip-codes";
+	// Property: "utm_offer" (select)
+	utm_offer: NotionSelectProperty; // Options: "ai5skipUnlimited" | "Get Free AI  Calling Credits" | "Early Access" | "trending-zip-codes";
 
-	// Property: "UTM Campaign (Relation)" (select)
-	"UTM Campaign (Relation)": NotionSelectProperty; // Options: "brand2025" | "beta2025" | "bf2025" | "fall2025" | "co-startup-week" | "beta_signup" | "investor_deck" | "cosw2025" | "ty-linkedin" | "Cofounder-Test" | "alpha_0.1" | "investor_follow_up_0.1" | "newsletter-welcome" | "pre-recruit-q1-25";
+	// Property: "utm_campaign" (select)
+	utm_campaign: NotionSelectProperty; // Options: "brand2025" | "beta2025" | "bf2025" | "fall2025" | "co-startup-week" | "beta_signup" | "investor_deck" | "cosw2025" | "ty-linkedin" | "Cofounder-Test" | "alpha_0.1" | "investor_follow_up_0.1" | "newsletter-welcome" | "pre-recruit-q1-25";
 
 	// Property: "Destination" (url)
 	Destination: NotionUrlProperty;
@@ -64,14 +64,14 @@ export interface LinkTreeNotionDatabaseProperties {
 	// Property: "Redirect To Download First File" (select)
 	"Redirect To Download First File": NotionSelectProperty; // Options: "Yes" | "No";
 
-	// Property: "UTM Source" (select)
-	"UTM Source": NotionSelectProperty; // Options: "youtube" | "linkedin" | "facebook" | "email" | "cosw2025" | "business_card" | "csw_handout" | "linktree" | "landing-page" | "powerpoint-qr" | "Reddit" | "x-twitter" | "instagram" | "website" | "github" | "investor-application-general" | "beehiiv" | "tik-tok" | "blue-sky" | "wellfound" | "gumroad";
+	// Property: "utm_source" (select)
+	utm_source: NotionSelectProperty; // Options: "youtube" | "linkedin" | "facebook" | "email" | "cosw2025" | "business_card" | "csw_handout" | "linktree" | "landing-page" | "powerpoint-qr" | "Reddit" | "x-twitter" | "instagram" | "website" | "github" | "investor-application-general" | "beehiiv" | "tik-tok" | "blue-sky" | "wellfound" | "gumroad";
 
 	// Property: "Details" (rich_text)
 	Details: NotionRichTextProperty;
 
-	// Property: "UTM Medium" (select)
-	"UTM Medium": NotionSelectProperty; // Options: "social" | "cpc" | "newsletter" | "linktree" | "qr_code" | "vCard" | "Post" | "link";
+	// Property: "utm_medium" (select)
+	utm_medium: NotionSelectProperty; // Options: "social" | "cpc" | "newsletter" | "linktree" | "qr_code" | "vCard" | "Post" | "link";
 
 	// Property: "Thumbnail" (url)
 	Thumbnail: NotionUrlProperty;
@@ -111,4 +111,16 @@ export interface LinkTreeNotionDatabaseProperties {
 
 	// Property: "Slug" (title)
 	Slug: NotionTitleProperty;
+
+	// Property: "gclid" (rich_text)
+	gclid: NotionRichTextProperty;
+
+	// Property: "utm_icp" (select)
+	utm_icp: NotionSelectProperty;
+
+	// Property: "utm_content" (select)
+	utm_content: NotionSelectProperty;
+
+	// Property: "utm_term" (select)
+	utm_term: NotionSelectProperty;
 }

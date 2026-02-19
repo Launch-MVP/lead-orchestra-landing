@@ -1,37 +1,28 @@
 import { NextResponse } from "next/server";
 
-const NOTION_API_BASE = "https://api.notion.com/v1";
-const NOTION_VERSION = "2022-06-28";
+import { queryNotionDatabase } from "@/utils/notion/notion";
 
+// match imports
 import { mapNotionPageToLinkTree } from "@/utils/notion/linktreeMapper";
 import type {
 	NotionPage,
 	NotionQueryResponse,
 } from "@/utils/notion/notionTypes";
 
-async function queryNotionDatabase(databaseId: string) {
-	const resp = await fetch(`${NOTION_API_BASE}/databases/${databaseId}/query`, {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${process.env.NOTION_KEY}`,
-			"Notion-Version": NOTION_VERSION,
-			"Content-Type": "application/json",
-		},
-		// The page that calls this API controls caching via next tags.
-		// Keep this request default (no-store here) to avoid double caching layers.
-		cache: "no-store",
-		body: JSON.stringify({ page_size: 100 }),
-	});
-	if (!resp.ok) {
-		const text = await resp.text();
-		throw new Error(`Notion DB query failed ${resp.status}: ${text}`);
-	}
-	return resp.json();
-}
-
 export async function GET() {
+	console.log("[API] Starting LINKTREE GET request");
 	try {
+		const notionKey = process.env.NOTION_KEY;
 		const rawId = process.env.NOTION_REDIRECTS_ID;
+		
+		console.log("[API] Env vars check:", { 
+			hasKey: !!notionKey, 
+			keyLength: notionKey?.length,
+			rawId: rawId 
+		});
+
+		if (!notionKey) throw new Error("Missing NOTION_KEY");
+		
 		const addDashes = (id: string) =>
 			id.replace(/^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})$/, "$1-$2-$3-$4-$5");
 		const dbId = !rawId
@@ -41,39 +32,72 @@ export async function GET() {
 				: rawId.length === 32
 					? addDashes(rawId)
 					: rawId;
+
+		console.log("[API] Resolved DB ID:", dbId);
+
 		if (!dbId) {
+			console.error("[API] Missing DB ID");
 			return NextResponse.json(
 				{ ok: false, error: "missing NOTION_REDIRECTS_ID" },
 				{ status: 500 },
 			);
 		}
 
-		const data = (await queryNotionDatabase(dbId)) as NotionQueryResponse;
+		console.log("[API] Fetching from Notion...");
+		// Inline fetch to be absolutely sure
+		const response = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${notionKey}`,
+				"Notion-Version": "2022-06-28",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ page_size: 100 }),
+			// cache: "no-store", // Next.js 13+ cache control
+            next: { revalidate: 0 }
+		});
+
+		console.log("[API] Notion response status:", response.status);
+
+		if (!response.ok) {
+			const text = await response.text();
+			console.error("[API] Notion error body:", text);
+			throw new Error(`Notion API failed: ${response.status} ${text}`);
+		}
+
+		const data = await response.json();
+		console.log("[API] Notion data received. Results count:", data?.results?.length);
+
 		const results: NotionPage[] = Array.isArray(data?.results)
 			? data.results
 			: [];
 
+		console.log("[API] Mapping results...");
 		const items = results
-			.map((page) => mapNotionPageToLinkTree(page))
+			.map((page) => {
+				try {
+					return mapNotionPageToLinkTree(page);
+				} catch (e) {
+					console.error("[API] Mapping error for page:", page.id, e);
+					return null;
+				}
+			})
 			.filter((m) =>
 				Boolean(
-					m?.linkTreeEnabled &&
-						((m?.destination && m.destination.length > 0) ||
-							(Array.isArray(m?.files) && m.files.length > 0)),
+					m &&
+					m.linkTreeEnabled &&
+						((m.destination && m.destination.length > 0) ||
+							(Array.isArray(m.files) && m.files.length > 0)),
 				),
 			);
+        
+        // Cast to remove nulls for valid return type although filter does it logic-wise
+        const validItems = items.filter((i): i is NonNullable<typeof i> => i !== null);
 
-		const debug = false; // flip to true temporarily if needed
-		if (debug) {
-			console.log("[linktree-api] dbId", dbId);
-			console.log("[linktree-api] total pages", results.length);
-			console.log(
-				"[linktree-api] items",
-				items.map((i) => i.slug),
-			);
-		}
-		return NextResponse.json({ ok: true, items });
+		console.log("[API] Final items count:", validItems.length);
+		return NextResponse.json({ ok: true, items: validItems });
 	} catch (err: unknown) {
+		console.error("[API] CRITICAL ERROR:", err);
 		const msg = err instanceof Error ? err.message : "internal error";
 		return NextResponse.json({ ok: false, error: msg }, { status: 500 });
 	}

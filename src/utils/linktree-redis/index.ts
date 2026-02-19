@@ -71,6 +71,8 @@ export type LinkTreeItem = {
 	utm_content?: string;
 	utm_term?: string;
 	utm_offer?: string;
+	gclid?: string;
+	utm_icp?: string;
 };
 
 function coerceBool(v: unknown): boolean {
@@ -498,6 +500,8 @@ export function withUtm(
 		utm_content?: string;
 		utm_term?: string;
 		utm_offer?: string;
+		gclid?: string;
+		utm_icp?: string;
 	},
 ): string {
 	try {
@@ -562,6 +566,14 @@ export function withUtm(
 
 		if (notionUtms?.utm_offer && !u.searchParams.get("utm_offer")) {
 			u.searchParams.set("utm_offer", notionUtms.utm_offer);
+		}
+
+		if (notionUtms?.gclid && !u.searchParams.get("gclid")) {
+			u.searchParams.set("gclid", notionUtms.gclid);
+		}
+
+		if (notionUtms?.utm_icp && !u.searchParams.get("utm_icp")) {
+			u.searchParams.set("utm_icp", notionUtms.utm_icp);
 		}
 
 		return u.toString();

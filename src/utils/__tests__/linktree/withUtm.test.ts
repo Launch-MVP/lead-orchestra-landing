@@ -99,6 +99,8 @@ describe("withUtm", () => {
 				utm_content: "notion-content",
 				utm_term: "notion-term",
 				utm_offer: "notion-offer",
+				gclid: "test-gclid",
+				utm_icp: "ideal-profile",
 			};
 
 			const result = withUtm(url, slug, notionUtms);
@@ -112,6 +114,8 @@ describe("withUtm", () => {
 			expect(resultUrl.searchParams.get("utm_content")).toBe("notion-content");
 			expect(resultUrl.searchParams.get("utm_term")).toBe("notion-term");
 			expect(resultUrl.searchParams.get("utm_offer")).toBe("notion-offer");
+			expect(resultUrl.searchParams.get("gclid")).toBe("test-gclid");
+			expect(resultUrl.searchParams.get("utm_icp")).toBe("ideal-profile");
 		});
 
 		test("adds partial Notion UTM parameters", () => {

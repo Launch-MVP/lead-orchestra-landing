@@ -29,14 +29,15 @@ const createBundleAnalyzer = (): ((config: NextConfig) => NextConfig) => {
 const withBundleAnalyzer = createBundleAnalyzer();
 
 const nextConfig: NextConfig = {
+	// distDir: ".next", // Default
 	// Optimize package imports to reduce bundle size
 	experimental: {
-		optimizePackageImports: [
-			'lucide-react',
-			'framer-motion',
-			'react-hot-toast',
-			'@radix-ui/react-icons',
-		],
+		// optimizePackageImports: [
+		// 	'lucide-react',
+		// 	'framer-motion',
+		// 	'react-hot-toast',
+		// 	'@radix-ui/react-icons',
+		// ],
 	},
 	// Compiler optimizations
 	compiler: {
@@ -283,4 +284,5 @@ const nextConfig: NextConfig = {
 	},
 };
 
-export default withBundleAnalyzer(nextConfig);
+// export default withBundleAnalyzer(nextConfig);
+export default nextConfig;
