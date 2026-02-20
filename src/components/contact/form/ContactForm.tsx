@@ -232,7 +232,11 @@ export default function ContactForm({
 
 			<FormProvider {...form}>
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+					<form
+						id="lo-intake-form"
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="space-y-4"
+					>
 						<input type="hidden" {...form.register("firstName")} />
 						<input type="hidden" {...form.register("lastName")} />
 						<input type="hidden" {...form.register("email")} />

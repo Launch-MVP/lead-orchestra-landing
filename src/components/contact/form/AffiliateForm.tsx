@@ -134,6 +134,7 @@ export default function AffiliateForm({
 			<FormProvider {...form}>
 				<Form {...form}>
 					<form
+						id="lo-intake-form"
 						onSubmit={form.handleSubmit((data) => {
 							console.log("[AffiliateForm] handleSubmit called", data);
 							onSubmit(data);
