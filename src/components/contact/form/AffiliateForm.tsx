@@ -10,7 +10,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FileIcon, Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
 	type ControllerRenderProps,
 	FormProvider,
@@ -67,24 +67,25 @@ export default function AffiliateForm({
 	}, []);
 
 	// Merge defaults with prefill and remove empty arrays for multiselect fields
-	const computeMergedDefaults = (
-		seed?: Partial<AffiliateFormValues>,
-	): AffiliateFormValues => {
-		const merged: Partial<AffiliateFormValues> = {
-			...baseDefaults,
-			...(seed ?? {}),
-		};
-		for (const field of affiliateFormFields) {
-			if (field.type === "multiselect") {
-				const name = field.name as keyof AffiliateFormValues;
-				const val = merged[name] as unknown;
-				if (Array.isArray(val) && val.length === 0) {
-					delete merged[name];
+	const computeMergedDefaults = useCallback(
+		(seed?: Partial<AffiliateFormValues>): AffiliateFormValues => {
+			const merged: Partial<AffiliateFormValues> = {
+				...baseDefaults,
+				...(seed ?? {}),
+			};
+			for (const field of affiliateFormFields) {
+				if (field.type === "multiselect") {
+					const name = field.name as keyof AffiliateFormValues;
+					const val = merged[name] as unknown;
+					if (Array.isArray(val) && val.length === 0) {
+						delete merged[name];
+					}
 				}
 			}
-		}
-		return merged as AffiliateFormValues;
-	};
+			return merged as AffiliateFormValues;
+		},
+		[baseDefaults],
+	);
 
 	const form = useForm<AffiliateFormValues>({
 		resolver: zodResolver(affiliateFormSchema),
@@ -96,8 +97,7 @@ export default function AffiliateForm({
 		if (prefill && Object.keys(prefill).length > 0) {
 			form.reset(computeMergedDefaults(prefill));
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(prefill)]);
+	}, [prefill, form.reset, computeMergedDefaults]);
 
 	const onSubmit = async (data: AffiliateFormValues) => {
 		console.log("[AffiliateForm] onSubmit called", data);
