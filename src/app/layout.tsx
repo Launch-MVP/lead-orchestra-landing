@@ -1,3 +1,4 @@
+import Script from "next/script";
 import "../index.css";
 import type { ReactNode } from "react";
 
@@ -43,12 +44,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					href="/logos/DealScale%20Transparent%20Logo/Deal%20Scale%20No%20Text.png"
 					// type omitted; browsers infer from extension
 				/>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `var $wc_load=function(a){return JSON.parse(JSON.stringify(a))}, $wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL), ref:$wc_load(document.referrer), search:$wc_load(location.search), hash:$wc_load(location.hash)}};`,
-					}}
+				<Script id="whatconverts-init" strategy="afterInteractive">
+					{
+						"var $wc_load=function(a){return JSON.parse(JSON.stringify(a))}; var $wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL), ref:$wc_load(document.referrer), search:$wc_load(location.search), hash:$wc_load(location.hash)}};"
+					}
+				</Script>
+				<Script
+					src="//s.ksrndkehqnwntyxlhgto.com/162476.js"
+					strategy="afterInteractive"
 				/>
-				<script src="//s.ksrndkehqnwntyxlhgto.com/162476.js" async />
 			</head>
 			<body className="theme-lead-orchestra theme-dealscale min-h-screen bg-background font-sans antialiased">
 				<SchemaInjector schema={KNOWLEDGE_GRAPH_SCHEMA} />

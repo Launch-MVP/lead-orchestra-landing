@@ -124,7 +124,11 @@ export default function CloserApplicationForm({
 
 			<FormProvider {...form}>
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+					<form
+						id="lo-intake-form"
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="space-y-6"
+					>
 						{closerFormFields.map((field) => (
 							<FormField
 								key={field.name}

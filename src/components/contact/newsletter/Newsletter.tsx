@@ -200,7 +200,11 @@ export const Newsletter = () => {
 					</Alert>
 				</div>
 			) : (
-				<form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-md">
+				<form
+					id="lo-intake-form"
+					onSubmit={handleSubmit(onSubmit)}
+					className="mx-auto max-w-md"
+				>
 					<div className="flex flex-col gap-3 sm:flex-row">
 						<div className="relative flex-grow">
 							<Input
@@ -264,7 +268,7 @@ export const Newsletter = () => {
 			<div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
 				{n8nContent.features.slice(0, 3).map((feature, index) => (
 					<div
-						key={index}
+						key={feature}
 						className="rounded-xl border-2 border-primary/30 bg-background-dark/20 p-6 text-center shadow-lg shadow-primary/10/10 backdrop-blur-sm transition-all duration-300 hover:border-primary/50"
 					>
 						<h3 className="mb-2 font-medium text-black text-lg text-primary dark:text-primary dark:text-white">

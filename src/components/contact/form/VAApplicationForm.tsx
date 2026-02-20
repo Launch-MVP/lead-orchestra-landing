@@ -129,7 +129,11 @@ export default function VAApplicationForm() {
 	return (
 		<FormProvider {...form}>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+				<form
+					id="lo-intake-form"
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="space-y-6"
+				>
 					<div className="space-y-4">
 						<h2 className="font-semibold text-slate-900 text-xl dark:text-white">
 							Personal Information
