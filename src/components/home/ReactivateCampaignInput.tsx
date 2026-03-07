@@ -439,7 +439,7 @@ export function ReactivateCampaignInput({
 							htmlFor="enrich"
 							className="flex cursor-pointer items-center gap-1 text-slate-700 text-sm sm:gap-1.5 dark:text-white/90"
 						>
-							<span className="hidden sm:inline">Enrich</span>
+							<span className="hidden sm:inline">Add AI features</span>
 							{/* Mobile: Use Dialog, Desktop: Use Popover */}
 							<>
 								<button
