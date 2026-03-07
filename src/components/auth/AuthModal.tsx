@@ -22,7 +22,7 @@ const viewConfig: Record<AuthView, { title: string; subtitle: string }> = {
 		subtitle: "Sign in to pick up right where you left off.",
 	},
 	signup: {
-		title: "Create your DealScale account",
+		title: "Create your Launch MVP account",
 		subtitle: "We'll confirm everything by email or SMS after you finish.",
 	},
 	reset: {
@@ -161,17 +161,17 @@ export function AuthModal() {
 
 	return (
 		<div
-			className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:items-center"
+			className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto px-4 pt-20 pb-4 sm:items-center sm:pt-4"
 			onKeyDown={handleKeyDown}
 		>
 			<div
 				role="button"
 				tabIndex={0}
-				className="fixed inset-0 bg-background/80 backdrop-blur-sm"
+				className="fixed inset-0 z-[59] bg-background/80 backdrop-blur-sm"
 				onClick={close}
 				onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && close()}
 			/>
-			<div className="relative z-50 my-8 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg sm:my-auto">
+			<div className="relative z-[60] my-4 w-full max-w-md max-h-[calc(100vh-6rem)] overflow-y-auto rounded-lg border bg-background p-6 shadow-lg sm:my-auto">
 				<button
 					type="button"
 					onClick={close}

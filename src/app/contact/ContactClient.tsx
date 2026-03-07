@@ -346,11 +346,11 @@ const Contact = () => {
 							onValueChange={handleTabChange}
 							className="w-full"
 						>
-							<TabsList className="mb-8 grid w-full grid-cols-2">
-								<TabsTrigger value="conversion" className="py-3">
+							<TabsList className="mb-8 p-1">
+								<TabsTrigger value="conversion" className="flex-1">
 									Denver Workshop Deposit
 								</TabsTrigger>
-								<TabsTrigger value="prequalification" className="py-3">
+								<TabsTrigger value="prequalification" className="flex-1">
 									Apply for Free Slot
 								</TabsTrigger>
 							</TabsList>
