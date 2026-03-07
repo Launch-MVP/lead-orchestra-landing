@@ -171,7 +171,7 @@ export function AuthModal() {
 				onClick={close}
 				onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && close()}
 			/>
-			<div className="relative z-[60] my-4 w-full max-w-md max-h-[calc(100vh-6rem)] overflow-y-auto rounded-lg border bg-background p-6 shadow-lg sm:my-auto">
+			<div className="relative z-[60] my-4 max-h-[calc(100vh-6rem)] w-full max-w-md overflow-y-auto rounded-lg border bg-background p-6 shadow-lg sm:my-auto">
 				<button
 					type="button"
 					onClick={close}
