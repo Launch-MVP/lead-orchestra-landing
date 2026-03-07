@@ -25,6 +25,7 @@ import {
 	AI_OUTREACH_STUDIO_TAGLINE,
 	buildPersonaAiOutreachStudioSeo,
 } from "@/data/home/aiOutreachStudio";
+import { default_cal_slug } from "@/data/constants/booking";
 import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
 import demoTranscript from "@/data/transcripts";
 import { cn } from "@/lib/utils";
@@ -1165,17 +1166,19 @@ const StaticCallDemoPreview = () => {
 					</ul>
 					<div className="flex flex-wrap gap-3">
 						<Link
-							href="/contact"
+							href="/contact?utm_source=showcase-cta-denver-3-day-mvp-build"
 							className="inline-flex items-center rounded-full bg-white px-5 py-2.5 font-semibold text-black transition hover:bg-white/90"
 						>
-							Book Free MVP Consult
+							Build Your MVP in 3 Days
 						</Link>
-						<Link
-							href="/#pricing"
+						<button
+							type="button"
+							data-cal-link={default_cal_slug}
+							data-cal-config='{"theme":"dark"}'
 							className="inline-flex items-center rounded-full border border-white/30 px-5 py-2.5 font-semibold text-white transition hover:bg-white/10"
 						>
-							See What&apos;s Included
-						</Link>
+							Book Free MVP Consult
+						</button>
 					</div>
 				</div>
 				<div className="rounded-3xl border border-white/10 bg-slate-950/60 p-6 shadow-black/30 shadow-inner">

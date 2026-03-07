@@ -449,20 +449,20 @@ const MobileNav = ({
 
 			<div className="mt-auto mb-8 flex w-full justify-center px-6">
 				<div className="w-full max-w-[260px]">
-					{/* Dark logo for light mode */}
+					{/* Light mode logo */}
 					<Image
 						width={520}
 						height={120}
-						src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png"
-						alt="Lead Orchestra"
+						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
+						alt="Launch MVP"
 						className="block h-auto w-full dark:hidden"
 					/>
-					{/* Light logo for dark mode */}
+					{/* Dark mode logo */}
 					<Image
 						width={520}
 						height={120}
-						src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Light%20Horizontal%20Lg.png"
-						alt="Lead Orchestra"
+						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
+						alt="Launch MVP"
 						className="hidden h-auto w-full dark:block"
 					/>
 				</div>
@@ -607,23 +607,23 @@ export default function Navbar() {
 			>
 				<div className="mx-auto flex h-[52px] max-w-7xl items-center justify-between sm:h-[60px] lg:h-[68px]">
 					<Link href="/" className="z-20 flex shrink-0 items-center">
-						{/* Dark logo for light mode */}
+						{/* Light mode logo */}
 						<Image
-							src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png"
-							alt="Lead Orchestra"
-							width={220}
-							height={44}
+							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
+							alt="Launch MVP"
+							width={400}
+							height={100}
 							priority
-							className="block h-7 w-auto sm:h-8 lg:h-9 dark:hidden"
+							className="block h-auto w-[110px] sm:w-[125px] lg:w-[140px] dark:hidden"
 						/>
-						{/* Light logo for dark mode */}
+						{/* Dark mode logo */}
 						<Image
-							src="/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Light%20Horizontal%20Lg.png"
-							alt="Lead Orchestra"
-							width={220}
-							height={44}
+							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
+							alt="Launch MVP"
+							width={400}
+							height={100}
 							priority
-							className="hidden h-7 w-auto sm:h-8 lg:h-9 dark:block"
+							className="hidden h-auto w-[110px] sm:w-[125px] lg:w-[140px] dark:block"
 						/>
 					</Link>
 

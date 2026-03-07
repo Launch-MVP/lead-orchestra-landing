@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuthModal } from "@/components/auth/use-auth-store";
 import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialCheckout";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +30,7 @@ import {
 	Phone,
 	Zap,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -84,6 +86,8 @@ export function ReactivateCampaignInput({
 	const inputRef = useRef<HTMLInputElement>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const { checkoutState, startTrial, closeCheckout } = useHeroTrialCheckout();
+	const { data: session } = useSession();
+	const openAuthModal = useAuthModal((state) => state.open);
 
 	const resetActivationState = useCallback(() => {
 		setIsProcessing(false);
@@ -99,7 +103,7 @@ export function ReactivateCampaignInput({
 			if (file) {
 				setUploadedFile(file);
 				setUploadMode("file");
-				// Optionally read file content and set as search value
+				// Read text content from .txt files to preview
 				if (file.type === "text/plain" || file.name.endsWith(".txt")) {
 					const reader = new FileReader();
 					reader.onload = (e) => {
@@ -126,6 +130,14 @@ export function ReactivateCampaignInput({
 	}, [closeCheckout]);
 
 	const handleActivate = useCallback(async () => {
+		// Gate: require sign-up / sign-in before processing
+		if (!session?.user) {
+			openAuthModal("signup", () => {
+				toast.success("Welcome! Press play again to generate your MVP architecture.");
+			});
+			return;
+		}
+
 		console.log("[ReactivateCampaign] Activation started", {
 			searchValue: searchValue.trim(),
 			skipTrace,
@@ -199,7 +211,7 @@ export function ReactivateCampaignInput({
 				toast.error("Failed to start payment process. Please try again.");
 			}
 		}, 1000);
-	}, [skipTrace, searchValue, startTrial, resetActivationState]);
+	}, [skipTrace, searchValue, startTrial, resetActivationState, session, openAuthModal]);
 
 	// Handle activation API call (separate from payment flow)
 	const handleActivation = useCallback(async () => {
@@ -404,7 +416,7 @@ export function ReactivateCampaignInput({
 							<input
 								ref={fileInputRef}
 								type="file"
-								accept=".txt,.csv,.json"
+								accept=".docx,.doc,.pdf,.txt"
 								onChange={handleFileUpload}
 								className="hidden"
 								disabled={isProcessing}
@@ -414,7 +426,7 @@ export function ReactivateCampaignInput({
 								onClick={handleActivate}
 								disabled={
 									isProcessing ||
-									(uploadMode === "url" && !searchValue.trim() && !uploadedFile)
+									(!searchValue.trim() && !uploadedFile)
 								}
 								className="h-10 w-10 shrink-0 rounded-full bg-sky-500 p-0 text-white shadow-lg transition-all hover:bg-sky-600 hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
 								aria-label="Start MVP scoping"
@@ -429,9 +441,14 @@ export function ReactivateCampaignInput({
 						</div>
 						{/* Mobile-only hint */}
 						<p className="text-slate-600 text-xs sm:hidden dark:text-white/60">
-							Enter a URL, search term, or upload a file
+							Describe your MVP or upload a doc (.docx, .pdf)
 						</p>
 					</div>
+
+					{/* Roadmap label */}
+					<p className="mt-1 text-center font-medium text-sky-600 text-sm tracking-wide dark:text-sky-400">
+						Get free MVP technical road map
+					</p>
 
 					{/* Enrich Toggle with Info */}
 					<div className="flex items-center justify-end gap-1.5 border-slate-200/50 border-t pt-3 sm:gap-2 dark:border-white/10">
@@ -465,45 +482,52 @@ export function ReactivateCampaignInput({
 										</button>
 									</PopoverTrigger>
 									<PopoverContent
-										className="z-50 w-80 border-sky-500/30 bg-background-dark text-white"
+										className="z-50 w-80 border-sky-200 bg-white shadow-xl dark:border-sky-500/30 dark:bg-slate-900"
 										side="top"
 										align="end"
 									>
 										<div className="space-y-3">
 											<div>
-												<h4 className="mb-2 font-semibold text-base text-white">
-													What does this include?
+												<h4 className="mb-2 font-semibold text-base text-slate-900 dark:text-white">
+													What to include for the best roadmap
 												</h4>
-												<p className="text-sm text-white/80 leading-relaxed">
-													The workshop turns rough ideas, notes, and references
-													into a sharper MVP plan with feature priorities,
-													integrations, and a launch-ready scope.
+												<p className="text-sm text-slate-600 leading-relaxed dark:text-white/80">
+													The more context you give, the sharper your
+													technical road map will be. Here's what helps:
 												</p>
 											</div>
 											<div>
-												<h5 className="mb-2 font-semibold text-sky-400 text-sm">
-													What you get:
+												<h5 className="mb-2 font-semibold text-sky-600 text-sm dark:text-sky-400">
+													Include in your description:
 												</h5>
-												<ul className="space-y-1.5 text-sm text-white/80">
+												<ul className="space-y-1.5 text-sm text-slate-600 dark:text-white/80">
 													<li className="flex items-start gap-2">
-														<span className="mt-0.5 text-sky-400">✓</span>
-														<span>Clear MVP scope and launch sequence</span>
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+														<span>Your product idea and the problem it solves</span>
 													</li>
 													<li className="flex items-start gap-2">
-														<span className="mt-0.5 text-sky-400">✓</span>
-														<span>Prioritized features and user flow</span>
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+														<span>Target users or audience</span>
 													</li>
 													<li className="flex items-start gap-2">
-														<span className="mt-0.5 text-sky-400">✓</span>
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 														<span>
-															Integration and analytics recommendations
+															Tech preferences (e.g. React, Next.js, Python)
 														</span>
 													</li>
 													<li className="flex items-start gap-2">
-														<span className="mt-0.5 text-sky-400">✓</span>
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 														<span>
-															Cleaner handoff for design and engineering
+															Key integrations (payments, auth, APIs)
 														</span>
+													</li>
+													<li className="flex items-start gap-2">
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+														<span>Timeline or launch deadline</span>
+													</li>
+													<li className="flex items-start gap-2">
+														<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+														<span>Budget range or team size (optional)</span>
 													</li>
 												</ul>
 											</div>
@@ -543,98 +567,106 @@ export function ReactivateCampaignInput({
 
 				{/* Enrich Info Dialog for Mobile */}
 				<Dialog open={showEnrichInfo} onOpenChange={setShowEnrichInfo}>
-					<DialogContent className="border-sky-500/30 bg-slate-900/95 backdrop-blur-xl sm:max-w-md [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white/80">
+					<DialogContent className="border-sky-200 bg-white backdrop-blur-xl sm:max-w-md dark:border-sky-500/30 dark:bg-slate-900/95 [&>button]:text-slate-500 [&>button]:hover:bg-slate-100 dark:[&>button]:text-white dark:[&>button]:hover:bg-white/10">
 						<DialogHeader>
-							<DialogTitle className="text-white">
-								Workshop Scope & Deliverables
+							<DialogTitle className="text-slate-900 dark:text-white">
+								Get the Best Roadmap
 							</DialogTitle>
-							<DialogDescription className="text-white/70">
-								Learn what the 3-day MVP workshop is designed to produce
+							<DialogDescription className="text-slate-500 dark:text-white/70">
+								Include these details for a sharper MVP technical road map
 							</DialogDescription>
 						</DialogHeader>
 						<Tabs defaultValue="enrichment" className="w-full">
-							<TabsList className="grid w-full grid-cols-2 bg-slate-800/50">
+							<TabsList className="grid w-full grid-cols-2 bg-slate-100 dark:bg-slate-800/50">
 								<TabsTrigger
 									value="enrichment"
-									className="text-white data-[state=active]:bg-sky-500 data-[state=active]:text-white"
+									className="text-slate-600 data-[state=active]:bg-sky-500 data-[state=active]:text-white dark:text-white"
 								>
-									Scope
+									What to Include
 								</TabsTrigger>
 								<TabsTrigger
 									value="export"
-									className="text-white data-[state=active]:bg-sky-500 data-[state=active]:text-white"
+									className="text-slate-600 data-[state=active]:bg-sky-500 data-[state=active]:text-white dark:text-white"
 								>
-									Export
+									What You Get
 								</TabsTrigger>
 							</TabsList>
 							<TabsContent value="enrichment" className="space-y-3 pt-4">
 								<div>
-									<h4 className="mb-2 font-semibold text-base text-white">
-										What gets scoped?
+									<h4 className="mb-2 font-semibold text-base text-slate-900 dark:text-white">
+										Describe your MVP idea
 									</h4>
-									<p className="text-sm text-white/80 leading-relaxed">
-										We define the core user path, MVP feature cut, dependencies,
-										and launch sequence so the build stays focused and usable.
+									<p className="text-sm text-slate-600 leading-relaxed dark:text-white/80">
+										The more detail you provide, the better your
+										technical road map will be. Include as much as you can.
 									</p>
 								</div>
 								<div>
-									<h5 className="mb-2 font-semibold text-sky-400 text-sm">
-										What you get:
+									<h5 className="mb-2 font-semibold text-sky-600 text-sm dark:text-sky-400">
+										Include in your description:
 									</h5>
-									<ul className="space-y-1.5 text-sm text-white/80">
+									<ul className="space-y-1.5 text-sm text-slate-600 dark:text-white/80">
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Core workflow and user journey</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Your product idea and the problem it solves</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Launch-critical features only</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Target users or audience</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Integration and analytics requirements</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Tech preferences (e.g. React, Next.js, Python)</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Risk reduction before full development</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Key integrations (payments, auth, APIs)</span>
+										</li>
+										<li className="flex items-start gap-2">
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Timeline or launch deadline</span>
+										</li>
+										<li className="flex items-start gap-2">
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
+											<span>Budget range or team size (optional)</span>
 										</li>
 									</ul>
 								</div>
 							</TabsContent>
 							<TabsContent value="export" className="space-y-3 pt-4">
 								<div>
-									<h4 className="mb-2 font-semibold text-base text-white">
+									<h4 className="mb-2 font-semibold text-base text-slate-900 dark:text-white">
 										What gets delivered?
 									</h4>
-									<p className="text-sm text-white/80 leading-relaxed">
+									<p className="text-sm text-slate-600 leading-relaxed dark:text-white/80">
 										You leave with a sharper MVP brief, implementation
 										direction, key flows, and the decisions needed to move into
 										build without wasted cycles.
 									</p>
 								</div>
 								<div>
-									<h5 className="mb-2 font-semibold text-sky-400 text-sm">
+									<h5 className="mb-2 font-semibold text-sky-600 text-sm dark:text-sky-400">
 										Typical outputs:
 									</h5>
-									<ul className="space-y-1.5 text-sm text-white/80">
+									<ul className="space-y-1.5 text-sm text-slate-600 dark:text-white/80">
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 											<span>Prioritized MVP feature list</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 											<span>Critical user flow and launch sequence</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 											<span>Integration and data requirements</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 											<span>Build-ready implementation direction</span>
 										</li>
 										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
+											<span className="mt-0.5 text-sky-600 dark:text-sky-400">✓</span>
 											<span>Cleaner handoff for product and engineering</span>
 										</li>
 									</ul>

@@ -17,6 +17,8 @@ import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialChecko
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Separator } from "@/components/ui/separator";
+import { default_cal_slug } from "@/data/constants/booking";
+import { handleCalButtonClick } from "@/lib/cal/CalButton";
 
 import { MetricBlock } from "./_components/metric-block";
 import {
@@ -105,34 +107,21 @@ export default function LiveDynamicHeroClient(): JSX.Element {
 	const heroVideo = useHeroVideoConfig(LIVE_VIDEO);
 
 	const handlePrimaryClick = useCallback(() => {
-		const label = LIVE_PRIMARY_CTA.label.toLowerCase();
-		if (label.includes("100 free")) {
-			if (typeof window !== "undefined") {
-				window.location.href = "/contact";
-			}
-			return;
+		// Primary CTA: "Build Your MVP in 3 Days" - navigate to Denver workshop contact
+		if (typeof window !== "undefined") {
+			window.location.href = "/contact?utm_source=hero-cta-denver-3-day-mvp-build";
 		}
-		startTrial();
-	}, [startTrial]);
+	}, []);
 
-	const handlePreviewDemo = useCallback(() => {
-		const node = videoSectionRef.current;
-		if (node && typeof node.scrollIntoView === "function") {
-			node.scrollIntoView({ behavior: "smooth", block: "center" });
-		}
-
-		const playVideo = () => {
-			videoPreviewRef.current?.play();
-		};
-
-		if (
-			typeof window !== "undefined" &&
-			typeof window.requestAnimationFrame === "function"
-		) {
-			window.requestAnimationFrame(playVideo);
-		} else {
-			playVideo();
-		}
+	const handleSecondaryClick = useCallback(() => {
+		// Secondary CTA: "Book Free MVP Consult" - open cal.com modal
+		void handleCalButtonClick({
+			calLink: default_cal_slug,
+			params: {
+				utm_source: "hero-secondary-cta",
+				utm_medium: "landing-page",
+			},
+		});
 	}, []);
 
 	return (
@@ -195,8 +184,8 @@ export default function LiveDynamicHeroClient(): JSX.Element {
 							secondary={LIVE_SECONDARY_CTA}
 							microcopy={LIVE_MICROCOPY}
 							onPrimaryClick={handlePrimaryClick}
-							onSecondaryClick={handlePreviewDemo}
-							primaryLoading={isTrialLoading}
+							onSecondaryClick={handleSecondaryClick}
+							primaryLoading={false}
 						/>
 						<div
 							ref={videoSectionRef}

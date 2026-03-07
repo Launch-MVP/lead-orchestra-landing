@@ -4,7 +4,9 @@ import dynamic from "next/dynamic";
 
 import { useDeferredLoad } from "@/components/providers/useDeferredLoad";
 
+import { default_cal_slug } from "@/data/constants/booking";
 import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
+import { useCal } from "@/hooks/use-calendly";
 import { usePersonaStore } from "@/stores/usePersonaStore";
 
 import {
@@ -20,6 +22,7 @@ const HeroSideBySide = dynamic(() => import("./HeroSideBySide"), {
 });
 
 function HeroStaticFallback() {
+	useCal();
 	const { persona } = usePersonaStore();
 	const personaLabel =
 		PERSONA_LABELS[persona] ?? PERSONA_LABELS[DEFAULT_PERSONA_KEY];
@@ -75,22 +78,15 @@ function HeroStaticFallback() {
 				</p>
 				<div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
 					<a
-						href="/contact"
+						href="/contact?utm_source=hero-cta-denver-3-day-mvp-build"
 						className="inline-flex min-w-[12rem] items-center justify-center rounded-full bg-primary px-6 py-3 font-semibold text-base text-primary-foreground shadow-lg shadow-primary/30 transition hover:translate-y-0.5 hover:bg-primary/90"
 					>
 						{LIVE_PRIMARY_CTA.label}
 					</a>
 					<button
 						type="button"
-						onClick={() => {
-							const section = document.getElementById("hero-video-section");
-							if (section) {
-								section.scrollIntoView({
-									behavior: "smooth",
-									block: "center",
-								});
-							}
-						}}
+						data-cal-link={default_cal_slug}
+						data-cal-config='{"theme":"dark"}'
 						className="inline-flex min-w-[12rem] items-center justify-center rounded-full border border-foreground/20 px-6 py-3 font-semibold text-base text-foreground transition hover:border-foreground/40 hover:text-foreground/80"
 					>
 						{LIVE_SECONDARY_CTA.label}

@@ -161,7 +161,7 @@ export function AuthModal() {
 
 	return (
 		<div
-			className="fixed inset-0 z-50 flex items-center justify-center p-4"
+			className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:items-center"
 			onKeyDown={handleKeyDown}
 		>
 			<div
@@ -171,7 +171,7 @@ export function AuthModal() {
 				onClick={close}
 				onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && close()}
 			/>
-			<div className="relative z-50 w-full max-w-md overflow-hidden rounded-lg border bg-background p-6 shadow-lg">
+			<div className="relative z-50 my-8 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg sm:my-auto">
 				<button
 					type="button"
 					onClick={close}

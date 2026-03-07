@@ -98,18 +98,18 @@ const HERO_COPY_V7 = {
 	template: "Stop {problem}, start {solution} - before {fear}. Imagine {hope}.",
 	ctas: {
 		primary: [
-			"Book Free MVP Consult",
-			"See the 3-Day MVP Plan",
-			"Get the Scope Checklist",
-			"Start Your MVP Sprint",
-			"Review Launch Options",
+			"Build Your MVP in 3 Days",
+			"Start Your 3-Day Build",
+			"Launch Your MVP Sprint",
+			"Reserve Your Build Slot",
+			"Start the Denver Build",
 		],
 		secondary: [
-			"See What's Included",
-			"Review the Process",
-			"Explore Deliverables",
-			"See Launch Examples",
-			"Watch the Walkthrough",
+			"Book Free MVP Consult",
+			"Schedule a Call",
+			"Talk to the Team",
+			"Get Expert Advice",
+			"Request a Walkthrough",
 		],
 		social: [
 			"Share with Your Team",
@@ -196,19 +196,19 @@ export const LIVE_COPY = resolveHeroCopy(
 );
 
 export const LIVE_PRIMARY_CTA = {
-	label: "Book Free MVP Consult",
+	label: "Build Your MVP in 3 Days",
 	description:
-		"Get a scoped launch recommendation, core feature cut, and stack direction in one call.",
+		"Join the Denver workshop. Scope, build, and launch your MVP with a dedicated team in one focused sprint.",
 	emphasis: "solid" as const,
-	badge: "Free Consult",
+	badge: "Denver 3-Day Build",
 };
 
 export const LIVE_SECONDARY_CTA = {
-	label: HERO_COPY_V7.ctas.secondary[0],
+	label: "Book Free MVP Consult",
 	description:
-		"Review the 3-day workshop format, handoff structure, and what fits inside the launch engagement.",
+		"Get a scoped launch recommendation, core feature cut, and stack direction in one call.",
 	emphasis: "outline" as const,
-	badge: "3-Day Plan",
+	badge: "Free Consult",
 };
 
 export const LIVE_MICROCOPY =

@@ -7,6 +7,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Pointer } from "@/components/ui/pointer";
 import { cn } from "@/lib/utils";
+import { FOUNDERS_CIRCLE_DEADLINE } from "@/constants/foundersCircleDeadline";
+import { useCountdown } from "@/hooks/useCountdown";
 
 const ctaButtonSchema = z.object({
 	label: z.string().min(1).max(50),
@@ -57,6 +59,7 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 	orientation = "vertical",
 	primaryLoading = false,
 }) => {
+	const countdown = useCountdown({ targetTimestamp: FOUNDERS_CIRCLE_DEADLINE });
 	const shouldRenderPrimary = displayMode !== "secondary";
 	const shouldRenderSecondary =
 		displayMode !== "primary" && secondary !== undefined;
@@ -161,6 +164,16 @@ const PersonaCTA: FC<PersonaCTAProps> = ({
 							isHorizontal ? "md:min-w-[260px]" : "",
 						)}
 					>
+						{/* Countdown corner ribbon */}
+						{!countdown.isExpired && (
+							<div className="pointer-events-none absolute top-0 right-0 z-20 overflow-hidden rounded-tr-3xl" style={{ width: 120, height: 120 }}>
+								<div className="absolute top-[22px] right-[-32px] w-[170px] rotate-45 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 py-[5px] text-center font-bold text-[9px] text-white uppercase tracking-[0.18em] shadow-lg">
+									{countdown.days > 0
+										? `${countdown.days}d ${countdown.hours}h left`
+										: `${countdown.hours}h ${countdown.minutes}m`}
+								</div>
+							</div>
+						)}
 						<Button
 							variant={buttonVariantForEmphasis(primary.emphasis)}
 							onClick={onPrimaryClick}

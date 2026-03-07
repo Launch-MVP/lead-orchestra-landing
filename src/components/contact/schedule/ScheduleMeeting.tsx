@@ -1,7 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { default_cal_slug } from "@/data/constants/booking";
 import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
+import { handleCalButtonClick } from "@/lib/cal/CalButton";
 import { event, generateMetaEventId } from "@/utils/seo/fbpixel";
 import { motion } from "framer-motion";
 import { Calendar, Info } from "lucide-react";
@@ -9,7 +11,6 @@ import * as React from "react";
 // * For accessibility and animation
 
 export function ScheduleMeeting() {
-	const calendarLink = "https://calendar.notion.so/meet/cyberoni/em2w42l93";
 	const [showBenefits, setShowBenefits] = React.useState(false);
 	const handleScheduleClick = React.useCallback(() => {
 		const eventId = generateMetaEventId();
@@ -24,6 +25,15 @@ export function ScheduleMeeting() {
 			eventName: "Schedule",
 			eventId,
 			eventSourceUrl: typeof window !== "undefined" ? window.location.href : undefined,
+		});
+
+		// Open Cal.com modal with UTM params
+		void handleCalButtonClick({
+			calLink: default_cal_slug,
+			params: {
+				utm_source: "contact-page",
+				utm_medium: "schedule-meeting",
+			},
 		});
 	}, []);
 
@@ -73,19 +83,12 @@ export function ScheduleMeeting() {
 				className="w-full"
 			>
 				<Button
-					asChild
 					className="mt-4 w-full bg-gradient-to-r from-primary to-focus transition-opacity hover:opacity-90 focus:ring-2 focus:ring-primary focus:ring-offset-2"
 					aria-label="Book a consultation"
 					data-testid="schedule-meeting-cta"
+					onClick={handleScheduleClick}
 				>
-					<a
-						href={calendarLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						onClick={handleScheduleClick}
-					>
-						Book a Consultation
-					</a>
+					Book a Consultation
 				</Button>
 			</motion.div>
 		</div>
