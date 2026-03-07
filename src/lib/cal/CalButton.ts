@@ -1,7 +1,7 @@
 import { getCalApi } from "@calcom/embed-react";
 
 export type CalModalOptions = {
-	/** Cal.com link slug, e.g. "cyber-oni-solutions-inc/deal-scale-tour" */
+	/** Cal.com link slug, e.g. "cyber-oni-solutions-inc/mvp-consultation" */
 	calLink: string;
 	/** Optional URL query params to pass through (UTM, prefill, etc.) */
 	params?: Record<string, string>;
