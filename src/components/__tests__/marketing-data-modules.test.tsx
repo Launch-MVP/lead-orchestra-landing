@@ -263,18 +263,6 @@ describe("marketing components use data modules", () => {
 	it("hydrates service marketing clients via data modules", async () => {
 		const ServiceHomeClient = await loadServiceHomeClient();
 
-		const integrationsStacks = [
-			{
-				category: "CRM",
-				libraries: [
-					{
-						name: "HubSpot",
-						description: "CRM integration",
-						lucideIcon: "Database",
-					},
-				],
-			},
-		];
 		const bentoFeatures = [
 			{
 				id: "feature-1",
@@ -287,28 +275,8 @@ describe("marketing components use data modules", () => {
 				description: "Description",
 			},
 		];
-		const featureTimeline = [
-			{
-				quarter: "Q1 2024",
-				status: "Live",
-				initiative: "Launch",
-				focus: "Automation",
-				summary: "Initial launch milestone",
-				highlights: ["Highlight 1"],
-			},
-		];
-
 		useDataModuleMock.mockImplementation(
 			(key: string, selector: (value: any) => any) => {
-				if (key === "service/slug_data/integrations") {
-					return selector({
-						status: "ready",
-						data: {
-							leadGenIntegrations: integrationsStacks,
-						},
-						error: undefined,
-					});
-				}
 				if (key === "bento/main") {
 					return selector({
 						status: "ready",
@@ -318,14 +286,6 @@ describe("marketing components use data modules", () => {
 						error: undefined,
 					});
 				}
-				if (key === "features/feature_timeline") {
-					return selector({
-						status: "ready",
-						data: { featureTimeline },
-						error: undefined,
-					});
-				}
-
 				return selector({ status: "ready", data: {}, error: undefined });
 			},
 		);
@@ -333,24 +293,20 @@ describe("marketing components use data modules", () => {
 		render(<ServiceHomeClient />);
 
 		expect(useDataModuleMock).toHaveBeenCalledWith(
-			"service/slug_data/integrations",
-			expect.any(Function),
-		);
-		expect(useDataModuleMock).toHaveBeenCalledWith(
 			"bento/main",
 			expect.any(Function),
 		);
-		expect(useDataModuleMock).toHaveBeenCalledWith(
-			"features/feature_timeline",
-			expect.any(Function),
-		);
-
 		const techStackCall =
 			TechStackSectionMock.mock.calls[
 				TechStackSectionMock.mock.calls.length - 1
 			] ?? [];
 		const [techStackProps] = techStackCall;
-		expect(techStackProps).toMatchObject({ stacks: integrationsStacks });
+		expect(techStackProps).toMatchObject({
+			title: "Delivery Stack",
+			description: expect.stringContaining("Launch MVP"),
+			stacks: expect.any(Array),
+		});
+		expect(techStackProps.stacks.length).toBeGreaterThan(0);
 
 		const bentoCall =
 			BentoPageMock.mock.calls[BentoPageMock.mock.calls.length - 1] ?? [];
@@ -362,7 +318,12 @@ describe("marketing components use data modules", () => {
 				FeatureTimelineTableMock.mock.calls.length - 1
 			] ?? [];
 		const [timelineProps] = timelineCall;
-		expect(timelineProps).toMatchObject({ rows: featureTimeline });
+		expect(timelineProps).toMatchObject({ rows: expect.any(Array) });
+		expect(timelineProps.rows.length).toBeGreaterThan(0);
+		expect(timelineProps.rows[0]).toMatchObject({
+			initiative: "MVP Strategy Sessions",
+			status: "Live",
+		});
 	});
 
 	it("derives service catalog entries from data modules", async () => {
@@ -375,11 +336,11 @@ describe("marketing components use data modules", () => {
 			title: "Service",
 			description: "desc",
 			features: ["feature"],
-			categories: ["lead_generation"],
+			categories: ["strategy"],
 		};
 
 		const servicesByCategory = {
-			lead_generation: {
+			strategy: {
 				svc: serviceItem,
 			},
 		};

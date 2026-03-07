@@ -2,12 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import Header from "@/components/common/Header";
+import PricingCheckoutDialog from "@/components/home/pricing/PricingCheckoutDialog";
 import {
 	getAttributionFieldsFromUrl,
 	resolveUtmIcpFromUrlOrState,
@@ -27,11 +28,13 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import {
+	denverWorkshopTierMap,
 	type QuickApplyValues,
 	quickApplyFields,
 	quickApplySchema,
 } from "@/data/contact/conversionFormFields";
 import { trackMetaServerEvent } from "@/lib/analytics/meta-events-client";
+import type { Plan } from "@/types/service/plans";
 import type { FieldConfig } from "@/types/contact/formFields";
 import {
 	generateMetaEventId,
@@ -42,23 +45,54 @@ import {
 export default function ConversionForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [hasStarted, setHasStarted] = useState(false);
-	const router = useRouter();
+	const [checkoutState, setCheckoutState] = useState<{
+		clientSecret: string;
+		plan: Plan;
+	} | null>(null);
 
 	const form = useForm<QuickApplyValues>({
 		resolver: zodResolver(quickApplySchema),
 		defaultValues: {
 			name: "",
 			email: "",
+			phone: "",
+			companyName: "",
 			website: "",
-			businessType: [],
-			monthlyBudget: "",
-			icpCategory: "",
-			speed: "",
+			selectedTier: "in-person-mvp-build",
+			projectSummary: "",
 		},
 		mode: "onBlur",
 	});
 
 	const { handleSubmit } = form;
+	const selectedTierValue = form.watch("selectedTier");
+	const selectedTier =
+		denverWorkshopTierMap[selectedTierValue] ??
+		denverWorkshopTierMap["in-person-mvp-build"];
+	const remainingBalance = selectedTier.totalPrice - selectedTier.depositAmount;
+	const depositPlan = useMemo<Plan>(
+		() => ({
+			id: `${selectedTier.value}-deposit`,
+			name: `${selectedTier.label} Deposit`,
+			price: {
+				monthly: { amount: 0, description: "", features: [] },
+				annual: { amount: 0, description: "", features: [] },
+				oneTime: {
+					amount: selectedTier.depositAmount,
+					description: "10% seat-hold deposit",
+					features: [
+						`Workshop tier: ${selectedTier.label}`,
+						`Full workshop total: $${selectedTier.totalPrice.toLocaleString()}`,
+						`Deposit due today: $${selectedTier.depositAmount.toLocaleString()}`,
+						`Remaining balance before kickoff: $${remainingBalance.toLocaleString()}`,
+						"Deposit reserves your Denver seat while final scheduling is confirmed.",
+					],
+				},
+			},
+			cta: { text: "Reserve Seat", type: "checkout" },
+		}),
+		[remainingBalance, selectedTier],
+	);
 
 	const handleFormInteraction = () => {
 		if (!hasStarted) {
@@ -82,39 +116,105 @@ export default function ConversionForm() {
 			const attribution = getAttributionFieldsFromUrl(window.location.href);
 			const utmIcp = resolveUtmIcpFromUrlOrState(
 				window.location.href,
-				data.icpCategory,
+				data.selectedTier,
 			);
 
-			// Submit to intake API
-			const response = await fetch("/api/contact/intake", {
+			const tier = denverWorkshopTierMap[data.selectedTier];
+			const captureResponse = await fetch("/api/contact", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					...data,
-					...attribution,
-					utm_icp: utmIcp,
+					name: data.name,
+					email: data.email,
+					phone: data.phone,
+					companyName: data.companyName,
+					landingPage: window.location.href,
+					selectedService: `${tier.label} Denver workshop deposit`,
+					message: [
+						`Selected tier: ${tier.label}`,
+						`Discounted total: $${tier.totalPrice.toLocaleString()}`,
+						`Seat-hold deposit: $${tier.depositAmount.toLocaleString()}`,
+						`Website: ${data.website}`,
+						`Project summary: ${data.projectSummary}`,
+					].join("\n"),
 					metaEventId,
 					eventSourceUrl: window.location.href,
-					// Flag as conversion/quick-apply
-					isQuickApply: true,
+					utm_icp: utmIcp,
+					...attribution,
 				}),
 			});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.error || "Failed to submit form");
+			if (!captureResponse.ok) {
+				const errorData = await captureResponse.json().catch(() => ({}));
+				throw new Error(errorData.error || "Failed to capture reservation");
 			}
 
-			// Track event
+			const intentResponse = await fetch("/api/stripe/intent", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					price: tier.depositAmount * 100,
+					description: `${tier.label} Denver workshop seat deposit`,
+					metadata: {
+						planId: `${tier.value}-deposit`,
+						planName: `${tier.label} Deposit`,
+						planType: "oneTime",
+						workshopTier: tier.value,
+						workshopTotal: String(tier.totalPrice),
+						depositAmount: String(tier.depositAmount),
+						customerEmail: data.email,
+						customerName: data.name,
+					},
+				}),
+			});
+
+			if (!intentResponse.ok) {
+				const errorData = await intentResponse.json().catch(() => ({}));
+				throw new Error(errorData.error || "Failed to initialize checkout");
+			}
+
+			const { clientSecret } = (await intentResponse.json()) as {
+				clientSecret?: string;
+			};
+
+			if (!clientSecret) {
+				throw new Error("Checkout is unavailable right now.");
+			}
+
 			trackIntakeFormSubmit({
-				businessType: data.businessType,
-				monthlyBudget: data.monthlyBudget,
+				businessType: [tier.label],
+				monthlyBudget: `$${tier.totalPrice.toLocaleString()}`,
 				eventId: metaEventId,
 			});
 
-			router.push("/contact/thank-you?source=conversion");
+			setCheckoutState({
+				clientSecret,
+				plan: {
+					...depositPlan,
+					name: `${tier.label} Deposit`,
+					id: `${tier.value}-deposit`,
+					price: {
+						...depositPlan.price,
+						oneTime: {
+							...depositPlan.price.oneTime,
+							amount: tier.depositAmount,
+							features: [
+								`Workshop tier: ${tier.label}`,
+								`Full workshop total: $${tier.totalPrice.toLocaleString()}`,
+								`Deposit due today: $${tier.depositAmount.toLocaleString()}`,
+								`Remaining balance before kickoff: $${(
+									tier.totalPrice - tier.depositAmount
+								).toLocaleString()}`,
+								"Deposit reserves your Denver seat while final scheduling is confirmed.",
+							],
+						},
+					},
+				},
+			});
 		} catch (err) {
 			console.error("Submission failed:", err);
 			toast.error("Submission failed. Please try again.");
@@ -128,8 +228,8 @@ export default function ConversionForm() {
 			<div className="-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20" />
 
 			<Header
-				title="Quick Application"
-				subtitle="Grab your spot in the queue with the basics. Takes less than 60 seconds."
+				title="Denver Workshop Deposit"
+				subtitle="Choose your in-person Denver workshop tier and place the 10% deposit to hold your seat."
 				size="sm"
 				className="mb-8 text-center"
 			/>
@@ -142,6 +242,51 @@ export default function ConversionForm() {
 						className="space-y-6"
 						onFocusCapture={handleFormInteraction}
 					>
+						<div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 text-left">
+							<p className="font-semibold text-foreground text-sm">
+								Selected tier
+							</p>
+							<p className="mt-1 font-semibold text-lg text-primary">
+								{selectedTier.label}
+							</p>
+							<p className="mt-1 text-muted-foreground text-sm">
+								{selectedTier.description}
+							</p>
+							<div className="mt-3 grid gap-2 text-sm sm:grid-cols-3">
+								<div className="rounded-xl bg-background/80 p-3">
+									<p className="text-muted-foreground text-xs uppercase tracking-wide">
+										Workshop Total
+									</p>
+									<p className="font-semibold text-foreground">
+										${selectedTier.totalPrice.toLocaleString()}
+									</p>
+								</div>
+								<div className="rounded-xl bg-background/80 p-3">
+									<p className="text-muted-foreground text-xs uppercase tracking-wide">
+										Deposit Due
+									</p>
+									<p className="font-semibold text-foreground">
+										${selectedTier.depositAmount.toLocaleString()}
+									</p>
+								</div>
+								<div className="rounded-xl bg-background/80 p-3">
+									<p className="text-muted-foreground text-xs uppercase tracking-wide">
+										Remaining
+									</p>
+									<p className="font-semibold text-foreground">
+										${remainingBalance.toLocaleString()}
+									</p>
+								</div>
+							</div>
+							<div className="mt-3">
+								<Link
+									href="/pricing?view=inPerson"
+									className="font-medium text-primary text-sm underline underline-offset-4 transition-opacity hover:opacity-80"
+								>
+									Get more details
+								</Link>
+							</div>
+						</div>
 						<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 							{quickApplyFields.map((field) => (
 								<FormField
@@ -188,13 +333,24 @@ export default function ConversionForm() {
 								</span>
 							) : (
 								<span className="flex items-center justify-center gap-2">
-									Submit Application <CheckCircle2 className="h-4 w-4" />
+									Reserve Seat With ${selectedTier.depositAmount.toLocaleString()} Deposit{" "}
+									<CheckCircle2 className="h-4 w-4" />
 								</span>
 							)}
 						</Button>
 					</form>
 				</Form>
 			</FormProvider>
+			{checkoutState ? (
+				<PricingCheckoutDialog
+					clientSecret={checkoutState.clientSecret}
+					plan={checkoutState.plan}
+					planType="oneTime"
+					mode="payment"
+					context="standard"
+					onClose={() => setCheckoutState(null)}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -18,11 +18,11 @@ import Image from "next/image";
 const ROTATION_INTERVAL_MS = 4000;
 
 const HERO_MESSAGES = [
-	"Export scraped data to CRM, CSV/JSON, Database, S3, or any system.",
-	"Integrate with MCP protocol, APIs, webhooks, and workflow engines like Kestra, Make, Zapier, and n8n.",
-	"Connect to CRMs, data warehouses, and automation platforms.",
-	"Open-source scraping that plugs into anything—no vendor lock-in.",
-];
+	"Ship with auth, billing, analytics, and the core integrations already wired.",
+	"Build on a stack your team can actually own after launch.",
+	"Connect product, GTM, and operations systems from day one.",
+	"Launch fast without ending up in a black-box build relationship.",
+] as const;
 
 const BASE_LOGOS = [
 	{
@@ -43,7 +43,7 @@ const BASE_LOGOS = [
 	},
 	{
 		src: "https://images.seeklogo.com/logo-png/46/1/make-logo-png_seeklogo-464017.png",
-		alt: "Make (formerly Integromat) logo",
+		alt: "Make logo",
 	},
 	{
 		src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/N8n_logo.png",
@@ -138,31 +138,28 @@ const BEAM_NETWORK_NODES: AnimatedBeamNetworkNode[] = [
 
 const HERO_METRICS = [
 	{
-		id: "sources",
-		value: 10,
-		suffix: "+",
+		id: "timeline",
+		value: 3,
+		suffix: " days",
 		decimalPlaces: 0,
-		label: "Built-in scraping sources",
+		label: "Target launch window",
 	},
 	{
-		id: "plugins",
-		value: 20,
+		id: "systems",
+		value: 4,
 		suffix: "+",
 		decimalPlaces: 0,
-		label: "Community MCP plugins",
+		label: "Core systems wired",
 	},
 	{
-		id: "uptime",
-		value: 99.9,
+		id: "handoff",
+		value: 100,
 		suffix: "%",
-		decimalPlaces: 1,
-		label: "Scraping reliability",
+		decimalPlaces: 0,
+		label: "Code and asset handoff",
 	},
 ];
 
-/**
- * ConnectAnythingHero renders the full-screen 3D marquee hero with rotating copy.
- */
 export function ConnectAnythingHero(): JSX.Element {
 	const [activeMessageIndex, setActiveMessageIndex] = useState(0);
 	const enableGpu = useGpuOptimizations();
@@ -204,7 +201,7 @@ export function ConnectAnythingHero(): JSX.Element {
 				centerContent={
 					<Image
 						src="/logos/DealScale%20Transparent%20Logo/Deal%20Scale%20No%20Text.png"
-						alt="Lead Orchestra core logo"
+						alt="Launch MVP core mark"
 						width={56}
 						height={56}
 						priority={false}
@@ -222,12 +219,12 @@ export function ConnectAnythingHero(): JSX.Element {
 				>
 					<Badge
 						variant="outline"
-						className="rounded-full border-white/30 bg-white/20 px-5 py-2 font-medium text-slate-900 text-xs uppercase tracking-[0.34em] shadow-[0_8px_30px_rgba(59,130,246,0.25)] backdrop-blur-md dark:border-white/15 dark:bg-slate-900/60 dark:text-slate-100"
+						className="rounded-full border-white/30 bg-white/20 px-5 py-2 font-medium text-slate-900 text-xs uppercase tracking-[0.34em] shadow-[0_8px_30px_rgba(36,124,255,0.25)] backdrop-blur-md dark:border-white/15 dark:bg-slate-900/60 dark:text-slate-100"
 					>
 						<span className="mr-2 inline-flex items-center justify-center rounded-full bg-sky-500/20 p-1 text-sky-600 dark:text-sky-300">
 							<Sparkles className="h-3.5 w-3.5" />
 						</span>
-						Data Ingestion Layer
+						Built On Your Stack
 					</Badge>
 				</motion.div>
 				<motion.h1
@@ -238,7 +235,7 @@ export function ConnectAnythingHero(): JSX.Element {
 				>
 					<div className="space-y-1 sm:space-y-2">
 						<span className="block w-full text-black dark:text-white">
-							Export to Any System
+							Deploy on the stack you can actually own
 						</span>
 					</div>
 				</motion.h1>
@@ -262,9 +259,10 @@ export function ConnectAnythingHero(): JSX.Element {
 					transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
 					className="mt-5 max-w-3xl text-slate-900 text-sm drop-shadow-[0_6px_14px_rgba(15,23,42,0.2)] md:text-base dark:text-slate-100/85"
 				>
-					Lead Orchestra exports scraped data to CRM, CSV/JSON, Database, S3, or
-					any system. Integrate with MCP protocol, APIs, webhooks, and workflow
-					engines like Kestra, Make, Zapier, and n8n.
+					Launch MVP is designed to ship quickly without locking you into a
+					brittle build. We connect the systems that matter, keep the
+					architecture clean, and hand over a product your team can extend after
+					launch.
 				</motion.p>
 				<motion.ul
 					initial="hidden"
@@ -293,7 +291,7 @@ export function ConnectAnythingHero(): JSX.Element {
 									className="font-semibold text-3xl text-slate-900 dark:text-white"
 								/>
 								{metric.suffix ? (
-									<span className="font-semibold text-lg text-slate-800 uppercase tracking-wide dark:text-white/90">
+									<span className="font-semibold text-lg text-slate-800 tracking-wide dark:text-white/90">
 										{metric.suffix}
 									</span>
 								) : null}

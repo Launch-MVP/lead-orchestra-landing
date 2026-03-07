@@ -13,28 +13,22 @@ import { activityStream } from "@/data/activity/activityStream";
 import { useGpuOptimizations } from "@/hooks/useGpuOptimizations";
 import { cn } from "@/lib/utils";
 
-import {
-	LIVE_COPY,
-	PERSONA_GOAL,
-	PERSONA_LABEL,
-} from "@/components/home/heros/live-dynamic-hero-demo/_config";
+import { PERSONA_LABEL } from "@/components/home/heros/live-dynamic-hero-demo/_config";
 import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
 import { usePersonaStore } from "@/stores/usePersonaStore";
 import { useShallow } from "zustand/react/shallow";
 import { ActivityRoller, usePrefersReducedMotion } from "./ActivityRoller";
 
 const LEFT_COLUMN_POINTS = [
-	"Sync scraping jobs, data normalization, and export workflows into a single live feed.",
-	"Surface the most valuable lead sources and scraping signals with motion cues and badges.",
-	"Respect focus mode by pausing motion when developers need deep work.",
+	"Keep scope, design direction, integrations, and launch tasks in one visible stream.",
+	"Surface the critical-path blockers, handoff items, and launch milestones that actually decide whether the MVP ships.",
+	"Respect focus mode by pausing motion when the team needs uninterrupted build time.",
 ] as const;
 
-const FALLBACK_HEADLINE =
-	"We orchestrate every scraping touchpoint so developers stay in flow mode.";
 const FALLBACK_SUBHEAD =
-	"Monitor live scraping jobs, data exports, and integration tasks without leaving your workflow. Developers trust Lead Orchestra for open-source data ingestion.";
+	"Scope, UX direction, build execution, integrations, analytics, and handoff live inside one focused 3-day workshop.";
 const FALLBACK_SUPPORT =
-	"Paste a URL → scrape all the leads → clean them → export instantly.";
+	"Track decisions, blockers, deliverables, and launch notes in one live workspace so the team can move quickly without overbuilding.";
 
 const CARD_STACK_OFFSET = 12;
 const CARD_STACK_SCALE_FACTOR = 0.04;
@@ -128,20 +122,11 @@ export default function FeatureSectionActivity(): JSX.Element {
 		personaAudience.endsWith("s") || personaAudience.endsWith("S")
 			? "stay"
 			: "stays";
-	const headline = `We orchestrate every scraping touchpoint so ${personaAudience} ${personaVerb} in flow mode.`;
-	const resolvedBenefit =
-		goal ??
-		LIVE_COPY?.values?.benefit ??
-		PERSONA_GOAL ??
-		"Scrape, normalize, and export lead data";
-	const subheadline =
-		`${resolvedBenefit} ${LIVE_COPY?.values?.socialProof ?? ""}`.trim() ||
-		FALLBACK_SUBHEAD;
-	const supportCopy = LIVE_COPY?.subtitle?.length
-		? LIVE_COPY.subtitle
-		: LIVE_COPY?.values?.socialProof?.length
-			? `${LIVE_COPY.values.socialProof} ${resolvedBenefit}`.trim()
-			: FALLBACK_SUPPORT;
+	const headline = `We keep scope, build, and launch decisions visible so ${personaAudience} ${personaVerb} aligned.`;
+	const subheadline = goal?.trim()
+		? `${goal.trim()} with one focused workshop covering product decisions, build execution, integrations, analytics, and handoff.`
+		: FALLBACK_SUBHEAD;
+	const supportCopy = FALLBACK_SUPPORT;
 
 	// Observe visibility to pause animations when offscreen
 	useEffect(() => {

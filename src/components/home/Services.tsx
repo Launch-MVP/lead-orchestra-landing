@@ -56,15 +56,15 @@ const ServicesSection = (props: ServicesSectionProps) => {
 	);
 
 	const {
-		title = "Tailored Solutions for Visionary Companies",
-		subtitle = "Whether launching lean or scaling enterprise-wide, we craft user-centric digital experiences that drive growth and innovation.",
+		title = "Launch MVP Services",
+		subtitle = "Strategy, build help, in-person workshops, specialist support, and launch assets for founders shipping fast.",
 		showTabs = [
-			SERVICE_CATEGORIES.LEAD_GENERATION,
-			SERVICE_CATEGORIES.LEAD_TYPES,
-			SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-			SERVICE_CATEGORIES.SKIP_TRACING,
-			SERVICE_CATEGORIES.AI_FEATURES,
-			SERVICE_CATEGORIES.REAL_ESTATE_TOOLS,
+			SERVICE_CATEGORIES.STRATEGY,
+			SERVICE_CATEGORIES.BUILD,
+			SERVICE_CATEGORIES.IN_PERSON,
+			SERVICE_CATEGORIES.SPECIALISTS,
+			SERVICE_CATEGORIES.SUPPORT,
+			SERVICE_CATEGORIES.RESOURCES,
 		],
 		showSearch,
 		showCategories,
@@ -334,18 +334,18 @@ const ServicesSection = (props: ServicesSectionProps) => {
 	// * Helper to convert category enum to human-friendly label
 	const getTabLabel = (tab: ServiceCategoryValue) => {
 		switch (tab) {
-			case SERVICE_CATEGORIES.LEAD_GENERATION:
-				return "Lead Generation";
-			case SERVICE_CATEGORIES.LEAD_TYPES:
-				return "Lead Types";
-			case SERVICE_CATEGORIES.LEAD_PREQUALIFICATION:
-				return "Lead Pre-qualification";
-			case SERVICE_CATEGORIES.SKIP_TRACING:
-				return "Skip Tracing";
-			case SERVICE_CATEGORIES.AI_FEATURES:
-				return "AI Features";
-			case SERVICE_CATEGORIES.REAL_ESTATE_TOOLS:
-				return "Tools";
+			case SERVICE_CATEGORIES.STRATEGY:
+				return "Strategy";
+			case SERVICE_CATEGORIES.BUILD:
+				return "Build";
+			case SERVICE_CATEGORIES.IN_PERSON:
+				return "In Person";
+			case SERVICE_CATEGORIES.SPECIALISTS:
+				return "Specialists";
+			case SERVICE_CATEGORIES.SUPPORT:
+				return "Support";
+			case SERVICE_CATEGORIES.RESOURCES:
+				return "Resources";
 			default:
 				return tab;
 		}

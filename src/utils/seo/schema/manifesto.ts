@@ -13,7 +13,7 @@ function slugifyAnchor(
 	return (
 		base
 			.normalize("NFKD")
-			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/\p{Diacritic}/gu, "")
 			.replace(/[^a-z0-9]+/gi, "-")
 			.replace(/^-+|-+$/g, "")
 			.toLowerCase() || `section-${index + 1}`
@@ -37,13 +37,13 @@ export function buildManifestoSchema(
 		"@context": SCHEMA_CONTEXT,
 		"@type": "CreativeWorkSeries",
 		"@id": seriesId,
-		name: options.name ?? "Lead Orchestra Blue Ocean Manifesto",
+		name: options.name ?? "Launch MVP Manifesto",
 		headline:
 			options.description ??
-			"Ten-part manifesto outlining how Lead Orchestra automates wealth creation for real estate operators.",
+			"Ten-part manifesto outlining how Launch MVP helps founders scope, build, and launch products with cleaner execution.",
 		description:
 			options.description ??
-			"Discover how Lead Orchestra scales revenue leverage with automation, ownership, and lifestyle-driven outcomes.",
+			"Discover how Launch MVP turns product clarity, launch systems, and execution discipline into real shipped outcomes.",
 		url: baseUrl,
 		inLanguage: "en-US",
 		author: {

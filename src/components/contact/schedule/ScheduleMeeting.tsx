@@ -34,7 +34,7 @@ export function ScheduleMeeting() {
 					<Calendar className="h-6 w-6 text-primary" aria-hidden="true" />
 				</div>
 				<h2 className="font-bold text-2xl text-black dark:text-white">
-					Schedule a Consultation
+					Get a Free MVP Consultation
 				</h2>
 				<p className="text-black dark:text-white">
 					Book a consultation to discuss your specific needs and see how we can
@@ -50,7 +50,7 @@ export function ScheduleMeeting() {
 				onClick={() => setShowBenefits((v) => !v)}
 			>
 				<Info className="h-4 w-4" aria-hidden="true" />
-				What to expect from the consultation
+				What to expect from the MVP consultation
 			</button>
 			{showBenefits && (
 				<ul
@@ -58,10 +58,10 @@ export function ScheduleMeeting() {
 					className="mb-4 ml-1 list-disc space-y-1 text-muted-foreground text-xs text-left"
 					aria-live="polite"
 				>
-					<li>Deep dive into your current lead generation process</li>
-					<li>Identify bottlenecks and automation opportunities</li>
+					<li>Deep dive into your MVP and lead generation goals</li>
+					<li>Identify bottlenecks and data pipeline opportunities</li>
 					<li>Live demo of relevant scraping and enrichment workflows</li>
-					<li>Custom strategy plan for your niche</li>
+					<li>Custom strategy plan for your MVP launch</li>
 				</ul>
 			)}
 

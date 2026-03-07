@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/components/ui/use-toast";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -14,7 +15,11 @@ import { useCallback } from "react";
 export default function SignInPage() {
 	const searchParams = useSearchParams();
 	const callbackUrl = searchParams.get("callbackUrl") || undefined;
-	const supabase = createClientComponentClient();
+	const isSupabaseConfigured = Boolean(
+		process.env.NEXT_PUBLIC_SUPABASE_URL &&
+			process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+	);
+	const supabase = isSupabaseConfigured ? createClientComponentClient() : null;
 
 	const buildRedirectTo = useCallback(
 		(provider: "linkedin" | "facebook") => {
@@ -33,36 +38,56 @@ export default function SignInPage() {
 	);
 
 	const handleLinkedIn = useCallback(async () => {
-		const destination = buildRedirectTo("linkedin");
-		if (!destination) {
+		if (supabase) {
+			const destination = buildRedirectTo("linkedin");
+			if (!destination) {
+				return;
+			}
+
+			await supabase.auth.signInWithOAuth({
+				provider: "linkedin_oidc",
+				options: { redirectTo: destination },
+			});
+			toast({
+				title: "LinkedIn OAuth",
+				description: "LinkedIn account connected. Finishing sign-in...",
+			});
 			return;
 		}
 
-		await supabase.auth.signInWithOAuth({
-			provider: "linkedin_oidc",
-			options: { redirectTo: destination },
-		});
 		toast({
-			title: "LinkedIn OAuth",
-			description: "LinkedIn account connected. Finishing sign-in...",
+			title: "LinkedIn Sign-In",
+			description:
+				"Supabase OAuth is not configured in this environment. Falling back to the default sign-in flow.",
 		});
-	}, [buildRedirectTo, supabase]);
+		await signIn("linkedin", callbackUrl ? { callbackUrl } : undefined);
+	}, [buildRedirectTo, callbackUrl, supabase]);
 
 	const handleFacebook = useCallback(async () => {
-		const destination = buildRedirectTo("facebook");
-		if (!destination) {
+		if (supabase) {
+			const destination = buildRedirectTo("facebook");
+			if (!destination) {
+				return;
+			}
+
+			await supabase.auth.signInWithOAuth({
+				provider: "facebook",
+				options: { redirectTo: destination },
+			});
+			toast({
+				title: "Facebook OAuth",
+				description: "Facebook account connected. Finishing sign-in...",
+			});
 			return;
 		}
 
-		await supabase.auth.signInWithOAuth({
-			provider: "facebook",
-			options: { redirectTo: destination },
-		});
 		toast({
-			title: "Facebook OAuth",
-			description: "Facebook account connected. Finishing sign-in...",
+			title: "Facebook Sign-In",
+			description:
+				"Supabase OAuth is not configured in this environment. Falling back to the default sign-in flow.",
 		});
-	}, [buildRedirectTo, supabase]);
+		await signIn("facebook", callbackUrl ? { callbackUrl } : undefined);
+	}, [buildRedirectTo, callbackUrl, supabase]);
 	return (
 		<div className="container grid min-h-screen w-screen flex-col items-center py-12 lg:max-w-none lg:grid-cols-2 lg:px-0 lg:py-20">
 			<div className="hidden h-full bg-muted lg:block" />

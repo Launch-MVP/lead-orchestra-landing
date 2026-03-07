@@ -30,13 +30,14 @@ export const AboutUsSection: React.FC = () => (
 					Our Mission
 				</span>
 				<h2 className="mb-4 font-bold text-3xl text-foreground sm:text-4xl">
-					About <span className="text-primary">Lead Orchestra</span>
+					About <span className="text-primary">Launch MVP</span>
 				</h2>
 				<p className="mb-6 max-w-lg text-base text-muted-foreground dark:text-gray-300">
-					Lead Orchestra is the open-source engine that powers your lead
-					pipeline. Scrape Anything. Export Everywhere. Paste a URL → scrape all
-					the leads → clean them → export instantly. Fresh leads, not rented
-					lists. Built for developers, agencies, and data teams.
+					Launch MVP helps founders and product teams stop circling ideas and
+					start shipping real products. We scope the critical workflow, design
+					the launch path, build the core systems, wire the right integrations,
+					and package a clean handoff so the MVP can go live in days instead of
+					disappearing into planning.
 				</p>
 				<div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:items-start">
 					<Link
@@ -45,14 +46,12 @@ export const AboutUsSection: React.FC = () => (
 					>
 						Learn More
 					</Link>
-					<a
-						href="https://discord.gg/BNrsYRPtFN"
-						target="_blank"
-						rel="noopener noreferrer"
+					<Link
+						href="/contact"
 						className="inline-block w-fit rounded-md border border-primary px-6 py-3 font-semibold text-primary text-sm transition-colors hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
 					>
-						Join Our Community
-					</a>
+						Book Free Consult
+					</Link>
 				</div>
 			</div>
 		</div>

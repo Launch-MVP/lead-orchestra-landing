@@ -28,6 +28,6 @@ export const metadata: Metadata = {
 		creator: "@softwear4u",
 		images: ["/images/monster_5.jpg"],
 	},
-	metadataBase: new URL(process.env.NEXTAUTH_URL || "https://dealscale.io"),
+	metadataBase: new URL(process.env.NEXTAUTH_URL || "https://launchmvp.com"),
 	// Add more defaults as needed
 };

@@ -7,6 +7,8 @@ import { FeatureTimelineTable } from "@/components/features/FeatureTimelineTable
 import UpcomingFeatures from "@/components/home/FeatureVote";
 import ServicesSection from "@/components/home/Services";
 import { Separator } from "@/components/ui/separator";
+import { featureTimeline } from "@/data/features/feature_timeline";
+import { leadGenIntegrations } from "@/data/service/slug_data/integrations";
 import { useHasMounted } from "@/hooks/useHasMounted";
 import { useDataModule } from "@/stores/useDataModuleStore";
 import {
@@ -28,21 +30,9 @@ const SectionFallback = ({
 
 export default function ServiceHomeClient() {
 	const [activeTab, setActiveTab] = useState<ServiceCategoryValue>(
-		SERVICE_CATEGORIES.LEAD_GENERATION,
+		SERVICE_CATEGORIES.STRATEGY,
 	);
 	const hasMounted = useHasMounted();
-	const {
-		status: integrationsStatus,
-		stacks: integrationsStacks,
-		error: integrationsError,
-	} = useDataModule(
-		"service/slug_data/integrations",
-		({ status, data, error }) => ({
-			status,
-			stacks: data?.leadGenIntegrations ?? [],
-			error,
-		}),
-	);
 	const {
 		status: bentoStatus,
 		features: bentoFeatures,
@@ -52,16 +42,6 @@ export default function ServiceHomeClient() {
 		features: data?.MainBentoFeatures ?? [],
 		error,
 	}));
-	const {
-		status: timelineStatus,
-		milestones,
-		error: timelineError,
-	} = useDataModule("features/feature_timeline", ({ status, data, error }) => ({
-		status,
-		milestones: data?.featureTimeline ?? [],
-		error,
-	}));
-
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const industry = urlParams.get("industry");
@@ -73,18 +53,12 @@ export default function ServiceHomeClient() {
 		}
 	}, []);
 
-	const resolvedStacks = useMemo(
-		() => (integrationsStatus === "ready" ? integrationsStacks : []),
-		[integrationsStatus, integrationsStacks],
-	);
+	const resolvedStacks = useMemo(() => leadGenIntegrations, []);
 	const resolvedBentoFeatures = useMemo(
 		() => (bentoStatus === "ready" ? bentoFeatures : []),
 		[bentoStatus, bentoFeatures],
 	);
-	const resolvedTimeline = useMemo(
-		() => (timelineStatus === "ready" ? milestones : []),
-		[timelineStatus, milestones],
-	);
+	const resolvedTimeline = useMemo(() => featureTimeline, []);
 
 	const handleIndustryChange = (value: ServiceCategoryValue) => {
 		setActiveTab(value);
@@ -104,15 +78,15 @@ export default function ServiceHomeClient() {
 			<section className="px-6 md:py-20 lg:px-8">
 				<div className="mx-auto max-w-7xl">
 					<ServicesSection
-						title="Our Comprehensive Services"
-						subtitle="Tailored solutions to meet your business needs"
+						title="Launch MVP Services"
+						subtitle="Strategy, workshops, build support, and specialist execution for founders who need to ship fast without accumulating cleanup debt."
 						showTabs={[
-							SERVICE_CATEGORIES.LEAD_GENERATION,
-							SERVICE_CATEGORIES.LEAD_TYPES,
-							SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-							SERVICE_CATEGORIES.SKIP_TRACING,
-							SERVICE_CATEGORIES.AI_FEATURES,
-							SERVICE_CATEGORIES.REAL_ESTATE_TOOLS,
+							SERVICE_CATEGORIES.STRATEGY,
+							SERVICE_CATEGORIES.BUILD,
+							SERVICE_CATEGORIES.IN_PERSON,
+							SERVICE_CATEGORIES.SPECIALISTS,
+							SERVICE_CATEGORIES.SUPPORT,
+							SERVICE_CATEGORIES.RESOURCES,
 						]}
 						showSearch={false}
 						showCategories={false}
@@ -128,25 +102,18 @@ export default function ServiceHomeClient() {
 				</div>
 			</section>
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
-			{integrationsStatus === "ready" ? (
-				<TechStackSection
-					title="Integrations"
-					description="Connect Lead Orchestra seamlessly with your CRM, databases, workflow engines, and data platforms. Export scraped leads to any system via CSV, JSON, Database, S3, or API. Integrate with n8n, Make, Zapier, Kestra, and other automation tools trusted by developers and agencies."
-					stacks={resolvedStacks}
-				/>
-			) : (
-				<SectionFallback
-					label="integrations"
-					error={integrationsStatus === "error" ? integrationsError : undefined}
-				/>
-			)}
+			<TechStackSection
+				title="Delivery Stack"
+				description="See the tools, systems, and product infrastructure Launch MVP uses to scope, build, launch, measure, and support MVPs across web, mobile, AI, analytics, and handoff."
+				stacks={resolvedStacks}
+			/>
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
 			{bentoStatus === "ready" && resolvedBentoFeatures.length > 0 ? (
 				<BentoPage
 					features={resolvedBentoFeatures}
-					title={"Why Developers & Agencies Choose Lead Orchestra"}
+					title={"Why Founders Choose Launch MVP"}
 					subtitle={
-						"Open-source scraping that plugs into anything. Scrape any website, normalize data, and export to your stack—no vendor lock-in."
+						"Launch MVP combines product strategy, build execution, launch support, and specialist engineering help so you can move from idea to shipped product with less drag."
 					}
 				/>
 			) : (
@@ -157,24 +124,17 @@ export default function ServiceHomeClient() {
 			)}
 			<div className="my-12">
 				<Header
-					title="How Lead Orchestra Works"
-					subtitle="Here's a timeline of our journey."
+					title="How Launch MVP Delivers"
+					subtitle="A transparent view of current services, delivery focus, and what is being expanded next."
 				/>
-				{timelineStatus === "ready" && resolvedTimeline.length > 0 ? (
-					<FeatureTimelineTable rows={resolvedTimeline} />
-				) : (
-					<SectionFallback
-						label="feature roadmap"
-						error={timelineStatus === "error" ? timelineError : undefined}
-					/>
-				)}
+				<FeatureTimelineTable rows={resolvedTimeline} />
 				<Separator className="my-8" />
 			</div>
 			<CTASection
-				title="Ready to Scrape Fresh Leads?"
-				description="Lead Orchestra is your open-source scraping engine for extracting leads from any website. Scrape, normalize, and export—get fresh data no one else has. Built for developers, agencies, and data teams."
-				buttonText="Start Scraping"
-				href="/get-started"
+				title="Ready to Launch Your MVP?"
+				description="Launch MVP helps founders scope the right version one, ship faster, and bring in the right specialist support when the product needs deeper execution."
+				buttonText="Book a Service"
+				href="/contact"
 			/>
 		</>
 	);

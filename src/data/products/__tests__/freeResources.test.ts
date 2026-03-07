@@ -31,16 +31,16 @@ describe("free resource catalog", () => {
 	it("flags free resources as a first-class category", () => {
 		const values = Object.values(ProductCategory) as string[];
 		expect(values).toContain("free-resources");
-		expect(values).toContain("voices");
-		expect(values).toContain("sales-scripts");
-		expect(values).toContain("prompts");
+		expect(values).toContain("strategy");
+		expect(values).toContain("support");
+		expect(values).toContain("data");
 	});
 
-	it("maps marketplace extensions to at least one product", () => {
+	it("maps launch MVP resource categories to at least one product", () => {
 		const categories: ProductCategory[] = [
-			ProductCategory.Voices,
-			ProductCategory.SalesScripts,
-			ProductCategory.Prompts,
+			ProductCategory.Strategy,
+			ProductCategory.Support,
+			ProductCategory.Data,
 		];
 
 		for (const category of categories) {

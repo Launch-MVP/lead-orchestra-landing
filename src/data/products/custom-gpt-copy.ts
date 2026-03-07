@@ -3,27 +3,28 @@ import { defineAbTests } from "@/data/products/copy";
 export const customBlogGptTemplateABTest = defineAbTests([
 	{
 		id: "ab-test-gpt-template-v1",
-		name: "Blog GPT Template Copy",
-		description: "Copy optimization for Self-Serve Blog GPT Template.",
+		name: "Launch Content GPT Template Copy",
+		description:
+			"Copy optimization for the self-serve launch content GPT template.",
 		variants: [
 			{
 				name: "V1 - Framework Focus",
 				percentage: 100,
 				copy: {
-					cta: "Start Writing Faster",
+					cta: "Ship Launch Content Faster",
 					buttonCta: "Get the Template",
-					tagline: "Your Content System in a Box.",
+					tagline: "Your Launch Content System in a Box.",
 					subtitle:
-						"The exact frameworks, prompt chains, and output rules we use to generate high-ranking content. Pre-packaged for you.",
+						"The exact frameworks, prompt chains, and output rules we use to generate answer-first content for founder-led launches.",
 					whatsInItForMe:
-						"Skip the years of trial and error. Get a proven, deterministic system for generating high-quality blog content immediately.",
-					target_audience: "DIY Marketers and Content Creators.",
+						"Skip the trial and error and use a proven system for generating drafts that support launch education, authority, and AI-search visibility.",
+					target_audience: "Founders, DIY marketers, and content operators.",
 					pain_point:
-						'Most "blogging prompts" produce generic, robotic trash that hurts your brand and rankings.',
-					fear: "You waste hours tweaking prompts only to get mediocre results that you have to rewrite anyway.",
-					hope: "You plug in a proven template and immediately start generating rough drafts that are 90% ready to publish.",
+						'Most "blogging prompts" produce generic, robotic output that weakens the launch story instead of strengthening it.',
+					fear: "You waste hours tweaking prompts and still publish content that sounds generic and misses the offer.",
+					hope: "You plug in a proven template and start generating rough drafts that are much closer to publishable on day one.",
 					solution:
-						"This isn't just a prompt; it's a complete productized workflow with scoring rules, formatting specs, and QA checks built in.",
+						"This is not just a prompt. It is a productized workflow with scoring rules, formatting specs, internal-link guidance, and QA built in.",
 					highlights: [
 						"Proven Prompt Chains",
 						"Output Scoring System",
@@ -48,20 +49,20 @@ export const customBlogGptStandardABTest = defineAbTests([
 				name: "V1 - Brand Voice Match",
 				percentage: 100,
 				copy: {
-					cta: "Scale Your Unique Voice",
+					cta: "Scale Your Founder Voice",
 					buttonCta: "Get Custom Build",
-					tagline: "AI That Sounds Like You.",
+					tagline: "Launch Content That Sounds Like You.",
 					subtitle:
-						"We ingest your best content and brand guidelines to train a custom GPT that writes with your specific tone and style.",
+						"We ingest your best content, brand docs, and launch offers to build a custom GPT that writes in your specific voice and structure.",
 					whatsInItForMe:
-						"Finally scale your content production without sacrificing the unique voice that makes your brand special.",
-					target_audience: "Established Brands and Thought Leaders.",
+						"Scale launch-content production without sacrificing the founder voice, offer nuance, and brand language that make the product credible.",
+					target_audience: "Founders, brands, and thought-leader teams.",
 					pain_point:
-						"You want to use AI, but every tool sounds generic and fails to capture your brand's nuance.",
-					fear: "You dilute your brand equity by publishing generic, robotic content that sounds like everyone else.",
-					hope: "Your audience can't tell the difference between your human-written posts and your AI-assisted ones.",
+						"You want the leverage of AI content, but generic systems miss your offer, your voice, and your actual launch priorities.",
+					fear: "You dilute the brand by publishing AI content that sounds polished but disconnected from the product and offer.",
+					hope: "Your audience sees consistent founder-quality content that reinforces the launch instead of diluting it.",
 					solution:
-						"We don't just prompt; we fine-tune. We build a custom knowledge base from your specific data so the AI knows your history, tone, and rules.",
+						"We do not just hand over prompts. We configure a custom knowledge base and writing system that understands your history, tone, offer, and rules.",
 					highlights: [
 						"Custom Voice Training",
 						"Brand Document Ingestion",
@@ -86,20 +87,20 @@ export const customBlogGptEngineABTest = defineAbTests([
 				name: "V1 - Automated Pipeline",
 				percentage: 100,
 				copy: {
-					cta: "Automate End-to-End",
+					cta: "Automate the Content Engine",
 					buttonCta: "Build Content Engine",
-					tagline: "From Trend to Indexing.",
+					tagline: "From Signal to Published Authority.",
 					subtitle:
-						"A complete, automated content infrastructure. We automate topic sourcing, drafting, and distribution workflows for scale.",
+						"A complete automated content infrastructure for sourcing topics, drafting assets, and moving launch content through distribution and indexing.",
 					whatsInItForMe:
-						"Turn content marketing into a scalable, predictable machine that runs without your constant supervision.",
-					target_audience: "Media Companies and High-Volume Publishers.",
+						"Turn launch-content production into a scalable, predictable system that keeps shipping without constant manual orchestration.",
+					target_audience: "Founder-led brands and high-output content teams.",
 					pain_point:
-						"Managing a high-volume content calendar involves messy spreadsheets, missed deadlines, and constant coordination.",
-					fear: "Your content machine breaks down the moment you or your editor steps away.",
-					hope: "You have a fully automated assembly line where high-quality content flows from idea to published post automatically.",
+						"Managing a high-volume content calendar with launch priorities, approvals, and indexing steps becomes operationally messy fast.",
+					fear: "The content machine falls apart the moment the founder or editor stops manually pushing it forward.",
+					hope: "You have a system where launch-relevant content moves from idea to published asset with much less coordination drag.",
 					solution:
-						"We build the entire infrastructure—connecting trend sources, AI generators, and your CMS—into a seamless, automated pipeline.",
+						"We build the infrastructure that connects topic sources, AI drafting, approvals, and publishing into one durable pipeline.",
 					highlights: [
 						"Automated Topic Sourcing",
 						"End-to-End Pipeline",

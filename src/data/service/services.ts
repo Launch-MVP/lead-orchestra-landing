@@ -1,1633 +1,1017 @@
-// src/data/services.ts OR src/types/services.ts
-
-import { SERVICE_CATEGORIES } from "@/types/service/services";
-import type {
-	IconName,
-	ServiceCategoryValue,
-	ServiceHowItWorks,
-	ServiceProblemSolution,
-	ServicesData,
-} from "@/types/service/services";
-import {
-	aiDirectMailCopyright,
-	aiInboundAgentCopyright,
-	aiInboundCopyright,
-	aiOutboundQualificationCopyright,
-	aiPhoneAgentCopyright,
-	aiSocialMediaCopyright,
-	aiSocialMediaOutreachCopyright,
-	aiTextMessageCopyright,
-	aiTextMessageOutreachCopyright,
-	dataEnrichmentCopyright,
-	embeddableAIChatbotCopyright,
-	leadDossierCopyright,
-	leadGenCopyright,
-	marketAnalysisCopyright,
-	marketAnalyzerCopyright,
-	performanceHubCopyright,
-	portfolioDashboardCopyright,
-	proprietaryVoiceCloningCopyright,
-	rentEstimatorCopyright,
-	snailMailCopyright,
-	socialLeadGenCopyright,
-	socialProfileHunterCopyright,
-} from "./slug_data/copyright";
-import {
-	aiDirectMailFAQ,
-	aiInboundAgentFAQ,
-	aiInboundFAQ,
-	aiOutboundQualificationFAQ,
-	aiPhoneAgentFAQ,
-	aiSocialMediaOutreachFAQ,
-	aiTextMessageOutreachFAQ,
-	dataEnrichmentFAQ,
-	embeddableAIChatbotFAQ,
-	leadDossierFAQ,
-	leadGenFAQ,
-	marketAnalysisFAQ,
-	marketAnalyzerFAQ,
-	performanceHubFAQ,
-	portfolioDashboardFAQ,
-	proprietaryVoiceCloningFAQ,
-	rentEstimatorFAQ,
-	snailMailFAQ,
-	socialLeadGenFAQ,
-	socialMediaQualificationFAQ,
-	socialProfileHunterFAQ,
-	textMessageFAQ,
-} from "./slug_data/faq";
-import {
-	aiDirectMailNurturingHowItWorks,
-	aiInboundAgentHowItWorks,
-	aiInboundHowItWorks,
-	aiOutboundQualificationHowItWorks,
-	aiPhoneAgentHowItWorks,
-	aiSocialMediaHowItWorks,
-	aiSocialMediaOutreachHowItWorks,
-	aiTextMessageHowItWorks,
-	aiTextMessageOutreachHowItWorks,
-	dataEnrichmentHowItWorks,
-	embeddableAIChatbotHowItWorks,
-	leadDossierHowItWorks,
-	leadGenHowItWorks,
-	marketAnalysisHowItWorks,
-	marketAnalyzerHowItWorks,
-	performanceHubHowItWorks,
-	portfolioDashboardHowItWorks,
-	proprietaryVoiceCloningHowItWorks,
-	rentEstimatorHowItWorks,
-	snailMailHowItWorks,
-	socialLeadGenHowItWorks,
-	socialProfileHunterHowItWorks,
-} from "./slug_data/how_it_works";
-import {
-	aiSocialMediaIntegrations,
-	aiSocialMediaOutreachIntegrations,
-	embeddableAIChatbotIntegrations,
-	leadGenIntegrations,
-} from "./slug_data/integrations";
-
 import type { FAQProps } from "@/types/faq";
+import type { Plan } from "@/types/service/plans";
+import {
+	type IconName,
+	SERVICE_CATEGORIES,
+	type ServiceCategoryValue,
+	type ServiceHowItWorks,
+	type ServiceItemData,
+	type ServiceProblemSolution,
+	type ServicesData,
+	type TechStack,
+} from "@/types/service/services";
+import type { Testimonial } from "@/types/testimonial";
 import { PricingPlans } from "./slug_data/pricing";
-import {
-	aiDirectMailNurturingProblemsSolutions,
-	aiInboundAgentProblemsSolutions,
-	aiInboundProblemsSolutions,
-	aiOutboundQualificationProblemsSolutions,
-	aiPhoneAgentProblemsSolutions,
-	aiSocialMediaOutreachProblemsSolutions,
-	aiSocialMediaProblemsSolutions,
-	aiTextMessageOutreachProblemsSolutions,
-	aiTextMessageProblemsSolutions,
-	dataEnrichmentProblemsSolutions,
-	embeddableAIChatbotProblemsSolutions,
-	leadDossierProblemsSolutions,
-	leadGenProblemsSolutions,
-	marketAnalysisProblemsSolutions,
-	marketAnalyzerProblemsSolutions,
-	performanceHubProblemsSolutions,
-	portfolioDashboardProblemsSolutions,
-	proprietaryVoiceCloningProblemsSolutions,
-	rentEstimatorProblemsSolutions,
-	snailMailProblemsSolutions,
-	socialLeadGenProblemsSolutions,
-	socialProfileHunterProblemsSolutions,
-} from "./slug_data/problems_solutions";
-import {
-	aiDirectMailNurturingTestimonials,
-	aiInboundAgentTestimonials,
-	aiInboundTestimonials,
-	aiOutboundQualificationTestimonials,
-	aiPhoneAgentTestimonials,
-	aiSocialMediaOutreachTestimonials,
-	aiSocialMediaTestimonials,
-	aiTextMessageOutreachTestimonials,
-	aiTextMessageTestimonials,
-	dataEnrichmentTestimonials,
-	embeddableAIChatbotTestimonials,
-	leadDossierTestimonials,
-	leadGenTestimonials,
-	marketAnalysisTestimonials,
-	marketAnalyzerTestimonials,
-	performanceHubTestimonials,
-	portfolioDashboardTestimonials,
-	proprietaryVoiceCloningTestimonials,
-	rentEstimatorTestimonials,
-	snailMailTestimonials,
-	socialLeadGenTestimonials,
-	socialProfileHunterTestimonials,
-} from "./slug_data/testimonials";
 
-const leadTypesHowItWorksBase: ServiceHowItWorks[] = [
+const DEFAULT_SPLINE_URL =
+	"https://prod.spline.design/homQGDx44sO4Aflh/scene.splinecode";
+const LAST_UPDATED = new Date("2026-03-06T00:00:00.000Z");
+
+const planIds = (...ids: string[]): Plan[] =>
+	ids
+		.map((id) => PricingPlans.find((plan) => plan.id === id))
+		.filter((plan): plan is Plan => Boolean(plan));
+
+const faqFor = (title: string): FAQProps => ({
+	title: `${title} FAQs`,
+	subtitle: `Common questions about ${title.toLowerCase()}, fit, and delivery.`,
+	faqItems: [
+		{
+			question: "Who is this for?",
+			answer:
+				"Founders and small teams that need a tighter launch path, cleaner execution, and less product drift.",
+		},
+		{
+			question: "Can this start from an existing prototype?",
+			answer:
+				"Yes. We can start from a rough prototype, an active codebase, or a founder brief and reduce it to the right next move.",
+		},
+		{
+			question: "What do we leave with?",
+			answer:
+				"You leave with usable product artifacts, clearer priorities, and a practical handoff instead of generic recommendations.",
+		},
+	],
+});
+
+const testimonialsFor = (title: string): Testimonial[] => [
 	{
-		stepNumber: 1,
-		title: "Select Sources",
-		subtitle: "Target the right profiles",
-		description:
-			"Choose the websites, directories, or public pages that match your target lead type, then set filters like location, keywords, and categories.",
-		icon: "Search",
-		label: "Select Sources",
-		positionLabel: "left-[-40px] top-[30px]",
-		payload: [
-			{ name: "Precision", value: 92, fill: "hsl(var(--primary))" },
-			{ name: "Coverage", value: 88, fill: "hsl(var(--secondary))" },
-		],
-		indicator: "dot",
+		id: 1,
+		name: "Nadia Chen",
+		role: "Founder",
+		company: "Peridot",
+		content: `${title} gave us a cleaner version-one path and cut weeks of indecision.`,
+		problem: "The product vision was broad and execution kept drifting.",
+		solution: "Scope tightened fast and the launch path became concrete.",
+		rating: 5,
 	},
 	{
-		stepNumber: 2,
-		title: "Extract & Normalize",
-		subtitle: "Clean data automatically",
-		description:
-			"We extract key fields (name, email, phone, company, website, social links) and normalize everything into a consistent schema for easy use.",
-		icon: "Database",
-		label: "Normalize",
-		positionLabel: "left-[120px] top-[5px]",
-		payload: [
-			{ name: "Data Quality", value: 95, fill: "hsl(var(--accent))" },
-			{ name: "Speed", value: 90, fill: "hsl(var(--muted))" },
-		],
-		indicator: "line",
-	},
-	{
-		stepNumber: 3,
-		title: "Export & Activate",
-		subtitle: "Use leads anywhere",
-		description:
-			"Export to CSV/JSON or push into your CRM and outreach workflows so your team can start conversations immediately.",
-		icon: "Rocket",
-		label: "Export",
-		positionLabel: "left-[-35px] top-[55px]",
-		payload: [
-			{ name: "Deliverability", value: 91, fill: "hsl(var(--chart-1))" },
-			{ name: "Time Saved", value: 94, fill: "hsl(var(--chart-2))" },
-		],
-		indicator: "dashed",
+		id: 2,
+		name: "Marcus Hill",
+		role: "Operator",
+		company: "Bookt",
+		content:
+			"We finally had a build path that felt launchable instead of experimental.",
+		problem: "Prototype work was moving without a stable foundation.",
+		solution: "Clearer priorities, better structure, and less cleanup debt.",
+		rating: 5,
 	},
 ];
 
-const leadTypesProblemsSolutionsBase: ServiceProblemSolution[] = [
-	{
-		problem: "Lead data is scattered across many websites and formats.",
-		solution:
-			"Scrape multiple sources and normalize everything into a single consistent output.",
-	},
-	{
-		problem: "Manual copy/paste lead building wastes hours every week.",
-		solution:
-			"Automate extraction, cleaning, and export so lists are ready in minutes.",
-	},
-	{
-		problem: "Messy records cause low response rates and duplicate outreach.",
-		solution:
-			"Standardize fields and de-duplicate records before they hit your CRM.",
-	},
+const problems = (
+	firstProblem: string,
+	firstSolution: string,
+	secondProblem: string,
+	secondSolution: string,
+): ServiceProblemSolution[] => [
+	{ problem: firstProblem, solution: firstSolution },
+	{ problem: secondProblem, solution: secondSolution },
 ];
 
-const emptyLeadTypesFaq = (subtitle: string): FAQProps => ({
-	title: "Frequently Asked Questions",
-	subtitle,
-	faqItems: [],
+const steps = (
+	a: [string, string, IconName],
+	b: [string, string, IconName],
+	c: [string, string, IconName],
+): ServiceHowItWorks[] =>
+	[a, b, c].map(([title, description, icon], index) => ({
+		stepNumber: index + 1,
+		title,
+		subtitle: `Step ${index + 1}`,
+		description,
+		icon,
+		label: `step-${index + 1}`,
+		positionLabel: `step-${index + 1}`,
+	}));
+
+const stacks = {
+	strategy: [
+		{
+			category: "Planning Stack",
+			libraries: [
+				{
+					name: "Notion",
+					description: "Launch memos, scope docs, and decision records.",
+					lucideIcon: "FileText",
+				},
+				{
+					name: "Figma",
+					description: "Fast UX direction, wireframes, and flow mapping.",
+					lucideIcon: "Palette",
+				},
+				{
+					name: "Miro",
+					description: "Founder workshops, system maps, and journey planning.",
+					lucideIcon: "LayoutGrid",
+				},
+			],
+		},
+	] satisfies TechStack[],
+	build: [
+		{
+			category: "Build Stack",
+			libraries: [
+				{
+					name: "Next.js",
+					description: "Web apps, dashboards, and launch pages.",
+					lucideIcon: "Rocket",
+				},
+				{
+					name: "React Native",
+					description: "Mobile delivery when the MVP needs app distribution.",
+					lucideIcon: "Smartphone",
+				},
+				{
+					name: "Supabase",
+					description: "Auth, database, storage, and backend helpers.",
+					lucideIcon: "Database",
+				},
+				{
+					name: "Stripe",
+					description: "Payments and subscription flows for launch-ready apps.",
+					lucideIcon: "CreditCard",
+				},
+			],
+		},
+	] satisfies TechStack[],
+	ai: [
+		{
+			category: "AI Stack",
+			libraries: [
+				{
+					name: "OpenAI",
+					description: "Prompted workflows, agents, and product copilots.",
+					lucideIcon: "BrainCircuit",
+				},
+				{
+					name: "n8n",
+					description: "Operational automations and workflow glue.",
+					lucideIcon: "RefreshCw",
+				},
+				{
+					name: "Pinecone",
+					description: "Retrieval and context layers for AI features.",
+					lucideIcon: "DatabaseZap",
+				},
+			],
+		},
+	] satisfies TechStack[],
+	support: [
+		{
+			category: "Support Stack",
+			libraries: [
+				{
+					name: "Sentry",
+					description: "Production error monitoring and issue triage.",
+					lucideIcon: "ShieldCheck",
+				},
+				{
+					name: "PostHog",
+					description:
+						"Usage review, funnel analysis, and launch feedback loops.",
+					lucideIcon: "BarChartBig",
+				},
+				{
+					name: "GitHub Actions",
+					description: "CI, release automation, and environment checks.",
+					lucideIcon: "Code",
+				},
+			],
+		},
+	] satisfies TechStack[],
+	resources: [
+		{
+			category: "Handoff Assets",
+			libraries: [
+				{
+					name: "README",
+					description: "Setup instructions and operating notes.",
+					lucideIcon: "FileText",
+				},
+				{
+					name: "Launch Checklist",
+					description: "QA, deployment, tracking, and owner responsibilities.",
+					lucideIcon: "CalendarCheck",
+				},
+				{
+					name: "Analytics Plan",
+					description: "KPIs, events, and instrumentation notes.",
+					lucideIcon: "PieChart",
+				},
+			],
+		},
+	] satisfies TechStack[],
+};
+
+type Seed = {
+	id: string;
+	title: string;
+	iconName: IconName;
+	description: string;
+	features: string[];
+	price?: number | string;
+	category: ServiceCategoryValue;
+	slug: string;
+	pricing: Plan[];
+	heroSubtitle: string;
+	problemsAndSolutions: ServiceProblemSolution[];
+	howItWorks: ServiceHowItWorks[];
+	integrations: TechStack[];
+	showBanner?: boolean;
+	bannerText?: string;
+	bannerColor?: string;
+};
+
+const service = (seed: Seed): ServiceItemData => ({
+	id: seed.id,
+	iconName: seed.iconName,
+	title: seed.title,
+	description: seed.description,
+	features: seed.features,
+	price: seed.price,
+	showBanner: seed.showBanner,
+	bannerText: seed.bannerText,
+	bannerColor: seed.bannerColor,
+	categories: [seed.category],
+	slugDetails: {
+		slug: seed.slug,
+		dilemma: seed.problemsAndSolutions[0]?.problem ?? seed.description,
+		solution: seed.problemsAndSolutions[0]?.solution ?? seed.heroSubtitle,
+		pricing: seed.pricing,
+		faq: faqFor(seed.title),
+		splineUrl: {
+			splineUrl: DEFAULT_SPLINE_URL,
+			defaultZoom: 1,
+		},
+		defaultZoom: 1,
+		problemsAndSolutions: seed.problemsAndSolutions,
+		howItWorks: seed.howItWorks,
+		testimonials: testimonialsFor(seed.title),
+		integrations: seed.integrations,
+		copyright: {
+			title: `Need help with ${seed.title.toLowerCase()}?`,
+			subtitle: seed.heroSubtitle,
+			ctaText: "Talk to Sales",
+			ctaLink: "/contact",
+		},
+		lastModified: LAST_UPDATED,
+		datePublished: LAST_UPDATED,
+	},
 });
 
 export const services: ServicesData = {
-	[SERVICE_CATEGORIES.LEAD_GENERATION]: {
-		leadManagement: {
-			id: "lead-management",
-			iconName: "Users",
-			title: "Lookalike Audience Expansion and Management",
+	[SERVICE_CATEGORIES.STRATEGY]: {
+		freeConsultation: service({
+			id: "service-free-mvp-consultation",
+			title: "Free MVP Consultation",
+			iconName: "Lightbulb",
 			description:
-				"Tap into our database of over 140 million on-market and off-market properties. Our AI-powered platform allows you to define precise search criteria to build targeted lead lists in minutes, not weeks, ensuring you connect with motivated sellers and find the right deals, faster.",
+				"A quick founder session to test the idea, the launch path, and whether the current MVP direction is worth building.",
 			features: [
-				"Access to 140M+ Property Records",
-				"AI-Powered Lead Scoring",
-				"Automated List Building & Enrichment",
-				"Seamless CRM Integration",
-				"Pipeline Management Dashboards",
+				"Idea review",
+				"Version-one pressure test",
+				"Launch-path guidance",
+				"Clear next step",
 			],
-			price: "Core Feature",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-				SERVICE_CATEGORIES.REAL_ESTATE_TOOLS,
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-				SERVICE_CATEGORIES.SKIP_TRACING,
-			],
-			slugDetails: {
-				integrations: leadGenIntegrations,
-				defaultZoom: 1,
-				slug: "lead-generation-management",
-				dilemma:
-					"Sourcing a consistent flow of high-quality real estate leads feels like searching for a needle in a haystack. Manual prospecting is inefficient, data is often outdated, and valuable time is wasted on unqualified prospects.",
-				solution:
-					"Tap into our database of over 140 million on-market and off-market properties. Our AI-powered platform allows you to define precise search criteria to build targeted lead lists in minutes, not weeks, ensuring you connect with motivated sellers and find the right deals, faster.",
-				problemsAndSolutions: leadGenProblemsSolutions,
-				howItWorks: leadGenHowItWorks,
-				testimonials: leadGenTestimonials,
-				pricing: PricingPlans,
-				copyright: leadGenCopyright,
-				faq: leadGenFAQ,
-			},
-		},
-		socialLeadGen: {
-			id: "social-lead-generation",
-			iconName: "Share",
-			title: "Automated Social Lookalike Audience Expansion",
-			description:
-				"Turn social media comments into closed deals. Our AI engages prospects, qualifies them with proven scripts, and nurtures them until they are ready for a sales call—then it books the appointment on your calendar or hot-transfers the live call directly to you.",
-			features: [
-				// Feature list updated to reflect the powerful outcome
-				"Automated Comment-to-DM Engagement",
-				"AI-Powered Nurturing & Follow-up",
-				"Automated Calendar Scheduling",
-				"Live Hot Transfer Phone Calls",
-				"Direct-to-CRM Lead Sync",
-			],
-			price: "Premium Add-on",
-			showBanner: true,
-			bannerText: "Social Appointments",
-			bannerColor: "bg-gradient-to-r from-pink-500 to-orange-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				integrations: leadGenIntegrations, // Assumes defined
-				defaultZoom: 1,
-				slug: "social-lead-generation",
-				dilemma:
-					"Social media generates comments, but turning that fleeting interest into a concrete sales appointment is a massive, time-consuming challenge. Leads often go cold before you can even talk to them.",
-				solution:
-					"Our system doesn't just find leads; it delivers them. The AI handles every step from the initial comment to qualification and nurturing, culminating in a booked appointment on your calendar or a live phone call with a sales-ready prospect.",
-				problemsAndSolutions: socialLeadGenProblemsSolutions, // Assumes defined
-				howItWorks: socialLeadGenHowItWorks, // Uses the updated version from above
-				testimonials: socialLeadGenTestimonials, // Assumes defined
-				pricing: PricingPlans, // Assumes defined
-				copyright: socialLeadGenCopyright, // Assumes defined
-				faq: socialLeadGenFAQ, // Assumes defined
-			},
-		},
-		directMailCampaigns: {
-			id: "direct-mail-campaigns",
-			iconName: "Mail",
-			title: "Automated Direct Mail Campaigns",
-			description:
-				"Launch proven, multi-touch direct mail campaigns in minutes. Select a lead list, choose an industry-tested sequence, and our proprietary system automatically sends the right mail piece at the right time to get your phone ringing.",
-			features: [
-				"Proven Multi-Touch Sequences",
-				"Professionally Designed Templates",
-				"Automated Sending & Scheduling",
-				"Intelligent Non-Responder Follow-up",
-				"Proprietary National Print & Mail Network", // Updated feature
-			],
-			price: "Usage-Based",
-			showBanner: true,
-			bannerText: "Automated Direct Mail",
-			bannerColor: "bg-gradient-to-r from-teal-500 to-blue-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "automated-direct-mail",
-				dilemma:
-					"Direct mail is a powerful lead source, but it's incredibly manual and hard to scale. Printing, stuffing envelopes, managing lists, and tracking follow-ups is a logistical nightmare that kills productivity.",
-				solution:
-					"Our system automates the entire process. Choose a lead list and activate a pre-built, 4-step mail campaign that uses industry-proven templates and timing to maximize response rates, all without you ever touching a stamp.",
-				problemsAndSolutions: snailMailProblemsSolutions,
-				howItWorks: snailMailHowItWorks,
-				testimonials: snailMailTestimonials,
-				pricing: PricingPlans,
-				copyright: snailMailCopyright,
-				faq: snailMailFAQ,
-			},
-		},
-	},
-	[SERVICE_CATEGORIES.LEAD_TYPES]: {
-		realEstateOffMarketLeads: {
-			id: "real-estate-off-market-leads",
-			iconName: "Database",
-			title: "Real Estate Off-Market Leads",
-			description:
-				"Build targeted off-market owner lists from public sources and data signals. Filter by geography, property characteristics, ownership, and motivation indicators to find deals faster.",
-			features: [
-				"Off-market owner lead list building",
-				"Geo + property filters (zip, city, type, etc.)",
-				"Owner/entity matching & de-duplication",
-				"CSV/JSON export to your pipeline",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "real-estate-off-market-leads",
-				dilemma:
-					"Off-market opportunities are hard to find because the data is fragmented and manual prospecting is slow.",
-				solution:
-					"Target the right sources, extract owner details, and generate clean off-market lists you can immediately activate for outreach.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Start Building Off-Market Lists",
-					subtitle:
-						"Generate clean off-market leads from public sources and activate outreach fast.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about Off-Market lead generation.",
-				),
-			},
-		},
-		realEstateInvestorB2BLeads: {
-			id: "real-estate-investor-b2b-leads",
-			iconName: "Users",
-			title: "Real Estate Investor & Wholesaler (B2B) Leads",
-			description:
-				"Generate B2B lead lists of investors, wholesalers, and institutional buyers. Find decision-makers, contact details, and profiles across public sources to drive partnerships and deal flow.",
-			features: [
-				"Investor, wholesaler, and institutional buyer targeting",
-				"Company + decision-maker extraction",
-				"Contact fields (email, phone, website, socials)",
-				"Segment by market, strategy, or asset class keywords",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-purple-600 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "real-estate-investor-b2b-leads",
-				dilemma:
-					"B2B deal flow depends on relationships, but investor and buyer data is scattered across many public sources.",
-				solution:
-					"Automate discovery and extraction of investor/wholesaler profiles so you can build partner lists and outreach sequences reliably.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Build Your Investor Network",
-					subtitle:
-						"Generate B2B investor and buyer lead lists and activate outreach in minutes.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about Investor & Wholesaler lead generation.",
-				),
-			},
-		},
-		localBusinessListingLeads: {
-			id: "local-business-listing-leads",
-			iconName: "Globe",
-			title: "Local Business Listing Leads",
-			description:
-				"Scrape local business listings at scale to build outbound-ready prospect lists. Capture business name, category, location, website, phone, and other public profile fields.",
-			features: [
-				"Local business profile scraping at scale",
-				"Category + geo targeting (city, zip, radius)",
-				"Website, phone, and address extraction",
-				"Export-ready lead lists for outreach",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-teal-500 to-blue-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "local-business-listing-leads",
-				dilemma:
-					"Local business prospecting is tedious because directory pages and profiles are time-consuming to compile by hand.",
-				solution:
-					"Automate extraction of public listing data and build clean, segmented lists your team can use immediately.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Scrape Local Business Listings",
-					subtitle:
-						"Generate clean business listing lead lists and export them to your pipeline.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about Local Business Listing leads.",
-				),
-			},
-		},
-		eventOrganizerLeads: {
-			id: "event-organizer-leads",
-			iconName: "Network",
-			title: "Event Organizer Leads",
-			description:
-				"Generate lead lists of event organizers, venues, and promoters from public event pages and directories. Capture contact info and event metadata to power sponsorship and partnership outreach.",
-			features: [
-				"Organizer + venue scraping from event pages",
-				"Extract emails, phones, websites, and socials",
-				"Segment by city, category, and event keywords",
-				"Export to CSV/JSON or CRM workflows",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-green-500 to-teal-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "event-organizer-leads",
-				dilemma:
-					"Finding the right organizers and decision-makers for events takes too long when you’re searching site by site.",
-				solution:
-					"Scrape public event sources, extract organizer details, and build segmented lead lists for sponsorship and partnership outreach.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Find Event Decision-Makers",
-					subtitle:
-						"Generate event organizer lead lists and start partnership outreach fast.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about Event Organizer leads.",
-				),
-			},
-		},
-		datingProfileLeads: {
-			id: "dating-profile-leads",
-			iconName: "Search",
-			title: "Dating Profile Leads",
-			description:
-				"Build lead lists from publicly available profile pages and listings where permitted. Extract profile fields and metadata for your matching, analytics, or outreach workflows.",
-			features: [
-				"Public profile field extraction",
-				"Location, interests, and keyword filtering",
-				"Normalize fields into a consistent schema",
-				"Export data for analysis or activation",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-pink-500 to-orange-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "dating-profile-leads",
-				dilemma:
-					"Profile data is inconsistent across sites and hard to collect in a structured way for analysis or workflows.",
-				solution:
-					"Extract and normalize publicly available profile fields into a clean dataset you can analyze or pipe into your systems.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Turn Public Profiles Into Structured Data",
-					subtitle:
-						"Extract and normalize publicly available profile fields for your workflows.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about Dating Profile leads.",
-				),
-			},
-		},
-		b2cConsumerLeads: {
-			id: "b2c-consumer-leads",
-			iconName: "Smartphone",
-			title: "B2C Consumer Leads",
-			description:
-				"Generate consumer lead lists from public web sources for B2C outreach. Extract contact fields and enrich records so campaigns launch quickly and cleanly.",
-			features: [
-				"Consumer lead list generation from public pages",
-				"Extract contact fields where available",
-				"De-duplication and normalization",
-				"Export to CSV/JSON or your CRM",
-			],
-			price: "Lead Type",
-			showBanner: true,
-			bannerText: "Lead Type",
-			bannerColor: "bg-gradient-to-r from-blue-500 to-indigo-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_TYPES,
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "b2c-consumer-leads",
-				dilemma:
-					"B2C prospecting is slow when data collection is manual and lead records are inconsistent across sources.",
-				solution:
-					"Automate extraction and normalization so you can launch consumer campaigns faster with cleaner lists.",
-				problemsAndSolutions: leadTypesProblemsSolutionsBase,
-				howItWorks: leadTypesHowItWorksBase,
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Launch B2C Campaigns Faster",
-					subtitle:
-						"Generate clean consumer lead lists and activate outreach across your tools.",
-					ctaText: "Get Started",
-					ctaLink: "/contact",
-				},
-				faq: emptyLeadTypesFaq(
-					"Everything you need to know about B2C Consumer lead generation.",
-				),
-			},
-		},
-	},
-	[SERVICE_CATEGORIES.LEAD_PREQUALIFICATION]: {
-		aiOutboundQualificationAgent: {
-			id: "ai-outbound-qualification-agent",
-			iconName: "UserCheck" as IconName,
-			title: "AI Outbound Qualification Agent",
-			description:
-				"Automate your outbound lead qualification with our AI Agent. It intelligently calls and texts your leads, pre-qualifies them through natural conversation, and then either books appointments directly on your calendar or initiates a hot transfer to your sales team.",
-			features: [
-				"Automated outbound AI voice calls and SMS campaigns",
-				"Intelligent conversational AI for deep lead pre-qualification",
-				"Customizable qualification scripts and lead scoring logic",
-				"Direct calendar integration for automated appointment scheduling",
-				"Seamless hot-transfer capability for sales-ready leads",
-				"Real-time CRM synchronization of all lead activities",
-				"Comprehensive performance analytics and reporting",
-			],
-			price: "Custom Pricing", // Or refer to plans like "Starts at $499/mo"
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1, // You might want to adjust this if you have a Spline/3D model
-				slug: "ai-outbound-qualification-agent",
-				dilemma:
-					"Your sales team is bogged down making countless unproductive outbound calls to unqualified leads, while scheduling and timely follow-ups on genuinely interested prospects become a bottleneck.",
-				solution:
-					"Deal Scale's AI Outbound Qualification Agent revolutionizes this. It tirelessly works your lead lists, engaging prospects via AI calls and SMS, expertly pre-qualifying them. Qualified leads are then instantly converted into booked appointments or hot-transferred to your sales reps, ensuring they only spend time on high-potential conversations.",
-				problemsAndSolutions: aiOutboundQualificationProblemsSolutions,
-				howItWorks: aiOutboundQualificationHowItWorks,
-				testimonials: aiOutboundQualificationTestimonials,
-				pricing: PricingPlans, // This is an array of Plan objects
-				copyright: aiOutboundQualificationCopyright,
-				faq: aiOutboundQualificationFAQ, // This is an FAQProps object
-				// splineUrl: { splineUrl: "your-spline-url-for-outbound-agent", defaultZoom: 1 }, // Optional
-				// datePublished: new Date("YYYY-MM-DD"), // Optional
-				// lastModified: new Date("YYYY-MM-DD"), // Optional
-			},
-		},
-		aiDirectMailQualificationAgent: {
-			id: "ai-direct-mail-qualification-agent",
-			iconName: "MailCheck" as IconName,
-			title: "AI Direct Mail Qualification Agent",
-			description:
-				"Transform direct mail into a precision-guided lead machine. Our AI identifies ideal off-market targets, sends hyper-personalized letters that get responses, and then automatically pre-qualifies interested sellers for you.",
-			features: [
-				"AI-powered list building from 140M+ property records",
-				"Pay-as-you-go mail fulfillment via Propietary Mailing System",
-				"Use AI Credits for mail personalization & skip tracing",
-				"24/7 AI agent to handle and qualify all inbound responses",
-				"Seamless hot-transfer of qualified leads to your sales team",
-				"Direct calendar integration for automated appointment setting",
-			],
-			price: "Usage-Based",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				slug: "ai-direct-mail-qualification-agent",
-				dilemma:
-					"Your direct mail campaigns are an expensive gamble. High monthly software fees, opaque printing costs, and the 'spray and pray' approach kill your ROI before the letters even land in mailboxes.",
-				solution:
-					"Deal Scale severs the link between effort and outcome. Pay transparent, at-cost prices for mailers via  Propietary Mailing System. Use our flexible AI Credits only for the tasks that create value: hyper-personalizing copy, skip tracing to find owners, and having our AI qualify every single inbound lead. Stop paying for software; start paying for results.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: aiDirectMailNurturingProblemsSolutions,
-				howItWorks: aiDirectMailNurturingHowItWorks,
-				testimonials: aiDirectMailNurturingTestimonials,
-				pricing: PricingPlans,
-				faq: aiDirectMailFAQ,
-				copyright: aiDirectMailCopyright,
-				// Optional Fields
-				// splineUrl: { splineUrl: "your-spline-url-for-direct-mail", defaultZoom: 1 },
-				// datePublished: new Date("2023-11-01"),
-				// lastModified: new Date("2023-11-01"),
-			},
-		},
-		aiInboundCallQualificationAgent: {
-			id: "ai-inbound-call-qualification-agent",
-			iconName: "Phone",
-			title: "AI Inbound Call Qualification Agent",
-			description:
-				"Never miss a lead again. Our AI agent answers your calls 24/7, qualifies leads in real-time through natural conversation, and books appointments directly on your calendar, ensuring every inbound call is a revenue opportunity.",
-			features: [
-				"24/7 Instant & Automated Call Answering",
-				"AI-Powered Conversational Lead Qualification",
-				"Customizable Qualification Scripts & Business Logic",
-				"Direct Calendar Integration for Automated Booking",
-				"Intelligent Call Routing & Hot-Transfer Capability",
-				"Automatic CRM Logging with Call Transcripts",
-			],
-			price: "Usage-Based",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				slug: "ai-inbound-call-qualification-agent",
-				dilemma:
-					"Missed calls are missed revenue. Your team can't answer every call, especially after hours. Voicemails get ignored, and staff spend too much time on repetitive qualification instead of high-value tasks.",
-				solution:
-					"Deal Scale’s AI Inbound Agent acts as your perfect 24/7 receptionist. It instantly answers every call, engages callers with intelligent, natural conversation, and executes your qualification process flawlessly. It filters out spam, booking only high-intent prospects directly into your calendar.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: aiInboundProblemsSolutions,
-				howItWorks: aiInboundHowItWorks,
-				testimonials: aiInboundTestimonials,
-				pricing: PricingPlans,
-				faq: aiInboundFAQ,
-				copyright: aiInboundCopyright,
-			},
-		},
-		aiSocialMediaQualificationAgent: {
-			id: "ai-social-media-qualification-agent",
-			iconName: "MessageSquare",
-			title: "AI Social Media Qualification Agent",
-			description:
-				"Turn your Facebook and Instagram comments and DMs into qualified leads, 24/7. Our AI agent instantly engages prospects, qualifies them through automated conversations, and syncs their data directly to your CRM.",
-			features: [
-				"24/7 Automated Engagement on Comments & DMs",
-				"Works with Facebook & Instagram",
-				"Visual Flow Builder for Custom Conversations",
-				"Automatic Lead Data Capture & CRM Sync",
-				"Calendar Integration for Direct Appointment Booking",
-				"100% Meta API Compliant",
-			],
-			price: "Usage-Based",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-				SERVICE_CATEGORIES.AI_FEATURES,
-			],
-			slugDetails: {
-				slug: "ai-social-media-qualification-agent",
-				dilemma:
-					"Your social media is a lead graveyard. Comments on your ads go unanswered for hours, DMs get seen too late, and you're manually trying to qualify everyone, wasting time on people who aren't serious.",
-				solution:
-					"Deal Scale's AI Agent acts as your dedicated social media manager that never sleeps. It instantly engages every prospect, runs them through your custom qualification script, and automatically separates the hot leads from the noise, so you only spend time on conversations that lead to deals.",
-				defaultZoom: 1,
-				integrations: aiSocialMediaIntegrations,
-				problemsAndSolutions: aiSocialMediaProblemsSolutions,
-				howItWorks: aiSocialMediaHowItWorks,
-				testimonials: aiSocialMediaTestimonials,
-				pricing: PricingPlans,
-				faq: socialMediaQualificationFAQ,
-				copyright: aiSocialMediaCopyright,
-			},
-		},
-		aiTextMessagePrequalificationAgent: {
-			id: "ai-text-message-prequalification-agent",
-			iconName: "MessageSquare",
-			title: "AI Text Message Prequalification Agent",
-			description:
-				"Engage, qualify, and book leads through intelligent, two-way SMS and iMessage conversations. Our AI agent handles the entire process, turning your lead lists into a pipeline of sales-ready appointments.",
-			features: [
-				"Two-Way Conversational AI (SMS & iMessage)",
-				"Exclusive iMessage (Blue Bubble) Support",
-				"Automated Lead Qualification & Nurturing",
-				"Built-in TCPA Compliance & Opt-Out Management",
-				"Direct Calendar & CRM Integration",
-				"Visual Flow Builder for Custom Scripts",
-			],
-			price: "Usage-Based",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [
-				SERVICE_CATEGORIES.AI_FEATURES,
-				SERVICE_CATEGORIES.LEAD_PREQUALIFICATION,
-			],
-			slugDetails: {
-				slug: "ai-text-message-prequalification-agent",
-				dilemma:
-					"Your leads ignore calls and emails. You know you need to reach them via text, but manual texting is impossible to scale, and standard SMS blasts are impersonal, ineffective, and legally risky.",
-				solution:
-					"Deal Scale's AI agent revolutionizes text outreach. It leverages our proprietary network to engage leads with trusted iMessage conversations, qualifies them through intelligent back-and-forth dialogue, and moves only the sales-ready prospects into your pipeline, all while maintaining strict compliance.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: aiTextMessageProblemsSolutions,
-				howItWorks: aiTextMessageHowItWorks,
-				testimonials: aiTextMessageTestimonials,
-				pricing: PricingPlans,
-				faq: textMessageFAQ,
-				copyright: aiTextMessageCopyright,
-			},
-		},
-	},
-
-	[SERVICE_CATEGORIES.SKIP_TRACING]: {
-		scrapingEngine: {
-			id: "scraping-crawling-engine",
-			iconName: "Code",
-			title: "Scraping & Crawling Engine",
-			description:
-				"PlaywrightCrawler-based engine with anti-bot modules, headless browser cluster, proxy rotation, stealth mode, and captcha bypass. Multi-step navigation, DOM selectors, automatic retries, and rate limiting.",
-			features: [
-				"PlaywrightCrawler-based scraping engine",
-				"Anti-bot modules and stealth mode",
-				"Proxy rotation and captcha bypass",
-				"Multi-step navigation and DOM selectors",
-				"Automatic retries and rate limiting",
-			],
-			price: "Open Source",
-			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-blue-500 to-indigo-600",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.SKIP_TRACING,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "scraping-crawling-engine",
-				dilemma:
-					"Building scrapers from scratch is time-consuming and fragile. Managing proxies, handling anti-bot systems, and dealing with site changes requires constant maintenance and expertise.",
-				solution:
-					"Lead Orchestra's scraping engine handles all the complexity. Built on PlaywrightCrawler with anti-bot modules, proxy rotation, and stealth mode, it reliably extracts data from any website without breaking when sites change.",
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Start Scraping Today",
-					subtitle: "Open-source scraping engine that works out of the box.",
-					ctaText: "View on GitHub",
-					ctaLink: "/get-started",
-				},
-				faq: {
-					title: "Scraping Engine FAQs",
-					subtitle:
-						"Everything you need to know about Lead Orchestra's scraping engine.",
-					faqItems: [],
-				},
-			},
-		},
-		mcpApiAggregator: {
-			id: "mcp-api-aggregator",
-			iconName: "Network",
-			title: "MCP API Aggregator",
-			description:
-				"Unified MCP spec for scraping targets. Plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, Twitter. All sources normalized to Lead Standard Format (LSF) schemas.",
-			features: [
-				"Unified MCP spec interface",
-				"Pre-built plugins for Zillow, Realtor, LinkedIn, MLS",
-				"Facebook, Reddit, Twitter integrations",
-				"Lead Standard Format (LSF) normalization",
-				"Extensible plugin architecture",
-			],
-			price: "Open Source",
-			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-purple-500 to-pink-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.SKIP_TRACING,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "mcp-api-aggregator",
-				dilemma:
-					"Every scraping source requires different code, different APIs, and different data formats. You waste time rebuilding the same logic for each new source, and your data is inconsistent across projects.",
-				solution:
-					"Lead Orchestra's MCP API Aggregator provides a unified interface for all scraping sources. Pre-built plugins for popular sites plus an extensible architecture means you can scrape any source with consistent, normalized data.",
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Unified Scraping Interface",
-					subtitle: "One API for all your scraping needs.",
-					ctaText: "Explore Plugins",
-					ctaLink: "/get-started",
-				},
-				faq: {
-					title: "MCP API Aggregator FAQs",
-					subtitle: "Everything you need to know about our MCP aggregator.",
-					faqItems: [],
-				},
-			},
-		},
-		dataNormalization: {
-			id: "data-normalization-layer",
-			iconName: "Database",
-			title: "Data Normalization Layer",
-			description:
-				"Address parsing, phone/email extraction, metadata tagging, de-duping, and entity resolution. Export to CRM, CSV, JSON, Database, S3, or any system.",
-			features: [
-				"Address parsing and validation",
-				"Phone and email extraction",
-				"Metadata tagging and de-duplication",
-				"Entity resolution and data cleaning",
-				"Export to CRM, CSV, JSON, Database, S3",
-			],
-			price: "Open Source",
-			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-green-500 to-teal-500",
-			categories: [
-				SERVICE_CATEGORIES.LEAD_GENERATION,
-				SERVICE_CATEGORIES.SKIP_TRACING,
-			],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "data-normalization-layer",
-				dilemma:
-					"Scraped data is messy and inconsistent. Addresses are in different formats, phone numbers are missing area codes, and duplicate records waste your time. You spend hours cleaning data before you can use it.",
-				solution:
-					"Lead Orchestra's data normalization layer automatically cleans and standardizes all scraped data. Addresses are parsed, contacts are de-duplicated, and metadata is tagged, ensuring your leads are always ready to use.",
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				copyright: {
-					title: "Clean Data, Automatically",
-					subtitle: "Normalize and export your scraped data in seconds.",
-					ctaText: "Get Started",
-					ctaLink: "/get-started",
-				},
-				faq: {
-					title: "Data Normalization FAQs",
-					subtitle: "Everything you need to know about data normalization.",
-					faqItems: [],
-				},
-			},
-		},
-		socialProfileHunter: {
-			id: "social-profile-hunter",
-			iconName: "Users",
-			title: "Social Profile Hunter",
-			description:
-				"Discover your lead's complete digital footprint. Use a username or email to find all associated accounts across 600+ social media and online platforms. A free, unlimited OSINT tool for all subscribers.",
-			features: [
-				"Username & Email Search",
-				"Scans 600+ Online Platforms",
-				"AI-Powered Metadata Extraction",
-				"PDF & CSV Reporting",
-				"Free & Unlimited for Subscribers",
-			],
-			price: "Free Tool",
-			showBanner: true,
-			bannerText: "Pilot Tester Perk",
-			bannerColor: "bg-gradient-to-r from-red-500 to-orange-500",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // Self-contained tool
-				defaultZoom: 1,
-				slug: "social-profile-hunter",
-				dilemma:
-					"You have a single piece of contact info—a username from a forum or an email address—but no other context. You can't verify their identity, understand their background, or personalize your outreach, making your efforts feel like a shot in the dark.",
-				solution:
-					"Our Social Profile Hunter instantly scans over 600 online platforms to create a complete map of your lead's digital footprint. It verifies their identity, uncovers their professional background, and gives you the crucial context needed to have an intelligent conversation.",
-				problemsAndSolutions: socialProfileHunterProblemsSolutions,
-				howItWorks: socialProfileHunterHowItWorks,
-				testimonials: socialProfileHunterTestimonials,
-				pricing: PricingPlans,
-				copyright: socialProfileHunterCopyright,
-				faq: socialProfileHunterFAQ,
-			},
-		},
-		leadDossierGenerator: {
-			id: "lead-dossier-generator",
+			price: "Free",
+			category: SERVICE_CATEGORIES.STRATEGY,
+			slug: "free-mvp-consultation",
+			pricing: [],
+			heroSubtitle:
+				"Get a fast reality check before spending weeks building the wrong version one.",
+			problemsAndSolutions: problems(
+				"Founders often treat every idea as launch-critical.",
+				"We reduce the product to the smallest useful path worth testing first.",
+				"Teams lose time deciding whether they need strategy, design, or engineering next.",
+				"We leave with a concrete recommendation on the next highest-leverage move.",
+			),
+			howItWorks: steps(
+				[
+					"Review the idea",
+					"Map the user, offer, and launch constraint set.",
+					"Lightbulb",
+				],
+				[
+					"Cut the noise",
+					"Separate launch-critical work from optional features.",
+					"SlidersHorizontal",
+				],
+				[
+					"Recommend the next move",
+					"Choose the right workshop, build, or cleanup path.",
+					"Rocket",
+				],
+			),
+			integrations: stacks.strategy,
+		}),
+		startupScoping: service({
+			id: "startup-scoping-session",
+			title: "Startup Scoping Session",
 			iconName: "FileText",
-			title: "Lead Dossier Generator",
 			description:
-				"The ultimate OSINT tool. Start with a single username to discover a web of associated accounts across 3000+ sites. Our proprietary recursive search finds secondary usernames to build a complete digital dossier.",
+				"Turn founder context into a scoped build memo, realistic technical direction, and a smaller version-one plan.",
 			features: [
-				"Recursive Search (Finds New Usernames)",
-				"Comprehensive Search Across 3000+ Sites",
-				"Profile Page Content Parsing",
-				"Visual Relationship Map & Reports",
-				"Free & Unlimited (No API Keys Needed)",
+				"Founder working session",
+				"Scope cut",
+				"Stack recommendation",
+				"Credited toward project",
 			],
-			price: "Free Tool",
+			price: 750,
+			category: SERVICE_CATEGORIES.STRATEGY,
+			slug: "startup-scoping-session",
+			pricing: planIds("startup-scoping-session"),
+			heroSubtitle:
+				"Convert founder context into a buildable scope before committing to a larger sprint.",
+			problemsAndSolutions: problems(
+				"Planning stalls when every feature feels equally important.",
+				"We cut scope to the smallest version that can still validate demand.",
+				"Early technical decisions are easy to overcomplicate.",
+				"We choose a stack that supports speed now without reckless cleanup debt later.",
+			),
+			howItWorks: steps(
+				["Capture the goal", "Align on user, offer, and constraints.", "Users"],
+				[
+					"Map the MVP",
+					"Define the minimum user journey worth shipping.",
+					"LayoutGrid",
+				],
+				[
+					"Ship the memo",
+					"Document priorities, tradeoffs, and next steps.",
+					"FileCheck",
+				],
+			),
+			integrations: stacks.strategy,
 			showBanner: true,
-			bannerText: "Pilot Tester Perk",
-			bannerColor: "bg-gradient-to-r from-purple-600 to-red-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // Self-contained tool
-				defaultZoom: 1,
-				slug: "lead-dossier-generator",
-				dilemma:
-					"You need to vet a potential partner or lead, but their online presence is fragmented across different platforms with different usernames. You only see a tiny piece of the puzzle, leaving you unable to conduct thorough due diligence.",
-				solution:
-					"Our Lead Dossier Generator solves this. Its unique recursive search finds a lead's secondary aliases and links all of their profiles together. It automatically builds a comprehensive map of their entire digital footprint, giving you the full picture.",
-				problemsAndSolutions: leadDossierProblemsSolutions,
-				howItWorks: leadDossierHowItWorks,
-				testimonials: leadDossierTestimonials,
-				pricing: PricingPlans,
-				copyright: leadDossierCopyright,
-				faq: leadDossierFAQ,
-			},
-		},
-		dataEnrichmentSuite: {
-			id: "data-enrichment-suite",
-			iconName: "DatabaseZap",
-			title: "Data Enrichment Suite",
+			bannerText: "One-Time",
+			bannerColor: "bg-gradient-to-r from-primary to-focus",
+		}),
+		enterpriseScoping: service({
+			id: "enterprise-scoping-session",
+			title: "Enterprise & Greenfield Scoping Session",
+			iconName: "Network",
 			description:
-				"A suite of premium, credit-based tools to verify, clean, and enrich your lead data. Turn any single piece of information—a phone, address, or name—into a complete, actionable lead profile.",
+				"Turn strategic corporate initiatives into a buildable architecture, scope, and technical plan.",
 			features: [
-				"Reverse Phone & Address Lookup",
-				"Bulk Phone Number Validation",
-				"Find Person by Name & Location",
-				"Real-Time Caller Identification",
-				"Uses Skip Tracing Credits",
+				"Stakeholder alignment",
+				"Architecture & compliance review",
+				"Stack recommendation",
+				"Credited toward prototyping",
 			],
-			price: "Premium Tool",
+			price: 1500,
+			category: SERVICE_CATEGORIES.STRATEGY,
+			slug: "enterprise-scoping-session",
+			pricing: planIds("enterprise-scoping-session"),
+			heroSubtitle:
+				"Validate constraints, compliance, and scope before committing to a greenfield enterprise build.",
+			problemsAndSolutions: problems(
+				"Enterprise greenfield projects often stall due to unmapped constraints.",
+				"We surface compliance, security, and integration requirements early.",
+				"Legacy systems make building new systems complex and slow.",
+				"We identify the quickest path to value through modernization or replacement.",
+			),
+			howItWorks: steps(
+				["Align Stakeholders", "Define KPIs, constraints, and business goals.", "Users"],
+				[
+					"Map Constraints",
+					"Review security, integration points, and legacy dependencies.",
+					"ShieldCheck",
+				],
+				[
+					"Deliver the Plan",
+					"Provide a clear architecture and phase-one build scope.",
+					"FileCheck",
+				],
+			),
+			integrations: stacks.strategy,
 			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [SERVICE_CATEGORIES.SKIP_TRACING],
-			slugDetails: {
-				integrations: [], // Self-contained within Deal Scale
-				defaultZoom: 1,
-				slug: "data-enrichment-suite",
-				dilemma:
-					"Your CRM is filled with incomplete and outdated information. Disconnected numbers, old addresses, and missing names lead to wasted marketing spend, low connection rates, and missed opportunities.",
-				solution:
-					"Our Data Enrichment Suite solves this by providing a set of powerful tools to clean, validate, and enrich your data. Instantly append correct owner information and remove bad data to ensure every outreach action is based on accurate, up-to-the-minute intelligence.",
-				problemsAndSolutions: dataEnrichmentProblemsSolutions,
-				howItWorks: dataEnrichmentHowItWorks,
-				testimonials: dataEnrichmentTestimonials,
-				pricing: PricingPlans,
-				copyright: dataEnrichmentCopyright,
-				faq: dataEnrichmentFAQ,
-			},
-		},
+			bannerText: "Enterprise",
+			bannerColor: "bg-gradient-to-r from-accent to-focus",
+		}),
+		technicalReview: service({
+			id: "service-technical-architecture-review",
+			title: "Technical Architecture Review",
+			iconName: "Network",
+			description:
+				"Review the system before more time gets sunk into architecture that is too fragile, too complex, or both.",
+			features: [
+				"Architecture audit",
+				"Risk flags",
+				"Stack tradeoffs",
+				"Implementation memo",
+			],
+			price: 2000,
+			category: SERVICE_CATEGORIES.STRATEGY,
+			slug: "technical-architecture-review",
+			pricing: [],
+			heroSubtitle:
+				"Get a technical decision memo before the MVP turns into a cleanup trap.",
+			problemsAndSolutions: problems(
+				"Teams keep shipping without confidence in the architecture beneath the product.",
+				"We identify what to keep, simplify, or change before the next build cycle.",
+				"Founders struggle to evaluate backend, infra, and data tradeoffs.",
+				"We translate technical choices into business consequences and sequencing.",
+			),
+			howItWorks: steps(
+				[
+					"Inspect the system",
+					"Review flows, data, auth, and deployment shape.",
+					"Search",
+				],
+				[
+					"Find the risk",
+					"Flag scale, reliability, and maintainability problems.",
+					"ShieldCheck",
+				],
+				[
+					"Prioritize fixes",
+					"Deliver a memo of what to change now versus later.",
+					"BarChart",
+				],
+			),
+			integrations: stacks.strategy,
+			showBanner: true,
+			bannerText: "One-Time",
+			bannerColor: "bg-gradient-to-r from-accent to-focus",
+		}),
 	},
-	[SERVICE_CATEGORIES.AI_FEATURES]: {
-		aiMarketAnalysis: {
-			id: "ai-market-analysis",
-			iconName: "BarChartBig",
-			title: "AI Market Analysis",
+	[SERVICE_CATEGORIES.BUILD]: {
+		frontendPolish: service({
+			id: "service-frontend-polish-sprint",
+			title: "Frontend Polish Sprint",
+			iconName: "Palette",
 			description:
-				"Get real-time rental data and market insights for any US zip code. Chat with our AI to understand trends, and arm your AI agents with market data to have more intelligent, persuasive conversations.",
+				"Clean up rough screens, interactions, and responsive behavior so the product feels credible at launch.",
 			features: [
-				"Nationwide Market Statistics & Trends",
-				"Accurate Rent Estimates & Comps",
-				"AI Chat Interface for Data Q&A",
-				"Arm AI Agents with Market Insights",
-				"Custom-Branded PDF & Online Reports",
+				"UI cleanup",
+				"Responsive fixes",
+				"Interaction polish",
+				"Handoff notes",
 			],
-			price: "Included in Pro/Scale Plans",
+			price: 2500,
+			category: SERVICE_CATEGORIES.BUILD,
+			slug: "frontend-polish-sprint",
+			pricing: [],
+			heroSubtitle:
+				"Upgrade a working MVP into something users can trust and teams can demo confidently.",
+			problemsAndSolutions: problems(
+				"Products often work before they feel trustworthy.",
+				"We improve clarity, consistency, and perceived quality on the highest-impact screens.",
+				"Frontend debt compounds when design decisions stay informal.",
+				"We tighten the implementation so iteration gets cheaper after launch.",
+			),
+			howItWorks: steps(
+				[
+					"Audit the flows",
+					"Choose the screens that most affect trust and conversion.",
+					"Search",
+				],
+				[
+					"Polish the UI",
+					"Improve hierarchy, states, and responsiveness.",
+					"Palette",
+				],
+				[
+					"Hand off cleanly",
+					"Document what changed and where to iterate next.",
+					"FileCheck",
+				],
+			),
+			integrations: stacks.build,
 			showBanner: true,
-			bannerText: "Data-Driven Decisions",
-			bannerColor: "bg-gradient-to-r from-green-600 to-cyan-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // Self-contained feature
-				defaultZoom: 1,
-				slug: "ai-market-analysis",
-				dilemma:
-					"Making investment decisions feels like a gamble. You're never sure if a market is growing or declining, and manually researching comps is a slow, painful process that still leaves you with an incomplete picture.",
-				solution:
-					"Our AI Market Analysis tool removes the guesswork. It provides instant access to comprehensive data for any US market. More importantly, it allows you to 'chat' with the data to get clear answers and then pass that intelligence directly to your AI agents, turning raw data into a competitive advantage.",
-				problemsAndSolutions: marketAnalysisProblemsSolutions,
-				howItWorks: marketAnalysisHowItWorks,
-				testimonials: marketAnalysisTestimonials,
-				pricing: PricingPlans,
-				copyright: marketAnalysisCopyright,
-				faq: marketAnalysisFAQ,
-			},
-		},
-		aiPerformanceHub: {
-			id: "ai-performance-hub",
-			iconName: "LayoutGrid",
-			title: "AI Command Center",
-			description:
-				"The world's first proactive CRM. It analyzes your pipeline to automatically add high-impact tasks to your board, and detects which of your manual to-dos it can complete for you, truly automating your workflow.",
-			features: [
-				"Visual Deal Pipeline (Kanban)",
-				"Proactive AI Task Generation",
-				"AI-Powered Manual Task Completion",
-				"Intelligent Lead Segmentation",
-				"Real-Time Business Analytics",
-			],
-			price: "Core Feature",
-			showBanner: true,
-			bannerText: "AI Ops Manager",
-			bannerColor: "bg-gradient-to-r from-gray-800 to-blue-900",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // This is a self-contained core feature
-				defaultZoom: 1,
-				slug: "ai-command-center",
-				dilemma:
-					"Your CRM is a passive database. It holds information but requires you to do all the thinking and all the work—creating tasks, deciding priorities, and performing every repetitive action yourself.",
-				solution:
-					"Our AI Command Center is an active partner. It doesn't just store your data; it analyzes it to proactively *add* tasks to your board, then offers to *complete* the repetitive tasks you've created, freeing you to focus on high-value actions.",
-				problemsAndSolutions: performanceHubProblemsSolutions,
-				howItWorks: performanceHubHowItWorks,
-				testimonials: performanceHubTestimonials,
-				pricing: PricingPlans,
-				copyright: performanceHubCopyright,
-				faq: performanceHubFAQ,
-			},
-		},
-		aiPhoneAgent: {
-			id: "ai-phone-agent",
-			iconName: "Phone",
-			title: "AI Phone Agent",
-			description:
-				"Stop chasing cold leads. Our 24/7 AI Phone Agent tirelessly calls and pre-qualifies your seller leads with natural, intelligent conversations, then automatically schedules appointments or hot-transfers live, motivated sellers directly to you.",
-			features: [
-				"24/7 Automated Outbound Calling",
-				"Natural, Human-Like Conversations",
-				"Intelligent Seller Lead Qualification",
-				"Automated Calendar Scheduling",
-				"Live Call Hot-Transfer Capability",
-			],
-			price: "Credit-Based",
-			showBanner: true,
-			bannerText: "Autopilot Appraisals",
-			bannerColor: "bg-gradient-to-r from-blue-500 to-indigo-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // Self-contained feature
-				defaultZoom: 1,
-				slug: "ai-phone-agent",
-				dilemma:
-					"You spend countless hours making repetitive, draining cold calls, only to get low connection rates and leads who aren't serious. This manual grind is the biggest bottleneck to scaling your business.",
-				solution:
-					"Our AI Phone Agent completely automates your outbound calling. It tirelessly dials and qualifies leads, filtering out the noise and delivering only sales-ready appointments and live hot-transfers, freeing you to focus on closing deals.",
-				problemsAndSolutions: aiPhoneAgentProblemsSolutions,
-				howItWorks: aiPhoneAgentHowItWorks,
-				testimonials: aiPhoneAgentTestimonials,
-				pricing: PricingPlans,
-				copyright: aiPhoneAgentCopyright,
-				faq: aiPhoneAgentFAQ,
-			},
-		},
-		aiInboundAgent: {
-			id: "ai-inbound-agent",
-			iconName: "Phone",
-			title: "AI Inbound Agent",
-			description:
-				"Stop missing calls from motivated sellers. Our 24/7 AI Inbound Agent instantly answers and qualifies every call from your marketing, then automatically schedules appointments or hot-transfers the live, sales-ready lead directly to you.",
-			features: [
-				"24/7 Automated Inbound Call Answering",
-				"Natural, Human-Like Conversations",
-				"Intelligent Lead Qualification & Filtering",
-				"Automated Calendar Scheduling",
-				"Live Call Hot-Transfer Capability",
-			],
-			price: "Credit-Based",
-			showBanner: true,
-			bannerText: "24/7 Receptionist",
-			bannerColor: "bg-gradient-to-r from-teal-500 to-green-500",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // Self-contained feature
-				defaultZoom: 1,
-				slug: "ai-inbound-agent",
-				dilemma:
-					"You spend a fortune on marketing to make the phone ring, but you inevitably miss calls that come in while you're busy or after hours. Every call that goes to voicemail is a potential deal lost to a competitor.",
-				solution:
-					"Our AI Inbound Agent solves this by answering every call instantly, 24/7. It acts as your perfect receptionist, qualifying every lead and converting your marketing spend into concrete appointments, ensuring no lead is ever wasted.",
-				problemsAndSolutions: aiInboundAgentProblemsSolutions,
-				howItWorks: aiInboundAgentHowItWorks,
-				testimonials: aiInboundAgentTestimonials,
-				pricing: PricingPlans,
-				copyright: aiInboundAgentCopyright,
-				faq: aiInboundAgentFAQ,
-			},
-		},
-		proprietaryVoiceCloning: {
-			id: "proprietary-voice-cloning",
-			iconName: "Sparkles" as IconName, // Changed to "Sparkles" as it's a valid IconName and fits "premium/magic"
-			title: "Deal Scale Proprietary AI Voice Cloning",
-			description:
-				"Transform your AI interactions with Deal Scale's exclusive Voice Cloning technology. Our advanced, in-house AI creates a perfect digital replica of your voice, enabling hyper-personalized outreach that builds instant trust and dramatically boosts lead engagement.",
-			features: [
-				"Proprietary AI crafts a high-fidelity clone of your unique voice",
-				"Deliver a truly consistent and authentic brand voice across all AI communications",
-				"Achieve unparalleled personalization in automated outreach",
-				"Build deeper trust and rapport with leads through familiar, human-like voice interactions",
-				"Seamlessly integrated with your Deal Scale AI Virtual Agents for immediate use",
-				"Powered entirely by Deal Scale's secure, advanced in-house technology",
-			],
-			price: "Exclusive Premium Tier Feature", // String type for price matches example
-			showBanner: true,
-			bannerText: "AI Voice Cloning",
-			bannerColor: "bg-gradient-to-r from-indigo-500 to-purple-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				integrations: [], // This is Deal Scale's own tech, so no external integrations listed here
-				defaultZoom: 1,
-				slug: "dealscale-proprietary-ai-voice-cloning",
-				dilemma:
-					"In a crowded marketplace, generic AI voices create a barrier, feeling impersonal and failing to capture the unique essence of your brand, leading to missed opportunities and lower engagement.",
-				solution:
-					"Deal Scale's Proprietary AI Voice Cloning breaks through this barrier. By enabling your AI Virtual Agents to speak in *your own cloned voice*, we transform automated interactions into genuinely personal experiences. This fosters immediate familiarity and trust, making leads significantly more receptive and boosting conversion rates like never before with technology developed and secured by Deal Scale.",
-				problemsAndSolutions: proprietaryVoiceCloningProblemsSolutions,
-				howItWorks: proprietaryVoiceCloningHowItWorks,
-				testimonials: proprietaryVoiceCloningTestimonials, // Uses the updated Testimonial interface
-				pricing: PricingPlans,
-				copyright: proprietaryVoiceCloningCopyright,
-				faq: proprietaryVoiceCloningFAQ, // Uses the updated FAQProps interface
-				// splineUrl, datePublished, lastModified are optional and can be added if needed
-				// splineUrl: { splineUrl: "your-spline-url-here-for-voice-cloning", defaultZoom: 1.2 },
-				// datePublished: new Date("2024-01-15"),
-				// lastModified: new Date("2024-03-10"),
-			},
-		},
-		aiSocialMediaEngagementService: {
-			id: "ai-social-media-engagement-service",
-			iconName: "MessagesSquare" as IconName, // Reflects the chat/DM engagement
-			title: "AI Social Lead Conversion Engine",
-			description:
-				"Turn social media buzz into booked appointments. Our AI leverages proven scripts and dynamic messaging to engage prospects from comments or DMs, qualify them through intelligent conversation, and schedule sales-ready calls on your calendar.",
-			features: [
-				"Automated Comment-to-DM & Direct Message Engagement",
-				"Utilizes Proven Preset Scripts & Dynamic AI-Generated Messages",
-				"Intelligent Lead Qualification via Conversational AI",
-				"Automated Calendar Scheduling for Sales-Ready Leads",
-				"Optional Live Hot-Transfer for Immediate Sales Calls",
-				"Seamless Integration with CRM & Deal Scale Virtual Agents",
-			],
-			price: "Premium Conversion Module", // Suggests higher value
-			showBanner: true,
-			bannerText: "Social Closed Deals",
-			bannerColor: "bg-gradient-to-r from-purple-500 to-pink-500", // Engaging colors
-			categories: [SERVICE_CATEGORIES.LEAD_GENERATION],
-			slugDetails: {
-				integrations: aiSocialMediaOutreachIntegrations,
-				defaultZoom: 1,
-				slug: "ai-social-lead-conversion", // Updated slug
-				dilemma:
-					"Your social media is buzzing with comments and messages, but manually converting that fleeting interest into concrete sales appointments is a time-consuming nightmare, leading to lost leads and frustration.",
-				solution:
-					"Deal Scale's AI Social Lead Conversion Engine acts as your 24/7 social sales assistant. Powered by our proprietary messaging technology, it intelligently engages prospects using optimized scripts or dynamic AI responses, qualifies them through natural conversation, and delivers sales-ready appointments directly to your calendar or as live call transfers.",
-				problemsAndSolutions: aiSocialMediaOutreachProblemsSolutions, // Updated
-				howItWorks: aiSocialMediaOutreachHowItWorks, // Updated
-				testimonials: aiSocialMediaOutreachTestimonials, // Updated
-				pricing: PricingPlans, // Ensure it reflects value
-				copyright: aiSocialMediaOutreachCopyright,
-				faq: aiSocialMediaOutreachFAQ, // Updated
-			},
-		},
-		aiTextMessageOutreachService: {
-			id: "ai-text-message-outreach-service",
-			iconName: "MessageCircle" as IconName, // Or "Smartphone", "MailCheck"
-			title: "AI Text Message Outreach",
-			description:
-				"Engage leads and nurture relationships at scale with intelligent, personalized, and compliant SMS campaigns. Our AI handles two-way conversations, qualifies prospects, and drives conversions directly from text messages.",
-			features: [
-				"AI-powered personalized SMS message generation",
-				"Automated two-way conversational SMS with prospects",
-				"Intelligent lead qualification and intent recognition via text",
-				"Built-in TCPA compliance and opt-out management",
-				"Smart list segmentation and targeted campaign delivery",
-				"Seamless CRM integration for lead and conversation syncing",
-				"Detailed analytics on SMS campaign performance",
-			],
-			price: "See Plans", // Or specific starting price
-			showBanner: true,
-			bannerText: "AI SMS",
-			bannerColor: "bg-gradient-to-r from-green-500 to-emerald-600",
-			categories: [SERVICE_CATEGORIES.LEAD_GENERATION],
-			slugDetails: {
-				integrations: [],
-				defaultZoom: 1,
-				slug: "ai-text-message-outreach",
-				dilemma:
-					"Standard bulk SMS is impersonal and ineffective, while manual texting isn't scalable. You need a way to reach and engage leads via text in a personalized, compliant, and efficient manner.",
-				solution:
-					"Deal Scale's AI Text Message Outreach empowers you to launch intelligent SMS campaigns that feel personal. Our AI crafts messages, engages in two-way conversations to qualify leads, ensures compliance, and integrates seamlessly with your workflow, turning text messages into a powerful conversion channel.",
-				problemsAndSolutions: aiTextMessageOutreachProblemsSolutions,
-				howItWorks: aiTextMessageOutreachHowItWorks,
-				testimonials: aiTextMessageOutreachTestimonials,
-				pricing: PricingPlans,
-				copyright: aiTextMessageOutreachCopyright,
-				faq: aiTextMessageOutreachFAQ,
-			},
-		},
-		embeddableAIChatbotService: {
-			id: "embeddable-ai-chatbot-service",
-			iconName: "BotMessageSquare" as IconName, // Or "MessageSquarePlus"
-			title: "Embeddable AI Sales Chatbot",
-			description:
-				"Turn your website into a 24/7 lookalike audience expansion engine inspired by How to Win Friends and Influence People. Our AI chatbot engages visitors, answers questions, pre-qualifies leads, and seamlessly integrates them into your Deal Scale workflow for immediate follow-up or booking.",
-			features: [
-				"Easy website embedding with a simple code snippet",
-				"Customizable branding, greetings, and qualification scripts",
-				"24/7 AI-powered visitor engagement and query handling",
-				"Intelligent lead pre-qualification and scoring",
-				"Direct integration with Deal Scale CRM & Calendar",
-				"Automated appointment booking for qualified leads",
-				"Live agent notification & chat transfer capabilities",
-			],
-			price: "Starts at $199/mo", // Or "Included in Premium Tier"
-			showBanner: true,
-			bannerText: "AI Chatbot",
-			bannerColor: "bg-gradient-to-r from-teal-400 to-sky-500",
-			categories: [SERVICE_CATEGORIES.LEAD_PREQUALIFICATION],
-			slugDetails: {
-				integrations: embeddableAIChatbotIntegrations,
-				defaultZoom: 1,
-				slug: "embeddable-ai-sales-chatbot",
-				dilemma:
-					"Your website attracts visitors, but many leave without a trace because there's no immediate, intelligent way to engage them, answer their questions, and guide them towards becoming a qualified lead.",
-				solution:
-					"Deal Scale's Embeddable AI Sales Chatbot transforms your website into an active sales assistant. It engages every visitor 24/7, provides instant answers, intelligently pre-qualifies them based on your criteria, and then seamlessly hands them off to your sales process by booking appointments or alerting your team—all automatically.",
-				problemsAndSolutions: embeddableAIChatbotProblemsSolutions,
-				howItWorks: embeddableAIChatbotHowItWorks,
-				testimonials: embeddableAIChatbotTestimonials,
-				pricing: PricingPlans,
-				copyright: embeddableAIChatbotCopyright,
-				faq: embeddableAIChatbotFAQ,
-			},
-		},
-	},
-	[SERVICE_CATEGORIES.REAL_ESTATE_TOOLS]: {
-		aiRentEstimator: {
-			id: "ai-rent-estimator",
-			iconName: "BarChartBig",
-			title: "AI Rent Estimator & Comps",
-			description:
-				"Look up accurate rent estimates, nearby rental comps, and local market trends for any property in the United States. Analyze new deals and maximize your portfolio's cash flow.",
-			features: [
-				"Instant Property Rent Estimates",
-				"Nearby Rental Comps",
-				"Local Market & Historical Trends",
-				"Professional Reports with Custom Branding",
-				"Rental Portfolio Dashboard",
-				"Real-Time Rent Alerts",
-			],
-			price: "Freemium",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				slug: "ai-rent-estimator-and-comps",
-				dilemma:
-					"You're analyzing a new investment or renewing a lease, but you're just guessing the rent. This uncertainty leads to risky investments, lost monthly income, and prolonged vacancies.",
-				solution:
-					"Our AI Rent Estimator provides instant, accurate rent values and rental comps for any US property. It empowers you to analyze deals with confidence, maximize your cash flow, and minimize vacancies by knowing the true market rate, every time.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: rentEstimatorProblemsSolutions,
-				howItWorks: rentEstimatorHowItWorks,
-				testimonials: rentEstimatorTestimonials,
-				pricing: PricingPlans,
-				faq: rentEstimatorFAQ,
-				copyright: rentEstimatorCopyright,
-			},
-		},
-		rentalMarketAnalyzer: {
-			id: "rental-market-analyzer",
-			iconName: "PieChart",
-			title: "Rental Market Analyzer",
-			description:
-				"Analyze rental property markets and find new investment opportunities. View rent averages, historical trends, and detailed market statistics for any zip code in the US.",
-			features: [
-				"Market Statistics for 38k+ Zip Codes",
-				"Historical Rent Performance Trends",
-				"Local Market Composition Analysis",
-				"Professional, Custom-Branded Reports",
-				"Portfolio Market Tracking & Updates",
-			],
-			price: "Freemium",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [SERVICE_CATEGORIES.AI_FEATURES],
-			slugDetails: {
-				slug: "rental-market-analyzer",
-				dilemma:
-					"Choosing a new market to invest in feels like a blind bet. You're trying to find growth opportunities without reliable data on rent trends, market health, or property type demand.",
-				solution:
-					"Our Rental Market Analyzer gives you the 30,000-foot view you need. Instantly pull comprehensive reports for any zip code to analyze rent averages, historical trends, and market composition, allowing you to confidently identify and compare investment opportunities from your desk.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: marketAnalyzerProblemsSolutions,
-				howItWorks: marketAnalyzerHowItWorks,
-				testimonials: marketAnalyzerTestimonials,
-				pricing: PricingPlans,
-				faq: marketAnalyzerFAQ,
-				copyright: marketAnalyzerCopyright,
-			},
-		},
-		enterprisePortfolioDashboard: {
-			id: "enterprise-portfolio-dashboard",
-			iconName: "LayoutGrid",
-			title: "Enterprise Portfolio Dashboard",
-			description:
-				"Unify, monitor, and optimize your entire rental portfolio from a single command center. Built for funds, property managers, and large investors who need real-time data and automated insights to drive returns.",
-			features: [
-				"Centralized Portfolio Dashboard with Custom KPIs",
-				"Proactive Rent Increase Alerts",
-				"Historical Performance & Lease Tracking",
-				"Automated Market Update Emails",
-				"White-Labeled Reporting for Clients & Stakeholders",
-				"Integration Access & Role-Based Permissions",
-			],
-			price: "Enterprise Tier",
-			showBanner: true,
-			bannerText: "Deal Scale Feature",
-			bannerColor: "bg-gradient-to-r from-orange-500 to-red-600",
-			categories: [SERVICE_CATEGORIES.REAL_ESTATE_TOOLS],
-			slugDetails: {
-				slug: "enterprise-portfolio-dashboard",
-				dilemma:
-					"You're managing a large, valuable portfolio using a patchwork of disconnected spreadsheets and legacy software. This creates data silos, prevents real-time analysis, and forces your team to waste time on manual reporting instead of value-add activities.",
-				solution:
-					"Our Enterprise Dashboard provides a unified, live view of your entire portfolio's performance. It automates rent optimization, streamlines stakeholder reporting, and delivers the critical insights your team needs to make smarter, faster, and more profitable decisions at scale.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: portfolioDashboardProblemsSolutions,
-				howItWorks: portfolioDashboardHowItWorks,
-				testimonials: portfolioDashboardTestimonials,
-				pricing: PricingPlans,
-				faq: portfolioDashboardFAQ,
-				copyright: portfolioDashboardCopyright,
-			},
-		},
-		// Lead Orchestra Tools for Developers
-		developerCli: {
-			id: "developer-cli",
+			bannerText: "One-Time",
+			bannerColor: "bg-gradient-to-r from-primary to-accent",
+		}),
+		vibeCleanup: service({
+			id: "service-vibe-code-cleanup",
+			title: "Vibe Code Cleanup",
 			iconName: "Code",
-			title: "CLI & Developer Tools",
 			description:
-				"Command-line interface and developer tools for building custom scrapers, automating workflows, and integrating Lead Orchestra into your development pipeline. Full API access, SDKs, and GitHub Actions templates.",
+				"Clean up fast-shipped code before the next sprint turns small shortcuts into a full rebuild.",
 			features: [
-				"Command-line interface (CLI) for scraping operations",
-				"JavaScript, Python, and Go SDKs",
-				"REST API with full documentation",
-				"GitHub Actions templates for CI/CD",
-				"Webhook system for real-time integrations",
-				"API key management and usage analytics",
+				"Code review",
+				"Cleanup priorities",
+				"Core refactors",
+				"Written handoff",
 			],
-			price: "Open Source",
+			price: 3000,
+			category: SERVICE_CATEGORIES.BUILD,
+			slug: "vibe-code-cleanup",
+			pricing: planIds("vibe-code-cleanup"),
+			heroSubtitle:
+				"Reduce cleanup debt before the MVP becomes too expensive to keep evolving.",
+			problemsAndSolutions: problems(
+				"Fast shipping creates hidden coupling and brittle flows.",
+				"We target the worst pressure points before they spread further.",
+				"Founders need momentum without a full rebuild too early.",
+				"We preserve what still works and refactor only where the drag is real.",
+			),
+			howItWorks: steps(
+				[
+					"Audit the code",
+					"Find fragility, duplication, and launch risk.",
+					"Code",
+				],
+				[
+					"Clean the core path",
+					"Refactor the flows that block speed and reliability.",
+					"RefreshCw",
+				],
+				[
+					"Document the state",
+					"Hand off what changed and what still needs work.",
+					"FileText",
+				],
+			),
+			integrations: stacks.support,
 			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-blue-500 to-indigo-600",
-			categories: [SERVICE_CATEGORIES.REAL_ESTATE_TOOLS],
-			slugDetails: {
-				slug: "developer-cli-tools",
-				dilemma:
-					"Building scrapers requires writing custom code, managing infrastructure, and handling edge cases. You waste time on boilerplate instead of focusing on your core product.",
-				solution:
-					"Lead Orchestra's CLI and SDKs let you build scrapers in minutes, not days. Use our command-line tools, SDKs, and API to integrate scraping into your workflow without managing infrastructure.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				faq: {
-					title: "Developer Tools FAQs",
-					subtitle:
-						"Everything you need to know about Lead Orchestra's developer tools.",
-					faqItems: [],
-				},
-				copyright: {
-					title: "Start Building Today",
-					subtitle: "Developer-friendly tools for building scrapers fast.",
-					ctaText: "View Documentation",
-					ctaLink: "/get-started",
-				},
-			},
-		},
-		// Lead Orchestra Tools for Agencies
-		agencyWhiteLabel: {
-			id: "agency-white-label",
-			iconName: "Users",
-			title: "White-Label & Agency Tools",
-			description:
-				"White-label Lead Orchestra for your agency clients. Custom branding, client management dashboards, and automated reporting. Scale your lead generation services without building infrastructure.",
-			features: [
-				"White-label branding and custom domains",
-				"Client management and multi-tenant dashboards",
-				"Automated client reporting and delivery",
-				"Custom export formats per client",
-				"Usage analytics and billing integration",
-				"Priority support for agency accounts",
-			],
-			price: "Agency Tier",
-			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-purple-500 to-pink-500",
-			categories: [SERVICE_CATEGORIES.REAL_ESTATE_TOOLS],
-			slugDetails: {
-				slug: "agency-white-label-tools",
-				dilemma:
-					"Delivering scraping services to clients requires custom infrastructure, manual reporting, and time-consuming setup. You can't scale without building your own platform.",
-				solution:
-					"Lead Orchestra's white-label tools let you deliver professional scraping services under your brand. Manage multiple clients, automate reporting, and scale without building infrastructure.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				faq: {
-					title: "Agency Tools FAQs",
-					subtitle:
-						"Everything you need to know about white-label and agency tools.",
-					faqItems: [],
-				},
-				copyright: {
-					title: "Scale Your Agency",
-					subtitle:
-						"White-label tools for delivering scraping services to clients.",
-					ctaText: "Contact Sales",
-					ctaLink: "/contact",
-				},
-			},
-		},
-		// Lead Orchestra Tools for Startups
-		startupQuickStart: {
-			id: "startup-quick-start",
-			iconName: "Rocket",
-			title: "Quick-Start Templates",
-			description:
-				"Pre-built scraping templates and workflows to get your MVP running fast. No infrastructure setup required. Focus on product-market fit, not scraping infrastructure.",
-			features: [
-				"Pre-built scraping templates for common sources",
-				"One-click deployment and configuration",
-				"Automated data normalization and export",
-				"Integration templates for popular tools",
-				"Documentation and best practices",
-				"Community support and examples",
-			],
-			price: "Free Tier",
-			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-green-500 to-teal-500",
-			categories: [SERVICE_CATEGORIES.REAL_ESTATE_TOOLS],
-			slugDetails: {
-				slug: "startup-quick-start-templates",
-				dilemma:
-					"Building scraping infrastructure from scratch takes weeks or months. You need to focus on your product, not on building data pipelines and managing servers.",
-				solution:
-					"Lead Orchestra's quick-start templates let you launch scraping workflows in minutes. Use pre-built templates, deploy with one click, and focus on building your product.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				faq: {
-					title: "Quick-Start Templates FAQs",
-					subtitle: "Everything you need to know about getting started fast.",
-					faqItems: [],
-				},
-				copyright: {
-					title: "Launch Fast",
-					subtitle: "Pre-built templates to get your MVP running in minutes.",
-					ctaText: "Get Started",
-					ctaLink: "/get-started",
-				},
-			},
-		},
-		// Lead Orchestra Tools for Enterprise
-		enterpriseTools: {
-			id: "enterprise-tools",
+			bannerText: "One-Time",
+			bannerColor: "bg-gradient-to-r from-primary to-focus",
+		}),
+		vibeRescue: service({
+			id: "service-vibe-coding-rescue",
+			title: "Vibe Coding Rescue",
 			iconName: "ShieldCheck",
-			title: "Enterprise Tools & Compliance",
 			description:
-				"Enterprise-grade tools for compliance, security, and scale. SSO integration, audit logging, custom MCP providers, and dedicated support. Built for teams that need reliability and control.",
+				"A heavier rescue for prototypes that demo just enough to be tempting but are too fragile to trust.",
 			features: [
-				"SSO and enterprise authentication (SAML, OAuth)",
-				"Audit logging and compliance reporting",
-				"Custom MCP provider development",
-				"Dedicated technical support and SLA",
-				"Private cloud and on-premise deployment",
-				"Custom integrations and API development",
+				"Prototype triage",
+				"Critical fixes",
+				"Keep-vs-rebuild guidance",
+				"Launch-risk memo",
 			],
-			price: "Enterprise Tier",
+			price: 4500,
+			category: SERVICE_CATEGORIES.BUILD,
+			slug: "vibe-coding-rescue",
+			pricing: planIds("vibe-coding-rescue"),
+			heroSubtitle:
+				"Stabilize a shaky prototype before it becomes a reputation problem or a rewrite surprise.",
+			problemsAndSolutions: problems(
+				"Prototype logic hides fragile assumptions and silent launch blockers.",
+				"We surface what is unsafe, what can be saved, and what should be rebuilt later.",
+				"Teams keep shipping on top of unstable foundations because there is no rescue plan.",
+				"We turn technical discomfort into explicit decisions and sequencing.",
+			),
+			howItWorks: steps(
+				[
+					"Triage the prototype",
+					"Find the highest-risk failure points first.",
+					"ShieldCheck",
+				],
+				[
+					"Rescue the core path",
+					"Fix what matters for launch credibility.",
+					"Rocket",
+				],
+				[
+					"Define the boundary",
+					"Document what survives into the next version.",
+					"Network",
+				],
+			),
+			integrations: stacks.support,
 			showBanner: true,
-			bannerText: "Lead Orchestra",
-			bannerColor: "bg-gradient-to-r from-gray-800 to-blue-900",
-			categories: [SERVICE_CATEGORIES.REAL_ESTATE_TOOLS],
-			slugDetails: {
-				slug: "enterprise-tools-compliance",
-				dilemma:
-					"Enterprise teams need compliance, security, and reliability that open-source tools can't provide. You need SSO, audit logs, and dedicated support to integrate scraping into your stack.",
-				solution:
-					"Lead Orchestra's enterprise tools provide the security, compliance, and support your team needs. SSO integration, audit logging, and dedicated support ensure reliable, compliant data operations.",
-				defaultZoom: 1,
-				integrations: [],
-				problemsAndSolutions: [],
-				howItWorks: [],
-				testimonials: [],
-				pricing: PricingPlans,
-				faq: {
-					title: "Enterprise Tools FAQs",
-					subtitle:
-						"Everything you need to know about enterprise features and compliance.",
-					faqItems: [],
-				},
-				copyright: {
-					title: "Enterprise Ready",
-					subtitle: "Security, compliance, and support for enterprise teams.",
-					ctaText: "Contact Sales",
-					ctaLink: "/contact",
-				},
-			},
-		},
+			bannerText: "One-Time",
+			bannerColor: "bg-gradient-to-r from-focus to-accent",
+		}),
+	},
+	[SERVICE_CATEGORIES.IN_PERSON]: {
+		mvpWorkshop: service({
+			id: "service-in-person-mvp-build",
+			title: "3-Day In-Person MVP Build Workshop",
+			iconName: "RocketLaunch",
+			description:
+				"A Denver sprint for founders who need the full MVP built around the core user journey without weeks of drift.",
+			features: [
+				"3-day sprint",
+				"Full MVP build",
+				"Scope lock",
+				"Launch handoff",
+			],
+			price: 7500,
+			category: SERVICE_CATEGORIES.IN_PERSON,
+			slug: "in-person-mvp-build-workshop",
+			pricing: planIds("in-person-mvp-build"),
+			heroSubtitle:
+				"Compress idea, scope, and implementation into a focused Denver build sprint.",
+			problemsAndSolutions: problems(
+				"Remote async work adds lag to every product decision.",
+				"We make the decisions live and keep the build centered on the core workflow.",
+				"Teams overbuild when version one is not forced into a smaller window.",
+				"We use time constraints to protect focus and ship the minimum useful product.",
+			),
+			howItWorks: steps(
+				[
+					"Lock the scope",
+					"Align on what the MVP must do before touching the build.",
+					"SlidersHorizontal",
+				],
+				[
+					"Build in person",
+					"Move through design, implementation, and integration together.",
+					"RocketLaunch",
+				],
+				[
+					"Launch and hand off",
+					"Leave with a working product and next-step roadmap.",
+					"CalendarCheck",
+				],
+			),
+			integrations: stacks.build,
+			showBanner: true,
+			bannerText: "Denver",
+			bannerColor: "bg-gradient-to-r from-primary to-focus",
+		}),
+		appAndLanding: service({
+			id: "service-in-person-app-launch",
+			title: "In-Person App + Landing Page Workshop",
+			iconName: "Smartphone",
+			description:
+				"A Denver workshop for teams that need the product and its launch surface built together so the message and the UX stay aligned.",
+			features: [
+				"Denver workshop",
+				"Web or mobile app",
+				"Landing page",
+				"QA and handoff",
+			],
+			price: 10000,
+			category: SERVICE_CATEGORIES.IN_PERSON,
+			slug: "in-person-app-landing-page-workshop",
+			pricing: planIds("in-person-app-launch"),
+			heroSubtitle:
+				"Build the product and its launch story together in a single Denver sprint.",
+			problemsAndSolutions: problems(
+				"Apps often launch with disconnected messaging and weak acquisition surfaces.",
+				"We build the app flow and landing-page story together inside one sprint.",
+				"Teams lose time when design, product, and launch copy are split across vendors.",
+				"We keep the tradeoffs in one room and make them live.",
+			),
+			howItWorks: steps(
+				[
+					"Align the offer",
+					"Define the product promise and conversion story.",
+					"MessageSquare",
+				],
+				[
+					"Build the surfaces",
+					"Ship the app flow and landing experience together.",
+					"Smartphone",
+				],
+				[
+					"Prep the launch",
+					"Leave with product, page, and launch next steps.",
+					"Globe",
+				],
+			),
+			integrations: stacks.build,
+			showBanner: true,
+			bannerText: "Denver",
+			bannerColor: "bg-gradient-to-r from-accent to-focus",
+		}),
+		aiPrototype: service({
+			id: "service-in-person-ai-prototype",
+			title: "In-Person AI Prototype Workshop",
+			iconName: "Brain",
+			description:
+				"A Denver sprint to prototype one AI-assisted workflow before committing to a larger product build.",
+			features: [
+				"Denver workshop",
+				"AI workflow prototype",
+				"Feasibility review",
+				"Build roadmap",
+			],
+			price: 8500,
+			category: SERVICE_CATEGORIES.IN_PERSON,
+			slug: "in-person-ai-prototype-workshop",
+			pricing: [],
+			heroSubtitle:
+				"Turn vague AI ambition into a concrete product workflow in a focused in-person sprint.",
+			problemsAndSolutions: problems(
+				"AI ideas stay abstract when no one defines the exact user workflow.",
+				"We turn the idea into a concrete interaction with clear product boundaries.",
+				"Teams overcommit to AI complexity without testing feasibility first.",
+				"We validate the workflow and decide what is worth building next.",
+			),
+			howItWorks: steps(
+				[
+					"Define the workflow",
+					"Isolate the single AI-assisted job worth testing first.",
+					"Brain",
+				],
+				[
+					"Prototype live",
+					"Map prompts, retrieval, and flow in the room.",
+					"Sparkles",
+				],
+				[
+					"Choose the next build",
+					"Leave with a prototype and implementation roadmap.",
+					"Rocket",
+				],
+			),
+			integrations: stacks.ai,
+			showBanner: true,
+			bannerText: "Denver",
+			bannerColor: "bg-gradient-to-r from-primary to-accent",
+		}),
+	},
+	[SERVICE_CATEGORIES.SPECIALISTS]: {
+		backendEngineer: service({
+			id: "service-embedded-backend-engineer",
+			title: "Embedded Backend Engineer",
+			iconName: "Database",
+			description:
+				"Month-to-month backend support for APIs, auth, integrations, database design, and launch-critical architecture work.",
+			features: [
+				"API design",
+				"Database modeling",
+				"Auth and payments",
+				"Launch support",
+			],
+			price: 3000,
+			category: SERVICE_CATEGORIES.SPECIALISTS,
+			slug: "embedded-backend-engineer",
+			pricing: planIds("backend-engineer-support"),
+			heroSubtitle:
+				"Bring in backend support without turning the MVP into a longer hiring problem.",
+			problemsAndSolutions: problems(
+				"Backend architecture keeps becoming the bottleneck for product speed.",
+				"We handle the backend pressure points before they slow feature delivery further.",
+				"API and data choices made under pressure are expensive to revisit later.",
+				"We design for speed now while keeping the structure reasonable for the next phase.",
+			),
+			howItWorks: steps(
+				[
+					"Review the backend",
+					"Find where architecture is blocking speed.",
+					"Database",
+				],
+				[
+					"Own the critical work",
+					"Implement the APIs, models, and integrations that matter most.",
+					"Network",
+				],
+				[
+					"Support the launch",
+					"Stay close until the release pressure drops.",
+					"ShieldCheck",
+				],
+			),
+			integrations: stacks.build,
+			showBanner: true,
+			bannerText: "Monthly",
+			bannerColor: "bg-gradient-to-r from-primary to-focus",
+		}),
+		frontendEngineer: service({
+			id: "service-embedded-frontend-engineer",
+			title: "Embedded Frontend Engineer",
+			iconName: "Palette",
+			description:
+				"Month-to-month frontend support for product flows, landing experiences, responsive polish, and interaction cleanup.",
+			features: [
+				"UI implementation",
+				"Responsive polish",
+				"Component cleanup",
+				"Launch-facing UX",
+			],
+			price: 2500,
+			category: SERVICE_CATEGORIES.SPECIALISTS,
+			slug: "embedded-frontend-engineer",
+			pricing: planIds("frontend-engineer-support"),
+			heroSubtitle:
+				"Add frontend help where the product most needs clarity, polish, and shipping speed.",
+			problemsAndSolutions: problems(
+				"Products can work before they feel trustworthy.",
+				"We improve the screens that most affect conversion and confidence.",
+				"Landing-page and product UX often drift apart.",
+				"We keep both surfaces aligned so the product matches the promise.",
+			),
+			howItWorks: steps(
+				[
+					"Prioritize the surface",
+					"Choose the screens that most affect trust and conversion.",
+					"LayoutGrid",
+				],
+				[
+					"Implement cleanly",
+					"Refine the UI and remove the obvious frontend drag.",
+					"Palette",
+				],
+				[
+					"Keep iterating",
+					"Stay available for launch-facing improvements month to month.",
+					"RefreshCw",
+				],
+			),
+			integrations: stacks.build,
+			showBanner: true,
+			bannerText: "Monthly",
+			bannerColor: "bg-gradient-to-r from-primary to-accent",
+		}),
+		aiEngineer: service({
+			id: "service-embedded-ai-engineer",
+			title: "Embedded AI Engineer",
+			iconName: "BrainCircuit",
+			description:
+				"Month-to-month AI support for agent workflows, prompts, retrieval, eval loops, and production-minded AI features.",
+			features: [
+				"Agent design",
+				"Prompt systems",
+				"Retrieval and evals",
+				"AI productization",
+			],
+			price: 4500,
+			category: SERVICE_CATEGORIES.SPECIALISTS,
+			slug: "embedded-ai-engineer",
+			pricing: planIds("ai-engineer-support"),
+			heroSubtitle:
+				"Add AI engineering help where the workflow needs to become real and usable, not just impressive.",
+			problemsAndSolutions: problems(
+				"AI demos often look convincing before reliability is tested.",
+				"We work on the actual workflow, not just the output veneer.",
+				"Prompt logic without evals is hard to trust in production.",
+				"We add structure around testing, retrieval quality, and operational behavior.",
+			),
+			howItWorks: steps(
+				[
+					"Define the AI job",
+					"Isolate the workflow the model needs to handle.",
+					"BrainCircuit",
+				],
+				[
+					"Wire the system",
+					"Connect prompts, tools, and retrieval to the product flow.",
+					"Puzzle",
+				],
+				[
+					"Harden for launch",
+					"Improve reliability and next-step decisions.",
+					"ShieldCheck",
+				],
+			),
+			integrations: stacks.ai,
+			showBanner: true,
+			bannerText: "Monthly",
+			bannerColor: "bg-gradient-to-r from-focus to-accent",
+		}),
+	},
+	[SERVICE_CATEGORIES.SUPPORT]: {
+		managedLaunchSupport: service({
+			id: "service-managed-launch-support",
+			title: "Managed Launch Support",
+			iconName: "RefreshCw",
+			description:
+				"Ongoing support for launch stabilization, bug fixes, small feature improvements, and feedback loops after go-live.",
+			features: [
+				"Bug fixes",
+				"Launch stabilization",
+				"Small feature iterations",
+				"Roadmap prioritization",
+			],
+			price: 3000,
+			category: SERVICE_CATEGORIES.SUPPORT,
+			slug: "managed-launch-support",
+			pricing: planIds("support-plan"),
+			heroSubtitle:
+				"Keep the MVP stable after launch without immediately expanding the team.",
+			problemsAndSolutions: problems(
+				"Post-launch issues stack up quickly and erase early momentum.",
+				"We handle the most important fixes and keep the release stable while usage grows.",
+				"Founders need help deciding what to improve next, not just someone to close tickets.",
+				"We pair iteration work with roadmap judgment and analytics review.",
+			),
+			howItWorks: steps(
+				[
+					"Triage the launch",
+					"Review issues, analytics, and product feedback.",
+					"BarChartBig",
+				],
+				[
+					"Ship targeted fixes",
+					"Stabilize the product and iterate on what matters.",
+					"RefreshCw",
+				],
+				[
+					"Prioritize the next cycle",
+					"Tighten the roadmap instead of growing a loose backlog.",
+					"CalendarCheck",
+				],
+			),
+			integrations: stacks.support,
+			showBanner: true,
+			bannerText: "Monthly",
+			bannerColor: "bg-gradient-to-r from-primary to-focus",
+		}),
+		devOpsEngineer: service({
+			id: "service-embedded-devops-engineer",
+			title: "Embedded DevOps Engineer",
+			iconName: "Cloud",
+			description:
+				"Month-to-month DevOps support for CI, environments, deployment reliability, observability, and launch readiness.",
+			features: [
+				"Deployment pipelines",
+				"Environment management",
+				"Observability",
+				"Release reliability",
+			],
+			price: 3500,
+			category: SERVICE_CATEGORIES.SUPPORT,
+			slug: "embedded-devops-engineer",
+			pricing: planIds("devops-engineer-support"),
+			heroSubtitle:
+				"Bring in practical DevOps support when release confidence matters more than infra theater.",
+			problemsAndSolutions: problems(
+				"Manual releases and unclear environments create avoidable launch risk.",
+				"We improve release confidence with cleaner pipelines and environment discipline.",
+				"Teams do not notice operational issues until users hit them first.",
+				"We add visibility, alerts, and practical operational guardrails.",
+			),
+			howItWorks: steps(
+				[
+					"Review release flow",
+					"Map deploy, environment, and incident gaps.",
+					"Cloud",
+				],
+				[
+					"Harden the system",
+					"Improve CI, environments, and observability.",
+					"ShieldCheck",
+				],
+				[
+					"Support the launch",
+					"Stay close during releases and stabilization.",
+					"Power",
+				],
+			),
+			integrations: stacks.support,
+			showBanner: true,
+			bannerText: "Monthly",
+			bannerColor: "bg-gradient-to-r from-accent to-focus",
+		}),
+	},
+	[SERVICE_CATEGORIES.RESOURCES]: {
+		launchAssets: service({
+			id: "service-launch-assets-handoff",
+			title: "Launch Assets & Handoff",
+			iconName: "UploadCloud",
+			description:
+				"Documentation, checklists, analytics notes, and handoff materials so the product can keep moving after the initial build.",
+			features: [
+				"Setup docs",
+				"Launch checklist",
+				"Analytics notes",
+				"Future roadmap handoff",
+			],
+			price: "Included with build services",
+			category: SERVICE_CATEGORIES.RESOURCES,
+			slug: "launch-assets-and-handoff",
+			pricing: [],
+			heroSubtitle:
+				"Keep the launch usable after delivery with docs, checklists, and a cleaner handoff package.",
+			problemsAndSolutions: problems(
+				"Fast launch work often leaves critical context trapped in memory and chat.",
+				"We turn the key build decisions into usable operating documents.",
+				"The next sprint slows down when no one knows what was shipped or why.",
+				"We give the team a handoff package that reduces context loss.",
+			),
+			howItWorks: steps(
+				[
+					"Collect the decisions",
+					"Turn build context into concise operating notes.",
+					"FileText",
+				],
+				[
+					"Package the assets",
+					"Create checklists, docs, and tracking notes.",
+					"UploadCloud",
+				],
+				[
+					"Hand off clearly",
+					"The next builder can step in without reconstructing the project.",
+					"Users",
+				],
+			),
+			integrations: stacks.resources,
+		}),
 	},
 };
 
-// --- Helper functions (remain the same) ---
-export const getAllServiceCategories = () => {
-	// Adjust if ServicesData keys are guaranteed
-	return Object.keys(services) as ServiceCategoryValue[];
-};
+export const getAllServiceCategories = () =>
+	Object.keys(services) as ServiceCategoryValue[];
 
-export const getServicesByCategory = (category: ServiceCategoryValue) => {
-	// Add a check for potentially missing category
-	return services[category] || {};
-};
+export const getServicesByCategory = (category: ServiceCategoryValue) =>
+	services[category] || {};
 
-export const getAllServices = () => {
-	return Object.values(services).flatMap((categoryObj) =>
-		Object.values(categoryObj),
-	);
-};
+export const getAllServices = () =>
+	Object.values(services).flatMap((categoryObj) => Object.values(categoryObj));
+
+export default services;

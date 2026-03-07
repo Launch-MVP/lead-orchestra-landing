@@ -33,15 +33,18 @@ const buildPlanDescription = (plan: RecurringPlan): string => {
 const buildPlanUrl = (planId: string, interval: string): string =>
 	buildAbsoluteUrl(`/pricing?plan=${planId}&interval=${interval}`);
 
-const toSku = (planId: string, interval: PricingInterval | "one-time") =>
-	`${planId}-${interval}`.toUpperCase();
+const toSku = (
+	planId: string,
+	interval: PricingInterval | "one-time" | "in-person",
+) => `${planId}-${interval}`.toUpperCase();
 
 const buildRecurringPlanProduct = (
 	plan: RecurringPlan,
-	interval: PricingInterval,
+	interval: PricingInterval | "one-time" | "in-person",
+	displayLabel: string,
 ): ProductSchema =>
 	buildProductSchema({
-		name: `${plan.name} (${interval === "monthly" ? "Monthly" : "Annual"})`,
+		name: `${plan.name} (${displayLabel})`,
 		description: buildPlanDescription(plan),
 		url: buildPlanUrl(plan.id, interval),
 		sku: toSku(plan.id, interval),
@@ -155,18 +158,36 @@ const buildSeatsSummary = (seats?: SeatAllocation): string => {
 const isSelfHostedPlan = (plan: OneTimePlan): plan is SelfHostedPlan =>
 	"roiEstimator" in plan;
 
+const isRecurringProjectPlan = (plan: OneTimePlan): plan is RecurringPlan =>
+	"price" in plan && "features" in plan;
+
 export const buildPricingJsonLd = ({
 	catalog,
 }: BuildPricingJsonLdOptions): Array<ProductSchema | ServiceSchema> => {
 	const monthlyPlans = catalog.pricing.monthly.map((plan) =>
-		buildRecurringPlanProduct(plan, "monthly"),
+		buildRecurringPlanProduct(plan, "monthly", "Monthly"),
 	);
 	const annualPlans = catalog.pricing.annual.map((plan) =>
-		buildRecurringPlanProduct(plan, "annual"),
+		buildRecurringPlanProduct(plan, "annual", "Annual"),
 	);
-	const oneTimePlans = catalog.pricing.oneTime.map((plan) =>
-		buildOneTimePlanService(plan),
+	const inPersonPlans = catalog.pricing.inPerson.map((plan) =>
+		buildRecurringPlanProduct(plan, "in-person", "In Person"),
 	);
+	const oneTimeProducts = catalog.pricing.oneTime
+		.filter(isRecurringProjectPlan)
+		.map((plan) => buildRecurringPlanProduct(plan, "one-time", "One-Time"));
+	const oneTimeServices = catalog.pricing.oneTime
+		.filter(
+			(plan): plan is Exclude<OneTimePlan, RecurringPlan> =>
+				!isRecurringProjectPlan(plan),
+		)
+		.map((plan) => buildOneTimePlanService(plan));
 
-	return [...monthlyPlans, ...annualPlans, ...oneTimePlans];
+	return [
+		...monthlyPlans,
+		...annualPlans,
+		...inPersonPlans,
+		...oneTimeProducts,
+		...oneTimeServices,
+	];
 };

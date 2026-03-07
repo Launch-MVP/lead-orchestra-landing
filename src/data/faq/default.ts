@@ -2,78 +2,76 @@ import type { FAQItem } from "@/types/faq";
 
 export const faqItems: FAQItem[] = [
 	{
-		question: "What makes Lead Orchestra different from other scraping tools?",
+		question: "What is Launch MVP?",
 		answer:
-			"Lead Orchestra is an open-source lead scraping and data ingestion platform built specifically for real estate professionals. Unlike generic scrapers, it includes pre-built plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, and Twitter. All scraped data is automatically normalized to Lead Standard Format (LSF) schemas, making it ready to export to CRM, CSV, JSON, Database, S3, or any system. Plus, it's built with Playwright for reliable anti-bot bypass and includes developer tooling like CLI, SDKs, and webhooks.",
+			"Launch MVP is a productized MVP build service for founders and innovation teams. The core offer is the 3-Day MVP Workshop: we scope the product, define the critical user flow, build the launch version, wire the key integrations, and hand over a production-ready foundation your team can extend.",
 	},
 	{
-		question: "Who is Lead Orchestra built for?",
+		question: "Who is this built for?",
 		answer:
-			"Lead Orchestra is designed for developers, agencies, and data teams who need to scrape leads from multiple sources and normalize the data for their workflows. Real estate agents, investors, and wholesalers use it to gather fresh leads from Zillow, Realtor, MLS, and social platforms. Agencies use it to build custom scraping pipelines for clients. Data teams use it for automated data ingestion and normalization.",
+			"It is designed for early-stage B2B founders, startup teams, and internal innovation groups that need a real MVP quickly. It is especially useful when you have a clear problem, limited bandwidth, and need help turning rough requirements into a launchable product without overbuilding.",
 	},
 	{
-		question: "What sources can Lead Orchestra scrape?",
+		question: "What do you actually deliver in 3 days?",
 		answer:
-			"Lead Orchestra includes pre-built MCP plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, and Twitter. The unified MCP spec makes it easy to add new sources. You can also use the Playwright-based crawling engine to scrape any website with custom selectors and navigation flows.",
+			"Typical deliverables include product scoping, core user flows, UI direction, application build, deployment setup, key integrations, analytics instrumentation, QA, and a clean handoff. The exact scope depends on the product, but the focus is always the smallest credible MVP that can be shown, tested, and learned from immediately.",
 	},
 	{
-		question: "How does the scraping engine work?",
+		question: "Is this no-code, low-code, or custom code?",
 		answer:
-			"Lead Orchestra uses a PlaywrightCrawler-based engine with anti-bot modules, headless browser clusters, proxy rotation, stealth mode, and captcha bypass. It supports multi-step navigation, DOM selectors, automatic retries, and rate limiting to ensure reliable scraping without getting blocked.",
+			"The build approach is pragmatic. If a managed service or low-code tool is the fastest stable choice, we use it. If custom code is the right call for ownership, flexibility, or performance, we build it. The goal is a reliable MVP you can keep, not technology purity for its own sake.",
 	},
 	{
-		question: "What data formats can I export to?",
+		question: "Do I own the code and assets?",
 		answer:
-			"You can export scraped and normalized data to CRM, CSV, JSON, Database, S3, or any system via API. The data normalization layer automatically parses addresses, extracts phone numbers and emails, tags metadata, de-duplicates records, and resolves entities before export.",
+			"Yes. The engagement is built around clean handoff and ownership. You keep the repo, product decisions, implementation details, and launch documentation so you are not trapped in a black-box relationship after the MVP ships.",
 	},
 	{
-		question: "Can I use Lead Orchestra with my existing tools?",
+		question:
+			"Can you wire integrations like auth, Stripe, analytics, CRM, or AI workflows?",
 		answer:
-			"Yes. Lead Orchestra is designed to plug into anything. Export to CRM for immediate use, CSV/JSON for spreadsheets, Database for storage, S3 for cloud storage, or use the API to integrate with custom systems. The webhook system can trigger actions in other tools when new leads are scraped.",
+			"Yes. Those are exactly the systems we scope for the MVP. Common integrations include authentication, payments, analytics, email, CRM sync, internal dashboards, and targeted AI workflows that reduce manual steps without overcomplicating the product.",
 	},
 	{
-		question: "How fast can I start scraping?",
+		question: "What if I only need strategy or scoping first?",
 		answer:
-			"You can start scraping in under 5 minutes. Just paste a URL, configure your scraping parameters (or use defaults), and let Lead Orchestra handle the rest. The CLI and SDKs make it easy to automate scraping jobs, and GitHub Actions templates help you set up continuous scraping workflows.",
+			"That is what the MVP Strategy Sprint is for. It is a smaller engagement focused on clarifying the offer, ICP, core workflow, stack recommendation, scope cut, and launch roadmap before you commit to the full build.",
 	},
 	{
-		question: "Is Lead Orchestra open-source?",
+		question: "What if I am non-technical?",
 		answer:
-			"Yes. Lead Orchestra is open-source, giving you full control over your scraping infrastructure. You can self-host, customize the code, and contribute improvements. Enterprise plans include additional features, support, and optional managed hosting.",
+			"That is a common fit. We translate the idea into product decisions, make tradeoffs explicit, and keep the delivery focused on the launch version. You do not need to manage engineers or write specs at startup-studio depth for the process to work.",
 	},
 	{
-		question: "What kind of data quality can I expect?",
+		question: "How much does it cost?",
 		answer:
-			"Lead Orchestra's data normalization layer ensures high-quality output. It automatically parses addresses into standardized formats, extracts and validates phone numbers and emails, tags metadata, removes duplicates, and resolves entity relationships. All data is normalized to Lead Standard Format (LSF) schemas for consistency.",
+			"The current core offers are a $500 MVP Strategy Sprint, a $12,500 3-Day MVP Workshop, and optional post-launch support starting at $2,500 per month. The actual recommendation depends on how much definition already exists and how much launch support you need after handoff.",
 	},
 	{
-		question: "Does Lead Orchestra handle rate limiting and anti-bot measures?",
+		question: "What happens if the requested scope is too large for 3 days?",
 		answer:
-			"Yes. The Playwright-based engine includes built-in anti-bot modules, proxy rotation, stealth mode, and captcha bypass. Automatic retries and rate limiting help prevent blocks. The headless browser cluster distributes load to avoid detection patterns.",
+			"We cut the scope aggressively to the launch-critical workflow. If the idea is too large, we define the version that should ship first, identify what gets deferred, and turn the rest into a sequenced roadmap. The discipline is part of the service.",
 	},
 	{
-		question: "Can I scrape data on a schedule?",
+		question: "Do you help after launch?",
 		answer:
-			"Yes. Use the CLI, SDKs, or GitHub Actions templates to set up scheduled scraping jobs. The webhook system can notify you when scraping completes, and you can export data automatically to your preferred destination.",
+			"Yes. Managed Launch Support covers iteration, bug fixes, small enhancements, launch feedback loops, and prioritization support after the initial MVP ships. It is designed for teams that need momentum after release without hiring immediately.",
 	},
 	{
-		question: "What developer tools are included?",
+		question:
+			"Can you work with an existing design, codebase, or internal team?",
 		answer:
-			"Lead Orchestra includes a CLI for command-line scraping, SDKs for JavaScript, Python, and Go, a webhook system for integrations, GitHub Actions templates for CI/CD workflows, an API key console for access management, and usage analytics to track your scraping activity.",
+			"Yes, if the existing work is solid enough to build on responsibly. We assess what should be reused, what should be tightened, and what should be excluded from the sprint so delivery stays clean and realistic.",
 	},
 	{
-		question: "How does data normalization work?",
+		question:
+			"Do you support investor demos, discovery calls, or launch materials?",
 		answer:
-			"The data normalization layer automatically processes scraped data: parsing addresses into standardized formats, extracting and validating phone numbers and email addresses, tagging metadata for categorization, de-duplicating records across sources, and resolving entity relationships. All output follows Lead Standard Format (LSF) schemas.",
+			"Yes. We can shape the MVP and supporting materials around customer conversations, investor demos, pilot rollouts, or internal stakeholder review. The point is not just to ship software, but to give you a product you can use to move the business forward.",
 	},
 	{
-		question: "Can I white label or self host Lead Orchestra?",
+		question: "How do we start?",
 		answer:
-			"Yes. Since Lead Orchestra is open-source, you can self-host it on your own infrastructure. Enterprise and partner users can also white label it with custom branding, dedicated infrastructure, and optional revenue-sharing models.",
-	},
-	{
-		question: "Is there a free trial or open-source version?",
-		answer:
-			"Yes. Lead Orchestra is open-source, so you can use it for free. Enterprise plans include additional features, support, managed hosting, and priority updates. New users can also request a trial of enterprise features.",
+			"Start with a consult or the Strategy Sprint. We review the product idea, target user, business goal, timeline, and technical constraints, then recommend the smallest launchable version and whether the full Workshop is the right next step.",
 	},
 ];

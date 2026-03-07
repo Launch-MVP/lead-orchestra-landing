@@ -1,13 +1,12 @@
 import type { ProductType } from "@/types/products";
 import { LicenseType, ProductCategory } from "@/types/products";
-import { ABTest } from "../../types/testing/index";
+import type { ABTest } from "../../types/testing/index";
 import {
 	linkedinScrapingWorkflowABTests,
 	multiSourceScrapingWorkflowABTests,
 	zillowScrapingWorkflowABTests,
 } from "./workflow-copy";
 
-// Extended type for workflow products
 export interface WorkflowProductType extends ProductType {
 	workflowId: string;
 	userId: string;
@@ -15,20 +14,20 @@ export interface WorkflowProductType extends ProductType {
 
 export const workflowProducts: WorkflowProductType[] = [
 	{
-		id: "zillow-scraping-workflow",
-		name: "Zillow Scraping Workflow",
-		abTest: zillowScrapingWorkflowABTests[0],
-		price: 199,
-		sku: "WF-ZILLOW-SCRAPE",
-		slug: "zillow-scraping-workflow",
+		id: "mvp-scope-system",
+		name: "MVP Scope System",
+		abTest: zillowScrapingWorkflowABTests[0] as ABTest,
+		price: 249,
+		sku: "LMVP-WF-SCOPE-249",
+		slug: "mvp-scope-system",
 		licenseName: LicenseType.Proprietary,
 		description:
-			"Pre-configured Lead Orchestra workflow for scraping Zillow listings. Includes MCP plugin setup, data normalization, and automatic export to CRM. Get started scraping Zillow in minutes.",
-		categories: [ProductCategory.Workflows, ProductCategory.Automation],
+			"A reusable scoping workflow that helps founders cut features, map the core user journey, and reach a cleaner version-one plan.",
+		categories: [ProductCategory.Workflows, ProductCategory.Strategy],
 		images: ["/products/workflows.png"],
 		types: [
-			{ name: "Standard", value: "standard", price: 199 },
-			{ name: "Premium", value: "premium", price: 399 },
+			{ name: "Standard", value: "standard", price: 249 },
+			{ name: "Team", value: "team", price: 449 },
 		],
 		reviews: [],
 		colors: [],
@@ -37,65 +36,65 @@ export const workflowProducts: WorkflowProductType[] = [
 			{
 				question: "What does this workflow include?",
 				answer:
-					"This workflow includes a pre-configured MCP plugin for Zillow, data normalization settings, and automatic export to your CRM. Just connect your Lead Orchestra instance and start scraping.",
+					"It includes a repeatable process for scope cutting, feature prioritization, and identifying the smallest launchable version of the product.",
 			},
 		],
-		workflowId: "wf-001-zillow",
+		workflowId: "wf-launch-scope-001",
 		userId: "user-assign-on-purchase",
 	},
 	{
-		id: "linkedin-scraping-workflow",
-		name: "LinkedIn Scraping Workflow",
-		abTest: linkedinScrapingWorkflowABTests[0],
-		price: 249,
-		sku: "WF-LINKEDIN-SCRAPE",
-		slug: "linkedin-scraping-workflow",
+		id: "beta-feedback-system",
+		name: "Beta Feedback System",
+		abTest: linkedinScrapingWorkflowABTests[0] as ABTest,
+		price: 199,
+		sku: "LMVP-WF-BETA-199",
+		slug: "beta-feedback-system",
 		licenseName: LicenseType.Proprietary,
 		description:
-			"Automate LinkedIn company and profile scraping with Lead Orchestra. Extract company data, employee information, and contact details. Perfect for B2B lead generation.",
-		categories: [ProductCategory.Workflows, ProductCategory.Automation],
+			"A reusable workflow for recruiting beta testers, collecting structured feedback, and keeping early validation organized.",
+		categories: [ProductCategory.Workflows, ProductCategory.Support],
 		images: ["/products/workflows.png"],
 		types: [
-			{ name: "Standard", value: "standard", price: 249 },
-			{ name: "Premium", value: "premium", price: 499 },
+			{ name: "Standard", value: "standard", price: 199 },
+			{ name: "Team", value: "team", price: 349 },
 		],
 		reviews: [],
 		colors: [],
 		sizes: [],
 		faqs: [
 			{
-				question: "What data can I scrape from LinkedIn?",
+				question: "What does this help with?",
 				answer:
-					"This workflow allows you to scrape company pages, employee profiles, job postings, and contact information. All data is normalized to Lead Standard Format (LSF) for easy export.",
+					"It helps founders run a tighter loop between outreach, user intake, product feedback, and roadmap follow-up.",
 			},
 		],
-		workflowId: "wf-002-linkedin",
+		workflowId: "wf-beta-feedback-002",
 		userId: "user-assign-on-purchase",
 	},
 	{
-		id: "multi-source-scraping-workflow",
-		name: "Multi-Source Scraping Workflow",
-		price: 399,
-		sku: "WF-MULTI-SOURCE",
-		slug: "multi-source-scraping-workflow",
-		abTest: multiSourceScrapingWorkflowABTests[0],
+		id: "launch-analytics-dashboard-workflow",
+		name: "Launch Analytics Dashboard Workflow",
+		price: 299,
+		sku: "LMVP-WF-ANALYTICS-299",
+		slug: "launch-analytics-dashboard-workflow",
+		abTest: multiSourceScrapingWorkflowABTests[0] as ABTest,
 		licenseName: LicenseType.Proprietary,
 		description:
-			"Scrape from multiple sources simultaneously (Zillow, Realtor, LinkedIn, MLS) with unified data normalization and export. Perfect for agencies and data teams scaling their lead generation.",
-		categories: [ProductCategory.Workflows, ProductCategory.Automation],
+			"A reusable reporting workflow for post-launch visibility across activation, product usage, and early traction signals.",
+		categories: [ProductCategory.Workflows, ProductCategory.Data],
 		images: ["/products/workflows.png"],
-		types: [{ name: "Standard", value: "standard", price: 399 }],
+		types: [{ name: "Standard", value: "standard", price: 299 }],
 		reviews: [],
 		colors: [],
 		sizes: [],
 		faqs: [
 			{
-				question: "What sources are included?",
+				question: "What does this workflow track?",
 				answer:
-					"This workflow includes pre-configured MCP plugins for Zillow, Realtor.com, LinkedIn, and MLS. All scraped data is automatically normalized to LSF and can be exported to CRM, CSV, or Database.",
+					"It is built to centralize early launch metrics so teams can monitor adoption, usage patterns, and next-step priorities in one cleaner view.",
 			},
 		],
-		workflowId: "wf-003-multi-source",
+		workflowId: "wf-launch-analytics-003",
 		userId: "user-assign-on-purchase",
 	},
 ];

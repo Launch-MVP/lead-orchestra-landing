@@ -76,7 +76,7 @@ export default function ProductFilter({
 		<div className="mb-8 flex w-full flex-col gap-4">
 			{showSearch && (
 				<div className="relative mx-auto w-full max-w-xs md:max-w-sm">
-					<span className="-translate-y-1/2 absolute top-1/2 left-3 text-purple-400">
+					<span className="-translate-y-1/2 absolute top-1/2 left-3 text-primary/70">
 						<svg
 							aria-label="Search"
 							width={18}
@@ -96,7 +96,7 @@ export default function ProductFilter({
 					</span>
 					<Input
 						type="text"
-						placeholder="Search products..."
+						placeholder="Search services, systems, or templates..."
 						value={searchTerm}
 						onChange={(e) => onSearch(e.target.value)}
 						className="rounded-lg border border-white/10 bg-white py-2 pl-10 text-black placeholder:text-gray-500 focus:border-primary focus:ring-primary dark:bg-[#181825] dark:text-white dark:placeholder:text-white/50"

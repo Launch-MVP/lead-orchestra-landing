@@ -4,7 +4,7 @@ import { ProductCheckoutForm } from "@/components/checkout/product/ProductChecko
 import { ProductSelectionProvider } from "@/contexts/ProductSelectionContext";
 import { useWaitCursor } from "@/hooks/useWaitCursor";
 import { startStripeToast } from "@/lib/ui/stripeToast";
-import type { ProductType } from "@/types/products";
+import { ProductCategory, type ProductType } from "@/types/products";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
@@ -115,6 +115,9 @@ const ProductPage = ({ product, callbackUrl }: ProductPageProps) => {
 
 	// Select the first AB test variant's copy (if present)
 	const variantCopy = product.abTest?.variants?.[0]?.copy;
+	const isRemoteCloserProduct = product.categories?.includes(
+		ProductCategory.RemoteClosers,
+	);
 
 	return (
 		<ProductSelectionProvider>
@@ -134,7 +137,10 @@ const ProductPage = ({ product, callbackUrl }: ProductPageProps) => {
 								checkoutLoading={checkoutLoading}
 								stripeLoaded={stripeLoaded}
 								setActiveTab={setActiveTab}
-								ctaText={variantCopy?.buttonCta || "Purchase"}
+								ctaText={
+									variantCopy?.buttonCta ||
+									(isRemoteCloserProduct ? "Hire" : "Purchase")
+								}
 							/>
 						</div>
 					</div>

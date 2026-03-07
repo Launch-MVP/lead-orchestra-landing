@@ -24,7 +24,8 @@ export const legalDocuments: LegalDocument[] = [
 	{
 		slug: "privacy-policy",
 		title: "Privacy Policy",
-		description: "How we collect, use, and protect your data.",
+		description:
+			"How Launch MVP collects, uses, and protects your personal information.",
 		lastUpdated: "2024-07-23",
 		content: privacyPolicyMarkdown,
 		source: "fallback",
@@ -33,7 +34,8 @@ export const legalDocuments: LegalDocument[] = [
 	{
 		slug: "terms-of-service",
 		title: "Terms of Service",
-		description: "Your legal agreement for using Deal Scale.",
+		description:
+			"Your legal agreement for using Launch MVP's website, workshops, services, and digital assets.",
 		lastUpdated: "2024-07-23",
 		content: termsOfServiceMarkdown,
 		source: "fallback",
@@ -42,7 +44,8 @@ export const legalDocuments: LegalDocument[] = [
 	{
 		slug: "cookie-policy",
 		title: "Cookie Policy",
-		description: "How we use cookies and similar technologies.",
+		description:
+			"How Launch MVP uses cookies and similar technologies across the site and service experience.",
 		lastUpdated: "2024-07-23",
 		content: cookiesPolicyMarkdown,
 		source: "fallback",

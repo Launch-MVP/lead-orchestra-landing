@@ -28,8 +28,7 @@ const indicatorPalette = [
 	{ from: "rgba(192,132,252,0.95)", to: "rgba(147,51,234,0.95)" },
 ] as const;
 
-const ROI_CALCULATOR_URL =
-	"https://app.dealscale.io/external-tools/calculators/roi";
+const ROI_CALCULATOR_URL = "/external-tools/roi-simulator";
 
 /**
  * FeatureShowcase renders the Macbook demo with contextual copy and metrics.

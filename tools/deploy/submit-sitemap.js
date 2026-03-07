@@ -1,4 +1,9 @@
-const DEFAULT_CANONICAL = 'https://leadorchestra.com';
+const DEFAULT_CANONICAL = 'https://dealscale.io';
+const FETCH_TIMEOUT_MS = Number(process.env.SITEMAP_SUBMIT_TIMEOUT_MS || 5000);
+
+function isDeployEnvironment() {
+	return Boolean(process.env.CI || process.env.VERCEL || process.env.RENDER || process.env.CF_PAGES);
+}
 
 /**
  * Resolve the canonical base URL for sitemap submissions.
@@ -68,6 +73,11 @@ async function submitSitemaps() {
 		return 0;
 	}
 
+	if (!isDeployEnvironment() && process.env.SITEMAP_SUBMIT_FORCE !== '1') {
+		console.log('[sitemap] Skipping submission outside CI/deploy environment.');
+		return 0;
+	}
+
 	const canonicalBase = resolveCanonicalBase();
 	const sitemapUrls = resolveSitemapUrls(canonicalBase);
 	console.log(`[sitemap] Submitting ${sitemapUrls.length} sitemap(s) for ${canonicalBase}.`);
@@ -79,7 +89,10 @@ async function submitSitemaps() {
 		for (const engine of SEARCH_ENGINES) {
 			const endpoint = engine.buildPingUrl(sitemapUrl);
 			try {
-				const response = await fetchFn(endpoint, { method: 'GET' });
+				const response = await fetchFn(endpoint, {
+					method: 'GET',
+					signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+				});
 				if (response.ok) {
 					console.log(
 						`[sitemap] ${engine.name} accepted submission for ${sitemapUrl} (status ${response.status}).`
@@ -117,6 +130,11 @@ async function submitIndexNow(canonicalBase, sitemapUrls) {
 		return;
 	}
 
+	if (!isDeployEnvironment() && process.env.INDEXNOW_SUBMIT_FORCE !== '1') {
+		console.log('[indexnow] Skipping submission outside CI/deploy environment.');
+		return;
+	}
+
 	const key =
 		process.env.INDEXNOW_KEY ||
 		process.env.PRIVATE_INDEX_NOW_KEY ||
@@ -150,6 +168,7 @@ async function submitIndexNow(canonicalBase, sitemapUrls) {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json; charset=utf-8' },
 			body: JSON.stringify(payload),
+			signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
 		});
 
 		if (response.ok) {

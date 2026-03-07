@@ -43,7 +43,11 @@ export function AuthModal() {
 	const { isOpen, view, setView, close } = useAuthModal();
 	const searchParams = useSearchParams();
 	const callbackUrl = searchParams?.get("callbackUrl") || undefined;
-	const supabase = createClientComponentClient();
+	const isSupabaseConfigured = Boolean(
+		process.env.NEXT_PUBLIC_SUPABASE_URL &&
+			process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+	);
+	const supabase = isSupabaseConfigured ? createClientComponentClient() : null;
 
 	const buildRedirectTo = useCallback(
 		(provider: "linkedin" | "facebook") => {
@@ -62,7 +66,7 @@ export function AuthModal() {
 	);
 
 	const handleLinkedIn = useCallback(async () => {
-		if (view === "signin") {
+		if (view === "signin" && supabase) {
 			const destination = buildRedirectTo("linkedin");
 			if (!destination) {
 				return;
@@ -79,6 +83,14 @@ export function AuthModal() {
 			return;
 		}
 
+		if (view === "signin" && !supabase) {
+			toast({
+				title: "LinkedIn Sign-In",
+				description:
+					"Supabase OAuth is not configured in this environment. Falling back to the default sign-in flow.",
+			});
+		}
+
 		toast({
 			title: "LinkedIn OAuth",
 			description:
@@ -88,7 +100,7 @@ export function AuthModal() {
 	}, [view, buildRedirectTo, supabase, callbackUrl]);
 
 	const handleFacebook = useCallback(async () => {
-		if (view === "signin") {
+		if (view === "signin" && supabase) {
 			const destination = buildRedirectTo("facebook");
 			if (!destination) {
 				return;
@@ -103,6 +115,14 @@ export function AuthModal() {
 				description: "Facebook account connected. Finishing sign-in...",
 			});
 			return;
+		}
+
+		if (view === "signin" && !supabase) {
+			toast({
+				title: "Facebook Sign-In",
+				description:
+					"Supabase OAuth is not configured in this environment. Falling back to the default sign-in flow.",
+			});
 		}
 
 		toast({

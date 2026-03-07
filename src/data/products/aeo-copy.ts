@@ -3,31 +3,31 @@ import { defineAbTests } from "@/data/products/copy";
 export const freeAeoContentCalendarABTest = defineAbTests([
 	{
 		id: "ab-test-aeo-calendar-v1",
-		name: "Free AEO Content Calendar Copy",
-		description: "SEO copy for Free AEO Content Calendar.",
+		name: "Free Launch AEO Content Calendar Copy",
+		description: "Copy for the Launch MVP AEO content calendar.",
 		variants: [
 			{
 				name: "V1 - Visibility Focus",
 				percentage: 100,
 				copy: {
-					cta: "Get Visible in AI Search",
+					cta: "Get Visible When the MVP Launches",
 					buttonCta: "Download Free Calendar",
-					tagline: "Plan for the AI Era.",
+					tagline: "Plan Launch Content for AI Search.",
 					subtitle:
-						"A 90-day content calendar designed to help you rank in ChatGPT, Perplexity, and Google AI Overviews.",
+						"A 90-day content calendar designed to help Launch MVP founders publish answer-first content that shows up in AI search.",
 					whatsInItForMe:
-						"Stop writing content that gets ignored by AI. This calendar gives you the exact answer-first topics you need to get cited.",
-					target_audience: "Content Marketers and SEOs.",
+						"You get a practical content plan that supports founder authority, product education, and AI-search visibility around the launch.",
+					target_audience: "Founders, content marketers, and launch teams.",
 					pain_point:
-						"Traditional content calendars focus on keywords, but AI models look for answers and entities.",
-					fear: "You pour hours into content that AI engines—and your future customers—will never see.",
-					hope: "You have a strategic roadmap to becoming a cited authority in the generative AI landscape.",
+						"Most content calendars are generic and do not help founders create the answer-first content AI systems actually surface.",
+					fear: "You launch the MVP and still stay invisible because the site never becomes a useful source in AI search.",
+					hope: "You build a consistent content engine that strengthens the launch story and gets cited over time.",
 					solution:
-						"Our AEO-first content calendar provides a structured plan to cover foundational topics, entities, and answers that AI models prioritize.",
+						"Our AEO-first content calendar gives founders a structured plan for publishing the questions, answers, and entities AI systems prioritize.",
 					highlights: [
 						"30/60/90 Day Plan",
 						"Answer-First Topics",
-						"Internal Link Strategy",
+						"Launch Authority System",
 					],
 					highlighted_words: ["AI Search", "Cited", "Roadmap"],
 				},
@@ -48,20 +48,20 @@ export const aeoLandingPageTemplateABTest = defineAbTests([
 				name: "V1 - Technical Optimization",
 				percentage: 100,
 				copy: {
-					cta: "Deploy AI-Ready Pages",
+					cta: "Launch an AI-Ready Page",
 					buttonCta: "Get the Template",
-					tagline: "Optimized for Machines & Humans.",
+					tagline: "Launch Pages That AI Can Read.",
 					subtitle:
-						"A conversion-focused landing page template pre-configured with the schema and structure AI models love.",
+						"A conversion-focused landing page template pre-configured with the schema and structure AI systems need to understand your Launch MVP offer.",
 					whatsInItForMe:
-						"Save dozens of development hours. We’ve already built the semantic HTML and JSON-LD schema you need to be understood by AI.",
-					target_audience: "Developers and Growth Teams.",
+						"Save build time and skip the technical guesswork of structuring a launch page for both humans and AI systems.",
+					target_audience: "Founders, developers, and growth teams.",
 					pain_point:
-						"Building structured data and semantic HTML from scratch is technical, tedious, and easy to mess up.",
-					fear: "Your beautifully designed pages are technically invisible to the AI crawlers deciding the future of search.",
-					hope: "You launch perfectly optimized pages that rank in standard search AND get picked up by AI answers.",
+						"Most launch pages look fine visually but are poorly structured for AI search, schema, and direct-answer extraction.",
+					fear: "Your launch page goes live but stays invisible to the AI systems shaping how buyers now discover tools and services.",
+					hope: "You ship a launch page that converts users and is technically ready to be cited in AI-generated answers.",
 					solution:
-						"Our template comes pre-loaded with comprehensive FAQ schema, semantic tagging, and answer-optimized layouts.",
+						"Our template comes pre-loaded with FAQ schema, semantic tagging, and layouts built for answer-first product positioning.",
 					highlights: [
 						"Pre-built JSON-LD Schema",
 						"Semantic HTML5",
@@ -86,24 +86,24 @@ export const aeoLandingPageDfyServiceABTest = defineAbTests([
 				name: "V1 - Expert Implementation",
 				percentage: 100,
 				copy: {
-					cta: "Let Us Build It",
+					cta: "Let Launch MVP Build It",
 					buttonCta: "Book Discovery Call",
-					tagline: "Your Brand, AI Optimized.",
+					tagline: "Your Launch Surface, AI Optimized.",
 					subtitle:
-						"We design, write, and deploy a custom AEO landing page that positions your brand as the answer.",
+						"We design, write, and deploy a custom AEO landing page that positions your MVP offer as the answer.",
 					whatsInItForMe:
-						"Get a world-class, AI-optimized asset without lifting a finger. We handle strategy, code, and copy.",
+						"Get a launch-ready, AI-optimized asset without rebuilding your site strategy, code, and copy internally.",
 					target_audience: "Founders and Marketing Executives.",
 					pain_point:
-						"You know you need an AI strategy, but your team lacks the specialized technical SEO and AEO writing skills.",
-					fear: "You continually delay your AI strategy while competitors cement their position as the industry authority.",
-					hope: "You launch a flagship AEO page that drives traffic and proves your thought leadership to both humans and machines.",
+						"You know the launch surface matters, but your team lacks the time or specialized AEO execution skills to build it properly.",
+					fear: "You keep delaying the landing page upgrade while competitors build clearer, more citeable surfaces around their offers.",
+					hope: "You launch a flagship page that improves credibility, conversion, and AI-search visibility at the same time.",
 					solution:
-						"Our expert team handles everything—from entity analysis to schema code—delivering a turnkey AEO asset for your brand.",
+						"Our team handles the strategy, copy, design, and schema implementation needed to deliver a turnkey AEO launch asset.",
 					highlights: [
 						"Custom Design & Copy",
 						"Full Technical AEO",
-						"Turnkey Deployment",
+						"Launch-Ready Deployment",
 					],
 					highlighted_words: ["Turnkey", "Authority", "Expert"],
 				},

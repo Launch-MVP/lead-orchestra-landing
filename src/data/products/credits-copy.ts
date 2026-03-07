@@ -3,38 +3,40 @@ import { defineAbTests } from "./copy";
 export const AIConversationCreditsABTest = defineAbTests([
 	{
 		id: "ab-test-ai-credits-v1",
-		name: "Lead Credits Copy",
-		description: "Copy optimization for Lead Credits (AI usage).",
+		name: "AI Credits Copy",
+		description:
+			"Copy optimization for AI credits and launch operations usage.",
 		variants: [
 			{
-				name: "V1 - Operational Efficiency",
+				name: "V1 - Keep the AI Loop Running",
 				percentage: 100,
 				copy: {
-					cta: "Top Up Your Credits",
-					buttonCta: "Get Credits",
-					tagline: "Fuel Your Data Pipeline.",
+					cta: "Top Up AI Credits",
+					buttonCta: "Get AI Credits",
+					tagline: "Fuel Your MVP and AI Workflows.",
 					subtitle:
-						"The fuel for your lead scraping engine. Scrape, enrich, and export without interruption.",
+						"Credits for prompts, evaluations, automations, and launch operations that rely on AI usage behind the scenes.",
 					whatsInItForMe:
-						"Ensure your lead generation workflows never stop running. Keep your pipeline full by maintaining a healthy credit balance.",
-					target_audience: "Heavy users of scraping and enrichment workflows.",
+						"Keep product experiments, AI features, and launch automations running without pausing the workflow every time usage spikes.",
+					target_audience:
+						"Teams using AI features, launch automations, and internal product workflows regularly.",
 					pain_point:
-						"Running out of credits mid-scrape stops your business processes cold, costing you time and momentum.",
-					fear: "Your automated workflows break because of a zero balance, and you miss critical lead data.",
-					hope: "Your system runs on autopilot, consistently feeding your CRM with fresh data day and night.",
+						"Running out of credits mid-workflow interrupts testing, demos, and operational routines right when momentum matters most.",
+					fear: "You hit a usage wall in the middle of launch prep, internal testing, or customer-facing AI flows.",
+					hope: "Your product team can keep shipping, testing, and iterating without the AI layer becoming the bottleneck.",
 					solution:
-						"Lead Credits are the universal currency for all data operations on our platform—flexible, non-expiring, and essential for scale.",
+						"AI Credits are a flexible usage balance for Launch MVP products and AI-enabled workflows, with simple top-ups and no forced monthly expiry.",
 					highlights: [
-						"Power all scrapers",
-						"Enrichment compatible",
-						"Never expire",
-						"Volume discounts",
+						"Supports AI product features",
+						"Works across launch workflows",
+						"Simple top-ups",
+						"No forced expiry",
 					],
-					highlighted_words: ["Fuel", "Pipeline", "Credits"],
+					highlighted_words: ["AI", "MVP", "Workflows"],
 				},
 			},
 		],
 		isActive: true,
-		tags: ["Credits", "Automation", "Infrastructure"],
+		tags: ["Credits", "AI", "Launch Operations"],
 	},
 ])[0];

@@ -53,10 +53,10 @@ describe("core schema builders", () => {
 
 	it("builds a Service schema with offers and provider", () => {
 		const schema = buildServiceSchema({
-			name: "AI Lead Qualification",
-			description: "Qualify leads automatically using AI call flows.",
-			url: buildAbsoluteUrl("/features/ai-lead-qualification"),
-			serviceType: "Lead Qualification",
+			name: "MVP Strategy Sprint",
+			description: "Pressure-test the product and cut scope to the core flow.",
+			url: buildAbsoluteUrl("/features/mvp-strategy-sprint"),
+			serviceType: "MVP Strategy",
 			category: SERVICE_CATEGORIES.LEAD_GENERATION,
 			areaServed: ["United States"],
 			offers: {
@@ -83,10 +83,10 @@ describe("core schema builders", () => {
 
 	it("builds a Product schema with normalized assets", () => {
 		const schema = buildProductSchema({
-			name: "Deal Scale CRM",
-			description: "AI-powered CRM built for real estate teams.",
-			url: buildAbsoluteUrl("/products/deal-scale-crm"),
-			sku: "DS-CRM-001",
+			name: "Launch MVP OS",
+			description: "Operating system for founders shipping a real version one.",
+			url: buildAbsoluteUrl("/products/launch-mvp-os"),
+			sku: "LMVP-OS-001",
 			image: ["/images/products/crm.png"],
 			offers: {
 				price: 149,
@@ -100,7 +100,7 @@ describe("core schema builders", () => {
 		expect(schema).toMatchObject({
 			"@type": "Product",
 			"@id": expect.stringContaining("#product"),
-			sku: "DS-CRM-001",
+			sku: "LMVP-OS-001",
 			image: [buildAbsoluteUrl("/images/products/crm.png")],
 			offers: expect.objectContaining({
 				url: buildAbsoluteUrl("/checkout"),

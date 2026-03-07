@@ -16,7 +16,7 @@ export default function ServicesPage() {
 	const { faqItems } = dataModules["faq/default"];
 	const schema = buildFAQPageSchema({
 		canonicalUrl: seo.canonical,
-		name: `${seo.title ?? "Deal Scale Features"} FAQs`,
+		name: `${seo.title ?? "Launch MVP Services"} FAQs`,
 		description: seo.description,
 		faqs: faqItems.slice(0, 8),
 	});

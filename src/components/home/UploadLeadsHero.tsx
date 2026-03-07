@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { AtSign, Bookmark, Hash, Play, Upload } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGpuOptimizations } from "@/hooks/useGpuOptimizations";
@@ -14,45 +13,42 @@ const BADGE_ROTATION_INTERVAL_MS = 3000;
 
 const ACTION_BADGES = [
 	{
-		id: "scrape",
-		label: "Scrape Sources",
+		id: "scope",
+		label: "Define Core Flow",
 		icon: Upload,
 		color:
 			"bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-100 dark:border-blue-700",
 	},
 	{
-		id: "normalize",
-		label: "Normalize Data",
+		id: "prioritize",
+		label: "Cut MVP Scope",
 		icon: Hash,
 		color:
-			"bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-100 dark:border-purple-700",
+			"bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900 dark:text-amber-100 dark:border-amber-700",
 	},
 	{
-		id: "export",
-		label: "Export CSV/JSON",
+		id: "stack",
+		label: "Wire Core Stack",
 		icon: Bookmark,
 		color:
 			"bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-100 dark:border-green-700",
 	},
 	{
 		id: "integrate",
-		label: "Integrate MCP",
+		label: "Launch Integrations",
 		icon: AtSign,
 		color:
-			"bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-100 dark:border-orange-700",
+			"bg-sky-100 text-sky-800 border-sky-200 dark:bg-sky-900 dark:text-sky-100 dark:border-sky-700",
 	},
 	{
-		id: "enrich",
-		label: "Export & Integrate",
+		id: "launch",
+		label: "QA and Launch",
 		icon: Play,
 		color:
 			"bg-pink-100 text-pink-800 border-pink-200 dark:bg-pink-900 dark:text-pink-100 dark:border-pink-700",
 	},
-];
+] as const;
 
-/**
- * UploadLeadsHero renders an upload/action input with animated badge sequencing.
- */
 export function UploadLeadsHero(): JSX.Element {
 	const [activeBadgeIndex, setActiveBadgeIndex] = useState(0);
 	const [inputValue, setInputValue] = useState("");
@@ -70,7 +66,6 @@ export function UploadLeadsHero(): JSX.Element {
 	}, []);
 
 	const handleAction = () => {
-		// Handle upload/action logic here
 		console.log("Action triggered with value:", inputValue);
 	};
 
@@ -78,7 +73,7 @@ export function UploadLeadsHero(): JSX.Element {
 		<section
 			className={cn(
 				"relative flex w-full flex-col items-center justify-center overflow-hidden",
-				"min-h-[400px] bg-gradient-to-br from-slate-50 via-white to-slate-100 py-16 sm:min-h-[450px] sm:py-20 md:min-h-[500px] lg:py-24 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950",
+				"min-h-[400px] bg-gradient-to-br from-stone-50 via-white to-slate-100 py-16 sm:min-h-[450px] sm:py-20 md:min-h-[500px] lg:py-24 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950",
 				gpuContainerClass,
 			)}
 		>
@@ -89,12 +84,10 @@ export function UploadLeadsHero(): JSX.Element {
 					transition={{ duration: 0.6, ease: "easeOut" }}
 					className="w-full"
 				>
-					{/* Search/Upload Bar Container */}
-					<div className="relative flex w-full items-center gap-3 rounded-2xl border border-sky-400/50 bg-white/80 px-4 py-4 shadow-[0_8px_30px_rgba(59,130,246,0.15)] backdrop-blur-xl transition-all duration-300 focus-within:border-sky-500 focus-within:shadow-[0_8px_30px_rgba(59,130,246,0.3)] dark:border-sky-500/40 dark:bg-slate-800/30 dark:focus-within:border-sky-500 dark:focus-within:shadow-[0_8px_30px_rgba(59,130,246,0.3)]">
-						{/* Input Field */}
+					<div className="relative flex w-full items-center gap-3 rounded-2xl border border-sky-400/40 bg-white/85 px-4 py-4 shadow-[0_8px_30px_rgba(36,124,255,0.12)] backdrop-blur-xl transition-all duration-300 focus-within:border-sky-500 focus-within:shadow-[0_8px_30px_rgba(36,124,255,0.24)] dark:border-sky-500/30 dark:bg-slate-800/30 dark:focus-within:border-sky-500 dark:focus-within:shadow-[0_8px_30px_rgba(36,124,255,0.24)]">
 						<Input
 							type="text"
-							placeholder="Scrape Sources & Export Data"
+							placeholder="Describe your MVP, users, and launch timeline"
 							value={inputValue}
 							onChange={(e) => setInputValue(e.target.value)}
 							onKeyDown={(e) => {
@@ -105,18 +98,16 @@ export function UploadLeadsHero(): JSX.Element {
 							className="flex-1 border-0 bg-transparent text-base text-slate-900 placeholder:text-slate-500 focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white dark:placeholder:text-slate-400"
 						/>
 
-						{/* Action Button */}
 						<Button
 							type="button"
 							onClick={handleAction}
 							className="h-10 w-10 rounded-full bg-sky-500 p-0 text-white shadow-lg transition-all hover:bg-sky-600 hover:shadow-xl active:scale-95"
-							aria-label="Perform action"
+							aria-label="Plan MVP action"
 						>
 							<Play className="h-5 w-5" fill="currentColor" />
 						</Button>
 					</div>
 
-					{/* Animated Badge Sequence */}
 					<div className="mt-6 flex flex-wrap items-center justify-center gap-2">
 						{ACTION_BADGES.map((badge, index) => {
 							const isActive = index === activeBadgeIndex;
@@ -150,15 +141,14 @@ export function UploadLeadsHero(): JSX.Element {
 					</div>
 				</motion.div>
 
-				{/* Description Text */}
 				<motion.p
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
 					className="mt-8 max-w-2xl text-center text-slate-600 text-sm md:text-base dark:text-slate-300"
 				>
-					Paste a URL → scrape all the leads → clean them → export to CSV/JSON.
-					Fresh leads, not rented lists.
+					Share the idea - we scope the MVP - build the critical workflow - wire
+					the systems that matter - and launch with a clean handoff.
 				</motion.p>
 			</div>
 		</section>

@@ -11,46 +11,47 @@ export type FeatureHighlight = {
 	description: string;
 };
 
-export const AI_OUTREACH_STUDIO_ANCHOR = "lead-orchestra-features";
-export const AI_OUTREACH_STUDIO_HEADING = "Lead Orchestra Features";
-export const AI_OUTREACH_STUDIO_TAGLINE = "Scrape Anything. Export Everywhere.";
+export const AI_OUTREACH_STUDIO_ANCHOR = "launch-mvp-system";
+export const AI_OUTREACH_STUDIO_HEADING = "3-Day MVP Workshop";
+export const AI_OUTREACH_STUDIO_TAGLINE =
+	"Scope, build, and launch your MVP in 3 days.";
 export const AI_OUTREACH_STUDIO_DESCRIPTION =
-	"Open-source lead scraping and data ingestion that plugs into anything. Lead Orchestra exports scraped data to CRM, CSV/JSON, Database, S3, or any system. Integrate with MCP protocol, APIs, webhooks, and workflow engines like Kestra, Make, Zapier, and n8n.";
+	"Launch MVP combines product strategy, UX direction, production-ready engineering, integrations, analytics, and launch support so founders can ship a real MVP fast without bloated scope or avoidable technical debt.";
 
 export const AI_OUTREACH_STUDIO_FEATURES: FeatureHighlight[] = [
 	{
-		title: "Scraping & Crawling Engine",
+		title: "Product Blueprint",
 		description:
-			"PlaywrightCrawler-based engine with anti-bot modules, headless browser cluster, proxy rotation, stealth mode, and captcha bypass. Multi-step navigation, DOM selectors, automatic retries, and rate limiting.",
+			"We cut the scope to the must-have user flow, define the launch version, and turn ambiguity into a sprint-ready build plan.",
 	},
 	{
-		title: "MCP API Aggregator",
+		title: "Production-Ready Stack",
 		description:
-			"Unified MCP spec for scraping targets. Plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, Twitter. All sources normalized to Lead Standard Format (LSF) schemas.",
+			"Auth, payments, data models, deployment, and architecture are set up for launch, not just for demo day.",
 	},
 	{
-		title: "Data Normalization Layer",
+		title: "Integrations & AI Workflows",
 		description:
-			"Address parsing, phone/email extraction, metadata tagging, de-duping, and entity resolution. Export to CRM, CSV, JSON, Database, S3, or any system.",
+			"We wire the systems that matter: Stripe, analytics, CRM, email, dashboards, and AI-assisted workflows where they create leverage.",
 	},
 	{
-		title: "Developer Tooling",
+		title: "Launch Assets & Handoff",
 		description:
-			"CLI, SDKs (JS, Python, Go), webhook system, GitHub Actions templates, API key console, and usage analytics. Built for developers, agencies, and data teams.",
+			"You leave with the repo, design direction, documentation, QA pass, and a post-launch roadmap your team can extend.",
 	},
 ] as const;
 
 export const AI_OUTREACH_STUDIO_KEYWORDS = [
-	"Lead Orchestra",
-	"open-source scraping",
-	"MCP scraping",
-	"data ingestion",
-	"web scraping",
-	"Playwright scraping",
-	"scraping API",
-	"lead scraping tools",
-	"fresh leads",
-	"Deal Scale integration",
+	"Launch MVP",
+	"3 day MVP",
+	"MVP workshop",
+	"MVP development",
+	"startup product development",
+	"founder product partner",
+	"product strategy sprint",
+	"AI workflow integration",
+	"launch-ready product build",
+	"production-ready MVP",
 ] as const;
 
 type AiOutreachStudioSeo = {
@@ -118,9 +119,9 @@ export const buildPersonaAiOutreachStudioSeo = ({
 	const personaLabel = resolvePersonaLabel(persona);
 	const personaGoal = resolvePersonaGoal(persona, goal);
 	const personaHeadline = `${AI_OUTREACH_STUDIO_TAGLINE} for ${personaLabel}`;
-	const personaDescription = `AI outreach automation for ${toLowerFragment(
+	const personaDescription = `Launch MVP helps ${toLowerFragment(
 		personaLabel,
-	)} teams to ${toLowerFragment(personaGoal)}. ${AI_OUTREACH_STUDIO_DESCRIPTION}`;
+	)} teams ${toLowerFragment(personaGoal)}. ${AI_OUTREACH_STUDIO_DESCRIPTION}`;
 
 	return buildAiOutreachStudioSeo({
 		headline: personaHeadline,

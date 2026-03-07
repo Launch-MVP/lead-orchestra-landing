@@ -12,7 +12,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 
 /**
- * FooterBetaCta renders the footer CTA with the Founders Circle countdown.
+ * FooterBetaCta renders the footer CTA for the Denver workshop with a fallback
+ * to the free MVP consultation.
  */
 export function FooterBetaCta({ className = "" }: { className?: string }) {
 	const hasMounted = useHasMounted();
@@ -34,11 +35,11 @@ export function FooterBetaCta({ className = "" }: { className?: string }) {
 				aria-live="polite"
 			>
 				<span className="text-primary/80 text-xs uppercase tracking-[0.12em] md:text-sm dark:text-emerald-200/80">
-					Founders Circle
+					3-Day MVP Build Workshop in Denver
 				</span>
 				{isClosed ? (
 					<span className="font-medium text-primary/70 text-xs md:text-sm dark:text-emerald-200/70">
-						Applications closed
+						Booking window closed
 					</span>
 				) : (
 					<time
@@ -50,31 +51,30 @@ export function FooterBetaCta({ className = "" }: { className?: string }) {
 				)}
 			</div>
 			<p className="text-muted-foreground text-xs md:mx-auto md:max-w-xs md:text-sm dark:text-white/60">
-				Get started free with open-source scraping. View on GitHub or request
-				enterprise access.
+				Reserve the Denver in-person workshop to scope, build, and launch fast.
+				If the workshop is not the right fit, book a free MVP consultation instead.
 			</p>
 			<div className="flex w-full flex-col-reverse gap-2 sm:flex-row sm:gap-3 md:w-full md:flex-row md:justify-center md:gap-3 lg:w-auto lg:justify-start">
 				<Link
-					href="/contact?utm_source=founders-circle-footer"
+					href="/contact?utm_source=footer-denver-3-day-mvp-workshop"
 					className="flex w-full justify-center lg:w-auto lg:justify-start"
 				>
 					<Button className="flex w-full items-center justify-center whitespace-nowrap bg-gradient-to-r from-primary to-focus text-sm text-white transition-opacity hover:opacity-90 md:w-auto">
-						Get Free Leads <ArrowRight className="ml-1 h-4 w-4" />
+						Book Denver Workshop{" "}
+						<ArrowRight className="ml-1 h-4 w-4" />
 					</Button>
 				</Link>
-				<a
-					href="https://discord.gg/BNrsYRPtFN"
-					target="_blank"
-					rel="noopener noreferrer"
+				<Link
+					href="/contact?utm_source=footer-free-mvp-consultation-fallback"
 					className="flex w-full justify-center lg:w-auto lg:justify-start"
 				>
 					<Button
 						variant="outline"
 						className="flex w-full items-center justify-center border-primary/40 bg-background/70 text-primary transition hover:bg-primary/10 lg:w-auto"
 					>
-						Join Community <ArrowRight className="ml-2 h-4 w-4" />
+						Free MVP Consultation <ArrowRight className="ml-2 h-4 w-4" />
 					</Button>
-				</a>
+				</Link>
 			</div>
 		</div>
 	);

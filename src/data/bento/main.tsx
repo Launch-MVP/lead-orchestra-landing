@@ -3,13 +3,6 @@ import dealScaleOutcome from "@/assets/animations/deal_scale_outcome.json";
 import launchLoading from "@/assets/animations/launchLoading.json";
 import marketAnalysis from "@/assets/animations/market_analysis.json";
 import voiceWave from "@/assets/animations/voice_wave_lottie.json";
-import {
-	DEFAULT_PERSONA,
-	DEFAULT_PERSONA_DISPLAY,
-	HERO_COPY_V7,
-	PERSONA_GOAL,
-	PERSONA_LABEL,
-} from "@/components/home/heros/live-dynamic-hero-demo/_config";
 import { Badge } from "@/components/ui/badge";
 import type { BentoFeature } from "@/types/bento/features";
 import Lottie from "lottie-react";
@@ -36,8 +29,8 @@ const layout = {
 
 export const MainBentoFeatures: BentoFeature[] = [
 	{
-		title: "Get started in 3 minutes or less",
-		description: "Start scraping leads in minutes, not hours.",
+		title: "Get clarity in one focused workshop",
+		description: "Align scope, stack, and launch plan fast.",
 		icon: <PlaneTakeoff className="h-6 w-6 text-accent" />,
 		className: layout.startOne,
 		background: (
@@ -52,29 +45,29 @@ export const MainBentoFeatures: BentoFeature[] = [
 			<div className="space-y-4 text-foreground">
 				<div className="space-y-1">
 					<h3 className="font-semibold text-white text-xl leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-						Scrape in One Click
+						Define the real version one
 					</h3>
 					<p className="font-medium text-sm text-white/90 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Paste a URL, configure, and scrape instantly
+						Cut the scope before the build drifts
 					</p>
 				</div>
 				<p className="text-sm text-white/90 leading-6 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-					Paste a URL from Zillow, Realtor, or any source, configure your
-					scraping parameters, and start extracting leads in seconds. No complex
-					setup required.
+					We turn a rough product idea into a launchable MVP plan by defining
+					the must-have workflow, edge cases worth ignoring, and the stack
+					needed to ship credibly.
 				</p>
 				<Badge
 					variant="secondary"
 					className="w-fit rounded-full bg-accent/15 px-3 py-1 font-semibold text-accent-foreground text-xs"
 				>
-					First scrape in under 60 seconds
+					Scope locked before build starts
 				</Badge>
 			</div>
 		),
 	},
 	{
-		title: "Scraping That Works While You Sleep",
-		description: "Never miss a fresh lead again",
+		title: "Build without planning drag",
+		description: "Ship the core workflow, not a bloated backlog.",
 		icon: <Clock className="h-6 w-6 text-accent" />,
 		className: layout.startTwo,
 		background: (
@@ -89,30 +82,29 @@ export const MainBentoFeatures: BentoFeature[] = [
 			<div className="space-y-4 text-foreground">
 				<div className="space-y-1">
 					<h3 className="font-semibold text-white text-xl leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-						Scraping That Works While You Sleep
+						3-day execution with real momentum
 					</h3>
 					<p className="font-medium text-sm text-white/90 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Never miss a fresh lead again
+						Keep engineering focused on the launch path
 					</p>
 				</div>
 				<p className="text-sm text-white/90 leading-6 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-					Set up automated scraping jobs that run 24/7. Schedule daily scrapes
-					from Zillow, Realtor, MLS, and social platforms. Fresh leads are
-					automatically normalized and exported to your pipeline while you
-					sleep.
+					We move from design direction into implementation quickly, handling
+					core systems, UI flow, launch blockers, and delivery sequencing inside
+					one tight workshop and build sprint.
 				</p>
 				<Badge
 					variant="secondary"
 					className="w-fit rounded-full bg-accent/15 px-3 py-1 font-semibold text-accent-foreground text-xs"
 				>
-					Automated scraping 24/7 — zero manual work
+					Fast build, less thrash
 				</Badge>
 			</div>
 		),
 	},
 	{
-		title: "Export Everywhere, Not Just CSV",
-		description: "Your data, your way",
+		title: "Launch-ready integrations",
+		description: "Wire the systems that matter from day one.",
 		icon: <Download className="h-6 w-6 text-accent" />,
 		className: layout.startThree,
 		background: (
@@ -127,29 +119,29 @@ export const MainBentoFeatures: BentoFeature[] = [
 			<div className="space-y-4 text-foreground">
 				<div className="space-y-1">
 					<h3 className="font-semibold text-white text-xl leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-						Export Everywhere, Not Just CSV
+						Integrations included where they create leverage
 					</h3>
 					<p className="font-medium text-sm text-white/90 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Your data, your way
+						Auth, billing, analytics, CRM, and AI workflows
 					</p>
 				</div>
 				<p className="text-sm text-white/90 leading-6 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-					Export normalized data to CRM, CSV, JSON, Database, S3, or any system
-					via API. Webhooks trigger actions in your deal tracker or custom
-					tools. Your scraped leads flow seamlessly into your workflow.
+					We connect the launch-critical systems so the MVP behaves like a real
+					product from the start, not a demo that needs to be rebuilt once users
+					show up.
 				</p>
 				<Badge
 					variant="secondary"
 					className="w-fit rounded-full bg-accent/15 px-3 py-1 font-semibold text-accent-foreground text-xs"
 				>
-					Export to any format or system
+					Launch stack wired
 				</Badge>
 			</div>
 		),
 	},
 	{
-		title: "Unlimited Scraping",
-		description: "Fresh leads that don't cost extra",
+		title: "Stay lean on version one",
+		description: "Keep complexity out until the product earns it.",
 		icon: <DatabaseZap className="h-6 w-6 text-accent" />,
 		className: layout.startFive,
 		background: (
@@ -164,30 +156,29 @@ export const MainBentoFeatures: BentoFeature[] = [
 			<div className="space-y-4 text-foreground">
 				<div className="space-y-1">
 					<h3 className="font-semibold text-white text-xl leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-						Unlimited Scraping
+						Build only what launch requires
 					</h3>
 					<p className="font-medium text-sm text-white/90 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Fresh leads that don't cost extra
+						Avoid feature debt before users respond
 					</p>
 				</div>
 				<p className="text-sm text-white/90 leading-6 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-					Scrape unlimited leads from Zillow, Realtor, LinkedIn, MLS, and more.
-					No per-record fees, no limits. Get fresh data directly from the
-					source, not rented lists. Open-source means you control your data
-					pipeline.
+					We prioritize the one workflow that proves the product, push
+					everything else to the roadmap, and keep the first release small
+					enough to launch and learn from quickly.
 				</p>
 				<Badge
 					variant="secondary"
 					className="w-fit rounded-full bg-accent/15 px-3 py-1 font-semibold text-accent-foreground text-xs"
 				>
-					Unlimited scraping — no per-record costs
+					Less scope, better odds of launch
 				</Badge>
 			</div>
 		),
 	},
 	{
-		title: "Scrape Any Source",
-		description: "MCP API Aggregator: Unified scraping interface",
+		title: "From idea to usable MVP",
+		description: "One workshop covering product, design, build, and handoff.",
 		icon: <Globe className="h-6 w-6 text-accent" />,
 		className: layout.startFour,
 		background: (
@@ -202,29 +193,28 @@ export const MainBentoFeatures: BentoFeature[] = [
 			<div className="space-y-4 rounded-2xl bg-gradient-to-br from-primary/15 via-accent/10 to-primary/5 p-4 text-left text-foreground shadow-[0_24px_60px_-38px_rgba(99,102,241,0.45)] backdrop-blur-md sm:p-6">
 				<div className="space-y-1">
 					<p className="font-semibold text-accent text-xs uppercase tracking-wide [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						MCP API Aggregator
+						Launch MVP System
 					</p>
 					<h3 className="font-semibold text-white text-xl leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-						Scrape Any Source
+						Three days to something real
 					</h3>
 				</div>
 				<div className="space-y-3 text-sm text-white/90">
 					<p className="font-medium text-white/90 [text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Pre-built plugins for Zillow, Realtor, LinkedIn, MLS, Facebook,
-						Reddit, and Twitter. All sources normalized to Lead Standard Format
-						(LSF) schemas.
+						Scope, UX direction, production-ready engineering, integrations,
+						analytics, QA, and handoff stay connected so founders can keep
+						momentum without losing clarity.
 					</p>
 					<p className="[text-shadow:0_1px_1px_rgba(0,0,0,0.3)]">
-						Use the Playwright engine to scrape any website. The unified MCP
-						spec makes it easy to add new sources or create custom scrapers for
-						your specific needs.
+						The outcome is not just a demo. It is a usable MVP, a cleaner repo,
+						clear delivery notes, and a post-launch roadmap the team can extend.
 					</p>
 				</div>
 				<Badge
 					variant="secondary"
 					className="w-fit rounded-full bg-primary/20 px-3 py-1 font-semibold text-primary-foreground text-xs backdrop-blur-sm"
 				>
-					One interface, unlimited sources
+					Strategy, build, and handoff in one flow
 				</Badge>
 			</div>
 		),

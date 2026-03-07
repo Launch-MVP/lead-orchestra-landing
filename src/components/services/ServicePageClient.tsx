@@ -63,8 +63,8 @@ const ServicePageClient: React.FC<ServicePageClientProps> = ({ service }) => {
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
 			<BentoPage
 				features={MainBentoFeatures}
-				title="Why Developers & Agencies Choose Lead Orchestra"
-				subtitle="Open-source scraping that plugs into anything. Scrape any website, normalize data, and export to your stack—no vendor lock-in."
+				title="Why Founders Choose Launch MVP"
+				subtitle="Launch MVP combines strategy, execution, launch support, and specialist help so version one ships faster with less cleanup debt."
 			/>
 			<Separator className="mx-auto my-8 max-w-7xl border-white/10" />
 			<section className="container">
@@ -84,7 +84,7 @@ const ServicePageClient: React.FC<ServicePageClientProps> = ({ service }) => {
 			<CTASection
 				title={slugDetails.copyright.title}
 				description={slugDetails.copyright.subtitle}
-				buttonText="Get Started"
+				buttonText="Book Service"
 				href="/contact"
 			/>
 		</>

@@ -15,7 +15,7 @@ describe("linktree schema builder", () => {
 		{
 			slug: "/blogs",
 			title: "Blog",
-			destination: "https://blog.dealscale.io",
+			destination: "https://launchmvp.com/blogs",
 			description: "Read our latest blog posts",
 			category: "content",
 			highlighted: true,
@@ -37,8 +37,8 @@ describe("linktree schema builder", () => {
 
 		expect(schema["@context"]).toBe("https://schema.org");
 		expect(schema["@type"]).toBe("ItemList");
-		expect(schema.name).toBe("DealScale Link Tree");
-		expect(schema.description).toContain("Quick access to DealScale's");
+		expect(schema.name).toBe("Launch MVP Link Tree");
+		expect(schema.description).toContain("Quick access to Launch MVP's");
 		expect(schema.itemListOrder).toBe(
 			"https://schema.org/ItemListOrderAscending",
 		);
@@ -67,7 +67,7 @@ describe("linktree schema builder", () => {
 		expect(schema.itemListElement[0].url).toMatch(/^https:\/\//);
 
 		// External URL should remain as-is
-		expect(schema.itemListElement[1].url).toBe("https://blog.dealscale.io");
+		expect(schema.itemListElement[1].url).toBe("https://launchmvp.com/blogs");
 	});
 
 	test("includes descriptions when available", () => {
@@ -149,7 +149,7 @@ describe("linktree schema builder", () => {
 		const customBaseUrl = "https://example.com/linktree";
 		const schema = buildLinkTreeItemListSchema(mockItems, customBaseUrl);
 
-		expect(schema.itemListElement[0].url).toContain("dealscale.io"); // Still uses buildAbsoluteUrl for internal
+		expect(schema.itemListElement[0].url).toContain("launchmvp.com"); // Still uses buildAbsoluteUrl for internal
 		// But items without URLs would use custom base
 		const itemsWithoutUrl: LinkTreeItem[] = [
 			{

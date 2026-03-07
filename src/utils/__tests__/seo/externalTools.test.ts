@@ -14,7 +14,7 @@ describe("external tools SEO utilities", () => {
 		const meta = getExternalToolSeo("/external-tools/roi-simulator");
 
 		expect(meta).toMatchObject({
-			title: "ROI Simulator | Deal Scale",
+			title: "ROI Simulator | Launch MVP",
 			canonical: "https://app.dealscale.io/roi-simulator",
 			keywords: expect.arrayContaining(["roi calculator"]),
 			priority: 0.85,
@@ -58,29 +58,29 @@ describe("external tools SEO utilities", () => {
 	it("builds HowTo schema that mirrors calculator steps", () => {
 		const schema = buildExternalToolHowToSchema({
 			canonicalUrl: "https://app.dealscale.io/roi-simulator",
-			name: "How to calculate real estate ROI",
+			name: "How to calculate product launch ROI",
 			description: "Step-by-step guide to run the ROI simulator.",
 			totalTime: "PT5M",
 			steps: [
 				{
-					name: "Enter property basics",
-					text: "Start by adding purchase price, rehab cost, and monthly rent.",
+					name: "Enter build assumptions",
+					text: "Start by adding project spend, delivery costs, and launch inputs.",
 				},
 				{
-					name: "Adjust financing inputs",
-					text: "Select loan type, down payment, and interest rate.",
+					name: "Adjust revenue assumptions",
+					text: "Add expected revenue lift, retained value, and operating savings.",
 				},
 				{
 					name: "Review results",
 					text: "Analyze yearly ROI and payback period in the results panel.",
 				},
 			],
-			tools: ["Deal Scale ROI simulator"],
+			tools: ["Launch MVP ROI simulator"],
 		});
 
 		expect(schema["@type"]).toBe("HowTo");
 		expect(schema.step).toHaveLength(3);
-		expect(schema.tool).toContain("Deal Scale ROI simulator");
+		expect(schema.tool).toContain("Launch MVP ROI simulator");
 	});
 
 	it("maps marketing slug to canonical app domain", () => {
@@ -90,16 +90,17 @@ describe("external tools SEO utilities", () => {
 
 	it("builds Product schema for external tool upsell blocks", () => {
 		const schema = buildExternalToolProductSchema({
-			name: "Deal Scale Pro",
-			description: "Unlock saved ROI scenarios, CRM sync, and automation.",
-			url: "https://dealscale.io/pricing",
+			name: "Launch MVP Pro",
+			description:
+				"Unlock saved ROI scenarios, launch planning support, and delivery systems.",
+			url: "https://launchmvp.com/pricing",
 			image: "/banners/pro-plan.png",
 			price: "199.00",
 			priceCurrency: "USD",
 		});
 
 		expect(() => validateProductSchema(schema)).not.toThrow();
-		expect(schema["@id"]).toBe("https://dealscale.io/pricing#product");
+		expect(schema["@id"]).toBe("https://launchmvp.com/pricing#product");
 		expect(schema.offers.price).toBe("199.00");
 	});
 });

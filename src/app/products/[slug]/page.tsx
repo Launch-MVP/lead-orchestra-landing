@@ -44,7 +44,7 @@ export async function generateMetadata({
 					alt: product.name,
 				},
 			],
-			siteName: "Deal Scale",
+			siteName: "Launch MVP",
 			type: "website",
 		},
 		twitter: {

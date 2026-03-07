@@ -1,5 +1,5 @@
 export const offerImg =
-	"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&q=80";
+	"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=80";
 import {
 	BookIcon,
 	BriefcaseIcon,
@@ -57,7 +57,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
 	{ title: "Home", href: "/", icon: HomeIcon },
 
-	{ title: "Features", href: "/features", icon: DollarSignIcon },
+	{ title: "Services", href: "/features", icon: DollarSignIcon },
 	{ title: "Pricing", href: "/pricing", icon: NewspaperIcon },
 	{ title: "Marketplace", href: "/products", icon: NewspaperIcon },
 
@@ -68,22 +68,25 @@ export const navItems: NavItem[] = [
 		children: [
 			{ title: "Blogs", href: "/blogs", icon: HomeIcon },
 			{ title: "Case Studies", href: "/case-studies", icon: NewspaperIcon },
-			{ title: "Enterprise", href: "/pricing", icon: BuildingIcon },
 			{ title: "About Us", href: "/about", icon: BriefcaseIcon },
-
 			{ title: "Events", href: "/events", icon: HomeIcon },
 
 			{ title: "Partners", href: "/partners", icon: UsersIcon },
 			{ title: "Careers", href: "/careers", icon: BriefcaseIcon },
 			{
-				title: "Tools For Lead Gen Agencies",
-				href: "/blogs?tag=lead+gen+agencies+tools",
+				title: "Free Resources",
+				href: "/products#category=free-resources",
 				icon: FileTextIcon,
 			},
 			{
-				title: "Tools For Founders",
-				href: "/blogs?tag=founders+tools",
+				title: "For Founders",
+				href: "/products#category=startups",
 				icon: FileTextIcon,
+			},
+			{
+				title: "For Enterprise / Greenfield",
+				href: "/products#category=enterprise",
+				icon: BuildingIcon,
 			},
 
 			{
@@ -91,12 +94,12 @@ export const navItems: NavItem[] = [
 				href: "/newsletter",
 				icon: FileTextIcon,
 				image: offerImg,
-				ctaTitle: "N8N Lead Gen Workflows",
+				ctaTitle: "Launch MVP Newsletter",
 				ctaSubtitle:
-					"Get ready-to-use n8n lead gen workflows for Lead Orchestra scraping automation.",
+					"Get actionable tips, product scoping advice, and ready-to-use resources for launching your MVP faster.",
 				ctaButton: {
-					label: "See Workflows",
-					href: "/blogs?tag=n8n+workflows",
+					label: "Subscribe",
+					href: "/newsletter",
 				},
 			},
 		],
@@ -107,34 +110,19 @@ export const navItems: NavItem[] = [
 		icon: BuildingIcon,
 		children: [
 			{
-				title: "Founders",
-				href: "/industries/founders",
-				icon: RocketIcon,
-			},
-			{
-				title: "Enterprise",
-				href: "/pricing",
+				title: "Enterprise & Greenfield Teams",
+				href: "/case-studies/enterprise-custom-scraping-and-enrichment",
 				icon: BuildingIcon,
 			},
 			{
-				title: "Developers & Engineers",
-				href: "/industries/developers",
+				title: "Startups",
+				href: "/case-studies/peridot-competitor-lead-capture-instagram-activation",
+				icon: RocketIcon,
+			},
+			{
+				title: "Non-Technical Founders",
+				href: "/case-studies/non-technical-founder-ai-mvp-build",
 				icon: Code2Icon,
-			},
-			{
-				title: "Lead Gen Agencies",
-				href: "/industries/agencies",
-				icon: MailIcon,
-			},
-			{
-				title: "SDR & RevOps Teams",
-				href: "/industries/sdr-revops",
-				icon: SearchIcon,
-			},
-			{
-				title: "Real Estate",
-				href: "/industries/real-estate",
-				icon: HomeIcon,
 			},
 		],
 	},

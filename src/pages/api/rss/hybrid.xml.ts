@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { XMLParser } from "fast-xml-parser";
 
-const SITE_URL = "https://dealscale.io";
+const SITE_URL = "https://launchmvp.com";
 const BEEHIIV_FEED = "https://rss.beehiiv.com/feeds/rsU6YI0l4Z.xml";
 // Try multiple YouTube feed formats - YouTube may have changed their feed URLs
 // Note: Channel ID should include the -A suffix: UCphkra97DMNIAIvA1y8hZ-A
 const YOUTUBE_CHANNEL_ID =
 	process.env.YOUTUBE_CHANNEL_ID || "UCphkra97DMNIAIvA1y8hZ-A";
-const YOUTUBE_USERNAME = process.env.YOUTUBE_USERNAME || "DealScaleRealEstate";
+const YOUTUBE_USERNAME = process.env.YOUTUBE_USERNAME || "LaunchMVP";
 const YOUTUBE_FEEDS = [
 	`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`,
 	`https://www.youtube.com/@${YOUTUBE_USERNAME}/videos.rss`,
@@ -92,7 +92,7 @@ const buildBeehiivEntries = (feedXml: string): HybridEntry[] => {
 			const description =
 				item.description ??
 				item["content:encoded"] ??
-				"Latest update from the DealScale blog.";
+				"Latest update from the Launch MVP blog.";
 			const guidValue =
 				typeof item.guid === "object" && item.guid?._text
 					? String(item.guid._text)
@@ -109,7 +109,7 @@ const buildBeehiivEntries = (feedXml: string): HybridEntry[] => {
 				.filter((category: string): category is string => Boolean(category));
 
 			return {
-				title: title || "DealScale Blog Update",
+				title: title || "Launch MVP Blog Update",
 				link: link || `${SITE_URL}/blog`,
 				description: description.toString(),
 				pubDate: normalizeDate(item.pubDate),
@@ -206,7 +206,7 @@ const buildYouTubeEntries = (feedXml: string): HybridEntry[] => {
 								entry.title?.["#text"]?.toString?.().trim() ||
 								entry.title?.toString?.().trim() ||
 								entry.title ||
-								"DealScale Video Update";
+								"Launch MVP Video Update";
 							const description =
 								entry["media:group"]?.["media:description"]?.[
 									"#text"
@@ -249,7 +249,7 @@ const buildYouTubeEntries = (feedXml: string): HybridEntry[] => {
 					entry.title?.["#text"]?.toString?.().trim() ||
 					entry.title?.toString?.().trim() ||
 					entry.title ||
-					"DealScale Video Update";
+					"Launch MVP Video Update";
 				const description =
 					entry["media:group"]?.["media:description"]?.[
 						"#text"
@@ -335,7 +335,7 @@ const buildGitHubEntries = (feedXml: string): HybridEntry[] => {
 				? String(entry.link["@_href"])
 				: typeof entry.link === "string"
 					? entry.link
-					: "") || "https://github.com/Deal-Scale";
+					: "") || "https://github.com/TechWithTy";
 		const content =
 			(typeof entry.content === "object" && entry.content?.["#text"]
 				? String(entry.content["#text"])
@@ -345,8 +345,8 @@ const buildGitHubEntries = (feedXml: string): HybridEntry[] => {
 		const description =
 			typeof content === "string"
 				? content.replace(/<[^>]+>/g, "").substring(0, 500) ||
-					"Latest activity from Deal-Scale organization on GitHub."
-				: "Latest activity from Deal-Scale organization on GitHub.";
+					"Latest activity from the Launch MVP organization on GitHub."
+				: "Latest activity from the Launch MVP organization on GitHub.";
 		const published = entry.published || entry.updated;
 		const author = entry.author?.name || "TechWithTy";
 
@@ -382,16 +382,16 @@ const buildChannelXml = (entries: HybridEntry[]): string => {
 
 			const sourceUrl =
 				entry.source === "youtube"
-					? "https://www.youtube.com/@DealScaleRealEstate"
+					? "https://www.youtube.com/@LaunchMVP"
 					: entry.source === "github"
-						? "https://github.com/Deal-Scale"
+						? "https://github.com/TechWithTy"
 						: `${SITE_URL}/blog`;
 			const sourceName =
 				entry.source === "youtube"
-					? "DealScale YouTube"
+					? "Launch MVP YouTube"
 					: entry.source === "github"
-						? "Deal-Scale GitHub"
-						: "DealScale Blog";
+						? "Launch MVP GitHub"
+						: "Launch MVP Blog";
 
 			return `<item>
 	<title>${sanitize(entry.title)}</title>
@@ -410,7 +410,7 @@ const buildChannelXml = (entries: HybridEntry[]): string => {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-	<title>DealScale Hybrid Feed</title>
+	<title>Launch MVP Hybrid Feed</title>
 	<link>${SITE_URL}</link>
 	<description>Unified feed combining DealScale blog posts, YouTube videos, and GitHub activity.</description>
 	<language>en-us</language>
@@ -435,7 +435,8 @@ export default async function handler(
 			try {
 				const response = await fetch(feedUrl, {
 					headers: {
-						"User-Agent": "DealScaleHybridRSSProxy/1.0 (+https://dealscale.io)",
+						"User-Agent":
+							"LaunchMVPHybridRSSProxy/1.0 (+https://launchmvp.com)",
 						Accept:
 							"application/atom+xml, application/rss+xml, application/xml;q=0.9, */*;q=0.8",
 					},
@@ -463,14 +464,16 @@ export default async function handler(
 			await Promise.allSettled([
 				fetch(BEEHIIV_FEED, {
 					headers: {
-						"User-Agent": "DealScaleHybridRSSProxy/1.0 (+https://dealscale.io)",
+						"User-Agent":
+							"LaunchMVPHybridRSSProxy/1.0 (+https://launchmvp.com)",
 						Accept: "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
 					},
 				}),
 				fetchYouTubeFeed(),
 				fetch(GITHUB_FEED, {
 					headers: {
-						"User-Agent": "DealScaleHybridRSSProxy/1.0 (+https://dealscale.io)",
+						"User-Agent":
+							"LaunchMVPHybridRSSProxy/1.0 (+https://launchmvp.com)",
 						Accept: "application/atom+xml, application/xml;q=0.9, */*;q=0.8",
 					},
 				}),
@@ -537,7 +540,7 @@ export default async function handler(
 		res
 			.status(502)
 			.send(
-				'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>DealScale Hybrid Feed Error</title><description>Hybrid feed temporarily unavailable.</description></channel></rss>',
+				'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Launch MVP Hybrid Feed Error</title><description>Hybrid feed temporarily unavailable.</description></channel></rss>',
 			);
 	}
 }

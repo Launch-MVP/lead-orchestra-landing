@@ -14,15 +14,6 @@ import {
 	LIVE_SECONDARY_CTA,
 } from "./_config";
 
-// Keep for potential future use
-// const LiveDynamicHeroClient = dynamic(
-// 	() => import("./LiveDynamicHeroClient"),
-// 	{
-// 		ssr: false,
-// 		loading: () => <HeroStaticFallback variant="loading" />,
-// 	},
-// );
-
 const HeroSideBySide = dynamic(() => import("./HeroSideBySide"), {
 	ssr: false,
 	loading: () => <HeroStaticFallback />,
@@ -37,29 +28,29 @@ function HeroStaticFallback() {
 	const heroPersonaConfig = HERO_COPY_V7.personas[heroPersona];
 	const problemPhrase =
 		heroPersonaConfig?.problem?.[0] ??
-		"buying stale lead lists from Apollo and ZoomInfo";
+		"trying to validate demand while the product is still stuck in planning";
 	const solutionPhrase =
 		heroPersonaConfig?.solution?.[0] ??
-		"scraping your own fresh leads from any website";
+		"a 3-day MVP workshop built around the must-have user path";
 	const subtitleByPersona: Partial<Record<string, string>> = {
 		agency:
-			"Stop burning budget on ads and rented databases like ZoomInfo. Build an owned lead engine that delivers unique sources weekly, often cutting acquisition costs up to 80%.",
+			"Move from idea to shipped MVP without managing a full build team. We define the scope, handle the hard tradeoffs, and launch the version that actually matters first.",
 		startup:
-			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid spend by 80-90%",
+			"Launch a real product in 3 days, not another polished concept. We cut the scope to the must-have flow, wire the critical systems, and hand you a product you can test immediately.",
 		developer:
-			"Replace brittle one-off scrapers with a standardized ingestion pipeline: scrape, normalize (LSF), dedupe/tag, export anywhere. Auditable, repeatable, production-friendly.",
+			"Ship the MVP without burying your future team in cleanup work. We focus on clean architecture, key integrations, and a handoff your engineers can build on confidently.",
 		enterprise:
-			"Own your lead sourcing with audit-ready pipelines: controlled ingestion, clean schemas, segmentation, and exports into your CRM built for scale and governance.",
+			"Turn internal concepts into usable pilots fast. We scope the right version, build the critical workflow, and create a decision-ready product without derailing the core roadmap.",
 	};
 	const description =
 		subtitleByPersona[heroPersona] ??
-		`Stop ${problemPhrase}. Start ${solutionPhrase}. Fresh leads, not rented lists.`;
+		`Stop ${problemPhrase}. Start ${solutionPhrase}. Launch fast without creating debt you have to undo later.`;
 
 	return (
 		<section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-gradient-to-b from-background via-muted/40 to-background text-foreground">
 			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.22)_0%,rgba(15,23,42,0)_62%)] opacity-80" />
-				<div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(99,102,241,0.15),rgba(59,130,246,0.08),rgba(34,197,94,0.08))]" />
+				<div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(36,124,255,0.22)_0%,rgba(16,20,24,0)_62%)] opacity-80" />
+				<div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(36,124,255,0.14),rgba(244,185,66,0.10),rgba(16,20,24,0.04))]" />
 			</div>
 
 			<div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 py-16 text-center sm:px-10">
@@ -69,14 +60,13 @@ function HeroStaticFallback() {
 				<h1 className="font-bold text-4xl text-foreground leading-tight sm:text-5xl md:text-6xl">
 					{(() => {
 						const heroTitleByPersona: Partial<Record<string, string>> = {
-							agency: "Stop buying leads. Build a lead engine you own.",
-							startup: "Own your pipeline. Stop renting growth.",
-							developer: "Standardize lead ingestion. Export anywhere.",
-							enterprise: "Enterprise-grade lead ingestion you can audit.",
+							agency: "Launch your MVP without hiring the whole team first.",
+							startup: "Launch a real MVP in 3 days.",
+							developer: "Ship fast without shipping technical debt.",
+							enterprise: "Turn product ideas into usable pilots fast.",
 						};
 						return (
-							heroTitleByPersona[heroPersona] ??
-							"Stop buying leads. Build a lead engine you own."
+							heroTitleByPersona[heroPersona] ?? "Launch a real MVP in 3 days."
 						);
 					})()}
 				</h1>
@@ -118,7 +108,5 @@ export default function LiveDynamicHeroDemoPage(): JSX.Element {
 		idleTimeout: 300,
 	});
 
-	// Always render static fallback immediately for above-the-fold LCP
-	// Upgrade to interactive version when browser is ready (fast timeout for better UX)
 	return shouldHydrate ? <HeroSideBySide /> : <HeroStaticFallback />;
 }

@@ -38,12 +38,12 @@ import type {
 const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	{
 		"@type": "Review",
-		name: "Real Estate Investor · DealScale",
+		name: "Founder · Launch MVP",
 		reviewBody:
-			"DealScale’s AI agents handle our seller calls and follow-ups automatically — we’ve doubled our closing rate.",
+			"Launch MVP helped us cut scope fast and ship a usable product our team could put in front of users immediately.",
 		author: {
 			"@type": "Person",
-			name: "Real Estate Investor",
+			name: "Founder",
 		},
 		reviewRating: {
 			"@type": "Rating",
@@ -58,12 +58,12 @@ const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	},
 	{
 		"@type": "Review",
-		name: "Wholesaler · DealScale",
+		name: "Product Lead · Launch MVP",
 		reviewBody:
-			"The voice cloning and CRM sync save us hours daily. Onboarding took minutes.",
+			"The workshop clarified the right version-one flow and saved us from an expensive rebuild.",
 		author: {
 			"@type": "Person",
-			name: "Wholesaler",
+			name: "Product Lead",
 		},
 		reviewRating: {
 			"@type": "Rating",
@@ -78,12 +78,12 @@ const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	},
 	{
 		"@type": "Review",
-		name: "AI Automation Consultant · DealScale",
+		name: "Startup Operator · Launch MVP",
 		reviewBody:
-			"DealScale is a must-have for AI-driven real estate prospecting. The lookalike lead engine is game-changing.",
+			"We moved from vague planning to a cleaner launch roadmap with real engineering decisions and a usable handoff.",
 		author: {
 			"@type": "Person",
-			name: "AI Automation Consultant",
+			name: "Startup Operator",
 		},
 		reviewRating: {
 			"@type": "Rating",
@@ -137,7 +137,7 @@ export const buildOrganizationSchema = (): OrganizationSchema => {
 		url: defaultSeo.canonical,
 		description: companyData.companyDescription,
 		sameAs: buildSocialProfiles(),
-		alternateName: ["DealScale.io", "Deal Scale", "DS", "Deal Scaler"],
+		alternateName: ["Launch MVP", "LaunchMVP", "launchmvp.com"],
 		foundingDate: "2024-03-01",
 		founder: {
 			"@type": "Person",
@@ -147,13 +147,14 @@ export const buildOrganizationSchema = (): OrganizationSchema => {
 		},
 		knowsAbout: [
 			"Artificial Intelligence",
-			"Real Estate Technology",
-			"Sales Automation",
-			"CRM Automation",
-			"Voice AI",
-			"Lead Generation",
-			"PropTech",
-			"Real Estate Investing",
+			"MVP Strategy",
+			"Product Development",
+			"Web Application Development",
+			"Mobile Application Development",
+			"Technical Architecture",
+			"Launch Systems",
+			"Analytics Implementation",
+			"AI Workflow Integration",
 		],
 		brand: {
 			"@type": "Brand",
@@ -185,7 +186,7 @@ export const buildWebSiteSchema = (): WebSiteSchema => ({
 		target: `${defaultSeo.canonical}/search?q={search_term_string}`,
 		"query-input": "required name=search_term_string",
 	},
-	hasPart: ["/marketplace", "/blog", "/ai-agents"]
+	hasPart: ["/products", "/blogs", "/features", "/pricing"]
 		.map((path): WebPageReference | undefined => {
 			const url = buildAbsoluteUrl(path);
 
@@ -203,10 +204,10 @@ export const buildSoftwareApplicationSchema =
 		"@context": SCHEMA_CONTEXT,
 		"@type": "SoftwareApplication",
 		"@id": `${defaultSeo.canonical}#software`,
-		name: "DealScale",
+		name: "Launch MVP",
 		description:
 			defaultSeo.description ??
-			"DealScale automates lead generation, enrichment, and outreach for real estate teams.",
+			"Launch MVP helps founders scope, build, and launch products with cleaner execution and handoff.",
 		url: defaultSeo.canonical,
 		image: buildAbsoluteUrl("/images/marketplace/ai-automations.png"),
 		applicationCategory: "BusinessApplication",
@@ -234,11 +235,11 @@ export const buildSoftwareApplicationSchema =
 export const buildDatasetSchema = (): DatasetSchema => ({
 	"@context": SCHEMA_CONTEXT,
 	"@type": "Dataset",
-	"@id": `${buildAbsoluteUrl("/ai-agents")}#dataset`,
-	name: "DealScale Lookalike Audience Engine",
+	"@id": `${buildAbsoluteUrl("/products")}#dataset`,
+	name: "Launch MVP Planning and Delivery Dataset",
 	description:
-		"AI-generated real estate prospect datasets enriched via pgvector embeddings, CRM intent signals, and public market data.",
-	url: buildAbsoluteUrl("/ai-agents"),
+		"Structured planning artifacts, delivery systems, launch templates, and product execution assets used across Launch MVP offers.",
+	url: buildAbsoluteUrl("/products"),
 	license: buildAbsoluteUrl("/tos"),
 	provider: {
 		"@type": "Organization",
@@ -247,10 +248,10 @@ export const buildDatasetSchema = (): DatasetSchema => ({
 		url: defaultSeo.canonical,
 	},
 	keywords: [
-		"real estate",
-		"lookalike audience",
-		"ai prospecting",
-		"deal sourcing",
+		"mvp planning",
+		"launch systems",
+		"product strategy",
+		"ai workflow integration",
 	],
 	distribution: [
 		{
@@ -262,24 +263,24 @@ export const buildDatasetSchema = (): DatasetSchema => ({
 });
 
 const KNOWS_ABOUT = [
-	"AI automation",
-	"real estate software",
-	"real estate lead generation",
-	"AI sales assistants",
-	"CRM automation",
-	"voice cloning for sales",
-	"pipeline automation",
-	"real estate investing tools",
-	"wholesaling automation",
-	"off-market deal discovery",
+	"AI-assisted product development",
+	"MVP workshops",
+	"founder product strategy",
+	"launch systems",
+	"technical architecture",
+	"web app delivery",
+	"mobile app delivery",
+	"product analytics",
+	"handoff systems",
+	"embedded engineering support",
 ];
 
 const VALUE_PROPOSITION_POINTS = [
-	"Import anything—CSVs, CRMs, APIs",
-	"Sync with any CRM including GoHighLevel, Salesforce, Pipedrive, Lofty, Follow Up Boss",
-	"Clone your voice and automate outreach",
-	"AI updates your CRM after every call",
-	"High-intent leads get routed or booked automatically",
+	"Cut scope to the must-have workflow",
+	"Ship a usable MVP in days, not months",
+	"Integrate auth, payments, analytics, and launch systems cleanly",
+	"Hand off code and documentation without cleanup debt",
+	"Add specialist support only where the build actually needs it",
 ];
 
 const AREA_SERVED = [
@@ -314,9 +315,7 @@ export const buildKnowledgeGraphSchema = () => {
 		"@type": ["Organization", "Brand"],
 		legalName: companyData.companyLegalName ?? organization.legalName,
 		foundingDate: "2025-10-29",
-		logo: buildAbsoluteUrl(
-			"/logos/lead_orchestra/Transparent/Lead%20Orchestra%20Dark%20Horizontal%20LG.png",
-		),
+		logo: buildAbsoluteUrl("/logo.png"),
 		areaServed: AREA_SERVED,
 		knowsAbout: KNOWS_ABOUT,
 		additionalProperty: [
@@ -329,7 +328,7 @@ export const buildKnowledgeGraphSchema = () => {
 				"@type": "PropertyValue",
 				name: "CoreNarrative",
 				value:
-					"DealScale automates the real estate grind—follow-up, CRM updates, outreach—so professionals can spend more time closing deals.",
+					"Launch MVP helps founders move from idea to usable product with tighter scope, cleaner execution, and a launch-ready handoff.",
 			},
 			{
 				"@type": "PropertyValue",
@@ -351,12 +350,12 @@ export const buildKnowledgeGraphSchema = () => {
 
 	const knowledgeGraphSoftware = {
 		...software,
-		name: "DealScale Automation Platform",
+		name: "Launch MVP Delivery Platform",
 		applicationCategory: [
-			"Real Estate Automation",
-			"CRM Automation",
-			"AI Sales Software",
-			"Lead Generation Automation",
+			"Product Development Service",
+			"MVP Delivery",
+			"AI Workflow Implementation",
+			"Launch Planning System",
 		],
 		operatingSystem: "Web",
 		downloadUrl: defaultSeo.canonical,
@@ -390,13 +389,13 @@ export const buildKnowledgeGraphSchema = () => {
 	const knowledgeGraphVideo = {
 		"@type": "VideoObject",
 		"@id": `${defaultSeo.canonical}#video`,
-		name: "How DealScale Automates CRM Follow-Up",
+		name: "How Launch MVP Turns Scope Into a Build Plan",
 		description:
-			"Short demo showing AI-driven CRM updates, scheduling, outreach, and lead qualification.",
+			"Short demo showing how Launch MVP turns product scope, integrations, and launch decisions into a build-ready plan.",
 		thumbnailUrl: defaultSeo.image,
 		uploadDate: "2025-10-01",
-		embedUrl: "https://www.youtube.com/embed/dealscale-demo",
-		contentUrl: "https://www.youtube.com/watch?v=dealscale-demo",
+		embedUrl: "https://www.youtube.com/embed/launch-mvp-demo",
+		contentUrl: "https://www.youtube.com/watch?v=launch-mvp-demo",
 		publisher: { "@id": ORGANIZATION_ID },
 		inLanguage: "en-US",
 	};
@@ -404,8 +403,9 @@ export const buildKnowledgeGraphSchema = () => {
 	const sitemapDataFeed = {
 		"@type": "DataFeed",
 		"@id": `${defaultSeo.canonical}#sitemap`,
-		name: "DealScale Sitemap Feed",
-		description: "Dynamic list of DealScale pages, blog posts, and events.",
+		name: "Launch MVP Sitemap Feed",
+		description:
+			"Dynamic list of Launch MVP pages, products, case studies, and events.",
 		dataFeedElement: [
 			{
 				"@type": "DataFeedItem",

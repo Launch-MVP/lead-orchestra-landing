@@ -31,7 +31,7 @@ interface CallCompleteModalProps {
 export const CallCompleteModal = ({
 	isOpen,
 	onClose: originalOnClose,
-	title = "Ready to start Scaling Your Deals?",
+	title = "Ready to start scaling your product?",
 	description = "Request Founders Circle or Pilot access to unlock early onboarding perks and personalized workflows.",
 	isLoading: externalLoading = false,
 	variant = "complete",
@@ -80,7 +80,7 @@ export const CallCompleteModal = ({
 
 	const content = {
 		complete: {
-			title: "Ready to start Scaling Your Deals?",
+			title: "Ready to start scaling your product?",
 			description:
 				"Request Founders Circle or Pilot access to unlock early onboarding perks and personalized workflows.",
 		},

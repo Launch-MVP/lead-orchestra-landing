@@ -5,15 +5,15 @@ import {
 	resolveHeroThumbnailSrc,
 	useHeroVideoConfig,
 } from "@external/dynamic-hero";
+import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import PersonaCTA from "@/components/cta/PersonaCTA";
-import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialCheckout";
 import type { BadgeMetrics } from "@/components/home/ReactivateCampaignBadges";
 import { ReactivateCampaignInput } from "@/components/home/ReactivateCampaignInput";
+import { useHeroTrialCheckout } from "@/components/home/heros/useHeroTrialCheckout";
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Particles } from "@/components/ui/particles";
@@ -151,34 +151,33 @@ export default function HeroSideBySide(): JSX.Element {
 	// Extract problem and solution based on selected persona
 	const problem =
 		heroPersonaConfig?.problem?.[0] ??
-		"buying stale lead lists from Apollo and ZoomInfo";
+		"trying to validate demand while the product is still stuck in planning";
 	const solution =
 		heroPersonaConfig?.solution?.[0] ??
-		"scraping your own fresh leads from any website";
+		"a 3-day MVP workshop built around the must-have user path";
 	const subtitleByPersona: Partial<Record<string, string>> = {
 		agency:
-			"Stop burning budget on ads and rented databases like ZoomInfo. Build an owned lead engine that delivers unique sources weekly, often cutting acquisition costs up to 80%.",
+			"Move from idea to shipped MVP without assembling the whole team first. We define the scope, handle the tradeoffs, and build the version that matters most.",
 		startup:
-			"Ads stop when spend stops. Lead Orchestra helps you build an owned acquisition loop. Get fresh leads from places competitors aren’t looking and reduce paid spend by 80-90%",
+			"Launch a real MVP in 3 days, not another polished concept. We cut to the must-have workflow, wire the critical systems, and hand off something you can test immediately.",
 		developer:
-			"Replace brittle one-off scrapers with a standardized ingestion pipeline: scrape, normalize (LSF), dedupe/tag, export anywhere. Auditable, repeatable, production-friendly.",
+			"Ship fast without burying your future team in cleanup work. We focus on clean architecture, the right integrations, and a handoff your engineers can extend.",
 		enterprise:
-			"Own your lead sourcing with audit-ready pipelines: controlled ingestion, clean schemas, segmentation, and exports into your CRM built for scale and governance.",
+			"Turn internal concepts into usable pilots without derailing the roadmap. We scope the right version, build the critical flow, and create a decision-ready product.",
 	};
 	const description =
 		subtitleByPersona[heroPersona] ??
-		`Stop ${problem}. Start ${solution}. Fresh leads, not rented lists.`;
+		`Stop ${problem}. Start ${solution}. Launch fast without creating debt you need to unwind later.`;
 
 	// Single combined statement
 	const heroTitleByPersona: Partial<Record<string, string>> = {
-		agency: "Stop buying leads. Build a lead engine you own.",
-		startup: "Own your pipeline. Stop renting growth.",
-		developer: "Standardize lead ingestion. Export anywhere.",
-		enterprise: "Enterprise-grade lead ingestion you can audit.",
+		agency: "Launch your MVP without hiring the whole team first.",
+		startup: "Launch a real MVP in 3 days.",
+		developer: "Ship fast without shipping technical debt.",
+		enterprise: "Turn product ideas into usable pilots fast.",
 	};
 	const combinedStatement =
-		heroTitleByPersona[heroPersona] ??
-		"Stop buying leads. Build a lead engine you own.";
+		heroTitleByPersona[heroPersona] ?? "Launch a real MVP in 3 days.";
 
 	return (
 		<div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-background via-muted/40 to-background text-foreground">

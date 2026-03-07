@@ -23,23 +23,23 @@ import {
 	ProductSummary,
 } from "./card";
 
-const MONETIZE_PORTAL_URL = "https://app.dealscale.io";
+const MONETIZE_PORTAL_URL = "/contact";
 
 const MONETIZE_CATEGORY_INFO: Record<
 	string,
 	{ title: string; subtitle: string }
 > = {
 	"sales-scripts-marketplace": {
-		title: "Sell Your Sales Scripts",
-		subtitle: "Publish proven cadences to thousands of Deal Scale operators",
+		title: "Sell Your Launch Copy",
+		subtitle: "Package proven systems and launch them as repeatable offers",
 	},
 	"workflows-marketplace": {
-		title: "Monetize Your Workflow",
-		subtitle: "Share your automation with the world and earn revenue",
+		title: "Package Your Delivery System",
+		subtitle: "Turn your internal process into a repeatable launch offer",
 	},
 	"voices-marketplace": {
 		title: "Monetize Your Voice Agent",
-		subtitle: "Tap into our network and deploy your concierge for clients",
+		subtitle: "Turn your voice workflow into a polished client-facing offer",
 	},
 };
 
@@ -105,7 +105,7 @@ const ProductCardNew = (props: CardProps) => {
 		else if (id.includes("voices")) category = "voices";
 
 		// Redirect to monetization portal
-		const url = new URL(MONETIZE_PORTAL_URL);
+		const url = new URL(MONETIZE_PORTAL_URL, window.location.origin);
 		url.searchParams.set("category", category);
 		url.searchParams.set("action", "monetize");
 		window.open(url.toString(), "_blank", "noopener");
@@ -116,6 +116,7 @@ const ProductCardNew = (props: CardProps) => {
 		(categories?.includes(ProductCategory.RemoteClosers) ?? false) &&
 		!isRemoteCloserMarketplace &&
 		(id?.startsWith("va-") || sku?.startsWith("LO-VA-"));
+	const isPeopleSupportProduct = isIndividualCloser;
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const handleAddToCart = useCallback(() => {
@@ -125,11 +126,10 @@ const ProductCardNew = (props: CardProps) => {
 			return;
 		}
 
-		// For individual VAs, open messaging/booking flow
-		if (isIndividualCloser) {
-			// TODO: Open VA messaging/booking modal or redirect to booking page
+		// For individual closers, open messaging/booking flow
+		if (isPeopleSupportProduct) {
 			toast.success(`Messaging ${name}...`);
-			console.log("Message VA:", id || sku);
+			console.log("Message closer:", id || sku);
 			return;
 		}
 
@@ -165,7 +165,7 @@ const ProductCardNew = (props: CardProps) => {
 		addToCart,
 		props,
 		isRemoteCloserMarketplace,
-		isIndividualCloser,
+		isPeopleSupportProduct,
 		id,
 		sku,
 		name,
@@ -179,13 +179,10 @@ const ProductCardNew = (props: CardProps) => {
 			return;
 		}
 
-		// For individual VAs, open hiring/booking flow
-		if (isIndividualCloser) {
-			// TODO: Open VA hiring/booking modal or redirect to booking page
+		// For individual closers, open hiring/booking flow
+		if (isPeopleSupportProduct) {
 			toast.success(`Hiring ${name}...`);
-			console.log("Hire VA:", id || sku);
-			// Could open a booking modal or redirect to booking page
-			// router.push(`/vas/${slug || id}/book`);
+			console.log("Hire closer:", id || sku);
 			return;
 		}
 
@@ -268,7 +265,7 @@ const ProductCardNew = (props: CardProps) => {
 				onClick={handleMonetizeMarketplaceClick}
 				title={monetizeInfo.title}
 				subtitle={monetizeInfo.subtitle}
-				ariaLabel={`${monetizeInfo.title} on Deal Scale`}
+				ariaLabel={`${monetizeInfo.title} with Launch MVP`}
 				className={className}
 			/>
 		);
@@ -306,9 +303,9 @@ const ProductCardNew = (props: CardProps) => {
 
 			{/* Buttons Row */}
 			<div className="mt-6 flex w-full flex-col space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
-				{isIndividualCloser ? (
+				{isPeopleSupportProduct ? (
 					<>
-						{/* Message Button for VAs */}
+						{/* Message Button for closers */}
 						<button
 							type="button"
 							className="flex items-center justify-center gap-2 rounded-lg border border-slate-200/80 bg-white px-4 py-2.5 font-medium text-slate-700 text-sm transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:focus:ring-offset-slate-950 dark:hover:bg-slate-900"
@@ -333,7 +330,7 @@ const ProductCardNew = (props: CardProps) => {
 							</svg>
 							<span>Message</span>
 						</button>
-						{/* Hire Button for VAs */}
+						{/* Hire Button for closers */}
 						<button
 							type="button"
 							className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 font-medium text-sm text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-500 dark:focus:ring-offset-slate-950 dark:hover:bg-blue-600"

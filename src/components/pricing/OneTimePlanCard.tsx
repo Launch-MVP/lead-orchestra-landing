@@ -17,6 +17,7 @@ interface BaseProps {
 	badgeLabel?: string;
 	badgeVariant?: "basic" | "starter" | "enterprise" | "partner";
 	badge?: ReactNode;
+	promoRibbonText?: string;
 }
 
 interface SelfHostedProps extends BaseProps {
@@ -130,8 +131,14 @@ export const SelfHostedCard = ({
 	badgeLabel,
 	badgeVariant,
 	pricingTiers,
+	promoRibbonText,
 }: SelfHostedProps) => (
-	<GlassCard highlighted>
+	<GlassCard highlighted className="relative overflow-hidden">
+		{promoRibbonText ? (
+			<div className="absolute top-4 right-[-2.75rem] z-10 w-36 rotate-45 border border-primary/25 bg-primary px-8 py-1 text-center font-semibold text-[10px] text-primary-foreground uppercase tracking-[0.24em] shadow-lg">
+				{promoRibbonText}
+			</div>
+		) : null}
 		<div className="flex flex-col gap-6 p-6">
 			<div className="flex items-start justify-between gap-3">
 				<div>
@@ -202,8 +209,14 @@ export const PartnershipCard = ({
 	badge,
 	badgeLabel,
 	badgeVariant = "partner",
+	promoRibbonText,
 }: PartnershipProps) => (
-	<GlassCard className="border-border">
+	<GlassCard className="relative overflow-hidden border-border">
+		{promoRibbonText ? (
+			<div className="absolute top-4 right-[-2.75rem] z-10 w-36 rotate-45 border border-primary/25 bg-primary px-8 py-1 text-center font-semibold text-[10px] text-primary-foreground uppercase tracking-[0.24em] shadow-lg">
+				{promoRibbonText}
+			</div>
+		) : null}
 		<div className="flex flex-col gap-6 p-6">
 			<div className="flex items-start justify-between gap-3">
 				<div>
@@ -253,4 +266,5 @@ export const toPartnershipProps = (
 	requirements: plan.requirements,
 	primaryLabel: plan.ctaType === "apply" ? "Apply Now" : "Contact Sales",
 	href: "/contact",
+	promoRibbonText: plan.promoRibbonText,
 });

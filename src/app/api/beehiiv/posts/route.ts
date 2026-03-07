@@ -10,8 +10,11 @@ export async function GET(request: NextRequest) {
 	const apiKey = process.env.BEEHIIV_API_KEY;
 	if (!publicationId) {
 		return NextResponse.json(
-			{ message: "Missing Beehiiv publication ID" },
-			{ status: 500 },
+			{
+				data: [],
+				message: "Beehiiv publication ID is not configured; returning empty feed.",
+			},
+			{ status: 200 },
 		);
 	}
 	// Read pagination/search params
@@ -103,7 +106,7 @@ export async function GET(request: NextRequest) {
 		// Debug: print today's timestamp in Beehiiv format (unix seconds)
 		try {
 			const todayUnixSeconds = Math.floor(Date.now() / 1000);
-			console.log(`[API] Today (unix seconds):`, todayUnixSeconds);
+			console.log("[API] Today (unix seconds):", todayUnixSeconds);
 		} catch {}
 		if (fetchAll) {
 			// Fetch all pages up to optional limit

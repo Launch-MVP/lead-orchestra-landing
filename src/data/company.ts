@@ -1,10 +1,10 @@
 import type { FooterProps } from "@/components/layout/Footer";
 
 export const companyData: FooterProps = {
-	companyName: "Deal Scale",
+	companyName: "Launch MVP",
 	companyLegalName: "Deal Scale LLC",
 	companyDescription:
-		"DealScale is an AI-powered real estate automation and CRM orchestration platform that automates lead generation, skip tracing, and AI-powered follow-up — helping agents, investors, and teams close more deals in less time.",
+		"Launch MVP helps founders scope, build, and launch real products faster through strategy sessions, in-person workshops, specialist support, and launch-ready systems.",
 	socialLinks: {
 		linkedin: "https://www.linkedin.com/company/deal-scale/",
 		facebook: "https://www.facebook.com/profile.php?id=61576707389189",
@@ -15,7 +15,7 @@ export const companyData: FooterProps = {
 	},
 	quickLinks: [
 		{ href: "/", label: "Home" },
-		{ href: "/features", label: "Features" },
+		{ href: "/features", label: "Services" },
 		{ href: "/pricing", label: "Pricing" },
 		{ href: "/blogs", label: "Blog" },
 		{ href: "/about", label: "About Us" },

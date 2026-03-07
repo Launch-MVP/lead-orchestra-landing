@@ -11,9 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	return {
 		...metadata,
-		title: "Careers at Lead Orchestra - Join Our Team",
+		title: "Careers at Launch MVP",
 		description:
-			"Explore open roles at Lead Orchestra. We're building AI-powered tools for real estate professionals. Join us in revolutionizing the industry.",
+			"Explore open roles at Launch MVP and help founders ship better products, launch systems, and AI-powered experiences.",
 		alternates: {
 			canonical: CAREERS_PORTAL_URL,
 		},
@@ -26,16 +26,16 @@ export async function generateMetadata(): Promise<Metadata> {
 			},
 		},
 		openGraph: {
-			title: "Careers at Lead Orchestra",
+			title: "Careers at Launch MVP",
 			description:
-				"Join our team and help build the future of real estate technology.",
+				"Join the team building founder-focused product strategy, launch systems, and AI-powered MVP delivery.",
 			url: CAREERS_PORTAL_URL,
 			type: "website",
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "Careers at Lead Orchestra",
-			description: "Explore open roles at Lead Orchestra.",
+			title: "Careers at Launch MVP",
+			description: "Explore open roles at Launch MVP.",
 		},
 	};
 }

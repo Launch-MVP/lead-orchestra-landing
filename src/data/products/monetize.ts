@@ -9,21 +9,17 @@ import {
 	workflowsMarketplaceABTests,
 } from "./monetize-copy";
 
-/**
- * Marketplace entry point products for monetization
- * These allow users to EARN income by selling/listing their content
- */
 export const monetizeProducts: ProductType[] = [
 	{
 		id: "sales-scripts-marketplace",
-		name: "Sales Scripts Marketplace",
-		price: 0, // Free to browse, application required to sell
-		sku: "DS-SALES-SCRIPTS-MARKETPLACE",
-		slug: "sales-scripts-marketplace",
+		name: "Launch Copy Marketplace",
+		price: 0,
+		sku: "LMVP-LAUNCH-COPY-MARKETPLACE",
+		slug: "launch-copy-marketplace",
 		licenseName: LicenseType.Proprietary,
 		abTest: salesScriptsMarketplaceABTests[0],
 		description:
-			"Publish and sell your proven MCP scraper plugins to the Lead Orchestra community. Share your custom scrapers, data normalization workflows, and integration templates to earn recurring revenue.",
+			"Publish reusable landing-page copy, email sequences, objection handling, and outreach assets for founders getting ready to launch.",
 		categories: [ProductCategory.SalesScripts, ProductCategory.Monetize],
 		images: [
 			"https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&q=80",
@@ -34,27 +30,27 @@ export const monetizeProducts: ProductType[] = [
 		sizes: [],
 		faqs: [
 			{
-				question: "How do I sell my sales scripts?",
+				question: "What can I list here?",
 				answer:
-					"Click on the Sales Scripts marketplace card to apply. Submit your proven scripts and we'll review them for quality and effectiveness. Once approved, your scripts will be available for purchase on the marketplace.",
+					"You can list launch-ready copy systems such as landing page copy packs, email sequences, founder outreach scripts, and objection-handling frameworks.",
 			},
 			{
-				question: "How much can I earn?",
+				question: "Why would founders buy these?",
 				answer:
-					"Plugin creators earn a percentage of each sale. Popular MCP plugins can generate recurring revenue as Lead Orchestra users purchase licenses for their scraping workflows.",
+					"Founders buy these to shortcut blank-page work and start with messaging that is already structured for validation and launch.",
 			},
 		],
 	},
 	{
 		id: "workflows-marketplace",
-		name: "Workflows Marketplace",
-		price: 0, // Free to browse, application required to monetize
-		sku: "DS-WORKFLOWS-MARKETPLACE",
-		slug: "workflows-marketplace",
+		name: "Delivery Systems Marketplace",
+		price: 0,
+		sku: "LMVP-DELIVERY-SYSTEMS-MARKETPLACE",
+		slug: "delivery-systems-marketplace",
 		licenseName: LicenseType.Proprietary,
 		abTest: workflowsMarketplaceABTests[0],
 		description:
-			"Monetize your scraping workflows by sharing them with the Lead Orchestra community. Sell your proven MCP plugins, data normalization workflows, and export integrations to earn revenue from developers and agencies.",
+			"List launch checklists, onboarding systems, delivery SOPs, and reusable workflows that help teams scope, build, and ship with less chaos.",
 		categories: [ProductCategory.Workflows, ProductCategory.Monetize],
 		images: [
 			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=80",
@@ -65,27 +61,27 @@ export const monetizeProducts: ProductType[] = [
 		sizes: [],
 		faqs: [
 			{
-				question: "How do I monetize my workflow?",
+				question: "What kinds of workflows fit here?",
 				answer:
-					"Click on the Workflows marketplace card to submit your automation. We'll review and test your workflow for quality and functionality. Once approved, it will be available for purchase on the marketplace.",
+					"Examples include MVP scoping systems, QA checklists, onboarding templates, launch runbooks, and delivery processes teams can reuse.",
 			},
 			{
-				question: "What types of workflows can I sell?",
+				question: "Who are these for?",
 				answer:
-					"You can sell any scraping workflow including MCP plugins for specific sites, data normalization pipelines, CRM export integrations, and multi-source scraping workflows. The workflow must be tested and proven effective.",
+					"They are for founders, startup teams, and agencies that want better structure without buying a full custom engagement first.",
 			},
 		],
 	},
 	{
 		id: "mcp-plugins-marketplace",
-		name: "MCP Plugins Marketplace",
-		price: 0, // Free to browse, application required to monetize
-		sku: "LO-MCP-PLUGINS-MARKETPLACE",
-		slug: "mcp-plugins-marketplace",
+		name: "Launch Tooling Marketplace",
+		price: 0,
+		sku: "LMVP-LAUNCH-TOOLING-MARKETPLACE",
+		slug: "launch-tooling-marketplace",
 		licenseName: LicenseType.Proprietary,
 		abTest: mcpPluginsMarketplaceABTests[0],
 		description:
-			"Monetize your MCP plugins and scraping tools by listing them on Lead Orchestra. Share your custom scrapers, data processing tools, and integration solutions with the community and earn recurring revenue.",
+			"Share compact tools for launch prep, AI validation, prompt systems, QA helpers, analytics setup, and internal product operations.",
 		categories: [ProductCategory.Workflows, ProductCategory.Monetize],
 		images: [
 			"https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&h=800&fit=crop&q=80",
@@ -96,14 +92,14 @@ export const monetizeProducts: ProductType[] = [
 		sizes: [],
 		faqs: [
 			{
-				question: "How do I monetize my voice agent?",
+				question: "What kind of tools belong in this marketplace?",
 				answer:
-					"Click on the MCP Plugins marketplace card to submit your plugin. We'll review your plugin's functionality, code quality, and effectiveness. Once approved, users can install and use your plugin in their Lead Orchestra workflows.",
+					"Useful launch tooling such as AI helpers, prompt packs, validation utilities, analytics setup tools, and product-ops helpers all fit well here.",
 			},
 			{
-				question: "What voice agents can I list?",
+				question: "What is the benefit of listing here?",
 				answer:
-					"You can list any MCP plugin, scraping tool, data normalization workflow, or integration solution that provides value to Lead Orchestra users. The plugin must be tested, documented, and ready for use.",
+					"It gives compact launch tools a clearer home and an audience of teams already looking for leverage they can buy quickly.",
 			},
 		],
 	},

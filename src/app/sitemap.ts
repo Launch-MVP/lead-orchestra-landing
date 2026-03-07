@@ -5,7 +5,6 @@ import { getLatestBeehiivPosts } from "@/lib/beehiiv/getPosts";
 import { getAllCaseStudies } from "@/lib/caseStudies/case-studies";
 import type { BeehiivPost } from "@/types/behiiv";
 import { getTestBaseUrl } from "@/utils/env";
-import { getSeoMetadataForPost } from "@/utils/seo/dynamic/blog";
 import { getSeoMetadataForCaseStudy } from "@/utils/seo/dynamic/case-studies";
 import { getSeoMetadataForService } from "@/utils/seo/dynamic/services";
 import { getSeoMetadataForProduct } from "@/utils/seo/product";
@@ -98,22 +97,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const posts = await getLatestBeehiivPosts();
 	const blogPosts = await Promise.all(
 		posts.map(async (post) => {
-			const seo = await getSeoMetadataForPost(post.id);
+			const canonical = post.web_url || `${baseUrl}/blogs/${post.id}`;
+			const description =
+				post.meta_default_description || post.preview_text || "";
 			return {
-				url: seo?.canonical || post.web_url || "",
+				url: canonical,
 				lastModified:
 					typeof post.published_at === "string" ||
 					typeof post.published_at === "number"
 						? new Date(post.published_at)
 						: new Date(),
-				canonical: seo?.canonical,
-				title: seo?.title,
-				description: seo?.description,
-				keywords: seo?.keywords,
-				image: seo?.image,
+				canonical,
+				title: post.meta_default_title || post.title,
+				description,
+				keywords: Array.isArray(post.content_tags) ? post.content_tags : [],
+				image: post.thumbnail_url || "",
 				type: "website",
-				changefreq: seo?.changeFrequency || "weekly",
-				priority: typeof seo?.priority === "number" ? seo.priority : 0.7,
+				changefreq: "weekly",
+				priority: 0.7,
 			};
 		}),
 	);

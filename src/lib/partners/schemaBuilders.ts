@@ -3,7 +3,7 @@ import { staticSeoMeta } from "@/utils/seo/staticSeo";
 
 const SCHEMA_CONTEXT = "https://schema.org";
 const BASE_CANONICAL = (
-	staticSeoMeta["/partners"]?.canonical || "https://dealscale.io/partners"
+	staticSeoMeta["/partners"]?.canonical || "https://launchmvp.com/partners"
 ).replace(/\/$/, "");
 
 const isAbsoluteUrl = (value: string | undefined): boolean =>
@@ -42,7 +42,7 @@ export function buildPartnersItemListSchema(partners: CompanyLogoDictType) {
 	return {
 		"@context": SCHEMA_CONTEXT,
 		"@type": "ItemList",
-		name: "DealScale Partner Directory",
+		name: "Launch MVP Partner Directory",
 		itemListOrder: "https://schema.org/ItemListOrderAscending",
 		itemListElement: entries.map(([slug, partner], index) => {
 			const url = resolvePartnerUrl(slug, partner.link);

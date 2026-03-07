@@ -4,32 +4,30 @@ import type { SeoMeta } from "../../utils/seo/seo";
 // Site URL from environment variable with fallback
 export const SITE_URL =
 	process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-	"https://leadorchestra.com";
+	"https://launchmvp.com";
 
-// Default SEO meta for Lead Orchestra
+// Default SEO meta for Launch MVP
 export const DEFAULT_SEO: SeoMeta = {
-	title: "Lead Orchestra | Open-Source Lead Scraping & Data Ingestion",
+	title: "Launch MVP | AI MVP Development in 3 Days",
 	description:
-		"Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists. Built for developers, agencies, and data teams.",
+		"Launch MVP helps founders and developers build AI MVPs in 3 days with product strategy, clean code, launch systems, analytics, and a developer-ready handoff.",
 	canonical: SITE_URL,
 	image: "/banners/main.png",
 	keywords: [
-		"open-source lead scraping",
-		"MCP scraping",
-		"data ingestion",
-		"web scraping",
-		"lead generation",
-		"developer tools",
-		"MCP protocol",
-		"CSV JSON export",
-		"Playwright scraping",
-		"scraping API",
-		"lead scraping tools",
-		"data extraction",
-		"scraping infrastructure",
-		"open-source scraping",
+		"launch mvp",
+		"3 day mvp",
+		"mvp development",
+		"startup product development",
+		"founder product partner",
+		"mvp workshop",
+		"product strategy sprint",
+		"prototype to launch",
+		"startup app development",
+		"ai workflow integration",
+		"build an mvp fast",
+		"production ready mvp",
 	],
-	siteName: "Lead Orchestra | Open-Source Lead Scraping Engine",
+	siteName: "Launch MVP | AI MVP Development",
 	type: "website",
 	ratingValue: 5,
 	reviewCount: 9,
@@ -40,9 +38,9 @@ export const DEFAULT_SEO: SeoMeta = {
  */
 export const STATIC_SEO_META: Record<string, SeoMeta> = {
 	"/": {
-		title: "Lead Orchestra | Open-Source Lead Scraping & Data Ingestion",
+		title: "Launch MVP | AI MVP Development in 3 Days",
 		description:
-			"Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists.",
+			"Launch MVP helps founders and developers scope and build AI MVPs in 3 days with clean engineering, launch systems, analytics, and launch-ready handoff.",
 		canonical: SITE_URL,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
@@ -50,36 +48,43 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		reviewCount: 9,
 	},
 	"/products": {
-		title: "Products | Lead Orchestra",
+		title: "Products | Launch MVP",
 		description:
-			"Browse our curated collection of lead magnets, MCP plugins, n8n workflows, and scraping tools from Lead Orchestra.",
+			"Browse Launch MVP products including strategy offers, Notion systems, launch-content GPTs, and SEO/AEO assets for founders shipping products.",
 		canonical: `${SITE_URL}/products`,
 		keywords: [
 			...DEFAULT_SEO.keywords,
 			"products",
-			"lead magnets",
-			"MCP plugins",
-			"n8n workflows",
+			"notion systems",
+			"seo aeo templates",
+			"launch content gpt",
+			"founder launch assets",
 		],
 		image: DEFAULT_SEO.image,
 	},
 	"/blogs": {
-		title: "Blogs | Lead Orchestra",
+		title: "Insights | Launch MVP",
 		description:
-			"See the latest insights, tutorials, and updates on lead scraping, data ingestion, and developer tools from the Lead Orchestra team.",
+			"Read Launch MVP insights on product strategy, MVP delivery, launch systems, founder workflows, and AI-assisted product development.",
 		canonical: `${SITE_URL}/blogs`,
-		keywords: DEFAULT_SEO.keywords,
+		keywords: [
+			...DEFAULT_SEO.keywords,
+			"launch mvp blog",
+			"founder insights",
+			"mvp strategy articles",
+			"launch systems",
+		],
 		image: DEFAULT_SEO.image,
 	},
 	"/pricing": {
-		title: "Pricing | Lead Orchestra",
+		title: "Pricing | Launch MVP",
 		description:
-			"Check out our pricing options and packages for lead scraping credits. Open-source free tier available. Sensible investments for maximal growth.",
+			"Review Launch MVP pricing for strategy sessions, in-person workshops, specialist support, launch systems, and SEO/AEO assets.",
 		canonical: `${SITE_URL}/pricing`,
 		keywords: [
-			"lead orchestra pricing",
-			"scraping credits pricing",
-			"open-source scraping",
+			"launch mvp pricing",
+			"mvp workshop pricing",
+			"founder launch support pricing",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
@@ -87,166 +92,175 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		changeFrequency: "daily",
 	},
 	"/case-studies": {
-		title: "Case Studies | Lead Orchestra",
+		title: "Case Studies | Launch MVP",
 		description:
-			"Check out real-world solutions and success stories from developers, agencies, and startups using Lead Orchestra for lead scraping and data ingestion.",
+			"See how Launch MVP helps founders and product teams scope, ship, and iterate on real MVPs without bloated delivery cycles.",
 		canonical: `${SITE_URL}/case-studies`,
 		keywords: DEFAULT_SEO.keywords,
 		image: "/banners/CaseStudy2.png",
 	},
 	"/contact": {
-		title: "Contact | Lead Orchestra",
+		title: "Contact | Launch MVP",
 		description:
-			"Get in touch with Lead Orchestra for expert lead scraping solutions, MCP plugin support, and developer tools.",
+			"Get in touch with Launch MVP for strategy sessions, in-person workshops, specialist support, launch systems, and SEO/AEO implementation.",
 		canonical: `${SITE_URL}/contact`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
 	"/contact-pilot": {
-		title: "Pilot Priority Access | Deal Scale",
+		title: "Priority Access | Launch MVP",
 		description:
-			"Get Pilot Priority Access: Instantly claim 1 free lookalike off-market real estate lead, unlock similarity-driven targeting features, and enjoy unlimited free skip tracing with exclusive early access to our AI-powered tools. Accelerate your deal flow with Deal Scale.",
+			"Get priority access to Launch MVP offers, founder consultations, workshop availability, and early access to new launch systems and productized services.",
 		canonical: `${SITE_URL}/contact-pilot`,
-		keywords: DEFAULT_SEO.keywords,
+		keywords: [
+			...DEFAULT_SEO.keywords,
+			"launch mvp priority access",
+			"founder consultation waitlist",
+			"mvp workshop priority",
+		],
 		image: DEFAULT_SEO.image,
 	},
 	"/about": {
-		title: "About Us | Lead Orchestra",
+		title: "About Launch MVP | Founder-Led MVP Delivery",
 		description:
-			"Learn about Lead Orchestra's mission to revolutionize lead generation with open-source scraping tools for developers, agencies, and data teams.",
+			"Learn how Launch MVP helps founders scope, build, and ship real products faster through focused workshops, cleaner execution, and launch-ready handoff.",
 		canonical: `${SITE_URL}/about`,
 		keywords: [
-			"About Lead Orchestra",
-			"Our Mission",
-			"Open-Source Scraping",
-			"MCP Protocol",
+			"about launch mvp",
+			"founder product partner",
+			"mvp workshop",
+			"product strategy and launch support",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 		manifestoSections: timelineSummary,
 	},
 	"/features": {
-		title: "Features | Lead Orchestra",
+		title: "Services | Launch MVP",
 		description:
-			"Check out powerful features of Lead Orchestra's scraping engine, including MCP plugins, data normalization, and multi-format export.",
+			"Browse Launch MVP services for product strategy, in-person workshops, embedded engineering support, and launch execution.",
 		canonical: `${SITE_URL}/features`,
 		keywords: [
-			"MCP scraping",
-			"data normalization",
-			"lead export",
-			"scraping API",
+			"launch mvp services",
+			"mvp workshop",
+			"embedded engineering support",
+			"product strategy services",
 			...DEFAULT_SEO.keywords,
 		],
 		image: "/banners/Feature.png",
 	},
 	"/agents": {
-		title: "AI for Real Estate Agents | Deal Scale",
+		title: "AI Product Agents | Launch MVP",
 		description:
-			"Supercharge your real estate business with AI-driven lookalike audience expansion inspired by How to Win Friends and Influence People and client management tools for agents.",
+			"Explore how Launch MVP helps founders scope, prototype, and ship AI agent workflows as usable product experiences instead of vague demos.",
 		canonical: `${SITE_URL}/agents`,
 		keywords: [
-			"real estate agent tools",
-			"AI for agents",
-			"lookalike audience expansion inspired by How to Win Friends and Influence People for agents",
+			"ai product agents",
+			"agent workflow design",
+			"launch ai features",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 
 	"/wholesalers": {
-		title: "AI for Wholesalers | Deal Scale",
+		title: "Founder Execution Systems | Launch MVP",
 		description:
-			"The best wholesaling software to automate your outreach, pre-qualify leads, and find motivated sellers faster.",
+			"See how Launch MVP packages founder execution systems for launch planning, delivery operations, content workflows, and post-launch iteration.",
 		canonical: `${SITE_URL}/wholesalers`,
 		keywords: [
-			"automation for wholesalers",
-			"best wholesaling software",
-			"wholesaler outreach",
+			"founder execution systems",
+			"launch operations",
+			"mvp workflow systems",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 	"/investors": {
-		title: "AI for Real Estate Investors | Deal Scale",
+		title: "Founder Strategy Support | Launch MVP",
 		description:
-			"Find and nurture lookalike off-market deals with AI-powered precision, audience expansion features, and similarity scoring. Close more deals and accelerate your sales cycle.",
+			"Launch MVP helps founders pressure-test the product, tighten the scope, and ship faster with strategy support before bigger build decisions are locked in.",
 		canonical: `${SITE_URL}/investors`,
 		keywords: [
-			"real estate investor tools",
-			"passive real estate lookalike audience expansion inspired by How to Win Friends and Influence People",
-			"close more deals with AI",
+			"founder strategy support",
+			"mvp scope consultation",
+			"product strategy workshop",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 	"/events": {
-		title: "Events | Deal Scale",
+		title: "Events | Launch MVP",
 		description:
-			"Stay updated on upcoming Deal Scale events, webinars, and real estate industry opportunities powered by AI.",
+			"Stay updated on Launch MVP workshops, founder sessions, live demos, and product-development events.",
 		canonical: `${SITE_URL}/events`,
 		keywords: [
-			"real estate events",
-			"deal scale webinars",
-			"AI real estate events",
+			"launch mvp events",
+			"founder workshops",
+			"product development events",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 	"/portfolio": {
-		title: "Portfolio | Deal Scale",
+		title: "Portfolio | Launch MVP",
 		description:
-			"Browse Deal Scale's portfolio to see AI-powered real estate solutions in action.",
+			"Browse Launch MVP work across MVP builds, launch systems, Notion operating layers, and AI-assisted product delivery.",
 		canonical: `${SITE_URL}/portfolio`,
 		keywords: [
-			"deal scale portfolio",
-			"real estate case studies",
-			"AI real estate success",
+			"launch mvp portfolio",
+			"mvp build examples",
+			"product delivery examples",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 
 	"/partners": {
-		title: "Partners | Deal Scale",
+		title: "Partners | Launch MVP",
 		description:
-			"Meet Deal Scale's technology and channel partners powering AI-driven real estate growth.",
+			"Meet the tools, platforms, and partners that support Launch MVP across product delivery, analytics, launch systems, and AI workflows.",
 		canonical: `${SITE_URL}/partners`,
 		keywords: [
-			"deal scale partners",
-			"real estate technology partners",
-			"ai integrations",
+			"launch mvp partners",
+			"product delivery partners",
+			"ai workflow integrations",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 
 	"/careers": {
-		title: "Careers | Deal Scale",
+		title: "Careers | Launch MVP",
 		description:
-			"Explore open roles at Deal Scale and help build AI automation for modern real estate teams.",
+			"Explore open roles at Launch MVP and help founders ship better products, launch systems, and AI-powered experiences.",
 		canonical: "https://dealscale.zohorecruit.com/jobs/Careers",
 		keywords: [
-			"deal scale careers",
-			"real estate ai jobs",
-			"proptech roles",
+			"launch mvp careers",
+			"ai product jobs",
+			"founder tooling roles",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 
 	"/faqs": {
-		title:
-			"DealScale FAQ | AI Voice, SMS, and Skip Tracing Automation for Real Estate Agents & Investors",
+		title: "Launch MVP FAQ | Workshops, Build Support, and Launch Systems",
 		description:
-			"Learn how DealScale automates skip tracing, AI voice outreach, SMS, and social lead qualification while staying TCPA and GDPR compliant. Discover ROI examples, voice cloning, CRM syncs, and compliance with the 2026 Colorado AI Act.",
+			"Learn how Launch MVP handles strategy sessions, in-person workshops, specialist support, launch systems, SEO/AEO assets, and founder delivery workflows.",
 		canonical: `${SITE_URL}/faq`,
-		keywords: DEFAULT_SEO.keywords,
+		keywords: [
+			...DEFAULT_SEO.keywords,
+			"launch mvp faq",
+			"mvp workshop faq",
+			"founder product support faq",
+		],
 		image: DEFAULT_SEO.image,
 	},
 	"/tos": {
-		title: "Terms of Service | Deal Scale",
+		title: "Terms of Service | Launch MVP",
 		description:
-			"Review the terms and conditions for using Deal Scale’s website and services.",
+			"Review the terms and conditions for using Launch MVP’s website, workshops, product services, and digital assets.",
 		canonical: `${SITE_URL}/tos`,
 		keywords: [
 			"Terms of Service",
@@ -257,17 +271,17 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		image: DEFAULT_SEO.image,
 	},
 	"/cookies": {
-		title: "Cookies Policy | Deal Scale",
+		title: "Cookies Policy | Launch MVP",
 		description:
-			"Learn how Deal Scale uses cookies to enhance your experience and protect your privacy.",
+			"Learn how Launch MVP uses cookies to improve the site experience and support analytics, product pages, and service interactions.",
 		canonical: `${SITE_URL}/cookies`,
 		keywords: DEFAULT_SEO.keywords,
 		image: DEFAULT_SEO.image,
 	},
 	"/privacy": {
-		title: "Privacy Policy | Deal Scale",
+		title: "Privacy Policy | Launch MVP",
 		description:
-			"Read our Privacy Policy to understand how Deal Scale collects, uses, and protects your personal information.",
+			"Read our Privacy Policy to understand how Launch MVP collects, uses, and protects your personal information.",
 		canonical: `${SITE_URL}/privacy`,
 		keywords: [
 			"Privacy Policy",
@@ -278,41 +292,41 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		image: DEFAULT_SEO.image,
 	},
 	"/GDPR": {
-		title: "GDPR | Deal Scale",
+		title: "GDPR | Launch MVP",
 		description:
-			"Read our GDPR policy to learn how Deal Scale protects your data.",
+			"Read our GDPR policy to learn how Launch MVP protects your data.",
 		canonical: `${SITE_URL}/GDPR`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	"/hippa": {
-		title: "HIPPA | Deal Scale",
+		title: "HIPPA | Launch MVP",
 		description:
-			"Read our HIPPA policy to learn how Deal Scale protects your data.",
+			"Read our HIPPA policy to learn how Launch MVP protects your data.",
 		canonical: `${SITE_URL}/hippa`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	"/PII": {
-		title: "PII | Deal Scale",
+		title: "PII | Launch MVP",
 		description:
-			"Read our PII policy to learn how Deal Scale protects your data.",
+			"Read our PII policy to learn how Launch MVP protects your data.",
 		canonical: `${SITE_URL}/PII`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	"/tcpCompliance": {
-		title: "TCP Compliance | Deal Scale",
+		title: "TCP Compliance | Launch MVP",
 		description:
-			"Read our TCP Compliance policy to learn how Deal Scale protects your data.",
+			"Read our TCP Compliance policy to learn how Launch MVP protects your data.",
 		canonical: `${SITE_URL}/tcpCompliance`,
 		image: DEFAULT_SEO.image,
 		keywords: DEFAULT_SEO.keywords,
 	},
 	"/legal": {
-		title: "Legal Center | Deal Scale",
+		title: "Legal Center | Launch MVP",
 		description:
-			"Access all of Deal Scale's legal documents including Privacy Policy, Terms of Service, and compliance information in one place.",
+			"Access all of Launch MVP's legal documents including Privacy Policy, Terms of Service, and compliance information in one place.",
 		canonical: `${SITE_URL}/legal`,
 		keywords: [
 			"Legal Documents",
@@ -324,43 +338,43 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		image: DEFAULT_SEO.image,
 	},
 	"/linktree": {
-		title: "Link Tree | Deal Scale",
+		title: "Link Tree | Launch MVP",
 		description:
-			"Quick access to DealScale's most important links, resources, and pages. Browse our products, services, blog posts, events, case studies, and more in one convenient place.",
+			"Quick access to Launch MVP’s most important links, resources, services, case studies, and product pages in one place.",
 		canonical: `${SITE_URL}/linktree`,
 		keywords: [
-			"deal scale links",
-			"deal scale resources",
-			"real estate resources",
+			"launch mvp links",
+			"launch mvp resources",
+			"founder resources",
 			"quick links",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
 	},
 	"/demos/real-time-analytics": {
-		title: "Real-Time Analytics Demo | Deal Scale",
+		title: "Real-Time Analytics Demo | Launch MVP",
 		description:
-			"Explore Deal Scale’s real-time analytics workspace. Preview dashboards, experimentation workflows, and live collaboration features inside an interactive MacBook showcase.",
+			"Explore Launch MVP’s real-time analytics workspace. Preview dashboards, experimentation workflows, and live collaboration features inside an interactive showcase.",
 		canonical: `${SITE_URL}/demos/real-time-analytics`,
 		keywords: [
 			"real-time analytics",
 			"ai dashboards",
 			"collaborative analytics",
 			"a/b testing demo",
-			"deal scale demo",
+			"launch mvp demo",
 			...DEFAULT_SEO.keywords,
 		],
 		image: "/banners/Feature.png",
 	},
 	"/affiliate": {
-		title: "Affiliate Program | Deal Scale",
+		title: "Affiliate Program | Launch MVP",
 		description:
-			"Join the Deal Scale Partner Circle to earn recurring commissions and unlock VIP benefits for your real estate audience.",
+			"Join the Launch MVP partner program to earn recurring commissions and share founder-focused product strategy, launch systems, and workshop offers.",
 		canonical: `${SITE_URL}/affiliate`,
 		keywords: [
-			"deal scale affiliate program",
-			"real estate affiliate marketing",
-			"ai partner program",
+			"launch mvp affiliate program",
+			"founder affiliate marketing",
+			"product services partner program",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,
@@ -368,15 +382,15 @@ export const STATIC_SEO_META: Record<string, SeoMeta> = {
 		changeFrequency: "monthly",
 	},
 	"/external-tools/roi-simulator": {
-		title: "ROI Simulator | Deal Scale",
+		title: "ROI Simulator | Launch MVP",
 		description:
-			"Model rehab budgets, marketing spend, and close rates with Deal Scale’s ROI simulator before you launch a campaign.",
+			"Model launch budgets, build spend, and return scenarios with Launch MVP’s ROI simulator before you commit to the next product cycle.",
 		canonical: "https://app.dealscale.io/roi-simulator",
 		keywords: [
 			"roi calculator",
-			"real estate roi",
-			"deal analyzer",
-			"campaign forecasting",
+			"product roi",
+			"launch budget planning",
+			"build forecasting",
 			...DEFAULT_SEO.keywords,
 		],
 		image: DEFAULT_SEO.image,

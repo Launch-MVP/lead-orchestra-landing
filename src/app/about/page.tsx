@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 const MANIFESTO_SCHEMA = buildManifestoSchema(timelineSummary, {
 	url: "/about",
-	name: "Lead Orchestra Blue Ocean Manifesto",
+	name: "Launch MVP Founder Manifesto",
 });
 
 // * Generate metadata for the about page

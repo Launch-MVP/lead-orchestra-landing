@@ -1,73 +1,69 @@
 import type { FeatureTimelineMilestone } from "@/components/features/FeatureTimelineTable";
 
-/**
- * Feature delivery roadmap used on /features.
- * Keeps copy anchored to the actual modules surfaced across the application.
- */
 export const featureTimeline: FeatureTimelineMilestone[] = [
 	{
-		quarter: "Q4 2024",
+		quarter: "Q4 2025",
 		status: "Live",
-		initiative: "Core Scraping Engine",
-		focus: "Data extraction",
+		initiative: "MVP Strategy Sessions",
+		focus: "Scoping and decision-making",
 		summary:
-			"Our PlaywrightCrawler-based scraping engine with anti-bot modules, headless browser cluster, proxy rotation, and stealth mode powers Lead Orchestra's core data extraction capabilities.",
+			"Founder consultations and paid scoping sessions are live to help teams cut scope, choose the right stack, and stop version one from bloating before code starts.",
 		highlights: [
-			"Multi-step navigation with DOM selectors and automatic retries.",
-			"Rate limiting and captcha bypass for reliable high-volume scraping.",
-			"Support for JavaScript rendering and dynamic content extraction.",
+			"Free consultation for fast launch-direction review.",
+			"Paid scoping session with stack recommendations and a launch memo.",
+			"Clearer decision path into workshops, cleanup, or specialist support.",
 		],
 	},
 	{
-		quarter: "Q1 2025",
+		quarter: "Q1 2026",
 		status: "Live",
-		initiative: "MCP API Aggregator",
-		focus: "Unified scraping interface",
+		initiative: "In-Person Build Workshops",
+		focus: "Fast execution",
 		summary:
-			"The MCP API Aggregator provides a unified interface for scraping multiple sources. Pre-built plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, and Twitter normalize all data to Lead Standard Format (LSF) schemas.",
+			"Denver-based workshops now support full MVP builds, app-plus-landing launches, and AI prototype sessions for founders who need tighter execution in person.",
 		highlights: [
-			"Pre-built plugins for major real estate and social platforms.",
-			"All sources normalized to consistent Lead Standard Format (LSF) schemas.",
-			"Easy plugin architecture for adding custom scraping sources.",
+			"3-day in-person MVP build workshop.",
+			"App plus landing page workshop for launch alignment.",
+			"AI prototype workshop for testing one core workflow before scaling scope.",
 		],
 	},
 	{
-		quarter: "Q1 2025",
+		quarter: "Q1 2026",
 		status: "Limited Beta",
-		initiative: "Data Normalization Layer",
-		focus: "Data quality",
+		initiative: "Launch Support Layer",
+		focus: "Post-launch stability",
 		summary:
-			"Advanced data normalization with address parsing, phone/email extraction, metadata tagging, de-duplication, and entity resolution. Export to CRM, CSV, JSON, Database, S3, or any system.",
+			"Managed launch support and embedded specialists are being packaged to help founders stabilize releases, fix the rough edges, and keep improving without hiring full-time immediately.",
 		highlights: [
-			"Automatic address parsing and phone/email validation.",
-			"De-duplication and entity resolution for clean lead lists.",
-			"Flexible export options: CRM, CSV, JSON, Database, S3, or API integration.",
+			"Managed launch support for bugs, polish, and next-step prioritization.",
+			"Embedded frontend, backend, AI, and DevOps support options.",
+			"Cleaner path from launch week into the next iteration cycle.",
 		],
 	},
 	{
-		quarter: "Q2 2025",
-		status: "Live",
-		initiative: "Developer Tooling & SDKs",
-		focus: "Developer experience",
-		summary:
-			"CLI, SDKs (JavaScript, Python, Go), webhook system, GitHub Actions templates, API key console, and usage analytics. Built for developers, agencies, and data teams.",
-		highlights: [
-			"CLI for command-line scraping and automation.",
-			"SDKs for JavaScript, Python, and Go with full API access.",
-			"GitHub Actions templates for CI/CD integration and scheduled scraping jobs.",
-		],
-	},
-	{
-		quarter: "Q3 2025",
+		quarter: "Q2 2026",
 		status: "In Build",
-		initiative: "MCP Plugin Marketplace",
-		focus: "Ecosystem expansion",
+		initiative: "Launch Assets & Handoff",
+		focus: "Documentation and operations",
 		summary:
-			"Community-driven plugin marketplace where developers can share and install custom MCP plugins. Browse, install, and contribute plugins for niche sources and specialized scraping needs.",
+			"Reusable launch assets are being expanded so teams leave with setup docs, KPI tracking notes, handoff materials, and operating context instead of a black-box build.",
 		highlights: [
-			"One-click plugin installation and automatic updates.",
-			"Community-contributed plugins for niche sources.",
-			"Plugin builder SDK and documentation for creating custom scrapers.",
+			"Launch checklists and QA notes.",
+			"Analytics plans and event instrumentation guidance.",
+			"Technical handoff materials for the next engineer or operator.",
+		],
+	},
+	{
+		quarter: "Q2 2026",
+		status: "Planning",
+		initiative: "Productized Launch Add-Ons",
+		focus: "Expansion paths",
+		summary:
+			"Additional launch services are being prioritized around mobile-first builds, landing-page copy, and specialist pairings that extend the core MVP workshop model.",
+		highlights: [
+			"Mobile app workshop track.",
+			"Launch copy and landing-page add-on.",
+			"Specialist bundles for product teams that need focused follow-on execution.",
 		],
 	},
 ];

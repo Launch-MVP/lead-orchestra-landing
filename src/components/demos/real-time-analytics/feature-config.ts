@@ -1,16 +1,10 @@
 import { z } from "zod";
 
-/**
- * Zod schema describing a metric badge rendered alongside the feature content.
- */
 const featureMetricSchema = z.object({
 	label: z.string().min(1),
 	value: z.string().min(1),
 });
 
-/**
- * Zod schema representing a single highlight bullet for a feature.
- */
 const featureHighlightSchema = z.object({
 	title: z.string().min(1),
 	description: z.string().min(1),
@@ -18,17 +12,11 @@ const featureHighlightSchema = z.object({
 	visual: z.string().optional(),
 });
 
-/**
- * Zod schema for the Macbook media payload.
- */
 const featureMediaSchema = z.object({
 	src: z.string().min(1),
 	alt: z.string().min(1),
 });
 
-/**
- * Schema describing the optional analytics chart block.
- */
 const featureChartDatumSchema = z.object({
 	period: z.string().min(1),
 	current: z.number(),
@@ -45,9 +33,6 @@ const featureChartSchema = z.object({
 	targetLabel: z.string().optional(),
 });
 
-/**
- * Schema for a single demo feature entry.
- */
 export const realTimeFeatureSchema = z.object({
 	id: z.string().min(1),
 	label: z.string().min(1),
@@ -59,101 +44,98 @@ export const realTimeFeatureSchema = z.object({
 	chart: featureChartSchema.optional(),
 });
 
-/**
- * Schema for the full feature list.
- */
 const realTimeFeatureListSchema = z.array(realTimeFeatureSchema).min(1);
 
 const realTimeFeaturesSeed = [
 	{
-		id: "scraping-engine",
-		label: "Scraping & Crawling Engine",
-		eyebrow: "Pillar 1: Core scraping infrastructure",
+		id: "product-blueprint",
+		label: "Product Blueprint",
+		eyebrow: "Pillar 1: Scope and system design",
 		description:
-			"PlaywrightCrawler-based engine with anti-bot modules, headless browser cluster, proxy rotation, stealth mode, and captcha bypass. Multi-step navigation, DOM selectors, automatic retries, and rate limiting.",
+			"We turn the product idea into a defined launch version with clear user flows, architecture decisions, and a realistic sprint plan.",
 		media: {
 			src: "/demo/static/charts/tab-1/baseline-kpis-top.png",
-			alt: "Lead Orchestra scraping engine dashboard showing live scraping jobs.",
+			alt: "Launch MVP scoping dashboard showing readiness, priorities, and launch planning.",
 		},
 		chart: {
-			heading: "Scraping throughput vs. targets",
+			heading: "Launch readiness vs. target scope",
 			description:
-				"Live scraping jobs streamed from the orchestration layer. Performance metrics update every 30 seconds as data lands.",
-			currentLabel: "Live scraping",
-			previousLabel: "Last hour",
-			targetLabel: "Target rate",
+				"Critical scope decisions are resolved first so design, engineering, and launch assets stay aligned to the same version.",
+			currentLabel: "Launch-ready scope",
+			previousLabel: "Initial wish list",
+			targetLabel: "Target MVP",
 			data: [
-				{ period: "Mon", current: 320, previous: 285, target: 300 },
-				{ period: "Tue", current: 344, previous: 298, target: 310 },
-				{ period: "Wed", current: 362, previous: 305, target: 320 },
-				{ period: "Thu", current: 378, previous: 312, target: 335 },
-				{ period: "Fri", current: 401, previous: 318, target: 348 },
+				{ period: "Mon", current: 42, previous: 88, target: 40 },
+				{ period: "Tue", current: 39, previous: 84, target: 39 },
+				{ period: "Wed", current: 37, previous: 79, target: 37 },
+				{ period: "Thu", current: 35, previous: 75, target: 35 },
+				{ period: "Fri", current: 34, previous: 72, target: 34 },
 			],
 		},
 		highlights: [
 			{
-				title: "Multi-step navigation",
+				title: "Scope discipline",
 				description:
-					"Handle complex scraping workflows with automatic retries, DOM selectors, and depth-based crawling across any website structure.",
+					"We identify the must-have workflow, remove launch blockers, and cut features that slow down validation.",
 				metric: {
-					label: "Success rate",
-					value: "98.5%",
+					label: "Decision window",
+					value: "<48 hrs",
 				},
 				visual: "/demo/static/charts/tab-1/baseline-kpis-mid.png",
 			},
 			{
-				title: "Anti-bot & stealth",
+				title: "Technical direction",
 				description:
-					"Built-in proxy rotation, captcha solving, and stealth mode to bypass detection and maintain high success rates.",
+					"Architecture, deployment path, and integration choices are defined early so the build stays clean under time pressure.",
 				metric: {
-					label: "Block rate",
-					value: "<2%",
+					label: "Core flows defined",
+					value: "3-5",
 				},
 				visual: "/demo/static/charts/tab-1/baseline-kpis-bottom.png",
 			},
 		],
 		metrics: [
 			{
-				label: "Active scrapers",
-				value: "12 sources",
+				label: "Launch window",
+				value: "3 days",
 			},
 			{
-				label: "Leads scraped",
-				value: "5.2K / hour",
+				label: "Primary user flow",
+				value: "Locked",
 			},
 			{
-				label: "Uptime",
-				value: "99.9%",
+				label: "Build risks",
+				value: "Surfaced early",
 			},
 		],
 	},
 	{
-		id: "mcp-aggregator",
-		label: "MCP API Aggregator",
-		eyebrow: "Pillar 2: Unified scraping interface",
+		id: "production-stack",
+		label: "Production-Ready Stack",
+		eyebrow: "Pillar 2: Build foundations that survive launch",
 		description:
-			"Unified MCP spec for scraping targets. Plugins for Zillow, Realtor, LinkedIn, MLS, Facebook, Reddit, Twitter. All sources normalized to Lead Standard Format (LSF) schemas.",
+			"The MVP is built on a stack your team can own, with the critical systems wired in from the beginning instead of bolted on later.",
 		media: {
 			src: "/demo/static/charts/tab-2/ai-agent-overview-top.png",
-			alt: "MCP plugin ecosystem showing available scrapers and connectors.",
+			alt: "Application architecture board showing auth, billing, analytics, and deployment systems.",
 		},
 		highlights: [
 			{
-				title: "Plugin ecosystem",
+				title: "Core systems included",
 				description:
-					"Community-powered plugins for any source. Zillow, Realtor, LinkedIn, job boards, directories—all accessible through one unified interface.",
+					"Authentication, billing, analytics, data models, and deployment are treated as part of the launch version when they matter to the product.",
 				metric: {
-					label: "Available plugins",
-					value: "20+ sources",
+					label: "Core systems",
+					value: "4+",
 				},
 				visual: "/demo/static/charts/tab-2/ai-agent-overview-mid.png",
 			},
 			{
-				title: "Standardized schemas",
+				title: "Handoff-friendly architecture",
 				description:
-					"All scraped data normalized to Lead Standard Format (LSF), so every source outputs consistent, structured lead objects.",
+					"We optimize for clean ownership so internal engineers or future hires can extend the product without a rewrite.",
 				metric: {
-					label: "Schema compliance",
+					label: "Ownership",
 					value: "100%",
 				},
 				visual: "/demo/static/charts/tab-2/ai-agent-overview-bottom.png",
@@ -161,98 +143,98 @@ const realTimeFeaturesSeed = [
 		],
 		metrics: [
 			{
-				label: "MCP providers",
-				value: "8 active",
+				label: "Auth and billing",
+				value: "Wired",
 			},
 			{
-				label: "Community plugins",
-				value: "15+",
+				label: "Analytics",
+				value: "Instrumented",
 			},
 		],
 	},
 	{
-		id: "normalization",
-		label: "Data Normalization Layer",
-		eyebrow: "Pillar 3: Clean, structured data",
+		id: "integrations-ai",
+		label: "Integrations and AI Workflows",
+		eyebrow: "Pillar 3: Connect the systems that matter",
 		description:
-			"Address parsing, phone/email extraction, metadata tagging, de-duping, and entity resolution. Export to CRM, CSV, JSON, Database, S3, or any system.",
+			"We wire the external systems that make the MVP useful on day one and add AI workflows where they create real leverage.",
 		media: {
 			src: "/demo/static/charts/tab-3/premium-engagement-top.png",
-			alt: "Data normalization dashboard showing cleaned and structured leads.",
+			alt: "Integration dashboard showing workflow automations, CRM sync, and analytics events.",
 		},
 		highlights: [
 			{
-				title: "Smart extraction",
+				title: "Operational integration",
 				description:
-					"Automatic address parsing, phone/email extraction, and metadata tagging from raw HTML. Entity resolution and de-duping ensure clean datasets.",
+					"CRM, email, dashboards, and analytics are connected so the product can support a real launch motion instead of a closed demo loop.",
 				metric: {
-					label: "Extraction accuracy",
-					value: "96.8%",
+					label: "Launch systems",
+					value: "Connected",
 				},
 				visual: "/demo/static/charts/tab-3/premium-engagement-bottom.png",
 			},
 			{
-				title: "Multi-format export",
+				title: "Targeted AI support",
 				description:
-					"Export normalized leads to CRM, CSV, JSON, Database, S3, or any system. Webhook triggers for real-time integration with your stack.",
+					"AI is used where it removes friction, such as classification, summarization, routing, or workflow acceleration, not as decorative feature bloat.",
 				metric: {
-					label: "Export formats",
-					value: "5+ formats",
+					label: "Manual steps reduced",
+					value: "High leverage",
 				},
 				visual: "/demo/static/charts/tab-3/premium-engagement-bottom-2.png",
 			},
 		],
 		metrics: [
 			{
-				label: "Leads normalized",
-				value: "12.5K / day",
+				label: "Integrations",
+				value: "Launch-critical",
 			},
 			{
-				label: "Dedupe rate",
-				value: "8.2%",
+				label: "Workflow coverage",
+				value: "End to end",
 			},
 		],
 	},
 	{
-		id: "developer-tooling",
-		label: "Developer Tooling",
-		eyebrow: "Pillar 4: Built for developers",
+		id: "launch-handoff",
+		label: "Launch Assets and Handoff",
+		eyebrow: "Pillar 4: Get the product into market cleanly",
 		description:
-			"CLI, SDKs (JS, Python, Go), webhook system, GitHub Actions templates, API key console, and usage analytics. Built for developers, agencies, and data teams.",
+			"The sprint ends with deployment readiness, QA coverage, launch context, and the documentation needed for the next build cycle.",
 		media: {
 			src: "/demo/static/charts/tab-3/premium-engagement-mid.png",
-			alt: "Developer tools and SDK documentation interface.",
+			alt: "Launch checklist interface showing QA, deployment, roadmap, and handoff notes.",
 		},
 		highlights: [
 			{
-				title: "CLI & SDKs",
+				title: "QA and deployment readiness",
 				description:
-					"Command-line interface and SDKs for JavaScript, Python, and Go. Integrate scraping into your existing workflows with minimal setup.",
+					"We tighten the release path so the MVP can go live with confidence instead of leaving the highest-risk work for the end.",
 				metric: {
-					label: "SDK languages",
-					value: "3 languages",
+					label: "Release state",
+					value: "Launch-ready",
 				},
 				visual: "/demo/static/charts/tab-3/premium-engagement-bottom-3.png",
 			},
 			{
-				title: "Webhooks & automation",
+				title: "Roadmap clarity",
 				description:
-					"GitHub Actions templates, webhook system, and API console for seamless integration with your development and automation workflows.",
+					"You leave with a sharper understanding of what comes next, what should wait, and what users need from version two.",
 				metric: {
-					label: "Integration time",
-					value: "<5 min",
+					label: "Next-step plan",
+					value: "Included",
 				},
 				visual: "/demo/static/charts/tab-3/premium-engagement-mid.png",
 			},
 		],
 		metrics: [
 			{
-				label: "API calls",
-				value: "2.4K / day",
+				label: "QA pass",
+				value: "Complete",
 			},
 			{
-				label: "Active integrations",
-				value: "48 teams",
+				label: "Handoff docs",
+				value: "Included",
 			},
 		],
 	},

@@ -69,12 +69,19 @@ export type TechStack = {
 
 // --- Constants and Category Types (remain the same) ---
 export const SERVICE_CATEGORIES = {
-	LEAD_GENERATION: "lead_generation",
-	LEAD_TYPES: "lead_types",
-	LEAD_PREQUALIFICATION: "lead_prequalification",
-	SKIP_TRACING: "skip_tracing",
-	AI_FEATURES: "ai_features",
-	REAL_ESTATE_TOOLS: "real_estate_tools",
+	STRATEGY: "strategy",
+	BUILD: "build",
+	IN_PERSON: "in_person",
+	SPECIALISTS: "specialists",
+	SUPPORT: "support",
+	RESOURCES: "resources",
+	// Backwards-compatible aliases for older tests and modules.
+	LEAD_GENERATION: "strategy",
+	LEAD_TYPES: "build",
+	LEAD_PREQUALIFICATION: "in_person",
+	SKIP_TRACING: "specialists",
+	AI_FEATURES: "support",
+	REAL_ESTATE_TOOLS: "resources",
 } as const;
 
 export type ServiceCategoryKey = keyof typeof SERVICE_CATEGORIES;

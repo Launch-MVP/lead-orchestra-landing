@@ -15,8 +15,8 @@ const UpcomingFeatures = () => {
 			<div className="container mx-auto px-4">
 				<div className="mb-10 text-center">
 					<Header
-						title="Vote On Upcoming Features"
-						subtitle="Help us prioritize what to build next by voting on your favorite ideas"
+						title="Vote On Upcoming Services"
+						subtitle="Help us prioritize the next workshops, support offers, and delivery add-ons by voting on what would help you launch faster."
 						size="lg"
 						className="mb-12 md:mb-16"
 					/>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const CANONICAL_ORIGIN =
 	process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-	"https://leadorchestra.com";
+	"https://launchmvp.com";
 const ALLOWED_ROUTES = [
 	"/",
 	"/blogs",

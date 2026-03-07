@@ -256,7 +256,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	const personaAudienceLabel =
 		PERSONA_LABEL.replace(/^For\s+/i, "").trim() || PERSONA_LABEL;
-	const personaPromise = `We orchestrate every deal touchpoint so ${personaAudienceLabel} stay in deal mode.`;
+	const personaPromise = `We help ${personaAudienceLabel} launch a real MVP fast without bloated scope or technical debt.`;
 	const outreachTagline = AI_OUTREACH_STUDIO_TAGLINE;
 
 	const heroKeywordsBase = [
@@ -277,7 +277,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	).slice(0, 48);
 	const heroDescription =
 		LIVE_COPY.subtitle ||
-		"Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists.";
+		"Scope, build, and launch your MVP in 3 days with clean architecture, core integrations, analytics, and handoff.";
 	const aiOutreachDescription = AI_OUTREACH_STUDIO_SEO.description;
 	const combinedDescriptionSegments = [
 		outreachTagline,
@@ -291,8 +291,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	const enrichedSeo = mapSeoMetaToMetadata({
 		...seo,
-		title:
-			"Lead Orchestra | Open-Source Lead Scraping & Data Ingestion That Plugs Into Anything",
+		title: "Launch MVP | Launch a Real MVP in 3 Days",
 		description: combinedDescription,
 		keywords: combinedKeywords,
 	});
@@ -335,13 +334,13 @@ const Index = async ({
 
 	const posts = await getLatestBeehiivPosts();
 	const homepageSeo = getStaticSeo("/");
-	const canonicalUrl = homepageSeo.canonical ?? "https://dealscale.io";
+	const canonicalUrl = homepageSeo.canonical ?? "https://launchmvp.com";
 	const heroDescription =
 		LIVE_COPY.subtitle ||
-		"Scrape Anything. Export Everywhere. Open-source lead scraping and data ingestion that plugs into anything. Fresh leads, not rented lists.";
+		"Scope, build, and launch your MVP in 3 days with clean architecture, core integrations, analytics, and handoff.";
 	const personaAudienceLabel =
 		PERSONA_LABEL.replace(/^For\s+/i, "").trim() || PERSONA_LABEL;
-	const personaPromise = `Scrape Anything. Export Everywhere.`;
+	const personaPromise = "Scope, build, and launch your MVP in 3 days.";
 	const heroServiceDescription = [personaPromise, heroDescription]
 		.filter((segment) => segment && segment.length > 0)
 		.join(" ");
@@ -352,31 +351,29 @@ const Index = async ({
 	]
 		.filter((segment) => segment && segment.length > 0)
 		.join(" ");
-	const activityNarrative = `Open-source scraping engine that helps ${personaAudienceLabel} access fresh leads with zero credit limits.`;
-	const aiOutreachFeatureDescription = `${AI_OUTREACH_STUDIO_TAGLINE} Scrape any source, normalize data, and export seamlessly.`;
+	const activityNarrative = `Launch system that helps ${personaAudienceLabel} move from idea to a usable MVP with clean execution and handoff.`;
+	const aiOutreachFeatureDescription = `${AI_OUTREACH_STUDIO_TAGLINE} Define the launch version, build the critical workflow, and wire the systems that matter.`;
 	const {
 		reviews: testimonialReviews,
 		aggregateRating: testimonialAggregateRating,
 	} = getTestimonialReviewData();
 	const blogSchema = buildBlogSchema({
 		canonicalUrl: `${canonicalUrl}/blogs`,
-		name: homepageSeo.title
-			? `${homepageSeo.title} Blog`
-			: "Lead Orchestra Blog",
+		name: homepageSeo.title ? `${homepageSeo.title} Blog` : "Launch MVP Blog",
 		description:
 			homepageSeo.description ??
-			"Lead Orchestra's latest insights on open-source scraping, MCP protocol, data ingestion, and developer tools.",
+			"Launch MVP insights on product strategy, MVP execution, launch planning, and shipping without technical debt.",
 		posts,
 	});
 	const heroServiceSchema = buildServiceSchema({
 		name: PERSONA_LABEL,
 		description: heroServiceDescription,
-		url: `${canonicalUrl}#lead-orchestra-hero`,
+		url: `${canonicalUrl}#launch-mvp-hero`,
 		serviceType: PERSONA_GOAL,
-		category: "Open-Source Lead Scraping & Data Ingestion",
+		category: "MVP Strategy, Design, and Engineering",
 		areaServed: ["United States", "Global"],
 		offers: {
-			price: "0",
+			price: "500",
 			priceCurrency: "USD",
 			url: `${canonicalUrl}/contact`,
 		},
@@ -384,14 +381,14 @@ const Index = async ({
 		reviews: testimonialReviews,
 	});
 	const aiOutreachServiceSchema = buildServiceSchema({
-		name: `${AI_OUTREACH_STUDIO_SEO.name} by Lead Orchestra`,
+		name: `${AI_OUTREACH_STUDIO_SEO.name} by Launch MVP`,
 		description: aiOutreachNarrative,
 		url: `${canonicalUrl}#${AI_OUTREACH_STUDIO_ANCHOR}`,
-		serviceType: "Open-Source Data Ingestion",
-		category: "Developer Tools & Data Infrastructure",
+		serviceType: "MVP Development",
+		category: "Product Strategy and Launch Execution",
 		areaServed: ["United States", "Global"],
 		offers: {
-			price: "0",
+			price: "12500",
 			priceCurrency: "USD",
 			url: `${canonicalUrl}/contact`,
 		},
@@ -435,7 +432,7 @@ const Index = async ({
 			<SectionWrapper
 				id="feature-activity"
 				lazy={false}
-				fallbackLabel="Lead Orchestra Features"
+				fallbackLabel="Launch System"
 			>
 				<>
 					<FeatureSectionActivity />
@@ -448,7 +445,7 @@ const Index = async ({
 			<SectionWrapper
 				id="connect-anything"
 				lazy={false}
-				fallbackLabel="Connect Any CRM"
+				fallbackLabel="Deploy On Your Stack"
 			>
 				<ConnectAnythingHero />
 			</SectionWrapper>
@@ -456,7 +453,7 @@ const Index = async ({
 			<SectionWrapper
 				id="upload-leads"
 				lazy={false}
-				fallbackLabel="Upload Leads & Perform Actions"
+				fallbackLabel="Scope Your MVP"
 			>
 				<UploadLeadsHero />
 			</SectionWrapper>
@@ -481,9 +478,9 @@ const Index = async ({
 			>
 				<Testimonials
 					testimonials={generalDealScaleTestimonials}
-					title={"What Developers & Agencies Say"}
+					title={"What Founders and Product Teams Say"}
 					subtitle={
-						"Hear from developers, agencies, and data teams about their experiences with Lead Orchestra"
+						"Hear how founders, startup teams, and innovation leaders used Launch MVP to move from idea to usable product faster."
 					}
 				/>
 			</SectionWrapper>
@@ -494,8 +491,8 @@ const Index = async ({
 				fallback={<PricingFallback />}
 			>
 				<MarketingCatalogPricing
-					title="Free Open-Source + Enterprise Options"
-					subtitle="100% free and open-source with no credit card required. Self-hosted enterprise licensing available for teams needing compliance and control."
+					title="Launch Offers Built for Speed"
+					subtitle="Start with strategy, move into the 3-Day MVP Workshop, and add post-launch support only if you need continued momentum."
 					catalog={pricingCatalog}
 					showFreePreview={false}
 					showUpgradeStack={false}
@@ -521,13 +518,13 @@ const Index = async ({
 				rootMargin="1200px"
 				fallback={<BlogFallback />}
 			>
-				<BlogPreview title="Latest Blogs" posts={posts} />
+				<BlogPreview title="Product Build Notes" posts={posts} />
 			</SectionWrapper>
 			<Separator className="w-full border-white/10" />
 			<SectionWrapper id="faq" rootMargin="1200px" fallback={<FaqFallback />}>
 				<Faq
 					title="Frequently Asked Questions"
-					subtitle="Find answers to common questions about Lead Orchestra, open-source scraping, MCP protocol, and data ingestion."
+					subtitle="Answers on scope, pricing, ownership, integrations, launch timing, and what the 3-Day MVP Workshop actually includes."
 					faqItems={faqItems}
 				/>
 			</SectionWrapper>

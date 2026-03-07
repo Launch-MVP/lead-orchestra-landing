@@ -1,5 +1,6 @@
 import { events as fallbackEvents } from "@/data/events";
 import type { NormalizedEvent } from "@/lib/events/eventSchemas";
+import { isBuildTimePrerender } from "@/utils/env";
 
 import { EVENTS_REVALIDATE_SECONDS } from "./constants";
 import {
@@ -90,6 +91,10 @@ function mapFallbackEvents(): NormalizedEvent[] {
 }
 
 export async function fetchEvents(): Promise<NormalizedEvent[]> {
+	if (isBuildTimePrerender()) {
+		return mapFallbackEvents();
+	}
+
 	try {
 		return await requestRemoteEvents();
 	} catch (error) {

@@ -63,6 +63,11 @@ export interface ProductFaq {
 }
 
 export enum ProductCategory {
+	Services = "services",
+	Strategy = "strategy",
+	InPerson = "in-person",
+	Support = "support",
+	Specialists = "specialists",
 	Credits = "credits",
 	Workflows = "workflows",
 	Essentials = "essentials",
@@ -81,6 +86,8 @@ export enum ProductCategory {
 	RemoteClosers = "remote-closers",
 	Templates = "Templates",
 	SeoAeo = "SEO/AEO",
+	Enterprise = "enterprise",
+	Startups = "startups",
 }
 
 /** Metadata describing an associated downloadable file or external free resource. */

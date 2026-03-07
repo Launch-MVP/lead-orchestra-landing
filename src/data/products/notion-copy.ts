@@ -3,31 +3,31 @@ import { defineAbTests } from "./copy";
 export const notionInvestorCrmABTests = defineAbTests([
 	{
 		id: "ab-test-notion-crm-v1",
-		name: "Notion Investor CRM Copy Test",
+		name: "Notion Founder CRM Copy Test",
 		description:
-			"Testing copy variants (Organization vs. Relationship Focus) for the Notion Investor CRM to optimize sales.",
+			"Testing copy variants for the founder CRM template in a Launch MVP context.",
 		variants: [
 			{
 				name: "V1 - Organization & Control",
 				percentage: 50,
 				copy: {
-					cta: "Organize Your Investors Now",
+					cta: "Organize Your Launch Relationships",
 					buttonCta: "Get the CRM",
-					tagline: "Ditch the Messy Spreadsheet.",
+					tagline: "One CRM for Launch Momentum.",
 					subtitle:
-						"A powerful Notion CRM to track investors, conversations, and deal status in one organized place.",
+						"A founder-friendly Notion CRM for tracking investors, partners, prospects, and launch-critical conversations in one place.",
 					whatsInItForMe:
-						"This template ends the chaos of managing investor relations in spreadsheets, so you never miss a follow-up or lose a key contact.",
+						"You stop juggling scattered notes and keep the people who matter to the launch in one usable system.",
 					target_audience:
-						"Founders and startups actively managing investor relations or raising capital.",
+						"Founders managing fundraising, pilots, or launch relationships.",
 					pain_point:
-						"Tracking investor conversations across spreadsheets, emails, and notes is chaotic and leads to missed opportunities.",
+						"Critical follow-ups get lost when investor, partner, and prospect conversations live across notes, email, and memory.",
 					solution:
-						"Our Notion CRM centralizes all investor data, conversations, and statuses into a single, easy-to-manage dashboard.",
+						"Our Notion CRM centralizes the key launch relationships and their status into a single founder dashboard.",
 					highlights: [
 						"Track every conversation",
 						"Never miss a follow-up",
-						"Manage your pipeline visually",
+						"Keep launch context visible",
 					],
 				},
 			},
@@ -35,23 +35,23 @@ export const notionInvestorCrmABTests = defineAbTests([
 				name: "V2 - Relationship & Capital",
 				percentage: 50,
 				copy: {
-					cta: "Raise Capital More Effectively",
+					cta: "Run Founder Outreach More Cleanly",
 					buttonCta: "Get the Template",
-					tagline: "Build Relationships, Raise Capital.",
+					tagline: "Relationships That Support the Launch.",
 					subtitle:
-						"The essential Notion CRM for building stronger investor relationships and closing your next round faster.",
+						"The essential Notion CRM for building stronger investor, advisor, and partner relationships around the MVP launch.",
 					whatsInItForMe:
-						"By systematically managing your relationships, you build the trust and momentum needed to get to a 'yes' faster.",
+						"You build more momentum because the right people, conversations, and next steps stay organized.",
 					target_audience:
-						"Startups focused on building strong, long-term relationships with their investors.",
+						"Founders who need stronger relationship management around fundraising and go-to-market.",
 					pain_point:
-						"Failing to properly nurture investor relationships leads to cold leads and a stalled fundraising process.",
+						"When relationship management is loose, both fundraising and launch partnerships lose momentum.",
 					solution:
-						"This CRM is designed to help you manage and nurture investor relationships effectively, turning contacts into commitments.",
+						"This CRM gives founders a cleaner system for nurturing the relationships that move the launch forward.",
 					highlights: [
 						"Build stronger relationships",
-						"Close your round faster",
-						"Turn contacts into capital",
+						"Support launch momentum",
+						"Turn contacts into next steps",
 					],
 				},
 			},
@@ -65,27 +65,26 @@ export const notionInvestorCrmABTests = defineAbTests([
 export const notionDealPipelineABTests = defineAbTests([
 	{
 		id: "ab-test-notion-pipeline-v1",
-		name: "Notion Deal Pipeline Copy Test",
-		description:
-			"Testing copy variants (Visual Tracking vs. Closing Faster) for the Notion Deal Pipeline to optimize sales.",
+		name: "Notion MVP Pipeline Copy Test",
+		description: "Testing copy variants for the MVP pipeline board.",
 		variants: [
 			{
 				name: "V1 - Visual Tracking",
 				percentage: 50,
 				copy: {
-					cta: "Visualize Your Pipeline",
+					cta: "Visualize the Launch Pipeline",
 					buttonCta: "Get the Board",
-					tagline: "See Your Entire Deal Flow.",
+					tagline: "See the Work Move.",
 					subtitle:
-						"A clear, Kanban-style board in Notion to visually track every deal from lead to close.",
+						"A clear, Kanban-style board in Notion to track launch work, pilots, and active opportunities from first touch to shipped outcome.",
 					whatsInItForMe:
 						"Get a high-level view of your entire pipeline in seconds, so you instantly know where every deal stands.",
 					target_audience:
-						"Founders and sales teams who want a simple, visual way to manage their opportunities.",
+						"Founders and small teams who want a simple visual way to manage launch activity.",
 					pain_point:
-						"Deals are falling through the cracks because you can't easily see the status of your entire pipeline.",
+						"Launch work falls through the cracks when there is no shared view of what is moving, blocked, or done.",
 					solution:
-						"Our Kanban-style board gives you a crystal-clear, visual overview of your deal stages, ensuring nothing gets missed.",
+						"Our Kanban-style board gives you a shared visual pipeline so work, follow-up, and opportunities stay visible.",
 					highlights: [
 						"Visualize every deal",
 						"Drag-and-drop simplicity",
@@ -97,23 +96,23 @@ export const notionDealPipelineABTests = defineAbTests([
 				name: "V2 - Closing Faster",
 				percentage: 50,
 				copy: {
-					cta: "Close Deals Faster",
+					cta: "Move Launch Work Faster",
 					buttonCta: "Get the Pipeline",
-					tagline: "Move Deals from Lead to Close.",
+					tagline: "Reduce Friction Across the Launch.",
 					subtitle:
-						"The streamlined Notion pipeline board designed to help you increase sales velocity and close more deals.",
+						"The streamlined Notion board designed to help founders reduce bottlenecks and move the MVP toward launch faster.",
 					whatsInItForMe:
-						"This template helps you identify bottlenecks and focus your efforts, shortening your sales cycle and increasing revenue.",
+						"This template helps you spot delays earlier so the launch does not slow down because of invisible blockers.",
 					target_audience:
-						"Sales-focused teams and founders who want to improve their sales process and increase revenue.",
+						"Founders and operators who want better launch coordination.",
 					pain_point:
-						"A disorganized sales process leads to a slow sales cycle and lost revenue.",
+						"A disorganized delivery pipeline creates delays, missed follow-ups, and slower launches.",
 					solution:
-						"This streamlined pipeline provides the structure needed to manage deals efficiently, reduce friction, and accelerate your sales cycle.",
+						"This streamlined board provides the structure needed to manage launch work efficiently and accelerate execution.",
 					highlights: [
-						"Shorten your sales cycle",
+						"Shorten the launch cycle",
 						"Identify and fix bottlenecks",
-						"Increase sales velocity",
+						"Increase execution velocity",
 					],
 				},
 			},
@@ -135,19 +134,19 @@ export const notionStartupOsABTests = defineAbTests([
 				name: "V1 - All-in-One System",
 				percentage: 50,
 				copy: {
-					cta: "Get Your All-in-One Workspace",
+					cta: "Get the Launch MVP Workspace",
 					buttonCta: "Get the OS",
-					tagline: "Your Entire Startup in One Place.",
+					tagline: "One Workspace for Product and Launch.",
 					subtitle:
-						"The complete, all-in-one Notion workspace for startups. Manage product, marketing, hiring, and more.",
+						"The complete Notion workspace for Launch MVP teams managing product scope, marketing, hiring, fundraising, and launch execution.",
 					whatsInItForMe:
 						"Stop switching between a dozen apps. This OS centralizes your entire startup's operations, saving you time and money.",
 					target_audience:
-						"Early-stage startups looking for a single, central system to run their company.",
+						"Early-stage founders who want a single system for building and launching.",
 					pain_point:
 						"Information is scattered across too many different tools, creating confusion and inefficiency.",
 					solution:
-						"Our Startup OS integrates all key business functions into a single, interconnected Notion workspace.",
+						"Our Launch MVP OS integrates product, launch, and operating functions into one interconnected Notion workspace.",
 					highlights: [
 						"Manage everything in one place",
 						"Stop paying for multiple tools",
@@ -159,17 +158,17 @@ export const notionStartupOsABTests = defineAbTests([
 				name: "V2 - Day One Acceleration",
 				percentage: 50,
 				copy: {
-					cta: "Build Faster from Day One",
+					cta: "Operate Faster From Day One",
 					buttonCta: "Install Now",
 					tagline: "Get Organized. Move Faster.",
 					subtitle:
-						"The ultimate Notion workspace for startups, designed to get you organized and executing from day one.",
+						"The Notion workspace for founders who want a cleaner system for scoping, building, and launching from day one.",
 					whatsInItForMe:
 						"This template gives you the structure you need to hit the ground running, so you can focus on building, not on setting up tools.",
 					target_audience:
 						"New founders who want to establish strong operational processes from the very beginning.",
 					pain_point:
-						"Setting up systems and processes from scratch is slow and distracts you from building your product.",
+						"Setting up systems from scratch slows down product work and launch prep at the exact moment speed matters most.",
 					solution:
 						"This pre-built OS provides all the dashboards and templates you need to run efficiently from day one, giving you an instant operational boost.",
 					highlights: [
@@ -197,19 +196,19 @@ export const notionFundraisingTrackerABTests = defineAbTests([
 				name: "V1 - Stay Organized",
 				percentage: 50,
 				copy: {
-					cta: "Organize Your Fundraise",
+					cta: "Organize the Raise and Launch",
 					buttonCta: "Get Tracker",
-					tagline: "Run a Stress-Free Fundraise.",
+					tagline: "Keep the Raise and Product Story Aligned.",
 					subtitle:
-						"Track investor outreach, commitments, and follow-ups in one clean Notion dashboard.",
+						"Track investor outreach, commitments, follow-ups, and launch milestones in one clean Notion dashboard.",
 					whatsInItForMe:
 						"This template brings calm to the chaos of fundraising, ensuring you stay on top of every detail and run a professional process.",
 					target_audience:
-						"Founders who are currently or about to start fundraising.",
+						"Founders fundraising while preparing a product launch.",
 					pain_point:
 						"Fundraising is a chaotic and stressful process where it's easy to drop the ball on critical follow-ups.",
 					solution:
-						"Our tracker provides a clear, simple system to manage every aspect of your raise, so nothing gets overlooked.",
+						"Our tracker provides one system for managing the raise and the launch narrative so nothing gets overlooked.",
 					highlights: [
 						"Track every conversation",
 						"Manage your investor pipeline",
@@ -221,11 +220,11 @@ export const notionFundraisingTrackerABTests = defineAbTests([
 				name: "V2 - Close Faster",
 				percentage: 50,
 				copy: {
-					cta: "Close Your Round Faster",
+					cta: "Keep Fundraising Momentum High",
 					buttonCta: "Get the Tracker",
 					tagline: "From First Call to Term Sheet.",
 					subtitle:
-						"The Notion dashboard designed to help you manage momentum and close your fundraising round in record time.",
+						"The Notion dashboard designed to help you manage fundraising momentum while keeping the product story launch-ready.",
 					whatsInItForMe:
 						"A well-managed process creates momentum. This tracker helps you manage that momentum to get to a term sheet faster.",
 					target_audience:
@@ -237,7 +236,7 @@ export const notionFundraisingTrackerABTests = defineAbTests([
 					highlights: [
 						"Build and maintain momentum",
 						"Accelerate your timeline",
-						"Impress investors",
+						"Keep launch traction visible",
 					],
 				},
 			},
@@ -259,15 +258,15 @@ export const notionTeamWikiABTests = defineAbTests([
 				name: "V1 - Centralized Knowledge",
 				percentage: 50,
 				copy: {
-					cta: "Create Your Single Source of Truth",
+					cta: "Create the Launch Handbook",
 					buttonCta: "Get the Wiki",
-					tagline: "Your Team's Central Brain.",
+					tagline: "The Team Brain for Launch.",
 					subtitle:
-						"A central wiki to document your team's processes, policies, and knowledge in one organized Notion workspace.",
+						"A central wiki for documenting processes, product context, launch checklists, and operating knowledge in one Notion workspace.",
 					whatsInItForMe:
 						"Stop answering the same questions over and over. This wiki becomes your team's single source of truth, saving everyone time.",
 					target_audience:
-						"Teams looking to eliminate repetitive questions and centralize company knowledge.",
+						"Teams looking to centralize launch knowledge and reduce repeated questions.",
 					pain_point:
 						"Key information is scattered, and team members constantly interrupt each other with repetitive questions.",
 					solution:
@@ -283,11 +282,11 @@ export const notionTeamWikiABTests = defineAbTests([
 				name: "V2 - Faster Scaling",
 				percentage: 50,
 				copy: {
-					cta: "Onboard & Scale Your Team Faster",
+					cta: "Onboard the Next Teammate Faster",
 					buttonCta: "Get the Handbook",
 					tagline: "The Foundation for Growth.",
 					subtitle:
-						"The essential team wiki and handbook for onboarding new hires and scaling your company culture.",
+						"The team wiki and handbook for onboarding new hires while preserving the product and launch context they need to execute well.",
 					whatsInItForMe:
 						"A good wiki makes onboarding new hires seamless, allowing you to grow your team without the chaos.",
 					target_audience:

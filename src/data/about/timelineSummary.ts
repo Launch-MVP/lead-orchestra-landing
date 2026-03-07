@@ -7,73 +7,46 @@ export interface ManifestoSectionSummary {
 
 export const timelineSummary: ManifestoSectionSummary[] = [
 	{
-		title: "1️⃣ Origin Story",
-		subtitle: "Automation-first freedom for real estate pros",
+		title: "1. Why We Exist",
+		subtitle: "Too many founders spend months circling version one",
 		summary:
-			"DealScale was created to give real estate operators the freedom that comes from automated deal flow instead of manual grind.",
-		anchor: "origin-story",
+			"Launch MVP exists to help founders escape endless planning and move toward a real product faster.",
+		anchor: "why-we-exist",
 	},
 	{
-		title: "2️⃣ Core Belief",
-		subtitle: "Wealth is a system, automation is the equalizer",
+		title: "2. What We Actually Do",
+		subtitle: "Scope, build, launch, and handoff in one delivery model",
 		summary:
-			"We believe leverage beats hustle, so we deliver automation that helps every agent and investor build wealth like an enterprise team.",
-		anchor: "core-belief",
+			"We combine strategy, workshops, focused build work, and launch support so product work does not fragment across disconnected vendors.",
+		anchor: "what-we-actually-do",
 	},
 	{
-		title: "3️⃣ The Blue Ocean Shift",
-		subtitle: "Reframing CRMs into an earning engine",
+		title: "3. How We Work",
+		subtitle: "The smallest useful version one beats a bloated roadmap",
 		summary:
-			"DealScale steps out of the CRM feature race and reframes the category around earnings, wealth language, and lifestyle outcomes.",
-		anchor: "blue-ocean-shift",
+			"We prefer live decisions, tight scope, and version-one clarity over impressive but expensive prototype theater.",
+		anchor: "how-we-work",
 	},
 	{
-		title: "4️⃣ Our Category",
-		subtitle: "Positioned as the AI Wealth Engine",
+		title: "4. What We Deliver",
+		subtitle: "A usable product, not just a sprint artifact",
 		summary:
-			"We define a new AI Wealth Engine that orchestrates every CRM, workflow, and conversation to scale real estate brands.",
-		anchor: "our-category",
+			"Every engagement is meant to end with working product progress, cleaner structure, and a handoff the next builder can use.",
+		anchor: "what-we-deliver",
 	},
 	{
-		title: '5️⃣ The Movement - "AI Investing League"',
-		subtitle: "Turning mastery into a competitive league",
+		title: "5. What We Refuse",
+		subtitle: "No fake velocity, no handoff chaos, no unnecessary scope",
 		summary:
-			"The AI Investing League makes growth a scoreboard where operators, closers, and titans rise through measurable wins.",
-		anchor: "ai-investing-league",
+			"We actively avoid cleanup debt, fuzzy ownership, and roadmap sprawl that makes early product work more expensive than it needs to be.",
+		anchor: "what-we-refuse",
 	},
 	{
-		title: "6️⃣ Emotional North Star",
-		subtitle: "Status, freedom, and momentum over features",
+		title: "6. Where This Is Going",
+		subtitle:
+			"More workshop paths, stronger launch support, sharper specialist help",
 		summary:
-			"We sell the status, momentum, and lifestyle that comes from scalable deal automation, not just software features.",
-		anchor: "emotional-north-star",
-	},
-	{
-		title: "7️⃣ Value Promise",
-		subtitle: "Pillars that translate into tangible outcomes",
-		summary:
-			"The pillars of speed, automation, wealth, freedom, and status each map to measurable ROI and outcomes.",
-		anchor: "value-promise",
-	},
-	{
-		title: '8️⃣ Self-Hosted Future - "Own Your AI"',
-		subtitle: "Enterprise ownership with aligned incentives",
-		summary:
-			"Advanced teams can own their AI through self-hosted licensing, revenue share, or full buyouts for compliant scale.",
-		anchor: "self-hosted-future",
-	},
-	{
-		title: "9️⃣ Signature Taglines",
-		subtitle: "Mantras that sell lifestyle and leverage",
-		summary:
-			"Our signature taglines capture the movement’s voice: automate, earn while you rest, and treat automation as a status symbol.",
-		anchor: "signature-taglines",
-	},
-	{
-		title: "🔟 Closing Line",
-		subtitle: "The manifesto’s leverage promise in one line",
-		summary:
-			"The manifesto ends with DealScale’s promise: leverage-first wealth building for ambitious real estate operators.",
-		anchor: "closing-line",
+			"Launch MVP is expanding into a broader founder delivery system built around fast scope, focused execution, and cleaner post-launch support.",
+		anchor: "where-this-is-going",
 	},
 ];

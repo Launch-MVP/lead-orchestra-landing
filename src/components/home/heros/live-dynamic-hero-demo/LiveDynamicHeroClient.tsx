@@ -184,8 +184,8 @@ export default function LiveDynamicHeroClient(): JSX.Element {
 						data-beam-collider="true"
 					>
 						<p className="max-w-3xl text-center text-base text-muted-foreground sm:text-lg md:text-xl dark:text-neutral-300">
-							Automated investor deal flow from your CRM and market data, so you
-							can focus on evaluating profitable opportunities.
+							A guided look at how the 3-Day MVP Workshop turns scattered ideas
+							into a usable product plan and launch-ready build direction.
 						</p>
 						<PersonaCTA
 							className="w-full max-w-5xl"
@@ -212,12 +212,11 @@ export default function LiveDynamicHeroClient(): JSX.Element {
 
 						<div className="w-full max-w-2xl rounded-3xl border border-border/45 bg-background/85 px-5 py-5 text-center shadow-[0_16px_55px_-35px_rgba(37,99,235,0.35)] backdrop-blur-md sm:px-6 md:px-10">
 							<p className="font-medium text-foreground text-sm sm:text-base">
-								Start with a 90-second walkthrough of the investor pipeline
-								control center.
+								Start with a 90-second walkthrough of the MVP workshop flow.
 							</p>
 							<p className="mt-2 text-muted-foreground text-sm sm:text-base">
-								Watch the demo, then review the rollout checklist below to keep
-								your deal sourcing consistent across acquisitions.
+								Watch the demo, then review the rollout checklist below to see
+								how scope, build, and handoff stay aligned.
 							</p>
 						</div>
 
@@ -238,25 +237,19 @@ export default function LiveDynamicHeroClient(): JSX.Element {
 								/>
 								<div className="text-center md:text-left">
 									<p className="font-semibold text-foreground text-sm sm:text-base">
-										Keep motivated sellers warm with always-on deal follow-up
+										Keep scope, build, and launch aligned from day one
 									</p>
 									<p className="text-muted-foreground text-xs sm:text-sm">
-										Automatically nurture leads from first interest to signed
-										contract without burning time.
+										Move from rough concept to working MVP without wasting
+										cycles on the wrong version first.
 									</p>
 								</div>
 							</div>
 							<Separator className="md:hidden" />
 							<div className="grid w-full grid-cols-1 gap-4 text-center font-semibold text-foreground text-sm sm:grid-cols-3 sm:text-base">
-								<MetricBlock
-									label="Seller Touchpoints"
-									value="Daily AI outreach"
-								/>
-								<MetricBlock label="Deal Screening" value="24/7 automation" />
-								<MetricBlock
-									label="Pipeline Visibility"
-									value="Real-time dashboards"
-								/>
+								<MetricBlock label="Scope" value="Critical flow first" />
+								<MetricBlock label="Build" value="3-day execution" />
+								<MetricBlock label="Handoff" value="Launch-ready direction" />
 							</div>
 						</div>
 					</div>

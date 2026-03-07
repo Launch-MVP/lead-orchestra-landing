@@ -1,44 +1,46 @@
 import { Marquee } from "@/components/magicui/marquee";
 import { cn } from "@/lib/utils";
 import Header from "../common/Header";
+
 const reviews = [
 	{
-		name: "Marcus R.",
-		username: "@marcusinvests",
-		body: "I was spending 20+ hours a week on cold calls. Deal Scale's AI automated everything, and now my calendar is filled with qualified appointments. It's a total game-changer.",
-		img: "https://avatar.vercel.sh/marcus",
+		name: "Nadia C.",
+		username: "@peridotapp",
+		body: "The biggest shift was finally cutting the MVP to the workflow users actually needed. We stopped stalling in planning and had something real to react to.",
+		img: "https://avatar.vercel.sh/nadia",
 	},
 	{
-		name: "Sarah L.",
-		username: "@slproperties",
-		body: "The problem was always the follow-up. Deal Scale's AI nurtures leads for weeks and turns cold prospects into motivated sellers ready to talk. We just closed a deal that would have definitely gone cold.",
-		img: "https://avatar.vercel.sh/sarah",
+		name: "Marcus H.",
+		username: "@booktco",
+		body: "We had too many ideas and not enough sequencing. Launch MVP helped us choose the right version one instead of the most ambitious one.",
+		img: "https://avatar.vercel.sh/marcush",
 	},
 	{
-		name: "David Chen",
-		username: "@chenacquisitions",
-		body: "We're not just getting leads, we're getting actual appointments on the books. The quality is night and day compared to any list I've ever bought. This is the missing piece for scaling.",
-		img: "https://avatar.vercel.sh/david",
+		name: "Leah S.",
+		username: "@seedfounder",
+		body: "The workshop forced decisions we had been postponing for weeks. That alone saved us from building the wrong thing.",
+		img: "https://avatar.vercel.sh/leah",
 	},
 	{
-		name: "Elena G.",
-		username: "@elenaflipping",
-		body: "As a solopreneur, I can't be everywhere at once. Deal Scale is my 24/7 acquisitions team. It handles all the front-end work so I can focus on negotiating and closing.",
-		img: "https://avatar.vercel.sh/elena",
+		name: "Devon K.",
+		username: "@devfounder",
+		body: "I expected a prototype. What we got was a clearer product path and a handoff I could actually keep working from.",
+		img: "https://avatar.vercel.sh/devon",
 	},
 	{
-		name: "Tom Becker",
-		username: "@beckerholdings",
-		body: "I was skeptical about AI, but the conversations are incredibly natural and effective. The consistency is something my team could never replicate manually. Our appointment show rate is through the roof.",
-		img: "https://avatar.vercel.sh/tom",
+		name: "Mina J.",
+		username: "@buildwithmina",
+		body: "The app and landing page finally told the same story. Before that, the product and the positioning felt disconnected.",
+		img: "https://avatar.vercel.sh/mina",
 	},
 	{
-		name: "Jessica P.",
-		username: "@jppropertygroup",
-		body: "My ROI with Deal Scale was clear within the first month. The amount of time saved alone is worth it, but the pipeline of pre-qualified sellers it delivers is invaluable.",
-		img: "https://avatar.vercel.sh/jessica",
+		name: "Andre P.",
+		username: "@startupops",
+		body: "Post-launch support mattered more than I expected. Small cleanup decisions kept the MVP from turning into immediate technical debt.",
+		img: "https://avatar.vercel.sh/andre",
 	},
 ];
+
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
@@ -56,10 +58,8 @@ const ReviewCard = ({
 	return (
 		<figure
 			className={cn(
-				"relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-				// light styles
+				"relative h-full w-64 overflow-hidden rounded-xl border p-4",
 				"border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-				// dark styles
 				"dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
 			)}
 		>
@@ -81,8 +81,8 @@ export function MarqueeDemo() {
 	return (
 		<div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
 			<Header
-				title="What Our Clients Say"
-				subtitle="Real Testimonials On Social Media"
+				title="Founder Notes From Recent Launches"
+				subtitle="A few reflections from teams that needed clearer scope, faster execution, and a cleaner version-one path."
 			/>
 			<Marquee pauseOnHover duration="20s" repeat={8}>
 				{firstRow.map((review) => (

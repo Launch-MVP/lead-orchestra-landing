@@ -46,14 +46,14 @@ const eventLeadSubtypes: ProductType["sizes"] = [
 export const creditProducts: ProductType[] = [
 	{
 		id: "ai-credits-bundle",
-		name: "Lead Credits",
+		name: "AI Credits",
 		price: 100, // Starting price for the smallest bundle
-		sku: "DS-AI-CRED",
-		slug: "lead-credits",
+		sku: "LMVP-AI-CRED",
+		slug: "ai-credits",
 		licenseName: LicenseType.Proprietary,
 		abTest: AIConversationCreditsABTest,
 		description:
-			"Power your lead scraping and data processing workflows with lead credits. Each credit is used for data operations like scraping leads, normalizing data, and exporting to your CRM. Keep your pipeline automation running smoothly by topping up your credits anytime.",
+			"Power AI-assisted MVP workflows, prompt runs, eval loops, launch automations, and internal product operations with a flexible credit balance.",
 		categories: [
 			ProductCategory.Credits,
 			ProductCategory.AddOn,
@@ -71,14 +71,14 @@ export const creditProducts: ProductType[] = [
 		sizes: [], // * Required by ProductType
 		faqs: [
 			{
-				question: "What is a Lead Credit used for?",
+				question: "What is an AI Credit used for?",
 				answer:
-					"Lead Credits are consumed during data operations managed by your scraping jobs. This includes scraping leads from websites, normalizing data, and exporting to your CRM or other systems.",
+					"AI Credits are consumed by Launch MVP workflows that rely on model usage, prompt execution, automation steps, and internal AI-assisted product operations.",
 			},
 			{
 				question: "Do these credits expire?",
 				answer:
-					"Purchased credits do not expire and will roll over each month as long as you have an active Lead Orchestra account.",
+					"Purchased credits do not expire, so you can top up when needed and use them as your AI workload grows.",
 			},
 		],
 	},

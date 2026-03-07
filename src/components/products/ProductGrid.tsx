@@ -8,8 +8,8 @@ import { usePagination } from "@/hooks/use-pagination";
 import { cn } from "@/lib/utils";
 import { ProductCategory, type ProductType } from "@/types/products";
 import { useSession } from "next-auth/react";
-import type React from "react";
 import {
+	type FC,
 	type ReactNode,
 	useCallback,
 	useEffect,
@@ -28,8 +28,13 @@ import WorkflowCreateModal from "./workflow/WorkflowCreateModal";
 
 // * Category pretty labels for ProductCategory enum
 const CATEGORY_LABELS: Record<ProductCategory, string> = {
+	services: "Services",
+	strategy: "Strategy",
+	"in-person": "In Person",
+	support: "Support",
+	specialists: "Specialists",
 	credits: "Credits",
-	workflows: "Workflows",
+	workflows: "MVP Planning",
 	essentials: "Essentials",
 	notion: "Notion",
 	voices: "Voices",
@@ -37,18 +42,20 @@ const CATEGORY_LABELS: Record<ProductCategory, string> = {
 	leads: "Leads",
 	data: "Data",
 	monetize: "Monetize",
-	automation: "Automation",
+	automation: "Launch Systems",
 	"add-on": "Add-On",
 	agents: "Agents",
 	"free-resources": "Free Resources",
-	"sales-scripts": "Sales Scripts",
+	"sales-scripts": "Launch Copy",
 	prompts: "Prompts",
 	"remote-closers": "Virtual Assistants (VA's)",
 	Templates: "Templates",
-	"SEO/AEO": "SEO/AEO",
+	"SEO/AEO": "SEO & AEO",
+	enterprise: "For Enterprise / Greenfield",
+	startups: "For Founders",
 };
 
-const MONETIZE_PORTAL_URL = "https://app.dealscale.io";
+const MONETIZE_PORTAL_URL = "/contact";
 const MONETIZE_CATEGORY_OVERRIDES: Partial<
 	Record<
 		ProductCategory,
@@ -60,24 +67,24 @@ const MONETIZE_CATEGORY_OVERRIDES: Partial<
 	>
 > = {
 	[ProductCategory.Workflows]: {
-		title: "Monetize Your Workflow",
-		subtitle: "Share your automation with the world and earn revenue",
-		ariaLabel: "Create and monetize your workflow",
+		title: "Package Your Delivery System",
+		subtitle: "Turn your internal build process into a reusable launch offer",
+		ariaLabel: "Package your delivery system",
 	},
 	[ProductCategory.Agents]: {
-		title: "Launch Your Agent on Deal Scale",
-		subtitle: "List your AI agent and start collecting revenue faster",
-		ariaLabel: "Launch your AI agent on Deal Scale",
+		title: "Launch Your Agent",
+		subtitle: "Package your assistant and turn it into a repeatable offer",
+		ariaLabel: "Launch your AI agent",
 	},
 	[ProductCategory.Voices]: {
 		title: "Monetize Your Voice Agent",
-		subtitle: "Tap into our network and deploy your concierge for clients",
-		ariaLabel: "Monetize your voice agent on Deal Scale",
+		subtitle: "Turn your voice workflow into a polished client-facing offer",
+		ariaLabel: "Monetize your voice agent",
 	},
 	[ProductCategory.SalesScripts]: {
-		title: "Sell Your Sales Scripts",
-		subtitle: "Publish proven cadences to thousands of Deal Scale operators",
-		ariaLabel: "Sell your sales scripts on Deal Scale",
+		title: "Sell Your Launch Copy",
+		subtitle: "Package proven messaging into reusable launch assets",
+		ariaLabel: "Sell your launch copy",
 	},
 	[ProductCategory.Prompts]: {
 		title: "List Your Prompt Library",
@@ -98,7 +105,7 @@ interface ProductGridProps {
 	callbackUrl?: string;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
+const ProductGrid: FC<ProductGridProps> = ({ products, callbackUrl }) => {
 	const { data: session } = useSession();
 	const { open: openAuthModal } = useAuthModal();
 	const [showWorkflowModal, setShowWorkflowModal] = useState(false);
@@ -267,7 +274,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 		canShowShowLess,
 		showMore,
 		showLess,
-	} = usePagination(filteredProducts, {
+	} = usePagination<ProductType>(filteredProducts, {
 		itemsPerPage: 6,
 		initialPage: 1,
 		enableShowAll: true,
@@ -280,13 +287,13 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 		}
 
 		openAuthModal("signin", () => setShowWorkflowModal(true));
-	}, [openAuthModal, session, setShowWorkflowModal]);
+	}, [openAuthModal, session]);
 
 	const buildMonetizeParams = useCallback(
 		(category: ProductCategory) => ({
-			utm_source: "deal-scale-marketplace",
+			utm_source: "launch-mvp-products",
 			utm_medium: "cta",
-			utm_campaign: "monetize-card",
+			utm_campaign: "product-catalog",
 			utm_content: `category-${category}`,
 		}),
 		[],
@@ -309,7 +316,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 		if (MONETIZE_CATEGORY_TARGETS.has(activeCategory)) {
 			const categoryKey = activeCategory as ProductCategory;
 			const copy = MONETIZE_CATEGORY_OVERRIDES[categoryKey];
-			const ariaLabel = copy?.ariaLabel ?? "Monetize on Deal Scale";
+			const ariaLabel = copy?.ariaLabel ?? "Explore the current offer";
 
 			const cardNode =
 				categoryKey === ProductCategory.Workflows ? (
@@ -363,7 +370,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, callbackUrl }) => {
 					{shouldShowEmptyState ? (
 						<div className="py-16 text-center">
 							<p className="text-black dark:text-white/70">
-								No products found for your criteria.
+								No services, systems, or templates found for your criteria.
 							</p>
 						</div>
 					) : (

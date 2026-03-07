@@ -61,86 +61,86 @@ const CALL_DEMO_PLAYLIST_AUTOPLAY_SRC =
 const TEXT_DEMO_MESSAGES: readonly TextDemoMessage[] = [
 	{
 		sender: "AI",
-		text: "🔍 Scraping job complete! Extracted 247 fresh leads from Zillow search results. All data normalized and ready for export. View results: https://app.leadorchestra.io/jobs/abc123",
+		text: "🧭 MVP brief ready. We mapped signup, onboarding, billing, and dashboard flows, then locked the launch version. Review: https://app.launchmvp.io/projects/demo-brief",
 		attachments: [
 			{
 				id: "scrape-results",
 				type: "image",
-				title: "Scraping results summary",
+				title: "MVP scope summary",
 				meta: "3 screenshots • 1.8 MB",
-				description: "Lead count, data quality metrics, export options.",
+				description: "Critical flows, launch scope, and delivery checkpoints.",
 				previewGradient: "from-sky-400/25 via-sky-500/15 to-indigo-500/20",
 			},
 			{
 				id: "data-preview",
 				type: "gif",
-				title: "Data normalization preview.gif",
+				title: "Build handoff preview.gif",
 				meta: "Loop • 8 sec",
 				description:
-					"Shows address parsing, phone extraction, and deduplication in action.",
+					"Shows architecture notes, integration plan, and post-launch roadmap.",
 				previewGradient: "from-emerald-400/25 via-cyan-400/20 to-slate-900/30",
 			},
 		],
 	},
 	{
 		sender: "Lead",
-		text: "Nice! Can I export this to my CRM?",
+		text: "Nice. Can you wire Stripe, auth, analytics, and the dashboard in the same sprint?",
 		attachments: [
 			{
 				id: "export-config",
 				type: "file",
-				title: "Database schema.json",
+				title: "launch-plan.json",
 				meta: "JSON • 2.4 KB",
-				description: "CRM connection config and field mapping.",
+				description: "Launch stack, milestones, and integration notes.",
 				previewGradient: "from-amber-400/25 via-orange-500/20 to-stone-900/25",
 			},
 		],
 	},
 	{
 		sender: "AI",
-		text: "✅ Export started! 247 leads are being synced to your CRM. ETA: 2 minutes. You'll get a webhook notification when it's complete.",
+		text: "✅ Yes. Stripe, auth, analytics, and the core dashboard are already in scope. We will keep the build tight and hand over the repo with setup docs.",
 		attachments: [
 			{
 				id: "export-progress",
 				type: "video",
-				title: "Export progress.mp4",
+				title: "delivery-plan.mp4",
 				meta: "Video • 15 sec",
-				description: "Real-time export status showing records being inserted.",
+				description: "Milestones, QA window, and launch handoff walkthrough.",
 				previewGradient: "from-indigo-400/25 via-purple-500/20 to-slate-900/30",
 			},
 		],
 	},
 	{
 		sender: "Lead",
-		text: "Perfect! Can I schedule this scrape to run daily?",
+		text: "Can we keep this launch inside three days?",
 	},
 	{
 		sender: "AI",
-		text: "Absolutely! I've set up a recurring job to scrape this Zillow search every day at 6 AM. You'll get a notification with fresh leads each morning. Want me to auto-export to your CRM too?",
+		text: "Yes. We locked the MVP to the must-have flow, staged the backlog, and reserved the final days for QA, deployment, and handoff. Want the delivery plan now?",
 	},
 	{
 		sender: "Lead",
-		text: "Yes, auto-export would be great. Thanks!",
+		text: "Yes, send the plan.",
 	},
 	{
 		sender: "AI",
-		text: "✅ Done! Your scheduled scrape is active. Daily runs at 6 AM with automatic CRM export. You'll receive notifications for each completed job.",
+		text: "✅ Sent. You now have the scope cut, stack recommendation, milestone calendar, and next-step roadmap.",
 	},
 ];
 const TEXT_DEMO_MESSAGES_COUNT = TEXT_DEMO_MESSAGES.length;
 
 const SESSION_MONITOR_DIALOG = [
-	"🔍 Scraping 247 leads from Zillow search results...",
-	"📊 Normalizing data: addresses, phone numbers, emails extracted.",
-	"💾 Exporting 1,234 leads to CRM...",
-	"🚀 Scheduled scrape job completed: 892 fresh leads from Realtor.com",
+	"🧭 Locking the launch version around the must-have user flow...",
+	"🧱 Wiring auth, billing, analytics, and deployment...",
+	"🔌 Connecting launch-critical integrations and AI workflows...",
+	"🚀 QA complete. MVP handoff package is ready for launch review.",
 ] as const;
 
 const SESSION_MONITOR_STATUS = [
-	"✅ Scraping job active, extracting data from 3 sources.",
-	"🔄 Data normalization in progress, cleaning 500+ records.",
-	"📤 Export ready: 1,234 leads formatted for CSV download.",
-	"⚡ MCP plugin loaded: LinkedIn scraping pipeline initialized.",
+	"Scope locked: critical launch path defined.",
+	"Build active: core systems are being wired now.",
+	"Launch checklist ready: QA, deployment, and analytics included.",
+	"Handoff prepared: repo, docs, and roadmap are packaged.",
 ] as const;
 
 const PhoneShell = ({
@@ -187,12 +187,10 @@ const CallHandoffCard = ({
 							className="size-full object-cover"
 						/>
 					</div>
-					<h3 className="font-semibold text-lg">
-						Lead Orchestra Data Pipeline
-					</h3>
+					<h3 className="font-semibold text-lg">Launch MVP Sprint Plan</h3>
 					<p className="text-slate-300 text-sm">
-						Scraped leads ready for export. Accept and we&apos;ll sync the data
-						to your system in CSV/JSON format.
+						Your scope, stack, and launch plan are ready. Accept and we&apos;ll
+						walk through the build path and next steps.
 					</p>
 				</div>
 			</div>
@@ -202,14 +200,14 @@ const CallHandoffCard = ({
 					onClick={onAccept}
 					className="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 font-semibold text-sm text-white shadow-emerald-500/40 shadow-lg transition hover:bg-emerald-400"
 				>
-					Accept Appointment
+					Review Build Plan
 				</button>
 				<button
 					type="button"
 					onClick={onQueue}
 					className="inline-flex w-full items-center justify-center rounded-full border border-white/20 bg-white/5 px-5 py-2.5 font-medium text-sm text-white transition hover:bg-white/10"
 				>
-					Send to Follow-up Queue
+					Send Follow-up
 				</button>
 				<button
 					type="button"
@@ -904,7 +902,7 @@ const CallDemoInteractive = () => {
 	);
 	const personaLabel =
 		PERSONA_LABELS[persona] ?? PERSONA_LABELS[DEFAULT_PERSONA_KEY];
-	const resolvedGoal = goal ?? "Scrape, normalize, and export lead data";
+	const resolvedGoal = goal ?? "launch a real MVP in 3 days";
 	const resolvedGoalLower = resolvedGoal.toLowerCase();
 	const personaSeo = useMemo(
 		() => buildPersonaAiOutreachStudioSeo({ persona, goal: resolvedGoal }),
@@ -916,16 +914,16 @@ const CallDemoInteractive = () => {
 	const leadCaptureCopy = useMemo(() => {
 		if (leadCaptureOrigin === "text") {
 			return {
-				title: "Ready to start scraping leads?",
+				title: "Want the 3-Day MVP workshop plan?",
 				description:
-					"Drop in your details and we'll send over the full scraping workflow alongside early access to MCP plugins.",
+					"Drop in your details and we’ll send the sample workshop plan, scope checklist, and next-step recommendation.",
 			};
 		}
 
 		return {
-			title: "Ready to start scraping with Lead Orchestra?",
+			title: "Ready to scope your MVP?",
 			description:
-				"Get started free with open-source scraping. View on GitHub or request enterprise access for self-hosted licensing.",
+				"Book a consult and we’ll map the fastest path to launch, the right stack, and what fits inside the 3-day workshop.",
 		};
 	}, [leadCaptureOrigin]);
 
@@ -977,12 +975,12 @@ const CallDemoInteractive = () => {
 									Session Monitor
 								</p>
 								<h3 className="mt-2 text-center font-semibold text-slate-900 text-xl sm:text-left dark:text-white">
-									Scrape any source, export to any system.
+									See the launch system in motion.
 								</h3>
 								<p className="mt-3 text-center text-slate-600 text-sm sm:text-left dark:text-white/70">
-									Build scraping workflows in minutes. Paste a URL → scrape all
-									the leads → clean them → export to CSV/JSON. Focus on{" "}
-									{resolvedGoalLower}.
+									Move from idea to scoped MVP fast. Define the critical
+									workflow, wire the stack, and launch with clean handoff. Focus
+									on {resolvedGoalLower}.
 								</p>
 								<div className="mt-4 flex flex-col items-center gap-4 rounded-xl bg-slate-900/5 p-4 text-slate-700 text-sm sm:flex-row sm:items-start dark:bg-black/30 dark:text-white/70">
 									<Image
@@ -1032,7 +1030,7 @@ const CallDemoInteractive = () => {
 													: "opacity-90 hover:opacity-100",
 											)}
 										>
-											Start a Call Demo
+											Start Build Walkthrough
 										</button>
 										<button
 											type="button"
@@ -1043,14 +1041,14 @@ const CallDemoInteractive = () => {
 													"border-slate-900/60 bg-slate-900/10 dark:border-white/30",
 											)}
 										>
-											Try a Text Demo
+											Try Scope Demo
 										</button>
 									</div>
 									<Link
 										className="font-semibold text-slate-400 text-xs uppercase tracking-[0.3em] transition hover:text-slate-600 dark:text-slate-500 dark:hover:text-white"
 										href="/features"
 									>
-										View all features
+										See launch deliverables
 									</Link>
 								</div>
 							</div>
@@ -1121,7 +1119,7 @@ const StaticCallDemoPreview = () => {
 			goal: state.goal,
 		})),
 	);
-	const resolvedGoal = goal ?? "Scrape, normalize, and export lead data";
+	const resolvedGoal = goal ?? "launch a real MVP in 3 days";
 	const personaSeo = useMemo(
 		() => buildPersonaAiOutreachStudioSeo({ persona, goal: resolvedGoal }),
 		[persona, resolvedGoal],
@@ -1170,43 +1168,42 @@ const StaticCallDemoPreview = () => {
 							href="/contact"
 							className="inline-flex items-center rounded-full bg-white px-5 py-2.5 font-semibold text-black transition hover:bg-white/90"
 						>
-							Request a live handoff
+							Book Free MVP Consult
 						</Link>
 						<Link
-							href="/products"
+							href="/#pricing"
 							className="inline-flex items-center rounded-full border border-white/30 px-5 py-2.5 font-semibold text-white transition hover:bg-white/10"
 						>
-							Browse automations
+							See What&apos;s Included
 						</Link>
 					</div>
 				</div>
 				<div className="rounded-3xl border border-white/10 bg-slate-950/60 p-6 shadow-black/30 shadow-inner">
 					<div className="space-y-4">
 						<p className="text-slate-400 text-xs uppercase tracking-[0.3em]">
-							Example SMS Assist
+							Example Launch Plan
 						</p>
 						<div className="space-y-3 rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-sm leading-relaxed">
 							<p className="text-emerald-300">
-								<span className="font-semibold">System</span>: 🔍 Scraping job
-								complete! Extracted 247 fresh leads from Zillow. All data
-								normalized and ready for export.
+								<span className="font-semibold">System</span>: Scope locked.
+								Signup, onboarding, billing, and dashboard are approved for the
+								launch sprint.
 							</p>
 							<p className="text-white/90">
-								<span className="font-semibold">User</span>: Can I export this
-								to my CRM?
+								<span className="font-semibold">User</span>: Can we include
+								Stripe, analytics, and a clean handoff?
 							</p>
 							<p className="text-emerald-300">
-								<span className="font-semibold">System</span>: Export started!
-								247 leads are being synced to your CRM. ETA: 2 minutes.
-								understandable. Homes nearby are closing at $420K–$435K. Want
-								Jordan to confirm a cash offer today?
+								<span className="font-semibold">System</span>: Included.
+								Delivery plan sent with build phases, QA window, deployment
+								checklist, and post-launch roadmap.
 							</p>
 						</div>
 						<div className="rounded-2xl border border-white/5 bg-white/10 p-4 text-slate-200 text-sm">
 							<p className="font-semibold">Live Call Handoff</p>
 							<p className="mt-1">
-								We’ll keep Ava on the line, sync the transcript to your CRM, and
-								trigger follow-up workflows automatically.
+								We&apos;ll review the scope, stack, launch risks, and next
+								milestones with you live so the sprint starts cleanly.
 							</p>
 						</div>
 					</div>

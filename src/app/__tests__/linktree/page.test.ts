@@ -1,13 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@/utils/seo/staticSeo", () => {
+vi.mock("@/utils/seo/staticSeo", async (importOriginal) => {
+	const actual = await importOriginal<typeof import("@/utils/seo/staticSeo")>();
 	const getStaticSeo = vi.fn();
 	return {
 		__esModule: true,
+		...actual,
 		getStaticSeo,
 		defaultSeo: {
-			canonical: "https://dealscale.io",
-			title: "Deal Scale",
+			canonical: "https://launchmvp.com",
+			title: "Launch MVP",
 			description: "Default description",
 		},
 	};
@@ -16,10 +18,10 @@ vi.mock("@/utils/seo/staticSeo", () => {
 vi.mock("@/utils/seo/mapSeoMetaToMetadata", () => ({
 	__esModule: true,
 	mapSeoMetaToMetadata: vi.fn((seo) => ({
-		title: seo.title || "Deal Scale",
+		title: seo.title || "Launch MVP",
 		description: seo.description || "Default description",
 		alternates: {
-			canonical: seo.canonical || "https://dealscale.io",
+			canonical: seo.canonical || "https://launchmvp.com",
 		},
 	})),
 }));
@@ -31,13 +33,13 @@ const mockedGetStaticSeo = vi.mocked(getStaticSeo);
 
 describe("LinkTree Page Metadata", () => {
 	const mockSeo = {
-		title: "Link Tree | Deal Scale",
+		title: "Link Tree | Launch MVP",
 		description:
-			"Quick access to DealScale's most important links, resources, and pages.",
-		canonical: "https://dealscale.io/linktree",
+			"Quick access to Launch MVP's most important links, resources, and pages.",
+		canonical: "https://launchmvp.com/linktree",
 		keywords: ["links", "resources"],
 		image: "/banners/main.png",
-		siteName: "Deal Scale",
+		siteName: "Launch MVP",
 		type: "website" as const,
 	};
 
@@ -49,19 +51,17 @@ describe("LinkTree Page Metadata", () => {
 	it("generates metadata with correct title", async () => {
 		const metadata = await generateMetadata();
 
-		expect(metadata.title).toBe(
-			"Link Tree | DealScale - Quick Access to Resources",
-		);
+		expect(metadata.title).toBe("Link Tree | Launch MVP");
 	});
 
 	it("generates metadata with correct description", async () => {
 		const metadata = await generateMetadata();
 
 		expect(metadata.description).toContain(
-			"Explore DealScale's curated collection of links",
+			"Explore Launch MVP's curated collection of links",
 		);
 		expect(metadata.description).toContain(
-			"products, services, blog posts, events, case studies",
+			"services, products, case studies, events, and founder resources",
 		);
 	});
 
@@ -69,10 +69,10 @@ describe("LinkTree Page Metadata", () => {
 		const metadata = await generateMetadata();
 
 		expect(metadata.openGraph).toEqual({
-			title: "DealScale Link Tree",
+			title: "Launch MVP Link Tree",
 			description:
-				"Quick access to DealScale's most important links, resources, and pages.",
-			url: "https://dealscale.io/linktree",
+				"Quick access to Launch MVP's most important links, resources, and pages.",
+			url: "https://launchmvp.com/linktree",
 			type: "website",
 		});
 	});
@@ -82,8 +82,8 @@ describe("LinkTree Page Metadata", () => {
 
 		expect(metadata.twitter).toEqual({
 			card: "summary_large_image",
-			title: "DealScale Link Tree",
-			description: "Quick access to DealScale's resources and pages.",
+			title: "Launch MVP Link Tree",
+			description: "Quick access to Launch MVP's resources and pages.",
 		});
 	});
 
@@ -91,7 +91,7 @@ describe("LinkTree Page Metadata", () => {
 		const metadata = await generateMetadata();
 
 		expect(mockedGetStaticSeo).toHaveBeenCalledWith("/linktree");
-		expect(metadata.openGraph?.url).toBe("https://dealscale.io/linktree");
+		expect(metadata.openGraph?.url).toBe("https://launchmvp.com/linktree");
 	});
 
 	it("falls back to default URL if SEO not found", async () => {
@@ -101,6 +101,6 @@ describe("LinkTree Page Metadata", () => {
 
 		const metadata = await generateMetadata();
 
-		expect(metadata.openGraph?.url).toBe("https://dealscale.io/linktree");
+		expect(metadata.openGraph?.url).toBe("https://launchmvp.com/linktree");
 	});
 });

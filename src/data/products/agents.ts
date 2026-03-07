@@ -10,14 +10,13 @@ const BASE_AGENT_IMAGE = "/products/workflows.png";
 
 export const agentProducts: ProductType[] = [
 	{
-		id: "realtor-mcp-plugin",
-		name: "Realtor.com MCP Plugin",
-		// abTest: realtorMcpPluginABTests[0], // Adding AB Test
+		id: "scope-agent",
+		name: "Scope Agent",
 		description:
-			"Pre-built MCP plugin for scraping Realtor.com listings. Includes property data extraction, owner information, and automatic normalization to Lead Standard Format (LSF). Ready to deploy in your Lead Orchestra instance.",
+			"AI planning assistant for requirements gathering, MVP scoping, feature reduction, and cleaner version-one product definition.",
 		price: 149,
-		sku: "LO-MCP-REALTOR",
-		slug: "realtor-mcp-plugin",
+		sku: "LMVP-AGENT-SCOPE",
+		slug: "scope-agent",
 		licenseName: LicenseType.Proprietary,
 		categories: [
 			ProductCategory.Agents,
@@ -34,27 +33,42 @@ export const agentProducts: ProductType[] = [
 		sizes: [],
 		faqs: [
 			{
-				question: "What data can I scrape from Realtor.com?",
+				question: "What does the Scope Agent help with?",
 				answer:
-					"This plugin extracts property listings, owner information, property details, pricing, and location data. All data is automatically normalized to LSF for easy export.",
+					"It helps teams collect requirements, identify scope creep, reduce version-one complexity, and generate clearer planning artifacts before the build starts.",
 			},
 			{
-				question: "Can I customize the data fields?",
+				question: "Who is this best for?",
 				answer:
-					"Yes. The plugin is fully configurable, allowing you to select which fields to extract and how to normalize the data.",
+					"It is best for founders and product teams that need sharper product definition before design and engineering work accelerates.",
 			},
 		],
 		abTest: realtorMcpPluginABTests[0],
+		agent: {
+			name: "Scope Agent",
+			type: "social",
+			description:
+				"AI assistant focused on product scoping and requirements clarification.",
+			image: BASE_AGENT_IMAGE,
+			isPublic: true,
+			isFree: false,
+			priceMultiplier: 2,
+			billingCycle: "one-time",
+			avatar: "scope-agent",
+			campaignGoal: "Clarify MVP scope",
+			persona: "Sharp, pragmatic product strategist.",
+			salesScript:
+				"Interview the idea, expose ambiguity, and produce a tighter MVP plan.",
+		},
 	},
 	{
-		id: "mls-scraper-plugin",
-		name: "MLS Scraper MCP Plugin",
-		abTest: mlsScraperPluginABTests[0],
+		id: "feedback-agent",
+		name: "Feedback Agent",
 		description:
-			"Professional MLS scraping plugin with advanced filtering, property search, and data export capabilities. Perfect for real estate investors and agents who need comprehensive property data.",
-		price: 299,
-		sku: "LO-MCP-MLS",
-		slug: "mls-scraper-plugin",
+			"AI assistant for organizing beta feedback, grouping signals, summarizing issues, and helping teams prioritize post-launch iteration.",
+		price: 199,
+		sku: "LMVP-AGENT-FEEDBACK",
+		slug: "feedback-agent",
 		licenseName: LicenseType.Proprietary,
 		categories: [
 			ProductCategory.Agents,
@@ -63,59 +77,93 @@ export const agentProducts: ProductType[] = [
 		],
 		images: [BASE_AGENT_IMAGE],
 		types: [
-			{ name: "Standard", value: "standard", price: 299 },
-			{ name: "Professional", value: "professional", price: 599 },
+			{ name: "Single License", value: "single", price: 199 },
+			{ name: "Team License", value: "team", price: 449 },
 		],
 		reviews: [],
 		colors: [],
 		sizes: [],
 		faqs: [
 			{
-				question: "Which MLS systems are supported?",
+				question: "What does the Feedback Agent do?",
 				answer:
-					"The plugin supports major MLS systems and can be customized for regional MLS access. Contact us for specific MLS compatibility.",
+					"It helps summarize user notes, organize feedback themes, surface repeated pain points, and support clearer roadmap decisions after launch.",
 			},
 			{
-				question: "Does it integrate with my CRM?",
+				question: "When should I use it?",
 				answer:
-					"Yes. The plugin exports data in LSF format, which can be automatically synced to your CRM, Database, or S3 bucket.",
+					"Use it after beta launch or early rollout when feedback volume is increasing and the team needs more structure around what to act on next.",
 			},
 		],
+		abTest: mlsScraperPluginABTests[0],
+		agent: {
+			name: "Feedback Agent",
+			type: "social",
+			description:
+				"AI assistant focused on product feedback synthesis and post-launch prioritization.",
+			image: BASE_AGENT_IMAGE,
+			isPublic: true,
+			isFree: false,
+			priceMultiplier: 3,
+			billingCycle: "monthly",
+			avatar: "feedback-agent",
+			campaignGoal: "Organize feedback and next steps",
+			persona: "Methodical product operator with strong synthesis habits.",
+			salesScript:
+				"Turn raw user feedback into grouped themes, issue summaries, and next-step recommendations.",
+		},
 	},
 	{
-		id: "job-board-scraper-plugin",
-		name: "Job Board Scraper Plugin",
-		abTest: jobBoardScraperPluginABTests[0],
+		id: "launch-ops-agent",
+		name: "Launch Ops Agent",
 		description:
-			"Scrape job boards to find companies actively hiring. Extract company names, job postings, and hiring signals. Perfect for B2B lead generation and SDR teams.",
-		price: 199,
-		sku: "LO-MCP-JOBS",
-		slug: "job-board-scraper-plugin",
+			"AI assistant for launch coordination, checklist management, blocker summaries, and keeping release details visible across the team.",
+		price: 179,
+		sku: "LMVP-AGENT-LAUNCH-OPS",
+		slug: "launch-ops-agent",
 		licenseName: LicenseType.Proprietary,
 		categories: [
 			ProductCategory.Agents,
 			ProductCategory.Automation,
-			ProductCategory.Leads,
+			ProductCategory.Workflows,
 		],
 		images: [BASE_AGENT_IMAGE],
 		types: [
-			{ name: "Single Board", value: "single", price: 199 },
-			{ name: "Multi-Board", value: "multi", price: 449 },
+			{ name: "Single License", value: "single", price: 179 },
+			{ name: "Team License", value: "team", price: 429 },
 		],
 		reviews: [],
 		colors: [],
 		sizes: [],
 		faqs: [
 			{
-				question: "Which job boards are supported?",
+				question: "What kind of work does the Launch Ops Agent support?",
 				answer:
-					"The plugin includes pre-configured scrapers for major job boards including LinkedIn Jobs, Indeed, Glassdoor, and more. Custom boards can be added.",
+					"It supports daily release coordination, checklist visibility, issue summaries, handoff notes, and the operational layer around launch week.",
 			},
 			{
-				question: "What hiring signals can I extract?",
+				question: "Is this a replacement for a human operator?",
 				answer:
-					"You can extract company names, job titles, posting dates, locations, and hiring patterns to identify companies actively growing their teams.",
+					"No. It is a coordination helper that reduces status reconstruction and keeps more launch information visible under pressure.",
 			},
 		],
+		abTest: jobBoardScraperPluginABTests[0],
+		agent: {
+			name: "Launch Ops Agent",
+			type: "phone",
+			description:
+				"AI assistant focused on launch coordination, blocker tracking, and release-week operating support.",
+			image: BASE_AGENT_IMAGE,
+			isPublic: true,
+			isFree: false,
+			priceMultiplier: 2,
+			billingCycle: "monthly",
+			voice: "alloy",
+			backgroundNoise: "office",
+			campaignGoal: "Keep launch coordination visible",
+			persona: "Calm launch operator who summarizes and escalates clearly.",
+			salesScript:
+				"Track launch tasks, surface blockers, and keep the team aligned on what still needs to happen.",
+		},
 	},
 ];

@@ -30,7 +30,7 @@ export interface ProductActionsProps {
 	 * Optional guard that runs before checkout is triggered.
 	 * Return `false` to short-circuit (e.g. prompt a login) while keeping the current UI in place.
 	 */
-	onBeforeCheckout?: () => Promise<boolean | void> | boolean | void;
+	onBeforeCheckout?: () => Promise<boolean | undefined> | boolean | undefined;
 }
 
 export default function ProductActions({
@@ -57,11 +57,43 @@ export default function ProductActions({
 	const isFreeResource =
 		Boolean(resource) &&
 		product.categories?.includes(ProductCategory.FreeResources);
+	const isPeopleSupportProduct = product.categories?.includes(
+		ProductCategory.RemoteClosers,
+	);
+
+	const pushProductEvent = (
+		eventName: string,
+		extra: Record<string, unknown> = {},
+	) => {
+		if (typeof window === "undefined") {
+			return;
+		}
+
+		window.dataLayer = window.dataLayer || [];
+		window.dataLayer.push({
+			event: eventName,
+			product_id: product.id,
+			product_name: product.name,
+			product_sku: product.sku,
+			product_slug: product.slug,
+			product_price: product.price,
+			product_categories: product.categories,
+			product_variant: variantId,
+			...extra,
+		});
+	};
 
 	const getPrimaryCtaLabel = () =>
 		resource?.type === "external" ? "Visit Resource" : "Download Resource";
 
 	const handleAddToCart = async () => {
+		if (isPeopleSupportProduct) {
+			toast.success("Message started", {
+				description: `You can follow up with ${product.name} from the contact flow.`,
+			});
+			return;
+		}
+
 		try {
 			setIsAddingToCart(true);
 			const selectedType = variantId
@@ -83,6 +115,13 @@ export default function ProductActions({
 						}
 					: undefined,
 			);
+
+			pushProductEvent("add_to_cart", {
+				cart_action: "add",
+				selected_type: selectedType?.value,
+				selected_type_name: selectedType?.name,
+				selected_type_price: selectedType?.price,
+			});
 
 			toast.success("Added to cart", {
 				description: `${product.name}${selectedType ? ` (${selectedType.name})` : ""} has been added to your cart.`,
@@ -107,6 +146,10 @@ export default function ProductActions({
 			if (result === false) {
 				return;
 			}
+			pushProductEvent("begin_checkout", {
+				checkout_entry: "product_actions",
+				cta_label: ctaText || "Checkout",
+			});
 			onCheckout();
 		} finally {
 			setIsCheckoutIntentPending(false);
@@ -122,6 +165,13 @@ export default function ProductActions({
 								href={resource.url}
 								target="_blank"
 								rel="noopener noreferrer"
+								onClick={() =>
+									pushProductEvent("select_content", {
+										content_type: "resource",
+										resource_type: resource.type,
+										resource_url: resource.url,
+									})
+								}
 								{...(resource.type === "download"
 									? { download: resource.fileName ?? true }
 									: {})}
@@ -201,7 +251,7 @@ export default function ProductActions({
 								) : (
 									<>
 										<ShoppingCart className="mr-2 h-5 w-5" />
-										Add to Cart
+										{isPeopleSupportProduct ? "Message" : "Add to Cart"}
 									</>
 								)}
 							</Button>
@@ -243,7 +293,7 @@ export default function ProductActions({
 								Processing...
 							</>
 						) : (
-							ctaText || "Checkout"
+							ctaText || (isPeopleSupportProduct ? "Hire" : "Checkout")
 						)}
 					</Button>
 				)}

@@ -1,5 +1,6 @@
 import { LinkTree } from "@/components/linktree/LinkTree";
 import { buildLinkTreeItemListSchema } from "@/lib/linktree/schemaBuilders";
+import { isBuildTimePrerender } from "@/utils/env";
 import type { LinkTreeItem } from "@/utils/linktree-redis";
 import { withUtm } from "@/utils/linktree-redis";
 import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
@@ -10,24 +11,24 @@ import { headers } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const seo = getStaticSeo("/linktree");
-	const baseUrl = seo.canonical || "https://dealscale.io/linktree";
+	const baseUrl = seo.canonical || "https://launchmvp.com/linktree";
 
 	return {
 		...mapSeoMetaToMetadata(seo),
-		title: "Link Tree | DealScale - Quick Access to Resources",
+		title: "Link Tree | Launch MVP",
 		description:
-			"Explore DealScale's curated collection of links. Quick access to our products, services, blog posts, events, case studies, and more. Find everything you need in one place.",
+			"Explore Launch MVP's curated collection of links. Quick access to services, products, case studies, events, and founder resources in one place.",
 		openGraph: {
-			title: "DealScale Link Tree",
+			title: "Launch MVP Link Tree",
 			description:
-				"Quick access to DealScale's most important links, resources, and pages.",
+				"Quick access to Launch MVP's most important links, resources, and pages.",
 			url: baseUrl,
 			type: "website",
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "DealScale Link Tree",
-			description: "Quick access to DealScale's resources and pages.",
+			title: "Launch MVP Link Tree",
+			description: "Quick access to Launch MVP's resources and pages.",
 		},
 	};
 }
@@ -39,8 +40,24 @@ export default async function LinkTreePage() {
 	const protocol =
 		h.get("x-forwarded-proto") ?? (process.env.VERCEL ? "https" : "http");
 	const base = `${protocol}://${host}`;
+	const isLocalServerFallback = /^http:\/\/localhost(?::\d+)?$/i.test(base);
+	const shouldSkipLocalServerFetch =
+		process.env.NODE_ENV === "production" && isLocalServerFallback;
+	const shouldSkipBuildTimeFetch = isBuildTimePrerender();
+
+	if (shouldSkipBuildTimeFetch || shouldSkipLocalServerFetch) {
+		return (
+			<LinkTree
+				items={[]}
+				title="Links"
+				subtitle="Quick access to our most important links"
+			/>
+		);
+	}
+
 	const resp = await fetch(`${base}/api/linktree`, {
 		next: { tags: ["link-tree"], revalidate: 300 },
+		signal: AbortSignal.timeout(5000),
 	});
 	if (!resp.ok) {
 		// Fail closed with empty list to avoid hard error on UI

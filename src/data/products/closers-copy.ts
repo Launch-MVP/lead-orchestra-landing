@@ -3,72 +3,73 @@ import { defineAbTests } from "./copy";
 export const virtualAssistantsABTests = defineAbTests([
 	{
 		id: "ab-test-va-marketplace-v1",
-		name: "Virtual Assistants Marketplace Copy Test",
+		name: "Operator Support Marketplace Copy Test",
 		description:
-			"Testing copy variants (Scale vs. Freedom) for the Virtual Assistants Marketplace.",
+			"Testing copy variants for virtual assistants and launch support operators.",
 		variants: [
 			{
-				name: "V1 - Scale Operations",
+				name: "V1 - Offload the Repetitive Work",
 				percentage: 50,
 				copy: {
-					cta: "Hire Vetted VAs",
+					cta: "Hire Support Operators",
 					buttonCta: "Browse Marketplace",
-					tagline: "Scale Your Data Operations Instantly.",
+					tagline: "Get the Busywork Off the Founder Desk.",
 					subtitle:
-						"Connect with skilled virtual assistants who specialize in lead processing, CRM management, and scraping workflows.",
+						"Connect with vetted remote assistants who can handle launch admin, research, QA coordination, and operating support.",
 					description:
-						"Stop doing low-leverage work. Hire vetted VAs who are already trained on Lead Orchestra workflows to handle data entry, list cleaning, and outreach management.",
+						"Founders should not spend their best hours on repetitive setup, cleanup, and coordination tasks. This marketplace helps teams add flexible operator support without hiring a full in-house team.",
 					whatsInItForMe:
-						"You can instantly scale your capacity without the headache of training or managing full-time employees.",
+						"You buy back focus time while keeping the launch moving across all the tasks that still need human follow-through.",
 					target_audience:
-						"Agencies and investors who need to process more leads than they can handle.",
+						"Founders, agencies, and small teams that need hands-on support without full-time hiring.",
 					pain_point:
-						"You are bottlenecked by manual tasks like data cleaning and CRM updates, preventing you from closing deals.",
-					fear: "Your pipeline is full of leads that are going cold because you physically can't process them fast enough.",
-					hope: "You have a dedicated team handling all the tedious backend work, so you can focus 100% on revenue-generating activities.",
+						"The launch stalls when no one owns the operational details that sit between product decisions and execution.",
+					fear: "You stay trapped doing support work that slows your ability to ship, sell, and make better product calls.",
+					hope: "The repetitive work gets handled consistently so your time returns to strategy, delivery, and customers.",
 					solution:
-						"Our marketplace connects you with VAs who are already experts in our tools, ready to plug into your business immediately.",
+						"The marketplace connects you with operators who can plug into launch workflows quickly and support the team where it needs relief.",
 					highlights: [
-						"Pre-vetted professionals",
-						"Specialized in scraping data",
-						"No training required",
-						"Flexible, on-demand hiring",
+						"Flexible remote support",
+						"Launch admin coverage",
+						"Research and QA help",
+						"Less founder overhead",
 					],
-					highlighted_words: ["Scale", "Instantly", "Vetted"],
+					highlighted_words: ["Support", "Focus", "Launch"],
 				},
 			},
 			{
-				name: "V2 - Founder Freedom",
+				name: "V2 - Build Capacity Without Hiring Fast",
 				percentage: 50,
 				copy: {
-					cta: "Reclaim Your Time",
+					cta: "Add Launch Capacity",
 					buttonCta: "Find Help Now",
-					tagline: "Stop Being the Bottleneck.",
+					tagline: "Expand the Team Without Expanding Payroll Yet.",
 					subtitle:
-						"Delegate your manual data tasks to pros so you can get back to being the CEO.",
+						"Bring in vetted operator support for launch prep, customer follow-up, and internal execution tasks.",
 					description:
-						"Your time is too valuable for data entry. Our marketplace lets you offload the grunt work to skilled assistants who actually enjoy it.",
+						"Not every growing team needs another full-time hire immediately. Sometimes the real need is steady operator support that closes gaps around launch and delivery.",
 					whatsInItForMe:
-						"You get your life back and can finally focus on strategy and growth instead of being buried in spreadsheets.",
-					target_audience: "Overworked founders and solo operators.",
+						"You add capacity where the business is currently straining without committing to a larger team structure too early.",
+					target_audience:
+						"Startup teams and service businesses balancing growth with hiring discipline.",
 					pain_point:
-						"You started a business to have freedom, but now you're working 14-hour days doing repetitive tasks.",
-					fear: "You will burn out and resent your business before you ever reach your revenue goals.",
-					hope: "You wake up knowing your leads are being processed, emails are being sent, and your business is running without you.",
+						"Important operational work slips because the core team is overloaded and no one has enough time for the details.",
+					fear: "Growth creates more drag instead of momentum because the work expands faster than the team can absorb it.",
+					hope: "You can increase execution capacity immediately while keeping hiring decisions more deliberate.",
 					solution:
-						"We provide the trusted human infrastructure to automate your operations, giving you the freedom to step back.",
+						"Remote support operators give you a flexible layer of execution help for launch and day-to-day follow-through.",
 					highlights: [
-						"Delegate manual tasks",
-						"Prevent founder burnout",
-						"Focus on strategy",
-						"Reliable remote support",
+						"Flexible support capacity",
+						"Cover operational gaps",
+						"Reduce early hiring pressure",
+						"Keep delivery moving",
 					],
-					highlighted_words: ["Delegate", "Freedom", "CEO"],
+					highlighted_words: ["Capacity", "Execution", "Support"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Marketplace", "Services", "Virtual Assistants", "Scale"],
+		tags: ["Marketplace", "Services", "Operator Support"],
 	},
 ]);

@@ -29,47 +29,47 @@ const PERSONA_N8N_CONTENT: Record<
 	}
 > = {
 	developer: {
-		title: "The Growth Conductor N8N Lead Gen Workflows",
+		title: "Launch MVP Build Systems",
 		description:
-			"Ready-to-use n8n workflows for automating Lead Orchestra scraping jobs. Connect your MCP plugins to n8n for end-to-end automation, from scraping to data export.",
+			"Workflow templates, architecture notes, integration patterns, and launch checklists for developers shipping MVPs with less drag.",
 		features: [
-			"n8n workflows for MCP plugin automation",
-			"Automated data export to Database, S3, and APIs",
-			"Error handling and retry logic for scraping jobs",
-			"GitHub Actions integration templates",
+			"Launch workflow templates for scoped MVP delivery",
+			"Architecture notes for cleaner version-one builds",
+			"Integration patterns for auth, payments, and analytics",
+			"Handoff checklists for product and engineering teams",
 		],
 	},
 	agency: {
-		title: "The Growth Conductor N8N Lead Gen Workflows",
+		title: "Launch MVP Delivery Systems",
 		description:
-			"Automate your lead generation pipeline with n8n. Connect Lead Orchestra scraping to your CRM, automate data processing, and scale your client delivery.",
+			"Client delivery systems, service packaging ideas, and launch checklists for agencies turning messy scope into shipped outcomes.",
 		features: [
-			"Multi-source scraping workflows (Zillow, Realtor, LinkedIn)",
-			"Automated CRM sync and lead enrichment",
-			"Client reporting and data delivery automation",
-			"White-label export workflows",
+			"Client scoping and kickoff templates",
+			"Launch checklists and delivery playbooks",
+			"Handoff docs for productized services",
+			"Reusable ops systems for repeatable client delivery",
 		],
 	},
 	startup: {
-		title: "The Growth Conductor N8N Lead Gen Workflows",
+		title: "Launch MVP Build Notes",
 		description:
-			"Build your MVP faster with pre-built n8n workflows. Automate lead scraping, data normalization, and export without building infrastructure from scratch.",
+			"Build notes, scope-cut frameworks, launch systems, and founder templates for startups trying to ship a real MVP fast without overbuilding.",
 		features: [
-			"Quick-start workflows for common scraping tasks",
-			"Database and API export automation",
-			"Error handling and monitoring templates",
-			"Integration with popular tools (Zapier, Make, Kestra)",
+			"Scope-cut frameworks for version one",
+			"Launch planning and execution templates",
+			"Founder operating systems and checklists",
+			"Examples for moving from idea to usable product",
 		],
 	},
 	enterprise: {
-		title: "The Growth Conductor N8N Lead Gen Workflows",
+		title: "Launch MVP Operating Systems",
 		description:
-			"Enterprise-grade n8n workflows for scaling your data operations. Integrate Lead Orchestra with your existing stack, automate compliance, and ensure data quality.",
+			"Operating frameworks for product teams standardizing launch execution, implementation quality, and AI workflow delivery across the stack.",
 		features: [
-			"Enterprise data pipeline workflows",
-			"SSO and security integration templates",
-			"Compliance and audit logging automation",
-			"Custom MCP provider integration guides",
+			"Team-wide implementation frameworks",
+			"Security and integration planning patterns",
+			"Handoff standards across product and engineering",
+			"AI workflow delivery systems for internal teams",
 		],
 	},
 };
@@ -170,9 +170,9 @@ export const Newsletter = () => {
 					{n8nContent.title}
 				</h2>
 				<p className="mx-auto max-w-2xl text-black dark:text-white/70">
-					{n8nContent.description} Join Lead Orchestra's newsletter for
-					ready-to-use n8n templates, expert automation insights, and real
-					results. No fluff, just what moves the needle.
+					{n8nContent.description} Join the Launch MVP newsletter for practical
+					systems, sharper execution patterns, and founder-ready insights. No
+					fluff, just what helps teams ship.
 				</p>
 			</div>
 			{isSubscribed ? (
@@ -276,11 +276,11 @@ export const Newsletter = () => {
 						</h3>
 						<p className="text-black text-sm dark:text-white/80">
 							{index === 0 &&
-								"Ready-to-use n8n workflows for automating Lead Orchestra scraping jobs and data exports"}
+								"Reusable systems for launch planning, delivery structure, and getting the MVP into users' hands faster."}
 							{index === 1 &&
-								"Learn how to build reliable scraping pipelines, handle errors, and scale your data workflows with n8n and Lead Orchestra"}
+								"Implementation notes on architecture, integrations, and reducing expensive rebuilds before they happen."}
 							{index === 2 &&
-								"Step-by-step guides for connecting Lead Orchestra to Make, Zapier, Kestra, and other workflow engines"}
+								"Step-by-step guidance for scoping, handoff, and running launch systems across the tools your team already uses."}
 						</p>
 					</div>
 				))}

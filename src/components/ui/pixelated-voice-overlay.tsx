@@ -12,7 +12,8 @@ const FEATURE_CARDS = [
 	{
 		key: "before",
 		title: "Before",
-		description: "Generic targeting that wastes time on unqualified leads.",
+		description:
+			"Vague scope, planning loops, and a backlog no one trusts enough to build from.",
 		className:
 			"border border-red-200 bg-gradient-to-br from-red-100 via-red-50 to-red-200/80 text-red-900 dark:border-red-500/30 dark:from-red-700/25 dark:via-red-600/20 dark:to-red-900/35 dark:text-red-50/90",
 		labelClassName: "text-red-600 dark:text-red-200/90",
@@ -21,7 +22,7 @@ const FEATURE_CARDS = [
 		key: "after",
 		title: "After",
 		description:
-			"Precision lookalike targeting that finds your best customers at scale.",
+			"Launch-ready scope, wired integrations, and a clean handoff your team can extend.",
 		className:
 			"border border-emerald-200 bg-gradient-to-br from-emerald-100 via-emerald-50 to-emerald-200/80 text-emerald-900 dark:border-emerald-300/35 dark:from-emerald-600/20 dark:via-emerald-500/15 dark:to-emerald-900/30 dark:text-emerald-50/90",
 		labelClassName: "text-emerald-600 dark:text-emerald-100/90",
@@ -54,8 +55,8 @@ const PixelatedVoiceOverlayComponent = ({
 	onStop,
 	onEnableInteractive,
 	onDisableInteractive,
-	title = "Your Lookalike Audience: Modeled, Matched, Ready to Convert",
-	subtitle = "DealScale’s neural voice stack ",
+	title = "3-Day MVP Delivery: Scoped, Sequenced, Ready to Launch",
+	subtitle = "Launch MVP workshop walkthrough",
 	onImageSelect,
 	onImageReset,
 	hasCustomImage = false,
@@ -218,7 +219,7 @@ const PixelatedVoiceOverlayComponent = ({
 				{!hasActiveTrack && (
 					<div className="flex flex-col gap-2 text-center text-slate-800 dark:text-white">
 						<SparklesText className="font-semibold text-slate-500 text-xs uppercase tracking-[0.42em] dark:text-white/70">
-							Lookalike Audience Cloning Showcase
+							3-Day MVP Workshop Showcase
 						</SparklesText>
 						<h2 className="font-bold text-[1.5rem] leading-tight sm:text-[2.0625rem]">
 							<AuroraText
@@ -369,21 +370,21 @@ const PixelatedVoiceOverlayComponent = ({
 								<div className="flex flex-col gap-2">
 									<div className="flex flex-wrap items-center justify-between gap-3">
 										<span className="font-semibold text-slate-500 text-xs uppercase tracking-[0.28em] dark:text-white/60">
-											Clone Your Audience
+											Map Your MVP
 										</span>
 										<span className="inline-flex items-center gap-2 rounded-full border border-sky-500/40 bg-sky-500/10 px-3 py-1 font-medium text-sky-600 text-xs shadow-sm backdrop-blur-sm dark:border-sky-300/40 dark:bg-sky-300/10 dark:text-sky-200">
 											<span className="h-1.5 w-1.5 rounded-full bg-sky-500 dark:bg-sky-200" />
-											Photo-to-video avatar tooling coming soon
+											Clickable scope preview coming soon
 										</span>
 									</div>
 									<p className="text-slate-600 text-sm leading-relaxed dark:text-white/75">
-										Upload a PNG to visualize your audience model. Works best
-										with transparent backgrounds and crisp lighting.
+										Upload a PNG wireframe, screenshot, or sketch to preview the
+										launch canvas. Clean, high-contrast images work best.
 									</p>
 									<p className="max-w-sm text-slate-500 text-xs leading-relaxed dark:text-white/60">
-										Model your best customers once, then generate lookalike
-										leads at scale across social media, sales touchpoints, and
-										web sources.
+										Use the workshop to pressure-test the critical flow, then
+										map the launch version, integrations, and handoff sequence
+										before build starts.
 									</p>
 									{imageUploadError ? (
 										<p className="text-red-600 text-xs dark:text-red-400">
@@ -404,12 +405,12 @@ const PixelatedVoiceOverlayComponent = ({
 											/>
 											<label
 												htmlFor={uploadInputId}
-												aria-label="Upload a PNG of your portrait"
+												aria-label="Upload a PNG of your product wireframe"
 												className="relative inline-flex w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-slate-300 px-5 py-2 font-medium text-slate-700 text-sm transition hover:border-slate-400 hover:bg-slate-100 sm:w-auto sm:px-6 sm:py-2.5 dark:border-white/40 dark:text-white dark:hover:border-white/60 dark:hover:bg-white/10"
 											>
 												{hasCustomImage
-													? "Generate Staging Video"
-													: "Generate Follow-Up Video"}
+													? "Replace Workshop Visual"
+													: "Upload MVP Visual"}
 											</label>
 										</div>
 										<input
@@ -437,26 +438,26 @@ const PixelatedVoiceOverlayComponent = ({
 									</div>
 									<div className="flex flex-wrap items-center gap-2 sm:items-center sm:gap-3">
 										<span className="text-[0.62rem] text-slate-500 uppercase tracking-[0.32em] dark:text-white/50">
-											Real Estate Investor Cuts
+											Workshop Deliverables
 										</span>
 										<div className="flex flex-wrap gap-2 sm:gap-2.5">
 											<button
 												type="button"
 												className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-1.5 font-medium text-slate-600 text-xs transition hover:border-slate-400 hover:bg-slate-100 dark:border-white/30 dark:text-white/80 dark:hover:border-white/50 dark:hover:bg-white/10"
 											>
-												Acquisition Pitch
+												Scope Snapshot
 											</button>
 											<button
 												type="button"
 												className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-1.5 font-medium text-slate-600 text-xs transition hover:border-slate-400 hover:bg-slate-100 dark:border-white/30 dark:text-white/80 dark:hover:border-white/50 dark:hover:bg-white/10"
 											>
-												LP Update
+												UI Direction
 											</button>
 											<button
 												type="button"
 												className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-1.5 font-medium text-slate-600 text-xs transition hover:border-slate-400 hover:bg-slate-100 dark:border-white/30 dark:text-white/80 dark:hover:border-white/50 dark:hover:bg-white/10"
 											>
-												Deal Teaser
+												Launch Roadmap
 											</button>
 										</div>
 									</div>
@@ -469,11 +470,12 @@ const PixelatedVoiceOverlayComponent = ({
 					<div className="flex flex-col gap-3 text-center text-slate-600 sm:flex-row sm:items-center sm:justify-between sm:text-left dark:text-white/70">
 						<div className="flex flex-col items-center gap-2 sm:items-start">
 							<span className="text-slate-500 text-xs uppercase tracking-[0.28em] dark:text-white/50">
-								Audio Comparison
+								Delivery Comparison
 							</span>
 							<p className="max-w-md text-slate-600 text-sm dark:text-white/70">
-								Compare generic targeting vs. precision lookalike matching to
-								see how Lead Orchestra finds your best customers at scale.
+								Compare loose planning against a launch-ready workshop outcome
+								to see how Launch MVP turns vague ideas into a buildable
+								product.
 							</p>
 						</div>
 						<div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center">
@@ -489,14 +491,14 @@ const PixelatedVoiceOverlayComponent = ({
 									isLoadingAudio && "cursor-wait opacity-70",
 								)}
 							>
-								{isPlaying ? "Stop Audio Comparison" : "Play Before & After"}
+								{isPlaying ? "Stop Comparison" : "Play Before & After"}
 							</button>
 							<button
 								type="button"
 								onClick={onEnableInteractive}
 								className="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2 font-medium text-slate-700 text-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-white/30 dark:text-white dark:hover:border-white/60 dark:hover:bg-white/10"
 							>
-								Interact with Clone
+								Explore Launch Canvas
 							</button>
 						</div>
 					</div>

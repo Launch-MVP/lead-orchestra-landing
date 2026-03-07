@@ -3,7 +3,6 @@
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import React from "react";
 import { v4 as uuid } from "uuid";
-import { AuroraText } from "../magicui/aurora-text";
 export type FunFact = { value: number; label: string; unit?: string };
 
 interface AboutFunFactsProps {
@@ -13,24 +12,23 @@ interface AboutFunFactsProps {
 export default function AboutFunFacts({
 	facts = [
 		{
-			value: 70,
-			label: "Reduction in Manual Calling Time",
-			unit: "%",
+			value: 3,
+			label: "Days to a focused MVP workshop",
 		},
 		{
-			value: 140,
-			label: "Property Records Fueling Our AI",
-			unit: "million",
-		},
-		{
-			value: 40,
-			label: "Improvement in Nurturing Efficiency",
-			unit: "%",
-		},
-		{
-			value: 200,
-			label: "Plus Beta Users Validated Our Demand",
+			value: 12,
+			label: "Launch-critical requirements prioritized",
 			unit: "+",
+		},
+		{
+			value: 15,
+			label: "Founder hours reclaimed before build starts",
+			unit: "+",
+		},
+		{
+			value: 25,
+			label: "Potential rebuild cost avoided through tighter scope",
+			unit: "k",
 		},
 	],
 }: AboutFunFactsProps) {

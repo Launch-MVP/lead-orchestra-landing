@@ -14,10 +14,10 @@ export type PersonaKey =
 	| "loan_officer";
 
 const HERO_PERSONA_LABELS: Record<PersonaKey, string> = {
-	developer: "Developers & Engineers",
-	agency: "Lead Gen Agencies",
-	startup: "Startups & Founders",
-	enterprise: "Enterprise Teams",
+	developer: "Technical Founders",
+	agency: "Non-Technical Founders",
+	startup: "Seed-Stage Startup Teams",
+	enterprise: "Innovation Teams",
 	// Legacy real estate personas (kept for backward compatibility)
 	agent: "Real Estate Agents",
 	investor: "Real Estate Investors",
@@ -27,10 +27,10 @@ const HERO_PERSONA_LABELS: Record<PersonaKey, string> = {
 };
 
 const GOAL_OVERRIDES: Partial<Record<PersonaKey, string>> = {
-	developer: "Scrape, normalize, and export lead data",
-	agency: "Scrape niche sources your competitors ignore",
-	startup: "Focus on product-market fit",
-	enterprise: "Integrate scraping into your existing stack",
+	developer: "launch cleanly without inheriting technical debt",
+	agency: "get from idea to shipped MVP without hiring a full product team",
+	startup: "launch a usable MVP in 3 days",
+	enterprise: "pilot new products without slowing core engineering",
 	// Legacy real estate personas
 	investor: HERO_INVESTOR_GOAL,
 	agent: "Scrape fresh leads from Zillow, Realtor, and MLS",
@@ -45,7 +45,6 @@ const deriveGoal = (persona: PersonaKey): string => {
 		return override;
 	}
 
-	// Only access HERO_COPY_V7.personas for valid HeroPersonaKey values
 	if (persona in HERO_COPY_V7.personas) {
 		const personaConfig = HERO_COPY_V7.personas[persona as HeroPersonaKey];
 		return (
@@ -53,7 +52,6 @@ const deriveGoal = (persona: PersonaKey): string => {
 		);
 	}
 
-	// Fallback for legacy personas
 	return HERO_INVESTOR_GOAL;
 };
 

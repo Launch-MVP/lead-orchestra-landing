@@ -23,11 +23,11 @@ const DEFAULT_BEFORE_AUDIO = "/calls/example-call-yt.mp3";
 const DEFAULT_AFTER_AUDIO = "/calls/example-call-yt.mp3";
 
 const BEFORE_AUDIO_CAPTIONS_SRC = `data:text/vtt;charset=utf-8,${encodeURIComponent(
-	"WEBVTT\n\n00:00.000 --> 00:04.000\nOriginal seller script with monotone delivery.\n",
+	"WEBVTT\n\n00:00.000 --> 00:04.000\nPlanning-heavy MVP pitch with vague scope and unclear next steps.\n",
 )}`;
 
 const AFTER_AUDIO_CAPTIONS_SRC = `data:text/vtt;charset=utf-8,${encodeURIComponent(
-	"WEBVTT\n\n00:00.000 --> 00:04.000\nEnhanced expressive clone demonstrating improved tone and pacing.\n",
+	"WEBVTT\n\n00:00.000 --> 00:04.000\nLaunch-ready MVP brief with clear scope, integrations, and handoff.\n",
 )}`;
 
 const CANVAS_CONFIG = {
@@ -627,8 +627,8 @@ const PixelatedVoiceCloneCardComponent = ({
 						onStop={stopPlayback}
 						onEnableInteractive={enableInteractiveView}
 						onDisableInteractive={disableInteractiveView}
-						title="Your Lookalike Audience: Modeled, Matched, Ready to Convert"
-						subtitle="DealScale’s neural voice stack "
+						title="3-Day MVP Delivery: Scoped, Sequenced, Ready to Launch"
+						subtitle="Launch MVP workshop walkthrough"
 						onImageSelect={handleFileChange}
 						onImageReset={handleResetImage}
 						hasCustomImage={Boolean(customImageSrc)}
@@ -682,16 +682,16 @@ const PixelatedVoiceCloneCardComponent = ({
 			</div>
 
 			<TextRevealCard
-				text="Clone your audience in minutes"
-				revealText="Find lookalike leads at scale."
+				text="Move from planning to product"
+				revealText="Launch a usable MVP in 3 days."
 				className="mx-auto max-w-3xl border-slate-200/70 bg-white/90 text-slate-900 dark:border-neutral-800/60 dark:bg-[#101014] dark:text-white"
 			>
 				<TextRevealCardTitle>
-					Hover to see how we clone your best buyers.
+					Hover to see the shift from vague idea to launch-ready scope.
 				</TextRevealCardTitle>
 				<TextRevealCardDescription>
-					We model your best customers, then generate a ready-to-contact
-					audience from the open web.
+					We cut the scope, define the stack, and package the build so your team
+					can launch fast and extend it cleanly after handoff.
 				</TextRevealCardDescription>
 			</TextRevealCard>
 		</div>

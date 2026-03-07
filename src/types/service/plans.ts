@@ -3,7 +3,7 @@ import type { ProductCategory } from "../products";
 import type { Feature } from "./services";
 
 export type PricingInterval = "monthly" | "annual";
-export type PricingUnit = "month" | "year";
+export type PricingUnit = "month" | "year" | "project";
 export type UnlimitedValue = number | "unlimited";
 
 export type RoiTierKind = "selfHosted" | "subscription";
@@ -44,6 +44,7 @@ export interface RecurringPlan {
 	id: string;
 	name: string;
 	price: number;
+	compareAtPrice?: number;
 	unit: PricingUnit;
 	ctaType: string;
 	idealFor?: string;
@@ -52,6 +53,7 @@ export interface RecurringPlan {
 	features: string[];
 	ctaLabel?: string;
 	bannerText?: string;
+	promoRibbonText?: string;
 }
 
 export interface PricingOption {
@@ -139,6 +141,7 @@ export interface SelfHostedPlan {
 	notes: string[];
 	requirements?: string[];
 	pricingTiers?: PricingTier[];
+	promoRibbonText?: string;
 }
 
 export interface PartnershipPlan {
@@ -149,13 +152,15 @@ export interface PartnershipPlan {
 	idealFor?: string;
 	includes: string[];
 	requirements?: string[];
+	promoRibbonText?: string;
 }
 
-export type OneTimePlan = SelfHostedPlan | PartnershipPlan;
+export type OneTimePlan = SelfHostedPlan | PartnershipPlan | RecurringPlan;
 
 export interface PricingSchema {
 	monthly: RecurringPlan[];
 	annual: RecurringPlan[];
+	inPerson: RecurringPlan[];
 	oneTime: OneTimePlan[];
 }
 

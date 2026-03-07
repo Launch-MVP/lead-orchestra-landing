@@ -175,7 +175,7 @@ export default function ContactForm({
 			}
 
 			trackLead({
-				contentName: "Founders Circle Application",
+				contentName: "Launch MVP Inquiry",
 				contentCategory: "Beta Tester",
 				currency: "USD",
 				value: 0,
@@ -224,8 +224,8 @@ export default function ContactForm({
 		<div className="relative mx-auto max-w-2xl rounded-2xl border border-primary/40 bg-gradient-to-br from-white via-background to-primary-50 p-6 shadow-xl ring-1 ring-primary/10 transition-all sm:p-10 dark:bg-gradient-to-br dark:from-background dark:via-background-dark dark:to-primary/10">
 			<div className="-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20" />
 			<Header
-				title="Founders Circle Application"
-				subtitle="Request early access to unlock 5 AI credits, priority onboarding, and a direct vote on upcoming features."
+				title="Tell Us What You’re Building"
+				subtitle="Share the product idea, timeline, and blockers. We’ll follow up with the best next step for strategy, launch, or build support."
 				size="md"
 				className="mb-12 md:mb-16"
 			/>
@@ -274,7 +274,7 @@ export default function ContactForm({
 									<Loader2 className="h-4 w-4 animate-spin" /> Sending...
 								</span>
 							) : (
-								"Submit Application"
+								"Send Details"
 							)}
 						</Button>
 					</form>

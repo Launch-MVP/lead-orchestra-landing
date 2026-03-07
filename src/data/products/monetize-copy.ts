@@ -2,216 +2,222 @@ import { defineAbTests } from "./copy";
 
 export const salesScriptsMarketplaceABTests = defineAbTests([
 	{
-		id: "ab-test-sales-scripts-marketplace-v1",
-		name: "Sales Scripts Marketplace Copy Test",
+		id: "ab-test-launch-copy-marketplace-v1",
+		name: "Launch Copy Marketplace Copy Test",
 		description:
-			"Testing copy variants (Passive Income vs. Community Impact) for Sales Scripts.",
+			"Testing copy variants for reusable launch messaging and conversion assets.",
 		variants: [
 			{
-				name: "V1 - Passive Income",
+				name: "V1 - Productize Your Copy",
 				percentage: 50,
 				copy: {
-					cta: "Start Selling Scripts",
-					buttonCta: "Apply to Sell",
-					tagline: "Turn Your Sales Copy into Cash.",
+					cta: "Sell Your Launch Copy",
+					buttonCta: "Submit Copy Pack",
+					tagline: "Turn Proven Messaging into a Product.",
 					subtitle:
-						"Monetize your proven cold email templates, calling scripts, and objection handlers by selling them on our marketplace.",
+						"Package landing page copy, email sequences, and founder outreach scripts into reusable launch assets.",
 					description:
-						"You've already written the perfect script. Now let it pay you forever. List your high-converting sales assets on the Lead Orchestra marketplace and earn recurring revenue every time another user downloads them.",
+						"Founders need sharp launch messaging fast. Publish the copy systems you already use so other teams can start with something stronger than a blank page.",
 					whatsInItForMe:
-						"You create a new stream of passive income from work you've already done, diversifying your revenue without extra effort.",
-					target_audience: "Sales pros and copywriters with proven assets.",
+						"You turn your best messaging work into repeatable revenue without adding client delivery overhead.",
+					target_audience:
+						"Copywriters, growth consultants, and founders with proven launch messaging.",
 					pain_point:
-						"You treat your best scripts as one-time tools, leaving money on the table by not productizing your knowledge.",
-					fear: "Your valuable IP sits in a Google Doc gathering dust while others are making money selling inferior templates.",
-					hope: "You wake up to notification after notification of new sales, turning your expertise into a scalable digital product business.",
+						"Great copy lives in docs and old projects instead of becoming an asset you can sell repeatedly.",
+					fear: "Your best messaging never compounds because it stays trapped in one-off engagements.",
+					hope: "You build a catalog of launch assets teams can buy whenever they need faster momentum.",
 					solution:
-						"Our marketplace handles the distribution and payments, letting you simply upload your assets and collect royalties.",
+						"The marketplace makes it easy to package, list, and distribute proven messaging systems.",
 					highlights: [
-						"Earn recurring royalties",
-						"Monetize existing assets",
-						"Reach thousands of buyers",
-						"Zero technical setup",
+						"Package proven messaging",
+						"Create repeatable revenue",
+						"Help founders launch faster",
+						"Keep delivery lightweight",
 					],
-					highlighted_words: ["Cash", "Passive Income", "Royalties"],
+					highlighted_words: ["Messaging", "Product", "Revenue"],
 				},
 			},
 			{
-				name: "V2 - Community Authority",
+				name: "V2 - Build Category Authority",
 				percentage: 50,
 				copy: {
-					cta: "Become a Sales Thought Leader",
-					buttonCta: "Share Your Expertise",
-					tagline: "Lead the Industry with Your Methods.",
+					cta: "Share Your Launch Framework",
+					buttonCta: "List Copy System",
+					tagline: "Be Known for the Messaging That Ships.",
 					subtitle:
-						"Establish yourself as a top authority by sharing your winning sales strategies with the Lead Orchestra community.",
+						"Turn your best launch messaging into a visible proof-of-work asset founders can actually use.",
 					description:
-						"The best way to build your personal brand is by helping others succeed. By listing your scripts, you position yourself as a go-to expert in your niche, opening doors for consulting and speaking opportunities.",
+						"Publishing your best launch copy is an easier signal of expertise than another thread, portfolio site, or opinion post. Let the work itself do the selling.",
 					whatsInItForMe:
-						"You build an incredible reputation as a subject matter expert, attracting high-value clients and followers who trust your methods.",
-					target_audience: "Consultants and coaches building a personal brand.",
+						"You build authority through assets that show how you think, not just how you talk.",
+					target_audience:
+						"Consultants and operators building a reputation around launch and conversion work.",
 					pain_point:
-						"It's hard to stand out in a crowded market without tangible proof of your expertise.",
-					fear: 'You remain "just another vendors" instead of becoming the requested expert that everyone wants to work with.',
-					hope: "Your name becomes synonymous with success in your industry, and clients beg to work with you.",
+						"It is hard to prove messaging expertise when most of the work sits inside client docs and private projects.",
+					fear: "You stay hard to differentiate because your best thinking is never productized.",
+					hope: "Your launch systems become the thing founders reference when they need better messaging.",
 					solution:
-						"The marketplace gives you a platform to showcase your best work, proving your value to a massive audience of potential clients.",
+						"Listing your frameworks creates a public, reusable asset that compounds authority and reach.",
 					highlights: [
-						"Build your personal brand",
-						"Showcase your expertise",
-						"Attract high-ticket clients",
-						"Help others succeed",
+						"Show your thinking",
+						"Build visible proof of work",
+						"Reach new founders",
+						"Grow authority through assets",
 					],
-					highlighted_words: ["Authority", "Expert", "Brand"],
+					highlighted_words: ["Authority", "Framework", "Assets"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Marketplace", "Monetization", "Sales Scripts"],
+		tags: ["Marketplace", "Monetization", "Launch Copy"],
 	},
 ]);
 
 export const workflowsMarketplaceABTests = defineAbTests([
 	{
-		id: "ab-test-workflows-marketplace-v1",
-		name: "Workflows Marketplace Copy Test",
+		id: "ab-test-delivery-systems-marketplace-v1",
+		name: "Delivery Systems Marketplace Copy Test",
 		description:
-			"Testing copy variants (Developer Revenue vs. Agency Scale) for Workflows.",
+			"Testing copy variants for reusable launch workflows, SOPs, and delivery systems.",
 		variants: [
 			{
-				name: "V1 - Developer Revenue",
+				name: "V1 - Productize Your Process",
 				percentage: 50,
 				copy: {
-					cta: "Sell Your Automations",
+					cta: "Sell Your Delivery System",
 					buttonCta: "List Workflow",
-					tagline: "Code Once. get Paid Forever.",
+					tagline: "Turn Internal Process into Product Revenue.",
 					subtitle:
-						"Publish your custom scraping and automation workflows to the marketplace and earn from every install.",
+						"Package onboarding flows, launch checklists, and delivery SOPs into reusable systems other teams can adopt.",
 					description:
-						'Use your technical skills to build detailed scraping workflows, then sell them to non-technical users. It\'s the "App Store" for lead generation automation.',
+						"Most agencies and product teams already have a repeatable launch process. This is how you turn that internal operating logic into something useful and sellable.",
 					whatsInItForMe:
-						"You turn your coding skills into a scalable product business, escaping the hourly billing trap.",
-					target_audience: "Developers and automation engineers.",
+						"You create a new revenue stream from work your team already refined through delivery.",
+					target_audience:
+						"Operators, agencies, and startup teams with proven delivery systems.",
 					pain_point:
-						"Trading time for money as a freelancer limits your income and burns you out.",
-					fear: "You're stuck debugging client projects for an hourly rate while product owners make the real upside.",
-					hope: "You build a portfolio of digital assets that generate revenue while you sleep, giving you true financial freedom.",
+						"Your best processes save time internally but never become assets that compound.",
+					fear: "You keep selling hours when your real leverage is the system behind the hours.",
+					hope: "Your internal workflow becomes a product that funds itself repeatedly.",
 					solution:
-						"We provide the platform to sell your code as a product, handling all the billing and delivery for you.",
+						"List the process, package the templates, and let other teams buy the structure.",
 					highlights: [
-						"Sell your code as a product",
-						"No customer support headaches",
-						"Global distribution",
-						"High profit margins",
+						"Package internal process",
+						"Create repeatable product revenue",
+						"Help teams launch faster",
+						"Reduce custom delivery overhead",
 					],
-					highlighted_words: ["Paid Forever", "Product", "Scalable"],
+					highlighted_words: ["Process", "Systems", "Revenue"],
 				},
 			},
 			{
-				name: "V2 - Agency Scale",
+				name: "V2 - Capture Down-Market Demand",
 				percentage: 50,
 				copy: {
-					cta: "Productize Your Agency",
+					cta: "Productize Your Delivery",
 					buttonCta: "Start Selling",
-					tagline: "Stop Selling Services. Start Selling Systems.",
+					tagline: "Sell Systems to Teams Not Ready for Full Service.",
 					subtitle:
-						"Package your agency's internal processes into sellable workflows for other businesses.",
+						"Turn the playbooks behind your work into lower-friction offers for founders who need structure before they need your full engagement.",
 					description:
-						'Your agency has already solved these problems. Now package those solutions and sell them to clients who can\'t afford your full service. Monetize the "down market" without adding operational drag.',
+						"Some buyers are not ready for a workshop or a build. They still need a better process. Productized delivery systems let you serve them without taking on extra service load.",
 					whatsInItForMe:
-						"You unlock a new revenue tier, capturing value from smaller leads without distracting your team from high-ticket clients.",
-					target_audience: "Agency owners and service providers.",
+						"You monetize demand that would otherwise leave without buying anything.",
+					target_audience:
+						"Service businesses and advisors that already have strong internal launch workflows.",
 					pain_point:
-						"You leave money on the table every time you turn down a small prospect, but taking them on would crush your margins.",
-					fear: "Your agency hits a revenue ceiling because you simply can't hire bright people fast enough.",
-					hope: 'You have a "product downsell" that captures revenue from every lead, boosting your bottom line effortlessly.',
+						"You lose smaller opportunities because the full-service engagement is too expensive or too early.",
+					fear: "Good-fit buyers leave empty handed because your only offer is the expensive one.",
+					hope: "You capture more of the demand curve with products that scale better than services.",
 					solution:
-						'The marketplace allows you to sell your "secret sauce" as a self-serve product, scaling your revenue without scaling your headcount.',
+						"Package the workflow as a self-serve offer and keep your service business focused on the higher-leverage work.",
 					highlights: [
-						"Monetize smaller leads",
-						"High-margin product revenue",
-						"Zero fulfillment cost",
-						"Build brand authority",
+						"Capture smaller buyers",
+						"Add scalable revenue",
+						"Protect service bandwidth",
+						"Extend your offer ladder",
 					],
-					highlighted_words: ["Systems", "Productize", "Scale"],
+					highlighted_words: ["Productize", "Scale", "Offer Ladder"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Marketplace", "Monetization", "Workflows"],
+		tags: ["Marketplace", "Monetization", "Delivery Systems"],
 	},
 ]);
 
 export const mcpPluginsMarketplaceABTests = defineAbTests([
 	{
-		id: "ab-test-mcp-plugins-marketplace-v1",
-		name: "MCP Plugins Marketplace Copy Test",
+		id: "ab-test-ai-tools-marketplace-v1",
+		name: "AI Tools Marketplace Copy Test",
 		description:
-			"Testing copy variants (Innovation vs. Distribution) for MCP Plugins.",
+			"Testing copy variants for reusable AI tools, prompts, and productized launch helpers.",
 		variants: [
 			{
-				name: "V1 - Innovation & Revenue",
+				name: "V1 - Launch Tooling",
 				percentage: 50,
 				copy: {
-					cta: "Monetize Your Tools",
-					buttonCta: "Submit Plugin",
-					tagline: "The App Store for AI Agents.",
+					cta: "Sell Your Launch Tooling",
+					buttonCta: "Submit Tool",
+					tagline: "Package the Small Tools Teams Keep Reusing.",
 					subtitle:
-						"Build and sell MCP plugins that power the next generation of AI agents and scraping workflows.",
+						"List prompts, internal generators, AI helpers, and validation tools that make launching easier.",
 					description:
-						"The demand for specialized AI tools is exploding. Build the connectors, scrapers, and data tools that feed the AI revolution, and get paid for every user.",
+						"Teams repeatedly build the same small utilities around scope, copy, QA, analytics, and AI flows. Productize those helpers instead of recreating them in every engagement.",
 					whatsInItForMe:
-						'You position yourself at the forefront of the AI wave, building the "picks and shovels" for the gold rush.',
-					target_audience: "AI developers and tool builders.",
+						"You turn practical launch tooling into a product catalog that keeps selling.",
+					target_audience:
+						"AI engineers, product teams, and consultants building reusable internal tools.",
 					pain_point:
-						"Building cool AI tools is fun, but distribution and monetization are hard.",
-					fear: "You build incredible technology that nobody ever finds or pays for.",
-					hope: "Your tool becomes the standard infrastructure for thousands of AI agents, generating massive adoption and revenue.",
+						"Useful launch helpers stay trapped inside one workspace instead of becoming products.",
+					fear: "You keep rebuilding the same tool for clients without capturing the long-term upside.",
+					hope: "Your internal launch tools become a compact product portfolio with clear demand.",
 					solution:
-						"We provide the distribution network to thousands of active users who are hungry for new tools to power their workflows.",
+						"List the tool once, package the docs, and let the marketplace handle discovery.",
 					highlights: [
-						"Access a hungry audience",
-						"Simple monetization",
-						"Standardized protocol (MCP)",
-						"Rapid adoption",
+						"List reusable AI helpers",
+						"Turn internal tools into products",
+						"Reach founder teams faster",
+						"Build a tighter offer catalog",
 					],
-					highlighted_words: ["Revenue", "AI Agents", "Innovation"],
+					highlighted_words: ["Tooling", "Products", "AI"],
 				},
 			},
 			{
-				name: "V2 - Distribution Network",
+				name: "V2 - Distribution and Reach",
 				percentage: 50,
 				copy: {
-					cta: "Reach Thousands of Users",
+					cta: "Reach More Founder Teams",
 					buttonCta: "List Your Tool",
-					tagline: "Instant Distribution for Your Code.",
+					tagline: "Put Useful Launch Tools in Front of Buyers Faster.",
 					subtitle:
-						"Get your data tools in front of thousands of high-value business users instantly.",
+						"Use the marketplace as a distribution channel for compact tools founders can adopt without a custom build.",
 					description:
-						"Don't build in a vacuum. Launch your plugin on the Lead Orchestra marketplace and get immediate access to a user base of serious investors and agencies willing to pay for tools that work.",
+						"Distribution is usually harder than building the tool. Listing practical launch tooling gives it a home where teams already expect to buy operational leverage.",
 					whatsInItForMe:
-						"You solve the hardest part of software—finding customers—by plugging directly into our existing ecosystem.",
-					target_audience: "SaaS founders and indie hackers.",
+						"You spend less time trying to invent distribution from scratch for every small product.",
+					target_audience:
+						"Indie builders and productized-service operators with useful launch tooling.",
 					pain_point:
-						"Marketing your tool is expensive and slow, and customer acquisition costs are eating all your profit.",
-					fear: "You run out of runway marketing a great product that just needs an audience to take off.",
-					hope: "You launch to immediate sales and feedback, validating your product and funding your roadmap on day one.",
+						"Small products die because distribution takes more effort than building them.",
+					fear: "Your best niche tools never reach the teams that would pay for them.",
+					hope: "You find faster traction by meeting buyers where they already browse for leverage.",
 					solution:
-						"Our marketplace handles the audience and trust, so you can focus on building the best possible tool.",
+						"The marketplace gives your tools a clearer shelf, audience, and path to discovery.",
 					highlights: [
-						"Instant customer base",
-						"Zero marketing cost",
-						"Feedback from power users",
-						"Trusted platform",
+						"Clearer distribution",
+						"Faster buyer discovery",
+						"Useful niche products",
+						"Lower go-to-market friction",
 					],
-					highlighted_words: ["Distribution", "Users", "Instant"],
+					highlighted_words: ["Distribution", "Reach", "Traction"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Marketplace", "Monetization", "MCP Plugins"],
+		tags: ["Marketplace", "Monetization", "Launch Tooling"],
 	},
 ]);

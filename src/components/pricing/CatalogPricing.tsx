@@ -27,6 +27,7 @@ import type {
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Loader2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import {
 	type ReactNode,
 	useCallback,
@@ -45,37 +46,45 @@ import {
 import { RecurringPlanCard } from "./RecurringPlanCard";
 import { RoiEstimatorModal } from "./RoiEstimatorModal";
 
-type PricingView = PricingInterval | "oneTime";
+type PricingView = "monthly" | "oneTime" | "inPerson";
 
 const VIEW_OPTIONS: Array<{ value: PricingView; label: string }> = [
 	{ value: "monthly", label: "Monthly" },
-	{ value: "annual", label: "Annual" },
 	{ value: "oneTime", label: "One-Time" },
+	{ value: "inPerson", label: "In Person" },
 ];
-
-const ANNUAL_PLAN_BADGES: Record<
-	string,
-	{ label: string; variant: "basic" | "starter" | "enterprise" }
-> = {
-	starterAnnual: { label: "Starter Annual", variant: "basic" },
-	growthAnnual: { label: "Growth Annual", variant: "starter" },
-	scaleAnnual: { label: "Scale Annual", variant: "enterprise" },
-};
 
 const MONTHLY_PLAN_BADGES: Record<
 	string,
 	{ label: string; variant: "basic" | "starter" | "enterprise" }
 > = {
-	starter: { label: "$500/mo", variant: "basic" },
-	growth: { label: "$1,500/mo", variant: "starter" },
-	scale: { label: "$5,000/mo", variant: "enterprise" },
+	"managed-support": { label: "$3,000/mo", variant: "starter" },
+	"backend-engineer-support": { label: "$3,000/mo", variant: "starter" },
+	"frontend-engineer-support": { label: "$2,500/mo", variant: "basic" },
+	"devops-engineer-support": { label: "$3,500/mo", variant: "starter" },
+	"ai-engineer-support": { label: "$4,500/mo", variant: "enterprise" },
 };
 
 const ONE_TIME_PLAN_BADGES: Record<
 	string,
-	{ label: string; variant: "partner" | "basic" | "starter" | "enterprise" }
+	{ label: string; variant: "basic" | "starter" | "enterprise" }
 > = {
-	commissionPartner: { label: "Commission Partner", variant: "partner" },
+	"startup-scoping-session": { label: "$750", variant: "basic" },
+	"enterprise-scoping-session": { label: "$1,500", variant: "enterprise" },
+	"vibe-code-cleanup": { label: "$3,000", variant: "starter" },
+	"vibe-coding-rescue": { label: "$4,500", variant: "enterprise" },
+	"frontend-polish-sprint": { label: "$2,500", variant: "starter" },
+	"backend-polish-sprint": { label: "$2,500", variant: "starter" },
+	"technical-architecture-review": { label: "$2,000", variant: "enterprise" },
+};
+
+const IN_PERSON_PLAN_BADGES: Record<
+	string,
+	{ label: string; variant: "basic" | "starter" | "enterprise" }
+> = {
+	"in-person-mvp-build": { label: "Save $4,500", variant: "starter" },
+	"in-person-app-launch": { label: "Save $5,000", variant: "enterprise" },
+	"in-person-ai-prototype": { label: "Save $7,500", variant: "enterprise" },
 };
 
 const toLegacyPlan = (
@@ -106,6 +115,9 @@ const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
 const isSelfHosted = (plan: OneTimePlan): plan is SelfHostedPlan =>
 	"ctaPrimary" in plan && "roiEstimator" in plan;
+
+const isRecurringProjectPlan = (plan: OneTimePlan): plan is RecurringPlan =>
+	"price" in plan && "features" in plan;
 
 /**
  * CatalogPricing renders the pricing catalog with optional teaser sections.
@@ -153,6 +165,7 @@ export const CatalogPricing = ({
 	showOpenSource = false,
 }: CatalogPricingProps) => {
 	const router = useNavigationRouter();
+	const searchParams = useSearchParams();
 	const [view, setView] = useState<PricingView>("monthly");
 	const [loading, setLoading] = useState<string | null>(null);
 	const [checkoutState, setCheckoutState] = useState<{
@@ -190,7 +203,10 @@ export const CatalogPricing = ({
 				if (value === "oneTime") {
 					return catalog.pricing.oneTime.length > 0;
 				}
-				return catalog.pricing[value].length > 0;
+				if (value === "inPerson") {
+					return catalog.pricing.inPerson.length > 0;
+				}
+				return catalog.pricing.monthly.length > 0;
 			}).map((option) => option.value),
 		[catalog],
 	);
@@ -201,18 +217,42 @@ export const CatalogPricing = ({
 		}
 	}, [availableViews, view]);
 
+	useEffect(() => {
+		const requestedView = searchParams?.get("view");
+		if (
+			requestedView === "monthly" ||
+			requestedView === "oneTime" ||
+			requestedView === "inPerson"
+		) {
+			if (availableViews.includes(requestedView)) {
+				setView(requestedView);
+			}
+		}
+	}, [availableViews, searchParams]);
+
 	const monthlyPlans = catalog.pricing.monthly;
-	const annualPlans = catalog.pricing.annual;
+	const inPersonPlans = catalog.pricing.inPerson;
 	const oneTimePlans = catalog.pricing.oneTime;
+	const oneTimeRecurringPlans = oneTimePlans.filter(isRecurringProjectPlan);
+	const oneTimeCustomPlans = oneTimePlans.filter(
+		(plan): plan is Exclude<OneTimePlan, RecurringPlan> =>
+			!isRecurringProjectPlan(plan),
+	);
 
 	const recurringPlans =
-		view === "monthly" ? monthlyPlans : view === "annual" ? annualPlans : [];
+		view === "monthly"
+			? monthlyPlans
+			: view === "inPerson"
+				? inPersonPlans
+				: oneTimeRecurringPlans;
 
-	const selfHostedPlan = oneTimePlans.find(
+	const selfHostedPlan = oneTimeCustomPlans.find(
 		(plan): plan is SelfHostedPlan => "roiEstimator" in plan,
 	);
-	const partnershipPlans = oneTimePlans.filter(
-		(plan): plan is Exclude<OneTimePlan, SelfHostedPlan> =>
+	const partnershipPlans = oneTimeCustomPlans.filter(
+		(
+			plan,
+		): plan is Exclude<Exclude<OneTimePlan, RecurringPlan>, SelfHostedPlan> =>
 			!("roiEstimator" in plan),
 	);
 
@@ -290,8 +330,15 @@ export const CatalogPricing = ({
 			? recurringPlans.filter((plan) => plan.id !== freePlan.id)
 			: recurringPlans;
 
+	const currentPlanGroupLabel =
+		view === "monthly"
+			? "Monthly Plan"
+			: view === "oneTime"
+				? "One-Time Plan"
+				: "In-Person Plan";
+
 	const aiCreditsProduct = useMemo(
-		() => creditProducts.find((product) => product.slug === "lead-credits"),
+		() => creditProducts.find((product) => product.slug === "ai-credits"),
 		[],
 	);
 
@@ -299,7 +346,7 @@ export const CatalogPricing = ({
 		async (coupon: string) => {
 			if (!aiCreditsProduct) {
 				toast.error(
-					"Lead credits product is unavailable. Please try again later.",
+					"AI credits product is unavailable. Please try again later.",
 				);
 				return;
 			}
@@ -613,7 +660,7 @@ export const CatalogPricing = ({
 		if (showAddOnStack && aiCreditsProduct) {
 			items.push({
 				id: 2,
-				name: "Lead Credits",
+				name: "AI Credits",
 				designation: "Add-on Discount",
 				content: (
 					<div className="flex flex-col gap-4">
@@ -622,10 +669,10 @@ export const CatalogPricing = ({
 								Add-On Boost
 							</p>
 							<h4 className="font-semibold text-foreground text-lg">
-								Lead Credits
+								AI Credits
 							</h4>
 							<p className="text-muted-foreground text-xs">
-								Top up lead credits with the launch coupon applied instantly.
+								Top up AI credits with the launch coupon applied instantly.
 							</p>
 						</div>
 						<button
@@ -764,8 +811,8 @@ export const CatalogPricing = ({
 													{showOpenSource
 														? freePlan.idealFor
 															? `Ideal for ${freePlan.idealFor.toLowerCase()}`
-															: "100% free and open-source scraping engine"
-														: "Test scraping workflows, data normalization, and CRM export before you upgrade."}
+															: "100% free and open-source MVP launch toolkit"
+														: "Test MVP workflows, AI-assisted operations, and launch systems before you upgrade."}
 												</p>
 											</div>
 											<ul className="list-none space-y-3 text-center text-muted-foreground text-sm">
@@ -774,9 +821,9 @@ export const CatalogPricing = ({
 															<li key={feature}>{feature}</li>
 														))
 													: [
-															"5 demo scraping jobs",
-															"1 active campaign",
-															"Dashboard + CRM preview",
+															"5 demo MVP workflows",
+															"1 active launch workspace",
+															"Dashboard + analytics preview",
 															"Upgrade to Team plan for full access",
 														].map((feature) => (
 															<li key={feature}>{feature}</li>
@@ -902,7 +949,7 @@ export const CatalogPricing = ({
 						</div>
 					) : null}
 
-					{view !== "oneTime" && displayedRecurringPlans.length > 0 ? (
+					{displayedRecurringPlans.length > 0 ? (
 						<div className="mt-12 grid grid-cols-1 items-start justify-center gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 							{minimalStackActive && minimalStackItems.length === 2 ? (
 								<div className="flex justify-center md:col-span-2 lg:col-span-1">
@@ -925,39 +972,27 @@ export const CatalogPricing = ({
 
 								const monthlyBadgeConfig =
 									view === "monthly" ? MONTHLY_PLAN_BADGES[plan.id] : undefined;
-								const annualBadgeConfig =
-									view === "annual" ? ANNUAL_PLAN_BADGES[plan.id] : undefined;
-
-								const defaultAnnualBadge =
-									view === "annual" &&
-									plan.ctaType === "subscribe" &&
-									!annualBadgeConfig ? (
-										<Badge
-											variant="secondary"
-											className="bg-primary/10 text-primary"
-										>
-											Save 15%
-										</Badge>
-									) : undefined;
+								const oneTimeBadgeConfig =
+									view === "oneTime"
+										? ONE_TIME_PLAN_BADGES[plan.id]
+										: undefined;
+								const inPersonBadgeConfig =
+									view === "inPerson"
+										? IN_PERSON_PLAN_BADGES[plan.id]
+										: undefined;
 
 								return (
 									<RecurringPlanCard
 										key={`${plan.id}-${view}`}
 										plan={plan}
-										view={view === "monthly" ? "monthly" : "annual"}
+										view="monthly"
+										planGroupLabel={currentPlanGroupLabel}
 										onSubscribe={
 											plan.ctaType === "subscribe"
-												? () =>
-														void handleSubscribe(
-															plan,
-															view === "monthly" ? "monthly" : "annual",
-														)
+												? () => void handleSubscribe(plan, "monthly")
 												: undefined
 										}
-										loading={
-											loading ===
-											`${plan.id}-${view === "monthly" ? "monthly" : "annual"}`
-										}
+										loading={loading === `${plan.id}-monthly`}
 										ctaOverride={
 											plan.ctaType === "contactSales"
 												? {
@@ -978,12 +1013,15 @@ export const CatalogPricing = ({
 														}
 													: undefined
 										}
-										badge={defaultAnnualBadge}
 										badgeLabel={
-											monthlyBadgeConfig?.label ?? annualBadgeConfig?.label
+											monthlyBadgeConfig?.label ??
+											oneTimeBadgeConfig?.label ??
+											inPersonBadgeConfig?.label
 										}
 										badgeVariant={
-											monthlyBadgeConfig?.variant ?? annualBadgeConfig?.variant
+											monthlyBadgeConfig?.variant ??
+											oneTimeBadgeConfig?.variant ??
+											inPersonBadgeConfig?.variant
 										}
 									/>
 								);
@@ -991,7 +1029,7 @@ export const CatalogPricing = ({
 						</div>
 					) : null}
 
-					{view === "oneTime" ? (
+					{view === "oneTime" && oneTimeCustomPlans.length > 0 ? (
 						<div className="mt-12 flex flex-col gap-6 lg:grid lg:grid-cols-12">
 							<div className="flex flex-col gap-8 lg:col-span-5">
 								<SelfHostedCard
@@ -1022,7 +1060,7 @@ export const CatalogPricing = ({
 											"Executive sponsor for AI governance sign-off",
 											"Secure cloud or on-prem budget for private deployment",
 											"Dedicated technical contact for integrations",
-											"Annual compliance review cadence with DealScale success team",
+											"Annual compliance review cadence with the Launch MVP team",
 										]
 									}
 									onPrimary={() => router.push("/contact")}
@@ -1035,6 +1073,7 @@ export const CatalogPricing = ({
 										"Estimate ROI & Setup Cost"
 									}
 									pricingTiers={selfHostedPlan?.pricingTiers}
+									promoRibbonText={selfHostedPlan?.promoRibbonText}
 								/>
 							</div>
 							<div className="lg:col-span-7">

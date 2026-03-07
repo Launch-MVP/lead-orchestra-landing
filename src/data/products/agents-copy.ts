@@ -2,221 +2,222 @@ import { defineAbTests } from "./copy";
 
 export const realtorMcpPluginABTests = defineAbTests([
 	{
-		id: "ab-test-realtor-mcp-v1",
-		name: "Realtor.com MCP Plugin Copy Test",
+		id: "ab-test-scope-agent-v1",
+		name: "Scope Agent Copy Test",
 		description:
-			"Testing copy variants (Speed vs. Data Depth) for the Realtor.com MCP Plugin.",
+			"Testing copy variants for a reusable AI scope and requirements assistant.",
 		variants: [
 			{
-				name: "V1 - Speed & Efficiency",
+				name: "V1 - Clarify the Product Faster",
 				percentage: 50,
 				copy: {
-					cta: "Start Scraping Realtor.com",
-					buttonCta: "Get Plugin",
-					tagline: "Extract Realtor.com Data in Seconds.",
+					cta: "Use the Scope Agent",
+					buttonCta: "Get Agent",
+					tagline: "Turn Loose Ideas into a Sharper Spec.",
 					subtitle:
-						"The fastest, most reliable way to scrape property details, agent contacts, and listings from Realtor.com.",
+						"An AI assistant for gathering requirements, pressure-testing ideas, and reducing early product ambiguity.",
 					description:
-						"Stop wasting hours manually copying data. This MCP plugin connects directly to your Lead Orchestra workflow to extract thousands of listings automatically. Get clean, normalized data instantly.",
+						"Instead of starting with a blank document, use an AI scope agent to interview the product idea, challenge assumptions, and generate a cleaner foundation for version one.",
 					whatsInItForMe:
-						"You save hours of manual work and get instant access to live market data, allowing you to move faster than your competition.",
+						"You get to a better starting point faster without stretching the planning phase endlessly.",
 					target_audience:
-						"Investors and agents who need rapid access to property data.",
+						"Founders and product teams shaping the first real version of an MVP.",
 					pain_point:
-						"Manually copying property details is slow, error-prone, and impossible to scale.",
-					fear: "While you copy one listing, your competitor has already analyzed the entire neighborhood.",
-					hope: "Imagine having a live feed of every new listing in your target market, automatically enriched and ready for outreach.",
+						"Requirements stay fuzzy for too long, which makes design and engineering work noisier than it should be.",
+					fear: "The team starts building while the product definition is still too loose to support good decisions.",
+					hope: "You create a cleaner spec that helps design and development move with less friction.",
 					solution:
-						"This plugin automates the entire extraction process, giving you a structured database of properties in minutes.",
+						"The scope agent structures the discovery work and turns early inputs into something more usable.",
 					highlights: [
-						"Scrape 1000+ listings/hour",
-						"Extract agent contact info",
-						"Automatic LSF normalization",
-						"Anti-blocking technology",
+						"Clarify requirements faster",
+						"Pressure-test assumptions",
+						"Generate cleaner specs",
+						"Reduce planning sprawl",
 					],
-					highlighted_words: ["Fastest", "Reliable", "Seconds"],
+					highlighted_words: ["Scope", "Spec", "Clarity"],
 				},
 			},
 			{
-				name: "V2 - Data Depth",
+				name: "V2 - Avoid Version-One Drift",
 				percentage: 50,
 				copy: {
-					cta: "Unlock Deep Property Insights",
-					buttonCta: "Get Data Access",
-					tagline: "The Complete Realtor.com Data Engine.",
+					cta: "Reduce Product Ambiguity",
+					buttonCta: "Get Planning Agent",
+					tagline: "Make Better Early Product Calls.",
 					subtitle:
-						"Extract comprehensive property data including tax history, owner details, and agent connect info.",
+						"Use AI to identify unclear requirements, missing edge cases, and risky assumptions before they become expensive build work.",
 					description:
-						"Don't settle for basic listing info. This plugin digs deep to retrieve full property history, tax records, and direct agent contact details, giving you the complete picture of every deal.",
+						"A planning agent is useful when the product is still full of vague language, overlapping ideas, and hidden complexity. It helps teams tighten the thinking before implementation.",
 					whatsInItForMe:
-						"You get a competitive edge with deeper data that reveals the true potential of every property, helping you make smarter investment decisions.",
+						"You reduce the odds of rework by making the fuzzy parts visible earlier.",
 					target_audience:
-						"Serious investors who need granular data analysis to find hidden gems.",
+						"Teams that need stronger product definition before moving into design and build.",
 					pain_point:
-						"Basic scrapers miss critical details like tax history and owner info, leading to bad investment decisions.",
-					fear: "Making an offer without the full story is a recipe for losing money on a bad deal.",
-					hope: "You can analyze deals with 100% confidence, knowing you have every single data point at your fingertips.",
+						"Version-one plans often look coherent until engineering starts exposing the gaps.",
+					fear: "You spend build time resolving problems that should have been surfaced at the requirements stage.",
+					hope: "The team starts implementation with a narrower, more trustworthy definition of the product.",
 					solution:
-						"Our advanced extraction engine pulls every available data point, ensuring you have total clarity on every property.",
+						"The planning agent turns ambiguity into explicit questions and tighter decisions.",
 					highlights: [
-						"Full tax & price history",
-						"Owner & agent details",
-						"Property characteristics",
-						"Schools & neighborhood data",
+						"Expose edge cases early",
+						"Reduce version-one drift",
+						"Improve product decisions",
+						"Support cleaner handoff",
 					],
-					highlighted_words: ["Comprehensive", "Deep", "Complete"],
+					highlighted_words: ["Ambiguity", "Rework", "Decisions"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["MCP", "Scraping", "Realtor.com", "Real Estate"],
+		tags: ["Agents", "AI", "Scope"],
 	},
 ]);
 
 export const mlsScraperPluginABTests = defineAbTests([
 	{
-		id: "ab-test-mls-scraper-v1",
-		name: "MLS Scraper Plugin Copy Test",
+		id: "ab-test-feedback-agent-v1",
+		name: "Feedback Agent Copy Test",
 		description:
-			"Testing copy variants (Access vs. Automation) for the MLS Scraper Plugin.",
+			"Testing copy variants for an AI assistant that organizes post-launch feedback.",
 		variants: [
 			{
-				name: "V1 - Direct Access",
+				name: "V1 - Tighten Feedback Triage",
 				percentage: 50,
 				copy: {
-					cta: "Access MLS Data Directly",
-					buttonCta: "Connect MLS",
-					tagline: "Direct MLS Data. No License Required.",
+					cta: "Use the Feedback Agent",
+					buttonCta: "Connect Agent",
+					tagline: "Turn Feedback into a Usable Queue.",
 					subtitle:
-						"Access unified MLS data streams through a simple, powerful MCP plugin interface.",
+						"An AI assistant for organizing user notes, issue signals, and launch feedback into cleaner next-step priorities.",
 					description:
-						"Get direct access to MLS listings across multiple regions without the hassle of individual feeds. We normalize everything into one standard format for easy analysis and export.",
+						"After launch, feedback comes from too many directions. The feedback agent helps gather those signals, summarize patterns, and make the next sprint easier to reason about.",
 					whatsInItForMe:
-						"You bypass the gatekeepers and get direct access to the most accurate, real-time property data available.",
+						"You get a cleaner signal from users without spending hours sorting through noise manually.",
 					target_audience:
-						"Proptech developers and investors building data-heavy applications.",
+						"Founders and operators trying to keep post-launch learning organized.",
 					pain_point:
-						"Getting MLS access is expensive, legally complex, and technically difficult to integrate.",
-					fear: "Building your business on delayed, third-party data means you're always a step behind the market.",
-					hope: "You have a direct line to the source of truth, giving your application or investment strategy an unfair advantage.",
+						"Useful product feedback gets lost because the intake process is too messy and inconsistent.",
+					fear: "The important feedback is buried under general commentary, duplicate reports, and reactive issue handling.",
+					hope: "You can route user signals into clearer product priorities without drowning in admin.",
 					solution:
-						"Our plugin bridges the gap, providing a unified, developer-friendly interface to accessing standardized MLS data.",
+						"The feedback agent helps structure, summarize, and prioritize what users are actually telling the team.",
 					highlights: [
-						"Unified MLS schema",
-						"Real-time listing updates",
-						"Standardized status codes",
-						"Developer-friendly API",
+						"Organize user input",
+						"Summarize patterns faster",
+						"Support sprint planning",
+						"Reduce manual triage",
 					],
-					highlighted_words: ["Direct", "Unified", "Real-time"],
+					highlighted_words: ["Feedback", "Triage", "Priorities"],
 				},
 			},
 			{
-				name: "V2 - Automation Power",
+				name: "V2 - Improve the Next Sprint",
 				percentage: 50,
 				copy: {
-					cta: "Automate Your Market Analysis",
-					buttonCta: "Start Automating",
-					tagline: "Your 24/7 Market Watchdog.",
+					cta: "Prioritize Better After Launch",
+					buttonCta: "Start Agent",
+					tagline: "Give Post-Launch Learning a System.",
 					subtitle:
-						"Automatically monitor MLS feeds for new listings, price drops, and status changes.",
+						"Use AI to help convert issue reports, user notes, and support signals into a tighter roadmap for version two.",
 					description:
-						"Turn MLS data into action. This plugin continuously monitors the market and triggers your workflows the moment a property matches your criteria.",
+						"Teams rarely need more feedback. They need a better operating system for reading it and deciding what to do next. This agent helps with that translation step.",
 					whatsInItForMe:
-						"You stop searching for deals and start letting the deals find you. Be the first to know about every price drop and new listing.",
+						"You create a clearer bridge between user behavior and product decisions.",
 					target_audience:
-						"Investors who want to automate their deal sourcing.",
+						"Product teams that want more disciplined post-launch iteration.",
 					pain_point:
-						"Manually refreshing searches means you miss the best deals that sell in hours.",
-					fear: "While you sleep, the perfect deal hits the market and is sold before you even wake up.",
-					hope: "Your system catches every opportunity instantly, putting you ahead of every other buyer in the market.",
+						"Without a consistent triage pattern, launch feedback creates churn more than clarity.",
+					fear: "You keep reacting to the loudest signal instead of the most important one.",
+					hope: "The next roadmap reflects actual user learning instead of whoever spoke last.",
 					solution:
-						"This automation engine watches the MLS 24/7, filtering and alerting you only when a property meets your exact buy box.",
+						"The agent gives teams a more structured view of what changed, what matters, and what should move next.",
 					highlights: [
-						"Instant new listing alerts",
-						"Price drop monitoring",
-						'Custom "Buy Box" filters',
-						"Auto-export to CRM",
+						"Translate feedback into action",
+						"Reduce noisy prioritization",
+						"Support roadmap clarity",
+						"Keep learning visible",
 					],
-					highlighted_words: ["Automate", "Monitor", "Instant"],
+					highlighted_words: ["Roadmap", "Learning", "Action"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["MCP", "Scraping", "MLS", "Data"],
+		tags: ["Agents", "AI", "Feedback"],
 	},
 ]);
 
 export const jobBoardScraperPluginABTests = defineAbTests([
 	{
-		id: "ab-test-job-board-scraper-v1",
-		name: "Job Board Scraper Plugin Copy Test",
+		id: "ab-test-launch-ops-agent-v1",
+		name: "Launch Ops Agent Copy Test",
 		description:
-			"Testing copy variants (Hiring Signals vs. Efficiency) for the Job Board Scraper.",
+			"Testing copy variants for an AI assistant that helps teams manage launch operations.",
 		variants: [
 			{
-				name: "V1 - Hiring Signals",
+				name: "V1 - Support Launch Coordination",
 				percentage: 50,
 				copy: {
-					cta: "Find Growing Companies",
-					buttonCta: "Get Hiring Data",
-					tagline: "Spot Growth Before Competitors.",
+					cta: "Use the Launch Ops Agent",
+					buttonCta: "Get Agent",
+					tagline: "Keep the Launch Week Tight.",
 					subtitle:
-						"Use job postings as a leading indicator to identify companies that are funded and growing.",
+						"An AI assistant that helps coordinate tasks, summarize progress, and keep launch details from slipping through the cracks.",
 					description:
-						"Hiring is the strongest signal of growth. This scraper monitors job boards to find companies hiring for key roles, giving you a list of high-intent prospects before they hit the radar of other sales teams.",
+						"Launches create dozens of small coordination tasks that are easy to miss. This agent helps teams keep the checklist, blockers, and daily updates easier to manage.",
 					whatsInItForMe:
-						"You get a list of prospects who definitely have budget and valid needs, increasing your sales conversion rates dramatically.",
+						"You spend less energy reconstructing status and more energy moving the launch forward.",
 					target_audience:
-						"B2B sales teams and agencies looking for high-intent leads.",
+						"Teams managing launch prep, release coordination, and immediate post-launch follow-through.",
 					pain_point:
-						"Cold outreach to stagnant companies is a waste of time. You need to know who has money to spend right now.",
-					fear: "You're pitching to companies that are firing, not hiring, wasting your limited sales bandwidth.",
-					hope: "Every lead you call is in growth mode, with an approved budget and an urgent problem to solve.",
+						"Operational details fragment across docs, chats, and memory right when the team needs more clarity.",
+					fear: "Important launch tasks slip because everyone assumes someone else is tracking them.",
+					hope: "The team moves through launch week with better visibility and fewer dropped details.",
 					solution:
-						"Our scraper identifies these high-growth companies by analyzing their hiring patterns, delivering you a list of qualified, budget-ready prospects.",
+						"The launch ops agent keeps status, tasks, and blockers easier to summarize and coordinate.",
 					highlights: [
-						"Identify localized growth",
-						"Track specific roles",
-						"Estimate team budgets",
-						"Find decision makers",
+						"Track launch details",
+						"Summarize blockers quickly",
+						"Reduce coordination drag",
+						"Support daily momentum",
 					],
-					highlighted_words: ["Growth", "Funded", "High-Intent"],
+					highlighted_words: ["Launch", "Coordination", "Momentum"],
 				},
 			},
 			{
-				name: "V2 - Recruitment Efficiency",
+				name: "V2 - Reduce Release Chaos",
 				percentage: 50,
 				copy: {
-					cta: "Fill Roles Faster",
-					buttonCta: "Start Scraping",
-					tagline: "Automate Candidate Sourcing.",
+					cta: "Reduce Launch Chaos",
+					buttonCta: "Start Agent",
+					tagline: "Give Release Work a Better Operating Rhythm.",
 					subtitle:
-						"Aggregate job postings and requirements to build better candidate profiles and market maps.",
+						"Use AI to keep the launch checklist, open issues, and coordination layer easier to manage under pressure.",
 					description:
-						"For recruiters and staffing agencies: scrape job descriptions across the web to understand market demand, salary ranges, and required skills. Build a comprehensive map of the talent market.",
+						"Release work becomes messy when status is scattered and the team is context-switching. The launch ops agent helps stabilize the coordination layer.",
 					whatsInItForMe:
-						"You become the market expert, armed with real-time data on who is hiring, for how much, and for what skills.",
-					target_audience: "Recruiters and staffing agencies.",
+						"You make launch week easier to operate without adding unnecessary process overhead.",
+					target_audience:
+						"Startup teams that need a lighter-weight operating system around release work.",
 					pain_point:
-						"Manually researching client requirements and competitor open roles is slow and keeps you from placing candidates.",
-					fear: "You lose clients because you don't understand the current salary benchmarks or talent availability.",
-					hope: "You allow data to drive your placement strategy, impressing clients with your deep market knowledge.",
+						"The details around launch create drag because no one has time to keep everything aligned manually.",
+					fear: "Small misses compound into avoidable launch friction and cleanup work.",
+					hope: "The launch process feels controlled enough that the team can focus on the work itself.",
 					solution:
-						"This tool automates the market research, giving you a live view of the entire employment landscape in your niche.",
+						"The agent provides a clearer coordination layer around the release without pretending to replace real judgment.",
 					highlights: [
-						"Analyze salary trends",
-						"Map skills demand",
-						"Monitor competitor hiring",
-						"Batch export to ATS",
+						"Reduce release chaos",
+						"Keep status visible",
+						"Lower coordination overhead",
+						"Support cleaner handoff",
 					],
-					highlighted_words: ["Automate", "Market Map", "Sourcing"],
+					highlighted_words: ["Release", "Status", "Control"],
 				},
 			},
 		],
-		startDate: new Date("2024-01-01T00:00:00Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["MCP", "Scraping", "Jobs", "B2B"],
+		tags: ["Agents", "AI", "Launch Ops"],
 	},
 ]);

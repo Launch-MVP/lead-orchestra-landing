@@ -1,18 +1,14 @@
 import { timeline } from "../timeline";
 import { timelineSummary } from "../timelineSummary";
 
-describe("DealScale manifesto timeline", () => {
+describe("Launch MVP manifesto timeline", () => {
 	const expectedSections = [
-		"1️⃣ Origin Story",
-		"2️⃣ Core Belief",
-		"3️⃣ The Blue Ocean Shift",
-		"4️⃣ Our Category",
-		'5️⃣ The Movement - "AI Investing League"',
-		"6️⃣ Emotional North Star",
-		"7️⃣ Value Promise",
-		'8️⃣ Self-Hosted Future - "Own Your AI"',
-		"9️⃣ Signature Taglines",
-		"🔟 Closing Line",
+		"1. Why We Exist",
+		"2. What We Actually Do",
+		"3. How We Work",
+		"4. What We Deliver",
+		"5. What We Refuse",
+		"6. Where This Is Going",
 	];
 
 	it("lists the manifesto sections in order", () => {
@@ -28,16 +24,12 @@ describe("DealScale manifesto timeline", () => {
 	it("includes concise subtitles for manifesto storytelling beats", () => {
 		const subtitles = timeline.map((entry) => entry.subtitle);
 		expect(subtitles).toEqual([
-			"Automation-first freedom for real estate pros",
-			"Wealth is a system, automation is the equalizer",
-			"Reframing CRMs into an earning engine",
-			"Positioned as the AI Wealth Engine",
-			"Turning mastery into a competitive league",
-			"Status, freedom, and momentum over features",
-			"Pillars that translate into tangible outcomes",
-			"Enterprise ownership with aligned incentives",
-			"Mantras that sell lifestyle and leverage",
-			"The manifesto’s leverage promise in one line",
+			"Too many founders spend months circling version one",
+			"Scope, build, launch, and handoff in one delivery model",
+			"The smallest useful version one beats a bloated roadmap",
+			"A usable product, not just a sprint artifact",
+			"No fake velocity, no handoff chaos, no unnecessary scope",
+			"More workshop paths, stronger launch support, sharper specialist help",
 		]);
 	});
 

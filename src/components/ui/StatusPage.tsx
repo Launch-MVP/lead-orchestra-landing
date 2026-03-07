@@ -22,16 +22,17 @@ export function StatusPage({ type, className = "" }: StatusPageProps) {
 
 	const title =
 		searchParams.get("title") ||
-		(isSuccess ? "Payment Successful" : "Payment Failed");
+		(isSuccess ? "Request Confirmed" : "Request Not Completed");
 	const subtitle =
 		searchParams.get("subtitle") ||
 		(isSuccess
-			? "Your order has been confirmed."
-			: "There was an issue with your payment.");
+			? "Your Launch MVP request has been recorded successfully."
+			: "There was a problem processing your Launch MVP request.");
 	const ctaText =
-		searchParams.get("ctaText") || (isSuccess ? "View Orders" : "Try Again");
+		searchParams.get("ctaText") ||
+		(isSuccess ? "View Services" : "Back to Pricing");
 	const ctaHref =
-		searchParams.get("ctaHref") || (isSuccess ? "/orders" : "/products");
+		searchParams.get("ctaHref") || (isSuccess ? "/features" : "/pricing");
 
 	const handleCtaClick = () => {
 		if (ctaHref) {

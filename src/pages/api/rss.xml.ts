@@ -10,7 +10,7 @@ export default async function handler(
 	try {
 		const response = await fetch(BEEHIIV_FEED, {
 			headers: {
-				"User-Agent": "DealScaleRSSProxy/1.0 (+https://dealscale.io)",
+				"User-Agent": "LaunchMVPRSSProxy/1.0 (+https://launchmvp.com)",
 				Accept: "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
 			},
 		});
@@ -33,7 +33,7 @@ export default async function handler(
 		res
 			.status(502)
 			.send(
-				'<?xml version="1.0" encoding="UTF-8"?><rss><channel><title>DealScale Feed Error</title><description>RSS temporarily unavailable.</description></channel></rss>',
+				'<?xml version="1.0" encoding="UTF-8"?><rss><channel><title>Launch MVP Feed Error</title><description>RSS temporarily unavailable.</description></channel></rss>',
 			);
 	}
 }
@@ -49,10 +49,10 @@ async function notifyIndexNow(): Promise<void> {
 	}
 
 	const payload = {
-		host: "dealscale.io",
+		host: "launchmvp.com",
 		key,
-		keyLocation: "https://dealscale.io/06663aa83dc949d6bde61889ae81d42f.txt",
-		urlList: ["https://dealscale.io/rss.xml"],
+		keyLocation: "https://launchmvp.com/06663aa83dc949d6bde61889ae81d42f.txt",
+		urlList: ["https://launchmvp.com/rss.xml"],
 	};
 
 	const response = await fetch("https://api.indexnow.org/indexnow", {

@@ -1,5 +1,4 @@
 import {
-	LicenseType,
 	ProductCategory,
 	type ProductResource,
 	type ProductType,
@@ -31,133 +30,32 @@ const defaultTypes: ProductType["types"] = [
 const defaultColors: ProductType["colors"] = [];
 const defaultSizes: ProductType["sizes"] = [];
 
-// Resource definitions for lead magnets
-const ossScraperStarterResource: ProductResource = {
-	type: "external",
-	url: "https://github.com/leadorchestra/scraper-starter-pack",
-	demoUrl: "https://app.supademo.com/embed/oss-starter",
-};
-
-const mcpTemplatesResource: ProductResource = {
-	type: "external",
-	url: "https://github.com/leadorchestra/mcp-scraper-templates",
-	demoUrl: "https://app.supademo.com/embed/mcp-templates",
-};
-
-const lsfSpecResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/lsf-spec-v1.0.pdf",
-	fileName: "lead-standard-format-v1.0.pdf",
-	fileSize: "2.1 MB",
-};
-
-const scrapingUniversityResource: ProductResource = {
-	type: "external",
-	url: "https://docs.leadorchestra.io/scraping-university",
-	demoUrl: "https://app.supademo.com/embed/scraping-uni",
-};
-
-const nicheLeadSourcesResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/50-niche-lead-sources.pdf",
-	fileName: "50-niche-lead-sources.pdf",
-	fileSize: "3.5 MB",
-};
-
-const listBuildingChallengeResource: ProductResource = {
-	type: "external",
-	url: "https://leadorchestra.notion.site/7-Day-List-Building-Challenge",
-	demoUrl: "https://app.supademo.com/embed/list-challenge",
-};
-
-const agencyLeadMachineResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/agency-lead-machine-funnel.pdf",
-	fileName: "agency-lead-machine-funnel.pdf",
-	fileSize: "5.2 MB",
-};
-
-const appointmentSetterResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/100k-appointment-setter-playbook.pdf",
-	fileName: "100k-appointment-setter-playbook.pdf",
-	fileSize: "4.8 MB",
-};
-
-const sdrProspectingResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/sdr-prospecting-super-pack.zip",
-	fileName: "sdr-prospecting-super-pack.zip",
-	fileSize: "12.3 MB",
-};
-
-const gtmPlaybooksResource: ProductResource = {
-	type: "external",
-	url: "https://leadorchestra.notion.site/30-Weekly-GTM-Playbooks",
-	demoUrl: "https://app.supademo.com/embed/gtm-playbooks",
-};
-
-const hubspotKitResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/hubspot-outbound-automation-kit.zip",
-	fileName: "hubspot-outbound-automation-kit.zip",
-	fileSize: "8.7 MB",
-};
-
-const fsboScrapingKitResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/fsbo-scraping-starter-kit.pdf",
-	fileName: "fsbo-scraping-starter-kit.pdf",
-	fileSize: "3.9 MB",
-};
-
-const offMarketSourcesResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/40-off-market-seller-sources.pdf",
-	fileName: "40-off-market-seller-sources.pdf",
-	fileSize: "2.6 MB",
-};
-
-const wholesalerPipelineResource: ProductResource = {
-	type: "external",
-	url: "https://leadorchestra.notion.site/Wholesaler-Automation-Pipeline",
-	demoUrl: "https://app.supademo.com/embed/wholesaler-pipeline",
-};
-
-const openLeadPlaybookResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/open-lead-playbook.pdf",
-	fileName: "open-lead-playbook.pdf",
-	fileSize: "15.4 MB",
-};
-
-const sitesToScrapeResource: ProductResource = {
-	type: "download",
-	url: "https://assets.leadorchestra.io/lead-magnets/500-sites-you-can-scrape.pdf",
-	fileName: "500-sites-you-can-scrape.pdf",
-	fileSize: "6.2 MB",
-};
-
-const mcpBuilderKitResource: ProductResource = {
-	type: "external",
-	url: "https://github.com/leadorchestra/mcp-builder-kit",
-	demoUrl: "https://app.supademo.com/embed/mcp-builder",
-};
+const resource = (
+	url: string,
+	options: {
+		fileName?: string;
+		fileSize?: string;
+		demoUrl?: string;
+	} = {},
+): ProductResource => ({
+	type: options.fileName ? "download" : "external",
+	url,
+	fileName: options.fileName,
+	fileSize: options.fileSize,
+	demoUrl: options.demoUrl,
+});
 
 export const leadMagnetProducts: ProductType[] = [
-	// For Developers
 	{
-		id: "oss-scraper-starter-pack",
-		name: "Open-Source Scraper Starter Pack",
+		id: "mvp-scope-starter-pack",
+		name: "MVP Scope Starter Pack",
 		description:
-			"A bundle of Playwright starter template, MCP provider boilerplate, LSF validation schema, and 3-5 example scrapers. Clone this → build a scraper → try it in Lead Orchestra.",
+			"A free starter pack with scope prompts, prioritization checklists, and launch framing for founders who need a cleaner version-one plan.",
 		price: 0,
-		sku: "LEAD-MAGNET-OSS-001",
-		slug: "oss-scraper-starter-pack",
-		categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
-		images: [
-			"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-SCOPE-001",
+		slug: "mvp-scope-starter-pack",
+		categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
+		images: ["/products/workflows.png"],
 		types: defaultTypes,
 		abTest: ossScraperStarterPackABTest,
 		reviews: [],
@@ -165,31 +63,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What's included in the starter pack?",
+				question: "Who should start here?",
 				answer:
-					"The pack includes a Playwright starter template, MCP provider boilerplate, LSF validation schema, and 3-5 example scrapers for common sites.",
-			},
-			{
-				question: "Do I need prior scraping experience?",
-				answer:
-					"No, the starter pack is designed for developers of all levels. It includes documentation and examples to get you started quickly.",
+					"Founders who have a product idea but need sharper scope, clearer priorities, and better launch framing before building.",
 			},
 		],
-		resource: ossScraperStarterResource,
+		resource: resource(
+			"https://launchmvp.com/resources/mvp-scope-starter-pack.pdf",
+			{
+				fileName: "mvp-scope-starter-pack.pdf",
+				fileSize: "2.4 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "mcp-scraper-templates",
-		name: "10 MCP Scraper Plugin Templates",
+		id: "launch-workshop-templates",
+		name: "Launch Workshop Templates",
 		description:
-			"Pre-built templates for directory sites, job boards, e-commerce pages, government websites, and local business lists. Turn any website into a Lead Orchestra provider.",
+			"A free bundle of workshop templates for MVP planning, launch copy, user stories, and delivery handoff.",
 		price: 0,
-		sku: "LEAD-MAGNET-MCP-001",
-		slug: "mcp-scraper-templates",
-		categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
-		images: [
-			"https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-TEMPLATES-001",
+		slug: "launch-workshop-templates",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/notion-2.png"],
 		types: defaultTypes,
 		abTest: mcpScraperTemplatesABTest,
 		reviews: [],
@@ -197,26 +94,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What types of sites are covered?",
+				question: "What is included?",
 				answer:
-					"The templates cover directory sites, job boards, e-commerce pages, government websites, and local business lists.",
+					"The bundle includes templates for workshop agendas, scope docs, launch copy, handoff notes, and delivery planning.",
 			},
 		],
-		resource: mcpTemplatesResource,
+		resource: resource(
+			"https://launchmvp.com/resources/launch-workshop-templates.zip",
+			{
+				fileName: "launch-workshop-templates.zip",
+				fileSize: "6.8 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "lead-standard-format-spec",
-		name: "Lead Standard Format (LSF) Specification v1.0",
+		id: "mvp-brief-specification",
+		name: "MVP Brief Specification",
 		description:
-			"The industry standard for lead data normalization. This specification ensures all scraped data is structured, validated, and ready for export to any system.",
+			"A concise spec format for capturing feature intent, constraints, integrations, and launch criteria in one place.",
 		price: 0,
-		sku: "LEAD-MAGNET-LSF-001",
-		slug: "lead-standard-format-spec",
+		sku: "LMVP-RESOURCE-SPEC-001",
+		slug: "mvp-brief-specification",
 		categories: [ProductCategory.FreeResources, ProductCategory.Data],
-		images: [
-			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
-		],
+		images: ["/products/essentials.png"],
 		types: defaultTypes,
 		abTest: lsfSpecABTest,
 		reviews: [],
@@ -224,26 +125,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "Why is LSF important?",
+				question: "Why use this spec?",
 				answer:
-					"LSF standardizes lead data across all sources, making it easy to export, integrate, and share data between systems without custom mapping.",
+					"It gives founders, designers, and engineers a shared product brief that is easier to implement and review.",
 			},
 		],
-		resource: lsfSpecResource,
+		resource: resource(
+			"https://launchmvp.com/resources/mvp-brief-specification.pdf",
+			{
+				fileName: "mvp-brief-specification.pdf",
+				fileSize: "1.7 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "scraping-university",
-		name: "Scraping University: 20 Mini Lessons",
+		id: "mvp-mini-lessons",
+		name: "MVP Mini Lessons",
 		description:
-			"Tiny tutorials covering rate limiting, DOM selection, anti-bot bypass, data normalization, and proxy rotation. Hosted free and virally shareable.",
+			"A free lesson library covering scope cuts, UX tradeoffs, analytics basics, and launch sequencing for early product teams.",
 		price: 0,
-		sku: "LEAD-MAGNET-UNI-001",
-		slug: "scraping-university",
-		categories: [ProductCategory.FreeResources],
-		images: [
-			"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-LESSONS-001",
+		slug: "mvp-mini-lessons",
+		categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
+		images: ["/products/consultation.png"],
 		types: defaultTypes,
 		abTest: scrapingUniversityABTest,
 		reviews: [],
@@ -251,26 +156,25 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What topics are covered?",
+				question: "How long are the lessons?",
 				answer:
-					"Lessons cover rate limiting, DOM selection, anti-bot bypass, data normalization, proxy rotation, and more advanced scraping techniques.",
+					"Each lesson is designed to be short and practical so founders can learn without getting buried in a course.",
 			},
 		],
-		resource: scrapingUniversityResource,
+		resource: resource("https://launchmvp.com/resources/mvp-mini-lessons", {
+			demoUrl: "https://app.supademo.com/embed/mvp-mini-lessons",
+		}),
 	},
-	// For Agencies
 	{
-		id: "50-niche-lead-sources",
-		name: "50 Niche Lead Sources You Can Scrape Today",
+		id: "customer-interview-source-list",
+		name: "Customer Interview Source List",
 		description:
-			"Examples include roofers, dentists, logistics companies, SaaS founders, solar installers, and attorneys. Scrape these 50 niches with Lead Orchestra.",
+			"A curated source list for finding customers, communities, and demand signals before you commit to the wrong MVP.",
 		price: 0,
-		sku: "LEAD-MAGNET-NICHE-001",
-		slug: "50-niche-lead-sources",
-		categories: [ProductCategory.FreeResources, ProductCategory.Leads],
-		images: [
-			"https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-RESEARCH-001",
+		slug: "customer-interview-source-list",
+		categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
+		images: ["/products/notion-2.png"],
 		types: defaultTypes,
 		abTest: nicheLeadSourcesABTest,
 		reviews: [],
@@ -278,26 +182,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What niches are included?",
+				question: "What does this help with?",
 				answer:
-					"The guide includes roofers, dentists, logistics companies, SaaS founders, solar installers, attorneys, and 44 more niche verticals.",
+					"It helps you find better research inputs so product decisions are based on actual customer language and demand clues.",
 			},
 		],
-		resource: nicheLeadSourcesResource,
+		resource: resource(
+			"https://launchmvp.com/resources/customer-interview-source-list.pdf",
+			{
+				fileName: "customer-interview-source-list.pdf",
+				fileSize: "2.9 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "7-day-list-building-challenge",
-		name: "The 7-Day List-Building Challenge",
+		id: "seven-day-launch-challenge",
+		name: "7-Day Launch Challenge",
 		description:
-			"Daily prompts: Day 1: Scrape → Day 2: Clean → Day 3: Enrich → Day 4: Score → Day 5: Build lead magnet → Day 6: Create email sequence → Day 7: Book meetings.",
+			"A guided challenge for clarifying the MVP, tightening the launch message, and preparing the product for a faster release.",
 		price: 0,
-		sku: "LEAD-MAGNET-CHALLENGE-001",
-		slug: "7-day-list-building-challenge",
-		categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
-		images: [
-			"https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-CHALLENGE-001",
+		slug: "seven-day-launch-challenge",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/workflows.png"],
 		types: defaultTypes,
 		abTest: listBuildingChallengeABTest,
 		reviews: [],
@@ -305,25 +213,23 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "How long does each day take?",
+				question: "How much time does it take?",
 				answer:
-					"Each day's challenge is designed to take 30-60 minutes, with clear step-by-step instructions and templates provided.",
+					"Each day is designed as a short focused block so founders can make real progress without blocking their whole week.",
 			},
 		],
-		resource: listBuildingChallengeResource,
+		resource: resource("https://launchmvp.notion.site/7-Day-Launch-Challenge"),
 	},
 	{
-		id: "agency-lead-machine-funnel",
-		name: "Agency Lead Machine Funnel Kit",
+		id: "founder-funnel-kit",
+		name: "Founder Funnel Kit",
 		description:
-			"Includes landing page template, cold email sequence, scraper workflow, Deal Scale upsell, and offer stack. Everything you need to build a complete lead generation funnel.",
+			"A simple launch funnel kit for packaging an MVP offer, landing page, and consultation CTA into one usable system.",
 		price: 0,
-		sku: "LEAD-MAGNET-AGENCY-001",
-		slug: "agency-lead-machine-funnel",
-		categories: [ProductCategory.FreeResources, ProductCategory.Automation],
-		images: [
-			"https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-FUNNEL-001",
+		slug: "founder-funnel-kit",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/consultation.png"],
 		types: defaultTypes,
 		abTest: agencyLeadMachineABTest,
 		reviews: [],
@@ -331,25 +237,29 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What's included in the kit?",
+				question: "Who is this best for?",
 				answer:
-					"The kit includes landing page template, cold email sequence, scraper workflow, Deal Scale upsell strategy, and complete offer stack.",
+					"It is best for founders who have a product or service offer but need a cleaner way to present and route demand.",
 			},
 		],
-		resource: agencyLeadMachineResource,
+		resource: resource(
+			"https://launchmvp.com/resources/founder-funnel-kit.pdf",
+			{
+				fileName: "founder-funnel-kit.pdf",
+				fileSize: "4.2 MB",
+			},
+		),
 	},
 	{
-		id: "appointment-setter-playbook",
-		name: "The $100k/yr Appointment Setter Playbook",
+		id: "founder-call-playbook",
+		name: "Founder Call Playbook",
 		description:
-			"Teach agencies how to use Lead Orchestra + Deal Scale to deliver for clients. Complete guide to building a profitable appointment setting service.",
+			"A free playbook for running sharper consultation calls, clarifying scope, and turning vague discovery into a usable next step.",
 		price: 0,
-		sku: "LEAD-MAGNET-APPT-001",
-		slug: "appointment-setter-playbook",
-		categories: [ProductCategory.FreeResources],
-		images: [
-			"https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-CALLS-001",
+		slug: "founder-call-playbook",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/consultation.png"],
 		types: defaultTypes,
 		abTest: appointmentSetterPlaybookABTest,
 		reviews: [],
@@ -357,26 +267,29 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "Is this for agencies or individual appointment setters?",
+				question: "What does the playbook cover?",
 				answer:
-					"The playbook is designed for both agencies and individual appointment setters looking to scale their service using Lead Orchestra and Deal Scale.",
+					"It covers discovery prompts, scope clarification, objections, and how to conclude calls with a clear next step.",
 			},
 		],
-		resource: appointmentSetterResource,
+		resource: resource(
+			"https://launchmvp.com/resources/founder-call-playbook.pdf",
+			{
+				fileName: "founder-call-playbook.pdf",
+				fileSize: "3.1 MB",
+			},
+		),
 	},
-	// For SDR/RevOps
 	{
-		id: "sdr-prospecting-super-pack",
-		name: "The SDR Prospecting Super Pack",
+		id: "beta-outreach-pack",
+		name: "Beta Outreach Pack",
 		description:
-			"Templates for competitor scraping, partner scraping, intent list scraping, and ideal customer list builder. Everything SDRs need to build better prospect lists.",
+			"A free pack of outreach templates for recruiting beta users, running interviews, and closing the loop with launch feedback.",
 		price: 0,
-		sku: "LEAD-MAGNET-SDR-001",
-		slug: "sdr-prospecting-super-pack",
-		categories: [ProductCategory.FreeResources, ProductCategory.Leads],
-		images: [
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-BETA-001",
+		slug: "beta-outreach-pack",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/notion-2.png"],
 		types: defaultTypes,
 		abTest: sdrProspectingPackABTest,
 		reviews: [],
@@ -384,26 +297,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What templates are included?",
+				question: "Is this only for pre-launch products?",
 				answer:
-					"The pack includes templates for competitor scraping, partner scraping, intent list scraping, and ideal customer list builder.",
+					"No. It works for both pre-launch validation and post-launch feedback collection.",
 			},
 		],
-		resource: sdrProspectingResource,
+		resource: resource(
+			"https://launchmvp.com/resources/beta-outreach-pack.zip",
+			{
+				fileName: "beta-outreach-pack.zip",
+				fileSize: "5.6 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "30-gtm-weekly-playbooks",
-		name: "30 Weekly Playbooks for GTM Teams",
+		id: "launch-playbook-bundle",
+		name: "Launch Playbook Bundle",
 		description:
-			"Examples include 'Scrape job boards to find buyers hiring engineers,' 'Scrape competitor customers from testimonials,' and 'Scrape top 100 high-intent ICPs monthly.'",
+			"A bundle of weekly launch playbooks covering messaging, activation, content, and post-launch follow-through.",
 		price: 0,
-		sku: "LEAD-MAGNET-GTM-001",
-		slug: "30-gtm-weekly-playbooks",
-		categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
-		images: [
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-PLAYBOOKS-001",
+		slug: "launch-playbook-bundle",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/workflows.png"],
 		types: defaultTypes,
 		abTest: gtmPlaybooksABTest,
 		reviews: [],
@@ -411,25 +328,23 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "How are the playbooks organized?",
+				question: "What kinds of playbooks are included?",
 				answer:
-					"Each playbook is a weekly template with step-by-step instructions, target sources, and expected outcomes for GTM teams.",
+					"The bundle includes launch messaging, founder-led content, beta follow-up, and post-launch activation workflows.",
 			},
 		],
-		resource: gtmPlaybooksResource,
+		resource: resource("https://launchmvp.notion.site/Launch-Playbook-Bundle"),
 	},
 	{
-		id: "hubspot-outbound-automation-kit",
-		name: "HubSpot Outbound Automation Kit",
+		id: "launch-ops-kit",
+		name: "Launch Ops Kit",
 		description:
-			"Contains import-ready LSF fields, sample workflows, and scripts for auto-scoring via Deal Scale. Seamlessly integrate Lead Orchestra with HubSpot.",
+			"A free operations kit for launch checklists, issue logging, analytics review, and post-release handoff tracking.",
 		price: 0,
-		sku: "LEAD-MAGNET-HUBSPOT-001",
-		slug: "hubspot-outbound-automation-kit",
-		categories: [ProductCategory.FreeResources, ProductCategory.Automation],
-		images: [
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-OPS-001",
+		slug: "launch-ops-kit",
+		categories: [ProductCategory.FreeResources, ProductCategory.Data],
+		images: ["/products/essentials.png"],
 		types: defaultTypes,
 		abTest: hubspotKitABTest,
 		reviews: [],
@@ -437,26 +352,26 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "Do I need HubSpot experience?",
+				question: "What problem does this solve?",
 				answer:
-					"Basic HubSpot knowledge is helpful, but the kit includes step-by-step instructions for setting up the automation workflows.",
+					"It keeps launch operations visible and organized so follow-through does not disappear into random docs and messages.",
 			},
 		],
-		resource: hubspotKitResource,
+		resource: resource("https://launchmvp.com/resources/launch-ops-kit.zip", {
+			fileName: "launch-ops-kit.zip",
+			fileSize: "4.9 MB",
+		}),
 	},
-	// For Real Estate
 	{
-		id: "fsbo-scraping-starter-kit",
-		name: "FSBO Scraping Starter Kit",
+		id: "user-story-kit",
+		name: "User Story Kit",
 		description:
-			"A PDF + video guide: How to scrape FSBO, how to enrich owners, and how to run AI calling in Deal Scale. Complete automation pipeline for real estate investors.",
+			"A guided kit for turning founder notes into clearer user stories, acceptance criteria, and implementation-ready tickets.",
 		price: 0,
-		sku: "LEAD-MAGNET-FSBO-001",
-		slug: "fsbo-scraping-starter-kit",
-		categories: [ProductCategory.FreeResources, ProductCategory.Leads],
-		images: [
-			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-STORIES-001",
+		slug: "user-story-kit",
+		categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
+		images: ["/products/essentials.png"],
 		types: defaultTypes,
 		abTest: fsboScrapingKitABTest,
 		reviews: [],
@@ -464,26 +379,26 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What's included in the kit?",
+				question: "When should I use this?",
 				answer:
-					"The kit includes a PDF guide and video tutorial covering FSBO scraping, owner enrichment, and AI calling automation in Deal Scale.",
+					"Use it when features are still vague and the team needs clearer tickets before implementation starts.",
 			},
 		],
-		resource: fsboScrapingKitResource,
-		isFeaturedFreeResource: true,
+		resource: resource("https://launchmvp.com/resources/user-story-kit.pdf", {
+			fileName: "user-story-kit.pdf",
+			fileSize: "2.0 MB",
+		}),
 	},
 	{
-		id: "40-off-market-seller-sources",
-		name: "40 Off-Market Seller Sources You Can Scrape Today",
+		id: "landing-page-outline",
+		name: "Landing Page Outline",
 		description:
-			"Niche verticals including FSBO, expired, auctions, rentals, probate sites, and county records. Find off-market deals your competitors can't access.",
+			"A free outline for structuring the hero, proof, offer, objections, and CTA flow of a product launch landing page.",
 		price: 0,
-		sku: "LEAD-MAGNET-OFFMARKET-001",
-		slug: "40-off-market-seller-sources",
-		categories: [ProductCategory.FreeResources, ProductCategory.Leads],
-		images: [
-			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-LANDING-001",
+		slug: "landing-page-outline",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/notion-2.png"],
 		types: defaultTypes,
 		abTest: offMarketSourcesABTest,
 		reviews: [],
@@ -491,25 +406,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What sources are covered?",
+				question: "Does this include copy?",
 				answer:
-					"The guide covers FSBO, expired listings, auctions, rentals, probate sites, county records, and 34 more off-market sources.",
+					"It includes structure and prompts for the core sections so the first draft is much easier to write.",
 			},
 		],
-		resource: offMarketSourcesResource,
+		resource: resource(
+			"https://launchmvp.com/resources/landing-page-outline.pdf",
+			{
+				fileName: "landing-page-outline.pdf",
+				fileSize: "1.4 MB",
+			},
+		),
+		isFeaturedFreeResource: true,
 	},
 	{
-		id: "wholesaler-automation-pipeline",
-		name: "Wholesaler Automation Pipeline Template",
+		id: "launch-workflow-template",
+		name: "Launch Workflow Template",
 		description:
-			"Complete workflow: Scrape → skip trace → qualify → follow-up → schedule appointment. Automate your entire wholesaling pipeline with Lead Orchestra + Deal Scale.",
+			"A visual workflow template for moving from scope to build, QA, launch, and handoff with fewer missed steps.",
 		price: 0,
-		sku: "LEAD-MAGNET-WHOLESALER-001",
-		slug: "wholesaler-automation-pipeline",
-		categories: [ProductCategory.FreeResources, ProductCategory.Automation],
-		images: [
-			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-WORKFLOW-001",
+		slug: "launch-workflow-template",
+		categories: [ProductCategory.FreeResources, ProductCategory.Data],
+		images: ["/products/workflows.png"],
 		types: defaultTypes,
 		abTest: wholesalerPipelineABTest,
 		reviews: [],
@@ -517,26 +437,25 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "Is this for experienced wholesalers?",
+				question: "Who should use this workflow?",
 				answer:
-					"The template works for both new and experienced wholesalers looking to automate their deal pipeline from scraping to appointment booking.",
+					"It works best for founders and small product teams that need one visible delivery path from scope to release.",
 			},
 		],
-		resource: wholesalerPipelineResource,
+		resource: resource(
+			"https://launchmvp.notion.site/Launch-Workflow-Template",
+		),
 	},
-	// Cross-market (Universal)
 	{
-		id: "open-lead-playbook",
-		name: "The Open Lead Playbook (Flagship)",
+		id: "open-mvp-playbook",
+		name: "Open MVP Playbook",
 		description:
-			"A beautifully designed, 20-30 page guide covering how to find leads, scrape, clean, enrich, follow up, and automate. Positions Lead Orchestra as the open-source standard.",
+			"A flagship guide to scoping, building, validating, and shipping an MVP without bloated process or endless planning loops.",
 		price: 0,
-		sku: "LEAD-MAGNET-PLAYBOOK-001",
-		slug: "open-lead-playbook",
-		categories: [ProductCategory.FreeResources],
-		images: [
-			"https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-PLAYBOOK-001",
+		slug: "open-mvp-playbook",
+		categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
+		images: ["/products/consultation.png"],
 		types: defaultTypes,
 		abTest: openLeadPlaybookABTest,
 		reviews: [],
@@ -544,26 +463,30 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What makes this the flagship guide?",
+				question: "Why is this the flagship resource?",
 				answer:
-					"This is our most comprehensive guide, covering the complete lead generation workflow from finding leads to automation, positioning Lead Orchestra as the industry standard.",
+					"It brings the whole launch approach together in one opinionated guide instead of scattered templates.",
 			},
 		],
-		resource: openLeadPlaybookResource,
+		resource: resource(
+			"https://launchmvp.com/resources/open-mvp-playbook.pdf",
+			{
+				fileName: "open-mvp-playbook.pdf",
+				fileSize: "7.3 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 	{
-		id: "500-sites-you-can-scrape",
-		name: "500 Sites You Can Scrape for Leads",
+		id: "50-launch-hooks",
+		name: "50 Launch Hooks",
 		description:
-			"This will go insanely viral. No other tool publishes this comprehensive list. Find leads from 500+ sources your competitors don't know about.",
+			"A swipe file of launch hooks for landing pages, short-form content, demos, and founder-led distribution.",
 		price: 0,
-		sku: "LEAD-MAGNET-500-001",
-		slug: "500-sites-you-can-scrape",
-		categories: [ProductCategory.FreeResources, ProductCategory.Leads],
-		images: [
-			"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-HOOKS-001",
+		slug: "50-launch-hooks",
+		categories: [ProductCategory.FreeResources, ProductCategory.Support],
+		images: ["/products/consultation.png"],
 		types: defaultTypes,
 		abTest: sitesToScrapeABTest,
 		reviews: [],
@@ -571,26 +494,26 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "Are these sites organized by category?",
+				question: "What can I use the hooks for?",
 				answer:
-					"Yes, the list is organized by industry, vertical, and data type, making it easy to find relevant sources for your specific needs.",
+					"You can use them for landing pages, content posts, outbound messages, and launch teaser copy.",
 			},
 		],
-		resource: sitesToScrapeResource,
-		isFeaturedFreeResource: true,
+		resource: resource("https://launchmvp.com/resources/50-launch-hooks.pdf", {
+			fileName: "50-launch-hooks.pdf",
+			fileSize: "1.1 MB",
+		}),
 	},
 	{
-		id: "mcp-scraper-builder-kit",
-		name: "MCP Scraper Builder Kit",
+		id: "ai-feature-planning-kit",
+		name: "AI Feature Planning Kit",
 		description:
-			"Turn ANY website into a Lead Orchestra provider. Complete toolkit with documentation, templates, and examples to build custom MCP scrapers.",
+			"A planning kit for turning AI feature ideas into usable product behavior with prompt logic, evaluation, and launch constraints.",
 		price: 0,
-		sku: "LEAD-MAGNET-MCP-BUILDER-001",
-		slug: "mcp-scraper-builder-kit",
-		categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
-		images: [
-			"https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop&q=80",
-		],
+		sku: "LMVP-RESOURCE-AI-001",
+		slug: "ai-feature-planning-kit",
+		categories: [ProductCategory.FreeResources, ProductCategory.Data],
+		images: ["/products/essentials.png"],
 		types: defaultTypes,
 		abTest: mcpBuilderKitABTest,
 		reviews: [],
@@ -598,12 +521,18 @@ export const leadMagnetProducts: ProductType[] = [
 		sizes: defaultSizes,
 		faqs: [
 			{
-				question: "What's included in the builder kit?",
+				question: "What is this best for?",
 				answer:
-					"The kit includes documentation, templates, examples, and step-by-step guides to turn any website into a Lead Orchestra MCP provider.",
+					"It is best for founders planning AI-powered MVP features that need real product logic, not just a demo concept.",
 			},
 		],
-		resource: mcpBuilderKitResource,
+		resource: resource(
+			"https://launchmvp.com/resources/ai-feature-planning-kit.zip",
+			{
+				fileName: "ai-feature-planning-kit.zip",
+				fileSize: "5.1 MB",
+			},
+		),
 		isFeaturedFreeResource: true,
 	},
 ].map((product) => ({

@@ -59,20 +59,18 @@ export function FeatureTimelineTable({
 			)}
 		>
 			<CardHeader className="gap-2">
-				<CardTitle className="text-balance text-2xl">
-					Delivery Roadmap
-				</CardTitle>
+				<CardTitle className="text-balance text-2xl">Service Roadmap</CardTitle>
 				<CardDescription className="text-pretty">
-					A transparent view of what is live inside Lead Orchestra today, what
-					is enjoying limited beta access, and the initiatives we are building
-					next for developers, agencies, and data teams.
+					A transparent view of what Launch MVP offers today, what is in limited
+					pilot mode, and the service lines we are building next for founders,
+					startups, and product teams.
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="pt-4">
 				<Table>
 					<TableCaption className="text-muted-foreground text-xs">
-						Status values update automatically from our product ops module—no
-						screenshots, no stale decks.
+						Status values update from the internal delivery roadmap so the page
+						stays current without stale decks or manual screenshots.
 					</TableCaption>
 					<TableHeader>
 						<TableRow className="bg-muted/40 hover:bg-muted/40">

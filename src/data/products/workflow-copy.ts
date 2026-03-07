@@ -2,408 +2,335 @@ import { defineAbTests } from "./copy";
 
 export const zillowScrapingWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-zillow-scraper-v1",
-		name: "Zillow Scraper Workflow Copy Test",
+		id: "ab-test-mvp-scope-system-v1",
+		name: "MVP Scope System Copy Test",
 		description:
-			"Testing copy variants (Speed vs. Data Quality) for the Zillow Scraping Workflow to optimize sales.",
+			"Testing copy variants for a reusable MVP scoping workflow product.",
 		variants: [
 			{
-				name: "V1 - Speed & Volume",
+				name: "V1 - Scope Faster",
 				percentage: 50,
 				copy: {
-					cta: "Scrape Zillow at Scale",
-					buttonCta: "Get the Workflow",
-					tagline: "Turn Zillow into Your Personal Database.",
+					cta: "Scope Your MVP Faster",
+					buttonCta: "Get the System",
+					tagline: "Turn Product Chaos into a Launchable Plan.",
 					subtitle:
-						"The fastest way to scrape thousands of Zillow listings and turn them into actionable leads.",
+						"A reusable scope-cutting system for founders who need the right version-one plan before they start building.",
 					description:
-						"Stop manually copying and pasting properties. This workflow automates the entire process, scraping listings, prices, and agent details in seconds so you can focus on making offers.",
+						"Use a structured scoping workflow to cut loose ideas down into a tighter product plan, clearer priorities, and a more realistic launch path.",
 					whatsInItForMe:
-						"Save hundreds of hours of manual work and get instant access to market data across entire zip codes.",
+						"You stop guessing which features matter and start making tighter product decisions faster.",
 					target_audience:
-						"Real estate investors and wholesalers looking for volume.",
+						"Founders and product teams still shaping the first real version of the product.",
 					pain_point:
-						"Manually building lists from Zillow is slow, tedious, and doesn't scale.",
-					fear: "You miss out on deals because you cant analyze the market fast enough.",
-					hope: "You have a constant stream of fresh property data feeding your deal pipeline.",
+						"The MVP keeps expanding because there is no disciplined scoping system in place.",
+					fear: "You waste budget building a bigger, blurrier version one than you actually need.",
+					hope: "You get to a sharper product plan without long planning cycles or consulting sprawl.",
 					solution:
-						"Automated scraping that pulls every detail you need from Zillow instantly.",
+						"This system gives you a repeatable framework for reducing scope and clarifying the launch path.",
 					highlights: [
-						"Scrape thousands of listings",
-						"Extract agent contacts",
-						"Export to CSV/Excel",
-						"Daily automated runs",
+						"Reduce scope faster",
+						"Clarify version-one priorities",
+						"Make tradeoffs visible",
+						"Create a cleaner launch plan",
 					],
-					highlighted_words: ["Scale", "Automated", "Speed"],
+					highlighted_words: ["Scope", "Plan", "Launch"],
 				},
 			},
 			{
-				name: "V2 - Data Quality & Analysis",
+				name: "V2 - Avoid Rebuilds",
 				percentage: 50,
 				copy: {
-					cta: "Get Precision Property Data",
-					buttonCta: "Install Scraper",
-					tagline: "Deep Insights for Smarter Deals.",
+					cta: "Avoid the Wrong Version One",
+					buttonCta: "Install Workflow",
+					tagline: "Decide Better Before You Build More.",
 					subtitle:
-						"Extract comprehensive property details, tax history, and price changes for superior market analysis.",
+						"A decision workflow built to reduce expensive feature drift and avoid rebuilding the wrong product later.",
 					description:
-						"Make data-driven decisions with complete property profiles. This tool goes beyond basic listings to capture hidden value indicators like price drops and tax history.",
+						"The fastest way to lose time is to build too much too early. This workflow helps teams pressure-test assumptions before they become costly implementation work.",
 					whatsInItForMe:
-						"Get the high-fidelity data you need to accurately underwrite deals and spot opportunities others miss.",
+						"You reduce wasted engineering effort by making the key product choices earlier and more clearly.",
 					target_audience:
-						"Sophisticated investors and analysts requiring detailed property data.",
+						"Startup teams that need stronger product judgment before committing engineering time.",
 					pain_point:
-						"Incomplete data leads to bad underwriting and risky investment decisions.",
-					fear: "Buying a lemon or overpaying because you didn't have the full picture.",
-					hope: "You have a competitive edge with deeper data than your competition.",
+						"Teams start building before the product shape is stable enough to justify the effort.",
+					fear: "You end up paying twice for architecture and UX because version one was never scoped tightly.",
+					hope: "You reach a launchable product shape that can actually survive first contact with users.",
 					solution:
-						"A precision scraper that captures every available data point for thorough analysis.",
+						"The workflow structures the questions and decisions that stop rebuilds before they start.",
 					highlights: [
-						"Deep property details",
-						"Price history tracking",
-						"Tax & assessment data",
-						"Clean, normalized format",
+						"Reduce rebuild risk",
+						"Pressure-test assumptions",
+						"Make cleaner tradeoffs",
+						"Protect build budget",
 					],
-					highlighted_words: ["Precision", "Insights", "Data"],
+					highlighted_words: ["Rebuild", "Tradeoffs", "Budget"],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Scraping", "Zillow", "Data"],
+		tags: ["Workflows", "Strategy", "MVP", "Scoping"],
 	},
 ]);
 
 export const linkedinScrapingWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-linkedin-scraper-v1",
-		name: "LinkedIn Scraper Workflow Copy Test",
+		id: "ab-test-beta-feedback-system-v1",
+		name: "Beta Feedback System Copy Test",
 		description:
-			"Testing copy variants (Lead Gen vs. Enrichment) for the LinkedIn Scraping Workflow.",
+			"Testing copy variants for a reusable beta user recruitment and feedback workflow.",
 		variants: [
 			{
-				name: "V1 - B2B Lead Gen",
+				name: "V1 - Recruit Better Testers",
 				percentage: 50,
 				copy: {
-					cta: "Fill Your B2B Pipeline",
-					buttonCta: "Start Scraping",
-					tagline: "The Ultimate B2B Lead Gen Tool.",
+					cta: "Recruit Better Beta Users",
+					buttonCta: "Get the Workflow",
+					tagline: "Find the Right Early Users Faster.",
 					subtitle:
-						"Automatically find and export decision-makers in your target niche directly from LinkedIn.",
+						"A reusable workflow for beta-user outreach, intake, and structured feedback collection.",
 					description:
-						"Forget expensive lead databases. Build your own targeted lists by scraping companies and employees directly from the source. Get verify email addresses and direct contact info.",
+						"Launches stall when the team has no clear way to recruit testers and capture usable feedback. This workflow gives founders a cleaner beta loop.",
 					whatsInItForMe:
-						"Generate unlimited B2B leads for a fraction of the cost of buying lists.",
-					target_audience: "B2B sales teams, recruiters, and agencies.",
+						"You create a repeatable path from outreach to actionable product feedback.",
+					target_audience:
+						"Founders trying to validate quickly with early users instead of building in a vacuum.",
 					pain_point:
-						"Paying heavily for outdated lead lists that have low response rates.",
-					fear: "Your sales team has an empty pipeline and no one to call.",
-					hope: "You have a self-filling pipeline of high-quality, targeted prospects.",
+						"Feedback collection is inconsistent, unstructured, and easy to ignore after launch pressure kicks in.",
+					fear: "You ship without learning enough from the first users who actually touch the product.",
+					hope: "You turn early conversations into specific product insight instead of vague opinions.",
 					solution:
-						"Automated LinkedIn scraping that identifies and captures your ideal customer profiles.",
+						"The workflow ties outreach, intake, and follow-up into one clearer feedback system.",
 					highlights: [
-						"Find decision makers",
-						"Export company data",
-						"Enrich with emails",
-						"Target by industry/role",
+						"Recruit testers faster",
+						"Collect structured feedback",
+						"Keep the loop organized",
+						"Improve post-launch learning",
 					],
-					highlighted_words: ["Pipeline", "Leads", "B2B"],
+					highlighted_words: ["Beta Users", "Feedback", "Validation"],
 				},
 			},
 			{
-				name: "V2 - Data Enrichment",
+				name: "V2 - Learn Faster After Launch",
 				percentage: 50,
 				copy: {
-					cta: "Enrich Your CRM Data",
-					buttonCta: "Get Data Tool",
-					tagline: "Keep Your CRM Up to Date.",
+					cta: "Tighten Your Feedback Loop",
+					buttonCta: "Start System",
+					tagline: "Make Early User Input Actually Useful.",
 					subtitle:
-						"Automatically update your contact records with the latest job titles, companies, and locations from LinkedIn.",
+						"A launch workflow designed to turn scattered feedback into prioritized next steps.",
 					description:
-						"Bad data is the silent killer of sales productivity. Keep your CRM fresh by verifying and updating contact details against live LinkedIn profiles automatically.",
+						"Collecting feedback is not enough. Teams need a clearer way to route what matters back into the roadmap without drowning in notes and opinions.",
 					whatsInItForMe:
-						"Maintain a pristine database that improves email deliverability and personalization.",
+						"You shorten the distance between user feedback and product improvement.",
 					target_audience:
-						"RevOps professionals and data-driven sales organizations.",
+						"Product teams and founders who want tighter iteration after the first release.",
 					pain_point:
-						"Your CRM is full of decayed data, leading to bounced emails and wasted effort.",
-					fear: "Your outreach is landing in the void because your data is old.",
-					hope: "Your team trusts their data implicitly, knowing it mimics the live state of the network.",
+						"Useful feedback gets buried because there is no clear operating system around it.",
+					fear: "You miss the signals that would have helped version two improve faster.",
+					hope: "You build a launch process where early user input directly sharpens the roadmap.",
 					solution:
-						"A workflow that continuously validates and updates your records against LinkedIn data.",
+						"The workflow creates a cleaner path from first user contact to concrete product action.",
 					highlights: [
-						"Verify job titles",
-						"Update company info",
-						"Clean old data",
-						"Improve deliverability",
+						"Reduce feedback chaos",
+						"Prioritize with structure",
+						"Improve iteration speed",
+						"Connect insight to roadmap",
 					],
-					highlighted_words: ["Enrich", "Fresh", "Verify"],
+					highlighted_words: ["Feedback Loop", "Roadmap", "Iteration"],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Scraping", "LinkedIn", "B2B"],
+		tags: ["Workflows", "Support", "Beta", "Feedback"],
 	},
 ]);
 
 export const multiSourceScrapingWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-multi-source-scraper-v1",
-		name: "Multi-Source Scraper Workflow Copy Test",
+		id: "ab-test-launch-analytics-system-v1",
+		name: "Launch Analytics System Copy Test",
 		description:
-			"Testing copy variants (Unified Data vs. Agency Scale) for the Multi-Source Scraping Workflow.",
+			"Testing copy variants for a reusable launch analytics and reporting workflow.",
 		variants: [
 			{
-				name: "V1 - Unified Data Schema",
+				name: "V1 - Get Visibility Fast",
 				percentage: 50,
 				copy: {
-					cta: "All Your Data, One Format",
-					buttonCta: "Get Unified Workflow",
-					tagline: "Stop Wrestling with Messy CSVs.",
+					cta: "See What the Launch Is Doing",
+					buttonCta: "Get Dashboard Workflow",
+					tagline: "Launch with Numbers You Can Actually Use.",
 					subtitle:
-						"Scrape Zillow, Realtor.com, and LinkedIn and get one clean, unified dataset ready for your CRM.",
+						"A reusable reporting workflow for founders who need a cleaner read on activation, usage, and early product traction.",
 					description:
-						"Data form different sources is a nightmare to merge. This workflow uses Lead Standard Format (LSF) to normalize everything automatically, so you can upload to your CRM without a headache.",
+						"Launching without a usable analytics loop creates false confidence. This workflow gives teams a practical way to track what matters right away.",
 					whatsInItForMe:
-						"Save hours of data cleaning and formatting every single week.",
+						"You stop relying on vague impressions and start reading launch performance with more clarity.",
 					target_audience:
-						"Data engineers and operations managers handling multiple data streams.",
+						"Founders and product teams that need a simple operating dashboard after release.",
 					pain_point:
-						"Spending more time formatting spreadsheets than actually using the data.",
-					fear: "Your database becomes a swamp of duplicate and mismatched records.",
-					hope: "You have a pristine, golden record for every lead, regardless of where it came from.",
+						"Launch metrics often end up fragmented across tools, tabs, and ad hoc screenshots.",
+					fear: "You make product decisions on intuition because the launch data is too messy to trust.",
+					hope: "You know which behaviors matter and where users are stalling after launch.",
 					solution:
-						"Automatic normalization that maps every source to a single, consistent schema.",
+						"The workflow centralizes the early analytics loop into a cleaner operating view.",
 					highlights: [
-						"Unified Lead Standard Format",
-						"Auto-deduplication",
-						"Clean address parsing",
-						"CRM-ready exports",
+						"Track activation faster",
+						"Centralize launch metrics",
+						"Reduce reporting mess",
+						"Improve early product judgment",
 					],
-					highlighted_words: ["Unified", "Clean", "Normalized"],
+					highlighted_words: ["Analytics", "Visibility", "Launch"],
 				},
 			},
 			{
-				name: "V2 - Agency Scale",
+				name: "V2 - Improve Product Judgment",
 				percentage: 50,
 				copy: {
-					cta: "Power Your Lead Agency",
-					buttonCta: "Scale Operations",
-					tagline: "Enterprise-Grade Scraping Infrastructure.",
+					cta: "Clean Up Your Launch Metrics",
+					buttonCta: "Install Reporting Flow",
+					tagline: "Stop Guessing What the Product Needs Next.",
 					subtitle:
-						"The robust engine designed to handle millions of records across multiple platforms for high-volume lead agencies.",
+						"A reporting workflow that helps teams connect user behavior to product prioritization after launch.",
 					description:
-						"When you are selling data, reliability is everything. This multi-source workflow is built for high throughput and redundancy, ensuring you always have data to deliver to your clients.",
+						"Teams frequently have analytics installed but not operationalized. This workflow helps turn events and dashboards into better product decisions.",
 					whatsInItForMe:
-						"Build a scalable data business on top of rock-solid infrastructure.",
+						"You get a more reliable feedback system for deciding what to fix, improve, or ship next.",
 					target_audience:
-						"Lead generation agencies and large-scale data vendors.",
+						"Startup teams trying to keep post-launch decisions grounded in actual usage.",
 					pain_point:
-						"Scrapers breaking constantly and IP bans stopping your delivery.",
-					fear: "Losing clients because you can't fulfill their data orders on time.",
-					hope: "You become the most reliable data provider in your niche, commanding premium prices.",
+						"The team has data, but not a practical system for reading and acting on it.",
+					fear: "Roadmap choices drift because the numbers are not helping the team prioritize clearly.",
+					hope: "Your analytics become an operating tool instead of a passive dashboard.",
 					solution:
-						"A resilient, multi-proxy scraping network that guarantees data delivery at scale.",
+						"The workflow turns launch data into a cleaner decision-support system for the next build cycle.",
 					highlights: [
-						"High-volume throughput",
-						"Smart proxy rotation",
-						"99.9% uptime reliability",
-						"API access",
+						"Improve prioritization",
+						"Turn data into decisions",
+						"Support the next sprint",
+						"Reduce dashboard sprawl",
 					],
-					highlighted_words: ["Scale", "Reliable", "Enterprise"],
+					highlighted_words: ["Prioritization", "Data", "Decisions"],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Scraping", "Enterprise", "Scale"],
+		tags: ["Workflows", "Data", "Analytics", "Launch"],
 	},
 ]);
 
 export const buyerLeadNurtureWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-buyer-lead-nurture-workflow-v1",
-		name: "Buyer Lead Nurture Workflow Copy Test",
+		id: "ab-test-founder-update-flow-v1",
+		name: "Founder Update Flow Copy Test",
 		description:
-			"Testing copy variants (Conversion Rate vs. Client Experience) for the Buyer Lead Nurture Workflow to optimize sales.",
+			"Testing copy variants for a reusable stakeholder update and progress workflow.",
 		variants: [
 			{
-				name: "V1 - Maximize Conversions",
-				percentage: 50,
+				name: "V1 - Keep Stakeholders Aligned",
+				percentage: 100,
 				copy: {
-					cta: "Convert More Buyer Leads",
+					cta: "Streamline Founder Updates",
 					buttonCta: "Get the Workflow",
-					tagline: "Turn More Leads into Commissions.",
+					tagline: "Keep Product Progress Easy to See.",
 					subtitle:
-						"The automated workflow designed to nurture your buyer leads and maximize your conversion rates.",
+						"A lightweight operating workflow for weekly updates, launch progress, and stakeholder visibility.",
 					whatsInItForMe:
-						"This system ensures no lead is forgotten, increasing your appointment-set rate and directly boosting your commission income.",
+						"You spend less time reconstructing status and more time moving the product forward.",
 					target_audience:
-						"Real estate agents and teams focused on maximizing revenue from their lead spend.",
+						"Founders and product leads managing internal stakeholders.",
 					pain_point:
-						"You're paying for buyer leads, but a low conversion rate is killing your ROI because you can't follow up with all of them effectively.",
+						"Status updates become another source of drift when no repeatable reporting habit exists.",
 					solution:
-						"This workflow automates the follow-up and nurturing process, systematically turning your expensive leads into closed deals.",
+						"The workflow standardizes updates so progress stays visible without extra process overhead.",
 					highlights: [
-						"Maximize lead ROI",
-						"Increase appointment-set rate",
-						"Automate drip campaigns",
-					],
-				},
-			},
-			{
-				name: "V2 - Perfect Client Experience",
-				percentage: 50,
-				copy: {
-					cta: "Deliver a 5-Star Experience",
-					buttonCta: "Install Workflow",
-					tagline: "Never Drop the Ball on a Lead.",
-					subtitle:
-						"Give every buyer lead a professional, 5-star experience with automated follow-ups and appointment scheduling.",
-					whatsInItForMe:
-						"This workflow ensures every lead receives prompt, professional communication, building trust and setting you apart from the competition.",
-					target_audience:
-						"Agents and teams who want to build a reputation for excellent customer service.",
-					pain_point:
-						"Being too busy means leads get ignored, making you look unprofessional and damaging your reputation.",
-					solution:
-						"Automate your follow-up process to guarantee every single lead receives timely, helpful communication, creating happy clients from day one.",
-					highlights: [
-						"Build trust with buyers",
-						"Professional communication, automated",
-						"Schedule appointments effortlessly",
-						"Build your reputation",
+						"Standardize updates",
+						"Reduce reporting overhead",
+						"Keep stakeholders aligned",
 					],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Automation", "Buyer Leads", "Copywriting"],
+		tags: ["Workflows", "Support", "Founder Ops"],
 	},
 ]);
 
 export const motivatedSellerWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-outreach-workflow-v1",
-		name: "Outreach Automation Workflow Copy Test",
+		id: "ab-test-launch-ops-flow-v1",
+		name: "Launch Ops Flow Copy Test",
 		description:
-			"Testing copy variants (Time Savings vs. Deal Closing) for the Outreach Workflow to optimize sales.",
+			"Testing copy variants for a reusable launch operations workflow.",
 		variants: [
 			{
-				name: "V1 - Autopilot & Efficiency",
-				percentage: 50,
+				name: "V1 - Run Launch with Less Chaos",
+				percentage: 100,
 				copy: {
-					cta: "Put Your Outreach on Autopilot",
+					cta: "Run a Cleaner Launch",
 					buttonCta: "Get the Workflow",
-					tagline: "Automate Your Outreach in Your Sleep.",
+					tagline: "Keep Launch Tasks from Fragmenting.",
 					subtitle:
-						"The all-in-one workflow to automate your outreach, follow-up, and lead nurturing.",
+						"A practical workflow for launch checklists, handoff, and cross-functional coordination.",
 					whatsInItForMe:
-						"This workflow runs your outreach campaigns 24/7, freeing you from tedious manual follow-ups so you can focus on closing deals.",
-					target_audience:
-						"Real estate investors and wholesalers who want to save time and scale their lookalike audience expansion strategy inspired by How to Win Friends and Influence People.",
+						"You get a simpler operational backbone for launch week and the immediate aftermath.",
+					target_audience: "Founders and operators managing the first release.",
 					pain_point:
-						"Manually following up with dozens of potential sellers is a full-time job that burns you out and limits your deal flow.",
+						"Launch work spreads across docs, chats, and memory unless it is structured on purpose.",
 					solution:
-						"Our pre-built workflow automates the entire outreach and nurturing process, so you can scale your campaigns without scaling your workload.",
+						"The workflow turns launch tasks and responsibilities into a repeatable operating rhythm.",
 					highlights: [
-						"Automate multi-channel outreach",
-						"Nurture leads 24/7",
-						"Save 10+ hours per week",
-					],
-				},
-			},
-			{
-				name: "V2 - More Deals & Revenue",
-				percentage: 50,
-				copy: {
-					cta: "Close More Off-Market Deals",
-					buttonCta: "Install Workflow",
-					tagline: "Never Let a Hot Lead Go Cold.",
-					subtitle:
-						"The ultimate workflow to convert more leads into profitable, lookalike off-market deals identified by our prediction features.",
-					whatsInItForMe:
-						"By instantly and persistently following up with every lead, this workflow ensures you engage hot prospects at the perfect moment, maximizing your conversions.",
-					target_audience:
-						"Deal-focused investors who want to maximize the ROI from their lead lists.",
-					pain_point:
-						"Hot leads are lost every day due to slow response times and inconsistent follow-up, costing you profitable deals.",
-					solution:
-						"This workflow automates instant and persistent follow-up, ensuring every valuable lead is nurtured until they are ready to talk.",
-					highlights: [
-						"Increase lead conversion rates",
-						"Engage leads instantly",
-						"Maximize your deal pipeline",
+						"Reduce launch chaos",
+						"Coordinate handoff",
+						"Keep critical tasks visible",
 					],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Automation", "Outreach", "Copywriting"],
+		tags: ["Workflows", "Support", "Launch Ops"],
 	},
 ]);
 
 export const openHouseWorkflowABTests = defineAbTests([
 	{
-		id: "ab-test-open-house-workflow-v1",
-		name: "Open House Follow-Up Workflow Copy Test",
+		id: "ab-test-post-launch-follow-up-flow-v1",
+		name: "Post-Launch Follow-Up Flow Copy Test",
 		description:
-			"Testing copy variants (Efficiency vs. Opportunity) for the Open House Follow-Up Workflow to optimize sales.",
+			"Testing copy variants for a post-launch follow-up and cleanup workflow.",
 		variants: [
 			{
-				name: "V1 - Time-Saving Efficiency",
-				percentage: 50,
+				name: "V1 - Stabilize the First Week",
+				percentage: 100,
 				copy: {
-					cta: "Automate Your Follow-Up",
-					buttonCta: "Get the Workflow",
-					tagline: "Save Hours After Every Open House.",
-					subtitle:
-						"Instantly follow up with every open house attendee without lifting a finger. Automate thank-yous, messages, and call reminders.",
-					whatsInItForMe:
-						"Stop spending your Sunday evening manually emailing attendees. This workflow does it all for you, saving you hours of tedious work.",
-					target_audience:
-						"Busy real estate agents who run frequent open houses.",
-					pain_point:
-						"Manually following up with dozens of open house attendees is a time-consuming chore that you dread every weekend.",
-					solution:
-						"This one-click workflow instantly handles all your post-event follow-up, giving you back your time.",
-					highlights: [
-						"Save hours of manual work",
-						"Follow up with 100% of attendees",
-						"Automated thank-you messages",
-					],
-				},
-			},
-			{
-				name: "V2 - Capture Every Opportunity",
-				percentage: 50,
-				copy: {
-					cta: "Turn Attendees into Clients",
+					cta: "Stabilize Post-Launch Faster",
 					buttonCta: "Install Workflow",
-					tagline: "Don't Let Hot Leads Walk Away.",
+					tagline: "Handle the First Wave Without Losing Momentum.",
 					subtitle:
-						"The workflow that automatically engages every open house visitor, identifies hot prospects, and helps you set more appointments.",
+						"A workflow for collecting launch issues, triaging fixes, and keeping the next sprint grounded in reality.",
 					whatsInItForMe:
-						"This system ensures the hottest leads from your open house get immediate attention, dramatically increasing your chances of converting an attendee into a client.",
+						"You get a clearer first-week system for what to fix now, what to defer, and what to learn from.",
 					target_audience:
-						"Agents who want to maximize the business generated from their open house events.",
+						"Teams that need a better rhythm for the first stretch after release.",
 					pain_point:
-						"You're meeting potential clients at open houses, but they're getting lost in the shuffle and you're missing out on real business.",
+						"Post-launch cleanup often becomes reactive and scattered as issues come in from multiple directions.",
 					solution:
-						"This workflow automatically engages everyone and helps surface the most interested prospects, ensuring no opportunity is missed.",
+						"The workflow creates a tighter triage loop so the team can stabilize without losing focus.",
 					highlights: [
-						"Convert attendees to clients",
-						"Identify the hottest prospects",
-						"Schedule more appointments",
+						"Organize issue intake",
+						"Prioritize fixes faster",
+						"Support the next sprint",
 					],
 				},
 			},
 		],
-		startDate: new Date("2023-11-01T09:00:00.000Z"),
+		startDate: new Date("2026-03-01T00:00:00Z"),
 		isActive: true,
-		tags: ["Workflows", "Automation", "Open House", "Copywriting"],
+		tags: ["Workflows", "Support", "Post Launch"],
 	},
 ]);

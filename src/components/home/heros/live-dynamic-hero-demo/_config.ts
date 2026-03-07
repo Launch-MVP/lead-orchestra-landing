@@ -12,129 +12,128 @@ const HERO_COPY_V7 = {
 	personas: {
 		developer: {
 			problem: [
-				"buying stale lead lists from Apollo and ZoomInfo",
-				"rebuilding scrapers and glue code for every project",
-				"managing complex proxy rotations and anti-bot systems",
+				"burning sprint cycles on auth, billing, infrastructure, and setup work",
+				"trying to ship an MVP while also acting as your own CTO, PM, and designer",
+				"rewriting rushed prototype code before you can even launch",
 			],
 			solution: [
-				"scraping your own fresh leads from any website",
-				"open-source lead OS that standardizes everything",
-				"one-click scraping with MCP plugins",
+				"shipping a production-ready MVP with clean architecture",
+				"getting the critical flows built without bloated scope",
+				"launching with code your team can actually extend",
 			],
 			fear: [
-				"your scraping pipeline breaks when sites change",
-				"you waste weeks building what should be a plugin",
+				"technical debt becomes the product",
+				"the launch slips because core systems were never scoped correctly",
 			],
 			hope: [
-				"you scrape any source in minutes with MCP plugins",
-				"your data flows seamlessly into any system",
-				"you focus on building features, not infrastructure",
+				"you launch with a repo your engineers trust",
+				"your MVP ships fast without a painful rebuild",
+				"you focus on growth instead of cleanup work",
 			],
 		},
 		agency: {
 			problem: [
-				"using the same Apollo lists as every other agency",
-				"paying premium prices for limited scraping APIs",
-				"struggling to find unique leads competitors can't access",
+				"having a product idea but no technical cofounder to ship it",
+				"getting vague proposals from dev shops that do not define scope",
+				"paying for design and development separately without a launch plan",
 			],
 			solution: [
-				"scraping niche sources your competitors ignore",
-				"free, open-source scraping with unlimited data",
-				"unique lead datasets clients can't get anywhere else",
+				"a founder-friendly MVP partner who scopes and ships the product",
+				"one sprint that covers design, build, integrations, and launch",
+				"a clear product plan before you overhire",
 			],
 			fear: [
-				"your scraping costs eat into profit margins",
-				"competitors find leads you can't access",
+				"you spend months and budget without getting something usable live",
+				"you hire the wrong team before the product is validated",
 			],
 			hope: [
-				"you scrape unlimited leads at zero marginal cost",
-				"you access niche sources your competitors can't",
-				"you scale your agency without scaling costs",
+				"you launch a credible MVP without managing a full build team",
+				"you finally have something real to show customers and investors",
+				"you move from idea to product without guesswork",
 			],
 		},
 		startup: {
 			problem: [
-				"spending thousands on ads and stale lists from Apollo & ZoomInfo",
-				"paying for enterprise tools you don't need yet",
-				"needing scraping without compliance-heavy infrastructure",
+				"trying to validate demand while the product is still stuck in planning",
+				"losing momentum because engineering is spread across too much scope",
+				"needing a real MVP fast without creating a brittle prototype",
 			],
 			solution: [
-				"open-source scraping that plugs into anything",
-				"generating unlimited, fresh leads for free",
-				"focus on product-market fit, not scraping infrastructure",
+				"a 3-day MVP workshop built around the must-have user path",
+				"tight scoping, fast execution, and a launch-ready handoff",
+				"a product your team can test with real users immediately",
 			],
 			fear: [
-				"your MVP gets delayed by infrastructure work",
-				"you burn runway on tools instead of product",
+				"runway disappears before the product reaches users",
+				"a rushed build has to be rebuilt before traction starts",
 			],
 			hope: [
-				"you launch faster with ready-made scraping",
-				"you scale data ingestion without scaling costs",
-				"you focus on product-market fit, not plumbing",
+				"you launch in 3 days with the core workflow working end to end",
+				"your team learns what users want from a real product, not a deck",
+				"you keep momentum without sacrificing code quality",
 			],
 		},
 		enterprise: {
 			problem: [
-				"needing custom scrapers with enterprise compliance",
-				"managing distributed scraping infrastructure",
-				"integrating scraping into existing data pipelines",
+				"waiting on internal roadmaps to test new product bets",
+				"needing a fast pilot without pulling core engineering off roadmap work",
+				"struggling to turn concept decks into usable internal or customer pilots",
 			],
 			solution: [
-				"self-hosted enterprise licensing with full control",
-				"SOC2/ISO compliance modules",
-				"seamless integration with existing systems",
+				"a focused MVP sprint that de-risks the product before a larger build",
+				"clean implementation with integrations, analytics, and handoff",
+				"a pilot your stakeholders can actually use and evaluate",
 			],
 			fear: [
-				"compliance issues from third-party scrapers",
-				"vendor lock-in with proprietary solutions",
+				"internal teams lose confidence because the pilot never ships",
+				"experiments stall in discovery without a working prototype",
 			],
 			hope: [
-				"you maintain full control and compliance",
-				"you integrate scraping into your existing stack",
-				"you scale without vendor dependencies",
+				"you validate new product bets without roadmap drag",
+				"you get a usable pilot into stakeholder hands quickly",
+				"you scale the right idea instead of debating the wrong one",
 			],
 		},
 	},
-	template: "Stop {problem}, start {solution} — before {fear}. Imagine {hope}.",
+	template: "Stop {problem}, start {solution} - before {fear}. Imagine {hope}.",
 	ctas: {
 		primary: [
-			"Get Started Free (Open Source)",
-			"View on GitHub",
-			"Start Scraping in 5 Minutes",
-			"Try the CLI",
-			"Explore MCP Plugins",
+			"Book Free MVP Consult",
+			"See the 3-Day MVP Plan",
+			"Get the Scope Checklist",
+			"Start Your MVP Sprint",
+			"Review Launch Options",
 		],
 		secondary: [
-			"See How It Works",
-			"Read the Documentation",
-			"View Example Scrapers",
-			"Join the Community",
-			"Watch a Demo",
+			"See What's Included",
+			"Review the Process",
+			"Explore Deliverables",
+			"See Launch Examples",
+			"Watch the Walkthrough",
 		],
 		social: [
-			"Star on GitHub",
 			"Share with Your Team",
-			"Contribute a Plugin",
-			"Join Discord",
-			"Follow on Twitter",
+			"Forward to a Cofounder",
+			"Review With Stakeholders",
+			"Use It in Discovery",
+			"Compare Delivery Options",
 		],
 	},
 	demo_mode: {
 		enabled: true,
-		headline_variant:
-			"Open-Source Lead Scraping & Data Ingestion — See Lead Orchestra in Action",
-		cta: "Start Interactive Demo",
+		headline_variant: "3-Day MVP Workshop - See Launch MVP in Action",
+		cta: "Start Launch Walkthrough",
 	},
 	metadata: {
-		tone: "developer_friendly_empowering",
+		tone: "direct_founder_friendly_technical",
 		vertical: [
-			"developer_tools",
-			"data_ingestion",
-			"web_scraping",
-			"lead_generation",
-			"mcp_protocol",
+			"mvp_development",
+			"product_strategy",
+			"startup_execution",
+			"prototype_to_launch",
+			"ai_workflows",
 		],
-		emotion_trigger: ["freedom", "empowerment", "efficiency", "community"],
+		emotion_trigger: ["clarity", "speed", "ownership", "confidence"],
 		updated_by: "Ty",
 	},
 } as const;
@@ -142,12 +141,12 @@ const HERO_COPY_V7 = {
 export type HeroPersonaKey = keyof typeof HERO_COPY_V7.personas;
 
 export const DEFAULT_PERSONA: HeroPersonaKey = "startup";
-export const DEFAULT_PERSONA_DISPLAY = "Open-Source Scraping Engine";
+export const DEFAULT_PERSONA_DISPLAY = "3-Day MVP Workshop";
 
-const PERSONA_LABEL = "For Founders, Startups & Product Teams";
-const PERSONA_GOAL = "Focus on product-market fit";
+const PERSONA_LABEL = "For Founders, Startups & Innovation Teams";
+const PERSONA_GOAL = "launch a real MVP in 3 days";
 const PERSONA_SOCIAL_PROOF =
-	"Fresh leads, not rented lists. Open-source scraping with unlimited data, zero credit limits.";
+	"Scope, design, build, integrations, analytics, and handoff in one focused 3-day workshop.";
 
 const pickPersonaField = (field: "problem" | "solution" | "fear" | "hope") => {
 	const persona = HERO_COPY_V7.personas[DEFAULT_PERSONA];
@@ -174,7 +173,7 @@ export const LIVE_COPY = resolveHeroCopy(
 			fear: TEMPLATE_FEAR,
 			socialProof: PERSONA_SOCIAL_PROOF,
 			benefit: PERSONA_GOAL,
-			time: "5",
+			time: "3",
 			hope: TEMPLATE_HOPE,
 		},
 		rotations: {
@@ -186,37 +185,37 @@ export const LIVE_COPY = resolveHeroCopy(
 	{
 		fallbackPrimaryChip: {
 			label: DEFAULT_PERSONA_DISPLAY,
-			sublabel: "AI pipeline automation",
+			sublabel: "Production-ready MVP delivery",
 			variant: "secondary",
 		},
 		fallbackSecondaryChip: {
-			label: PERSONA_GOAL,
+			label: "Launch in 3 days",
 			variant: "outline",
 		},
 	},
 );
 
 export const LIVE_PRIMARY_CTA = {
-	label: "Get 100 Free Leads",
+	label: "Book Free MVP Consult",
 	description:
-		"Scrape your first site in 60 seconds. We’ll clean, dedupe, and export your first 100 leads for free.",
+		"Get a scoped launch recommendation, core feature cut, and stack direction in one call.",
 	emphasis: "solid" as const,
-	badge: "100% Free",
+	badge: "Free Consult",
 };
 
 export const LIVE_SECONDARY_CTA = {
 	label: HERO_COPY_V7.ctas.secondary[0],
-	description: "See how open-source scraping works. One command = fresh leads.",
+	description:
+		"Review the 3-day workshop format, handoff structure, and what fits inside the launch engagement.",
 	emphasis: "outline" as const,
-	badge: "See Live Demo",
+	badge: "3-Day Plan",
 };
 
 export const LIVE_MICROCOPY =
-	'Scrape Anything. Export Everywhere. <link href="#hero-video-section">See how it works</link>. Fresh leads, not rented lists.';
+	'Strategy, build, integrations, and launch support. <link href="#hero-video-section">See what is included</link>. Clean handoff, no black-box build.';
 
 export const LIVE_SOCIAL_PROOF = {
 	...DEFAULT_HERO_SOCIAL_PROOF,
-	// caption: "Reusable hero experiences adopted by Lead Orchestra builders.",
 };
 
 export { PERSONA_GOAL, PERSONA_LABEL, HERO_COPY_V7, PERSONA_SOCIAL_PROOF };

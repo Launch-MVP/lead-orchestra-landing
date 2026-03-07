@@ -12,19 +12,19 @@ describe("schema builders", () => {
 	const baseCaseStudy: CaseStudy = {
 		id: "example",
 		title: "Example Case Study",
-		subtitle: "How Deal Scale increased qualified leads",
+		subtitle: "How Launch MVP helped a team ship faster",
 		slug: "example-case-study",
 		categories: ["automation", "real-estate"],
 		industries: ["real-estate"],
 		copyright: {
-			title: "Work with Deal Scale",
-			subtitle: "Automate your pipeline",
+			title: "Work with Launch MVP",
+			subtitle: "Ship without the rebuild",
 			ctaText: "Get started",
 			ctaLink: "/contact",
 		},
 		tags: ["AI", "Sales"],
 		clientName: "Sample Client",
-		clientDescription: "A high-growth real estate team.",
+		clientDescription: "A fast-moving startup team.",
 		featuredImage: "/images/case-study.png",
 		thumbnailImage: "/images/case-study-thumb.png",
 		businessChallenges: ["Manual outreach"],
@@ -36,7 +36,7 @@ describe("schema builders", () => {
 			},
 		],
 		solutions: ["AI nurture"],
-		description: "Deal Scale automated the entire outreach workflow.",
+		description: "Launch MVP clarified scope and accelerated delivery.",
 		results: [
 			{
 				title: "Increase in qualified meetings",
@@ -46,7 +46,7 @@ describe("schema builders", () => {
 	};
 
 	it("builds a CreativeWork schema with reviews for a case study", () => {
-		const canonical = "https://dealscale.io/case-studies/example-case-study";
+		const canonical = "https://launchmvp.com/case-studies/example-case-study";
 		const related: CaseStudy[] = [
 			{
 				...baseCaseStudy,
@@ -81,7 +81,7 @@ describe("schema builders", () => {
 			]),
 			isRelatedTo: [
 				expect.objectContaining({
-					url: "https://dealscale.io/case-studies/related-case-study",
+					url: "https://launchmvp.com/case-studies/related-case-study",
 				}),
 			],
 		});
@@ -96,8 +96,8 @@ describe("schema builders", () => {
 	it("builds FAQPage schema from FAQ items", () => {
 		const faqs: FAQItem[] = [
 			{
-				question: "What is Deal Scale?",
-				answer: "Deal Scale is an AI revenue engine.",
+				question: "What is Launch MVP?",
+				answer: "Launch MVP helps founders ship usable products faster.",
 			},
 			{
 				question: "Do you integrate with CRMs?",
@@ -106,9 +106,9 @@ describe("schema builders", () => {
 		];
 
 		const schema = buildFAQPageSchema({
-			canonicalUrl: "https://dealscale.io/features",
-			name: "Deal Scale Features FAQs",
-			description: "Answers to common feature questions.",
+			canonicalUrl: "https://launchmvp.com/features",
+			name: "Launch MVP Services FAQs",
+			description: "Answers to common service questions.",
 			faqs,
 		});
 
@@ -139,34 +139,34 @@ describe("schema builders", () => {
 		const posts: BeehiivPost[] = [
 			{
 				id: "1",
-				title: "Scale your outbound",
-				subtitle: "Tactics for real estate teams",
-				web_url: "https://blog.dealscale.io/scale-outbound",
+				title: "Ship your MVP faster",
+				subtitle: "Tactics for founder teams",
+				web_url: "https://launchmvp.com/blogs/ship-your-mvp-faster",
 				published_at: 1700000000,
 				content_tags: ["Outbound", "AI"],
-				thumbnail_url: "https://cdn.dealscale.io/img1.png",
+				thumbnail_url: "https://launchmvp.com/images/blog-1.png",
 			},
 			{
 				id: "2",
-				title: "Automate lead follow up",
+				title: "Tighten version one",
 				subtitle: "Playbooks that work",
-				web_url: "https://blog.dealscale.io/automate-follow-up",
+				web_url: "https://launchmvp.com/blogs/tighten-version-one",
 				published_at: 1700500000,
 				content_tags: ["Automation"],
-				thumbnail_url: "https://cdn.dealscale.io/img2.png",
+				thumbnail_url: "https://launchmvp.com/images/blog-2.png",
 			},
 		];
 
 		const schema = buildBlogSchema({
-			canonicalUrl: "https://dealscale.io/blogs",
-			name: "Deal Scale Blog",
-			description: "Insights on AI-powered deal flow.",
+			canonicalUrl: "https://launchmvp.com/blogs",
+			name: "Launch MVP Blog",
+			description: "Insights on MVP delivery and launch systems.",
 			posts,
 		});
 
 		expect(schema).toMatchObject({
 			"@type": "Blog",
-			url: "https://dealscale.io/blogs",
+			url: "https://launchmvp.com/blogs",
 			blogPost: expect.arrayContaining([
 				expect.objectContaining({
 					"@type": "BlogPosting",

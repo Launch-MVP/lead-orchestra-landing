@@ -2,11 +2,11 @@ import StatusPageClient from "@/components/ui/StatusPageClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Error | Lead Orchestra",
-	description: "An error occurred",
+	title: "Error | Launch MVP",
+	description: "There was a problem completing your request.",
 	openGraph: {
-		title: "Error | Lead Orchestra",
-		description: "An error occurred while processing your request",
+		title: "Error | Launch MVP",
+		description: "There was a problem completing your request.",
 	},
 };
 

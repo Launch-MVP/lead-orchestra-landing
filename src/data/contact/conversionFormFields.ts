@@ -1,40 +1,48 @@
 import type { FieldConfig } from "@/types/contact/formFields";
 import { z } from "zod";
-import { intakeFormFields, intakeFormSchema } from "./intakeFormFields";
 
-// * Re-export the base schema for consistency
-export { intakeFormSchema };
-export type { IntakeFormValues as ConversionFormValues } from "./intakeFormFields";
+export const denverWorkshopTiers = [
+	{
+		value: "in-person-mvp-build",
+		label: "3-Day MVP Build Workshop",
+		totalPrice: 3000,
+		depositAmount: 300,
+		description: "Full MVP build in Denver over 3 focused days.",
+	},
+	{
+		value: "in-person-app-launch",
+		label: "App + Landing Page Workshop",
+		totalPrice: 5000,
+		depositAmount: 500,
+		description: "Web app or mobile app plus a launch landing page.",
+	},
+	{
+		value: "in-person-ai-prototype",
+		label: "Enterprise Prototyping Workshop",
+		totalPrice: 7500,
+		depositAmount: 750,
+		description: "Enterprise-grade in-person product or AI prototype sprint.",
+	},
+] as const;
 
-// * B2B Only ICP Categories
-const b2bIcpCategories = [
-	"Real Estate Agencies",
-	"Commercial Real Estate Agents",
-	"Commercial Real Estate Brokers",
-	"Commercial Real Estate Investors",
-	"Commercial Real Estate Wholesalers",
-	"SaaS Founders",
-	"Tech Startups",
-	"B2B Service Providers",
-	"Marketing Agency",
-	"Nonprofit / Community Org",
-	"B2B",
-	"Other",
-];
+export type DenverWorkshopTierValue = (typeof denverWorkshopTiers)[number]["value"];
 
-// * Helper to filter options
-const _filterOptions = (
-	options: { value: string; label: string }[],
-	allowedValues: string[],
-) => {
-	return options.filter((opt) => allowedValues.includes(opt.value));
-};
+export const denverWorkshopTierMap = Object.fromEntries(
+	denverWorkshopTiers.map((tier) => [tier.value, tier]),
+) as Record<DenverWorkshopTierValue, (typeof denverWorkshopTiers)[number]>;
 
-// * Quick Apply Schema (Step 1 only)
 export const quickApplySchema = z.object({
 	name: z.string().min(2, "Name is required"),
 	email: z.string().email("Invalid email address"),
-	website: z.string().min(1, "Website is required"),
+	phone: z.string().min(7, "Phone number is required"),
+	companyName: z.string().min(2, "Company name is required"),
+	website: z.string().url("Valid website is required"),
+	selectedTier: z.enum([
+		"in-person-mvp-build",
+		"in-person-app-launch",
+		"in-person-ai-prototype",
+	]),
+	projectSummary: z.string().min(12, "Project summary is required"),
 	gclid: z.string().optional(),
 	wbraid: z.string().optional(),
 	gbraid: z.string().optional(),
@@ -46,45 +54,77 @@ export const quickApplySchema = z.object({
 	utm_term: z.string().optional(),
 	utm_content: z.string().optional(),
 	utm_icp: z.string().optional(),
-	businessType: z.array(z.string()).min(1, "Business type / niche is required"),
-	monthlyBudget: z.string().min(1, "Monthly budget is required"),
-	icpCategory: z.string().min(1, "ICP category is required"),
-	speed: z.string().min(1, "Start date / urgency is required"),
 });
 
 export type QuickApplyValues = z.infer<typeof quickApplySchema>;
 
-// * Internal field list for filtering
-const step1FieldNames = [
-	"name",
-	"email",
-	"website",
-	"businessType",
-	"monthlyBudget",
-	"icpCategory",
-	"speed", // Urgency
+export const quickApplyFields: FieldConfig[] = [
+	{
+		name: "name",
+		label: "Name",
+		type: "text",
+		placeholder: "Your name",
+		value: "",
+		description: "Used for the workshop reservation and checkout.",
+		onChange: () => {},
+	},
+	{
+		name: "email",
+		label: "Email",
+		type: "text",
+		placeholder: "you@company.com",
+		value: "",
+		description: "Used for payment confirmation and event follow-up.",
+		onChange: () => {},
+	},
+	{
+		name: "phone",
+		label: "Phone",
+		type: "text",
+		placeholder: "Best number",
+		value: "",
+		description: "Used if we need to confirm scheduling details quickly.",
+		onChange: () => {},
+	},
+	{
+		name: "companyName",
+		label: "Company / Brand",
+		type: "text",
+		placeholder: "Company or project name",
+		value: "",
+		description: "Helps us prepare the right workshop context.",
+		onChange: () => {},
+	},
+	{
+		name: "website",
+		label: "Website / Product URL",
+		type: "url",
+		placeholder: "https://example.com",
+		value: "",
+		description: "Share the current site, prototype, or product URL.",
+		onChange: () => {},
+	},
+	{
+		name: "selectedTier",
+		label: "Denver workshop tier",
+		type: "select",
+		placeholder: "Select workshop tier",
+		value: "",
+		description: "Deposit is 10% of the selected discounted workshop price.",
+		onChange: () => {},
+		options: denverWorkshopTiers.map((tier) => ({
+			value: tier.value,
+			label: `${tier.label} · $${tier.totalPrice.toLocaleString()} total · $${tier.depositAmount.toLocaleString()} deposit`,
+		})),
+	},
+	{
+		name: "projectSummary",
+		label: "What do you want to build in Denver?",
+		type: "textarea",
+		placeholder: "Describe the MVP, app, or prototype you want to work through in person...",
+		value: "",
+		minLength: 12,
+		description: "Give us enough context to prepare before your seat is confirmed.",
+		onChange: () => {},
+	},
 ];
-
-// * Fields for the conversion form (derived from intakeFormFields)
-export const quickApplyFields: FieldConfig[] = intakeFormFields
-	.filter((f) => step1FieldNames.includes(f.name))
-	.map((field) => {
-		if (
-			field.name === "icpCategory" &&
-			(field.type === "select" || field.type === "multiselect")
-		) {
-			return {
-				...field,
-				options: field.options.filter((opt) =>
-					b2bIcpCategories.includes(opt.value),
-				),
-			};
-		}
-		if (field.name === "speed") {
-			return {
-				...field,
-				label: "Start date / Urgency",
-			};
-		}
-		return field;
-	});

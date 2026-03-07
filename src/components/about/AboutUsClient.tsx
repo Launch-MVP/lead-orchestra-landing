@@ -23,10 +23,10 @@ export default function AboutUsClient() {
 			<MarqueeDemo />
 
 			<CTASection
-				title="Invest in Deal Scale!"
-				description="Looking for scalable, AI-powered investment opportunities with proven growth and strong deal flow? Discover how Deal Scale empowers forward-thinking investors to accelerate returns and capitalize on market momentum."
-				buttonText="Get The Pitch Deck"
-				href="/pitch-deck-investor"
+				title="Need a clearer path to version one?"
+				description="Launch MVP helps founders scope the right product, ship faster, and avoid turning early momentum into cleanup debt."
+				buttonText="Book Free Consultation"
+				href="/contact"
 			/>
 		</main>
 	);

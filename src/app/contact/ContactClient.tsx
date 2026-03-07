@@ -252,13 +252,17 @@ const Contact = () => {
 	);
 	const {
 		status: stepsStatus,
-		steps,
+		denverWorkshopSteps,
+		freeSlotApplicationSteps,
 		error: stepsError,
 	} = useDataModule(
 		"service/slug_data/consultationSteps",
 		({ status, data, error }) => ({
 			status,
-			steps: (data?.betaSignupSteps ?? []) as ContactStep[],
+			denverWorkshopSteps: (data?.denverWorkshopSteps ?? []) as ContactStep[],
+			freeSlotApplicationSteps: (data?.freeSlotApplicationSteps ??
+				data?.betaSignupSteps ??
+				[]) as ContactStep[],
 			error,
 		}),
 	);
@@ -278,7 +282,9 @@ const Contact = () => {
 
 	const isStepsLoading = stepsStatus === "idle" || stepsStatus === "loading";
 	const isStepsError = stepsStatus === "error";
-	const hasSteps = steps.length > 0;
+	const activeSteps =
+		activeTab === "conversion" ? denverWorkshopSteps : freeSlotApplicationSteps;
+	const hasSteps = activeSteps.length > 0;
 
 	useDataModuleGuardTelemetry({
 		key: "service/slug_data/trustedCompanies",
@@ -342,10 +348,10 @@ const Contact = () => {
 						>
 							<TabsList className="mb-8 grid w-full grid-cols-2">
 								<TabsTrigger value="conversion" className="py-3">
-									Quick Form
+									Denver Workshop Deposit
 								</TabsTrigger>
 								<TabsTrigger value="prequalification" className="py-3">
-									Consultation Form
+									Apply for Free Slot
 								</TabsTrigger>
 							</TabsList>
 							<TabsContent value="conversion" className="mt-0 outline-none">
@@ -367,7 +373,14 @@ const Contact = () => {
 								Loading next steps…
 							</div>
 						) : hasSteps ? (
-							<ContactSteps steps={steps} />
+							<ContactSteps
+								steps={activeSteps}
+								title={
+									activeTab === "conversion"
+										? "What Happens After You Reserve"
+										: "What Happens After You Apply"
+								}
+							/>
 						) : (
 							<div className="mt-6 rounded-xl border border-white/10 bg-background-dark/50 p-6 text-center text-muted-foreground">
 								Next steps coming soon.

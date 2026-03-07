@@ -8,30 +8,30 @@ import type {
 
 export const HERO_ROTATIONS: HeroCopyRotations = {
 	problems: [
-		"losing track of off-market leads",
-		"babysitting scattered STEPS tokens",
-		"copying animations across codebases",
+		"overbuilding the wrong MVP",
+		"guessing at the launch scope",
+		"stalling before product validation",
 	],
 	solutions: [
-		"STEPS automations expand warm audiences",
-		"automated seller nurturing",
-		"guided STEPS motions launch faster",
+		"3-day MVP workshops create real momentum",
+		"scoped product builds ship faster",
+		"launch systems keep the team aligned",
 	],
 	fears: [
-		"your deal pipeline dries up",
-		"stakeholders churn on stale demos",
-		"brand QA fire drills return",
+		"your launch keeps slipping",
+		"the product ships bloated and messy",
+		"the team rebuilds version one twice",
 	],
 };
 
 export const HERO_COPY_INPUT: HeroCopy = {
 	values: {
-		problem: "losing track of off-market leads",
-		solution: "qualifying AI real estate leads",
-		fear: "your next profitable deal stalls",
-		socialProof: "Join 200+ teams speeding up delivery.",
-		benefit: "Ship dynamic marketing pages",
-		time: "7",
+		problem: "overbuilding the wrong MVP",
+		solution: "launching a real product in 3 days",
+		fear: "your launch keeps slipping",
+		socialProof: "Join founders using Launch MVP to ship faster.",
+		benefit: "Launch a usable MVP",
+		time: "3",
 	},
 	rotations: HERO_ROTATIONS,
 };
@@ -41,36 +41,36 @@ export const QUICK_START_PERSONA_GOAL = HERO_COPY_INPUT.values.benefit;
 
 export const HERO_COPY_FALLBACK: ResolveHeroCopyOptions = {
 	fallbackPrimaryChip: {
-		label: "Shared UI Library",
-		sublabel: "Lighting-fast iterations",
+		label: "3-Day MVP Workshop",
+		sublabel: "Scope, build, launch",
 		variant: "secondary",
 	},
 	fallbackSecondaryChip: {
-		label: "External Demo",
+		label: "Founder Ready",
 		variant: "outline",
 	},
 };
 
 export const PRIMARY_CTA = {
-	label: "Launch Quick Start Hero",
-	description: "Deploy the reusable hero module in under seven minutes.",
+	label: "Book Free MVP Consultation",
+	description: "Pressure-test the idea and leave with a clearer launch path.",
 	emphasis: "solid" as const,
-	badge: "Guided Setup",
+	badge: "Free Scope Consult",
 };
 
 export const SECONDARY_CTA = {
-	label: "Preview Guided Demo",
-	description: "Tour the module before plugging it into production.",
+	label: "View Services",
+	description: "See the workshops, support offers, and specialist options.",
 	emphasis: "outline" as const,
-	badge: "See it in action",
+	badge: "Launch Offers",
 };
 
 export const CTA_MICROCOPY =
-	'Reusable hero experiences adopted by builders. <link href="#dynamic-hero-details">Explore the KPI impact</link>.';
+	'Founder-led builds, launch workshops, and specialist support. <link href="#dynamic-hero-details">Explore the delivery model</link>.';
 
 export const HERO_TRIAL_PLAN = {
 	id: "dynamic-hero-basic",
-	name: "DealScale",
+	name: "Launch MVP",
 };
 
 export const createHeroTrialPlan = (): Plan => ({
@@ -79,10 +79,10 @@ export const createHeroTrialPlan = (): Plan => ({
 	price: {
 		monthly: {
 			amount: 0,
-			description: "Free trial - no charge today",
+			description: "Free consultation - no charge today",
 			features: [
-				"Full access to DealScale AI automation features during your trial.",
-				"Stay active after the trial to keep full access.",
+				"Clarify the MVP scope, stack, and delivery path during the consultation.",
+				"Leave with a sharper recommendation on what to build next.",
 			],
 		},
 		annual: { amount: 0, description: "", features: [] },

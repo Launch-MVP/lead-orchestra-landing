@@ -16,8 +16,7 @@ const RelatedCaseStudies = ({ studies }: RelatedCaseStudiesProps) => {
 			<div className="mx-auto max-w-7xl">
 				<SectionHeading
 					title="Related Case Studies"
-					description="See real success stories and ways to leverage Deal Scale to grow 
-your business."
+					description="See how teams used Launch MVP to define version one, ship faster, and avoid expensive rebuilds."
 					centered={true}
 				/>
 

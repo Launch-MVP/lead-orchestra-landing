@@ -26,14 +26,14 @@ const PERSONA_NEWSLETTER_HERO: Record<
 	}
 > = {
 	developer: {
-		headline: "Automate Your Scraping Workflows",
+		headline: "Build Faster With Better Systems",
 		subheadline:
-			"Join our newsletter for ready-to-use n8n lead gen workflows that connect Lead Orchestra MCP plugins to n8n for end-to-end automation. Get exclusive access to pre-built workflows for automated scraping, data normalization, and export to Database, S3, and APIs.",
+			"Join the Launch MVP newsletter for workflow templates, architecture notes, integration patterns, and launch checklists that help developers ship MVPs without overbuilding.",
 	},
 	agency: {
-		headline: "Automate Your Lead Generation Pipeline",
+		headline: "Sharpen Client Delivery",
 		subheadline:
-			"Join our newsletter for ready-to-use n8n lead gen workflows that connect Lead Orchestra scraping to your CRM, automate data processing, and scale your client delivery. Get exclusive access to multi-source scraping workflows and white-label export automation.",
+			"Get Launch MVP delivery systems, client handoff templates, launch checklists, and productized-service ideas that help agencies move from vague scope to shipped outcomes.",
 	},
 	startup: {
 		headline: "Build Your MVP Faster",
@@ -41,9 +41,9 @@ const PERSONA_NEWSLETTER_HERO: Record<
 			"Join our newsletter for ready-to-use n8n lead gen workflows that help you automate lead scraping, data normalization, and export without building infrastructure from scratch. Get quick-start templates and integration guides for popular tools.",
 	},
 	enterprise: {
-		headline: "Scale Your Data Operations",
+		headline: "Systemize Product Delivery",
 		subheadline:
-			"Join our newsletter for enterprise-grade n8n lead gen workflows that integrate Lead Orchestra with your existing stack. Get compliance automation templates, SSO integration guides, and custom MCP provider workflows.",
+			"Get Launch MVP operating systems for product teams, including implementation frameworks, integration planning, handoff standards, and AI workflow patterns for internal delivery.",
 	},
 };
 
@@ -115,15 +115,15 @@ export default function NewsletterClient({ posts }: { posts: BeehiivPost[] }) {
 		<main className="flex min-h-screen flex-col bg-background">
 			{/* ! Hero section for strong visual impact with embedded newsletter email input */}
 			<Hero
-				badgeLeft="N8N Lead Gen Workflows"
-				badgeRight="Automation Templates"
+				badgeLeft="Launch Systems"
+				badgeRight="Build Notes"
 				headline={heroContent.headline}
 				subheadline={heroContent.subheadline}
-				highlight="with n8n"
+				highlight="with Launch MVP"
 				ctaVariant="form"
 				ctaForm={<NewsletterEmailInput />}
 				image={offerImg}
-				imageAlt="n8n lead gen workflow showing Lead Orchestra scraping automation"
+				imageAlt="Launch MVP build systems and product delivery notes"
 			/>
 			{showLogosError ? (
 				<div className="mx-auto my-12 max-w-5xl text-center text-destructive">
@@ -153,7 +153,7 @@ export default function NewsletterClient({ posts }: { posts: BeehiivPost[] }) {
 					testimonials={testimonials}
 					title={"What Our Clients Say"}
 					subtitle={
-						"Hear from our clients about their experiences with our services"
+						"Hear how founders and product teams moved faster with Launch MVP."
 					}
 				/>
 			) : showTestimonialsEmptyReady ? (

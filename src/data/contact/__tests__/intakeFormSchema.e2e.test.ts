@@ -9,8 +9,15 @@ const baseValid = () => ({
 	phone: "+15555550123",
 	noWebsite: false,
 	website: "https://example.com",
-	painPoints: ["Not enough high-quality leads"],
-	interestedFeatures: ["Lead Enrichment"],
+	productStage: "idea",
+	productType: "web_app",
+	teamSize: "2-5",
+	productSummary:
+		"We are building a launch-ready MVP for startup operators who need to validate demand quickly.",
+	mustHaveFeatures:
+		"Auth, onboarding, payments, analytics, and the core user workflow.",
+	painPoints: ["Need help cutting MVP scope"],
+	interestedFeatures: ["MVP scoping session"],
 
 	leadOwner: "Founder",
 	speed: "7-10",

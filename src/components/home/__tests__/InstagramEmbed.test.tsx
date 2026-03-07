@@ -13,7 +13,7 @@ describe("InstagramEmbed", () => {
 		render(<InstagramEmbed />);
 
 		const loader = screen.getByTestId("instagram-embed-loading");
-		const iframe = screen.getByTitle("Deal Scale Instagram feed");
+		const iframe = screen.getByTitle("Launch MVP Instagram feed");
 
 		expect(loader).toBeInTheDocument();
 		expect(loader).toHaveAttribute("aria-hidden", "false");
@@ -23,10 +23,10 @@ describe("InstagramEmbed", () => {
 		expect(loader).toHaveAttribute("aria-hidden", "true");
 	});
 
-	it("points the iframe to the Deal Scale Instagram embed", () => {
+	it("points the iframe to the configured Instagram embed", () => {
 		render(<InstagramEmbed />);
 
-		const iframe = screen.getByTitle("Deal Scale Instagram feed");
+		const iframe = screen.getByTitle("Launch MVP Instagram feed");
 
 		expect(iframe).toHaveAttribute(
 			"src",

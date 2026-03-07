@@ -17,6 +17,7 @@ import type { ReactNode } from "react";
 export interface RecurringPlanCardProps {
 	plan: RecurringPlan;
 	view: PricingInterval;
+	planGroupLabel?: string;
 	onSubscribe?: () => void;
 	loading?: boolean;
 	ctaOverride?: {
@@ -60,6 +61,7 @@ const formatCredits = (value?: UnlimitedValue) => {
 export const RecurringPlanCard = ({
 	plan,
 	view,
+	planGroupLabel,
 	onSubscribe,
 	loading,
 	ctaOverride,
@@ -67,10 +69,12 @@ export const RecurringPlanCard = ({
 	badgeLabel,
 	badgeVariant,
 }: RecurringPlanCardProps) => {
-	const priceLabel =
-		view === "monthly"
-			? `${formatCurrency(plan.price)}/mo`
-			: `${formatCurrency(plan.price)}/yr`;
+	const unitLabel =
+		plan.unit === "project" ? "/project" : view === "monthly" ? "/mo" : "/yr";
+	const priceLabel = `${formatCurrency(plan.price)}${unitLabel}`;
+	const compareAtPriceLabel = plan.compareAtPrice
+		? `${formatCurrency(plan.compareAtPrice)}${unitLabel}`
+		: null;
 
 	const credits = plan.credits
 		? [
@@ -147,16 +151,27 @@ export const RecurringPlanCard = ({
 	return (
 		<GlassCard
 			className={cn(
-				"flex flex-col justify-between p-6",
+				"relative flex flex-col justify-between overflow-hidden p-6",
 				plan.ctaType === "contactSales" ? "border-primary/40" : undefined,
 			)}
 			highlighted={plan.ctaType === "subscribe" && plan.price >= 5000}
 		>
+			{plan.promoRibbonText ? (
+				<div className="absolute top-4 right-[-2.75rem] z-10 w-36 rotate-45 border border-primary/25 bg-primary px-8 py-1 text-center font-semibold text-[10px] text-primary-foreground uppercase tracking-[0.24em] shadow-lg">
+					{plan.promoRibbonText}
+				</div>
+			) : null}
 			<div className="space-y-4">
+				{plan.bannerText ? (
+					<Badge className="bg-primary/10 text-primary" variant="secondary">
+						{plan.bannerText}
+					</Badge>
+				) : null}
 				<div className="flex items-start justify-between gap-2">
 					<div>
 						<p className={cn("text-sm", "text-muted-foreground", "uppercase")}>
-							{view === "monthly" ? "Monthly Plan" : "Annual Plan"}
+							{planGroupLabel ??
+								(view === "monthly" ? "Monthly Plan" : "Annual Plan")}
 						</p>
 						<h3 className={cn("mt-1", "text-2xl", "font-semibold")}>
 							{plan.name}
@@ -165,6 +180,11 @@ export const RecurringPlanCard = ({
 					{renderBadge()}
 				</div>
 				<div>
+					{compareAtPriceLabel ? (
+						<p className="font-medium text-muted-foreground text-sm line-through">
+							{compareAtPriceLabel}
+						</p>
+					) : null}
 					<p className={cn("text-4xl", "font-bold")}>{priceLabel}</p>
 					{plan.idealFor ? (
 						<p className={cn("mt-1", "text-sm", "text-muted-foreground")}>

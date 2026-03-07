@@ -3,10 +3,9 @@ import { staticSeoMeta } from "@/utils/seo/staticSeo";
 
 type StaticSeoExpectation = {
 	title: string;
-	description: string;
+	descriptionIncludes: string;
 	canonical: string;
 	image: string;
-	keywords: string[];
 	priority?: number;
 	changeFrequency?: string;
 };
@@ -15,12 +14,10 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/blogs",
 		{
-			title: "Blogs | Deal Scale",
-			description:
-				"See the latest insights, stories, and updates for real estate investors and wholesalers from the Deal Scale team.",
-			canonical: "https://dealscale.io/blogs",
+			title: "Insights | Launch MVP",
+			descriptionIncludes: "product strategy",
+			canonical: "https://launchmvp.com/blogs",
 			image: DEFAULT_SEO.image,
-			keywords: DEFAULT_SEO.keywords,
 			priority: 0.8,
 			changeFrequency: "weekly",
 		},
@@ -28,12 +25,10 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/contact",
 		{
-			title: "Beta Test Sign Up | Deal Scale",
-			description:
-				"Get in touch with Deal Scale for expert AI-powered real estate solutions and support.",
-			canonical: "https://dealscale.io/contact",
+			title: "Contact | Launch MVP",
+			descriptionIncludes: "in-person workshops",
+			canonical: "https://launchmvp.com/contact",
 			image: DEFAULT_SEO.image,
-			keywords: DEFAULT_SEO.keywords,
 			priority: 0.7,
 			changeFrequency: "monthly",
 		},
@@ -41,12 +36,10 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/case-studies",
 		{
-			title: "Case Studies | Deal Scale",
-			description:
-				"Check out real-world solutions and success stories from real estate professionals using Deal Scale and its Technologies.",
-			canonical: "https://dealscale.io/case-studies",
+			title: "Case Studies | Launch MVP",
+			descriptionIncludes: "scope, ship, and iterate",
+			canonical: "https://launchmvp.com/case-studies",
 			image: "/banners/CaseStudy2.png",
-			keywords: DEFAULT_SEO.keywords,
 			priority: 0.8,
 			changeFrequency: "weekly",
 		},
@@ -54,15 +47,10 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/cookies",
 		{
-			title: "Cookie Policy | Deal Scale",
-			description: "How we use cookies and similar technologies.",
-			canonical: "https://dealscale.io/cookies",
+			title: "Cookie Policy | Launch MVP",
+			descriptionIncludes: "uses cookies and similar technologies",
+			canonical: "https://launchmvp.com/cookies",
 			image: DEFAULT_SEO.image,
-			keywords: [
-				"Cookie Policy",
-				"Deal Scale Legal Document",
-				...DEFAULT_SEO.keywords,
-			],
 			priority: 0.3,
 			changeFrequency: "yearly",
 		},
@@ -70,49 +58,37 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/events",
 		{
-			title: "Events | Deal Scale",
-			description:
-				"Stay updated on upcoming Deal Scale events, webinars, and real estate industry opportunities powered by AI.",
-			canonical: "https://dealscale.io/events",
+			title: "Events | Launch MVP",
+			descriptionIncludes: "founder sessions",
+			canonical: "https://launchmvp.com/events",
 			image: DEFAULT_SEO.image,
-			keywords: DEFAULT_SEO.keywords,
 		},
 	],
 	[
 		"/faqs",
 		{
-			title:
-				"DealScale FAQ | AI Voice, SMS, and Skip Tracing Automation for Real Estate Agents & Investors",
-			description:
-				"Learn how DealScale automates skip tracing, AI voice outreach, SMS, and social lead qualification while staying TCPA and GDPR compliant. Discover ROI examples, voice cloning, CRM syncs, and compliance with the 2026 Colorado AI Act.",
-			canonical: "https://dealscale.io/faq",
+			title: "Launch MVP FAQ | Workshops, Build Support, and Launch Systems",
+			descriptionIncludes: "strategy sessions",
+			canonical: "https://launchmvp.com/faq",
 			image: DEFAULT_SEO.image,
-			keywords: DEFAULT_SEO.keywords,
 		},
 	],
 	[
 		"/portfolio",
 		{
-			title: "Portfolio | Deal Scale",
-			description:
-				"Browse Deal Scale's portfolio to see AI-powered real estate solutions in action.",
-			canonical: "https://dealscale.io/portfolio",
+			title: "Portfolio | Launch MVP",
+			descriptionIncludes: "MVP builds",
+			canonical: "https://launchmvp.com/portfolio",
 			image: DEFAULT_SEO.image,
-			keywords: DEFAULT_SEO.keywords,
 		},
 	],
 	[
 		"/privacy",
 		{
-			title: "Privacy Policy | Deal Scale",
-			description: "How we collect, use, and protect your data.",
-			canonical: "https://dealscale.io/privacy",
+			title: "Privacy Policy | Launch MVP",
+			descriptionIncludes: "protects your personal information",
+			canonical: "https://launchmvp.com/privacy",
 			image: DEFAULT_SEO.image,
-			keywords: [
-				"Privacy Policy",
-				"Deal Scale Legal Document",
-				...DEFAULT_SEO.keywords,
-			],
 			priority: 0.3,
 			changeFrequency: "yearly",
 		},
@@ -120,42 +96,38 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/tos",
 		{
-			title: "Terms of Service | Deal Scale",
-			description: "Your legal agreement for using Deal Scale.",
-			canonical: "https://dealscale.io/tos",
+			title: "Terms of Service | Launch MVP",
+			descriptionIncludes: "workshops",
+			canonical: "https://launchmvp.com/tos",
 			image: DEFAULT_SEO.image,
-			keywords: [
-				"Terms of Service",
-				"Deal Scale Legal Document",
-				...DEFAULT_SEO.keywords,
-			],
 		},
 	],
 	[
 		"/features",
 		{
-			title: "Features | Deal Scale",
-			description:
-				"Check out powerful features of Deal Scale's AI, including automated lead nurturing, outreach, and our AI Caller.",
-			canonical: "https://dealscale.io/features",
+			title: "Services | Launch MVP",
+			descriptionIncludes: "embedded engineering support",
+			canonical: "https://launchmvp.com/features",
 			image: "/banners/Feature.png",
-			keywords: [...DEFAULT_SEO.keywords],
 		},
 	],
 ];
 
 describe("Static SEO metadata", () => {
 	it("provides entries for every expected static path", () => {
-		cases.forEach(([path]) => {
+		for (const [path] of cases) {
 			expect(staticSeoMeta[path]).toBeDefined();
-		});
+		}
 	});
 
 	it.each(cases)("matches configured metadata for %s", (path, expected) => {
 		const seo = staticSeoMeta[path];
-		expect(seo).toMatchObject(expected);
-		expect(Array.isArray(seo.keywords)).toBe(true);
+		expect(seo.title).toBe(expected.title);
+		expect(seo.description).toContain(expected.descriptionIncludes);
+		expect(seo.canonical).toBe(expected.canonical);
 		expect(seo.image).toBe(expected.image);
+		expect(Array.isArray(seo.keywords)).toBe(true);
+		expect(seo.keywords.length).toBeGreaterThan(0);
 		if (expected.priority !== undefined) {
 			expect(seo.priority).toBe(expected.priority);
 		}

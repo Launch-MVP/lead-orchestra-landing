@@ -108,7 +108,7 @@ describe("ProductGrid featured free resources", () => {
 		slug: "base-product",
 		images: ["/base.png"],
 		reviews: [],
-		categories: [ProductCategory.Workflows],
+		categories: [ProductCategory.Strategy],
 		types: [],
 		colors: [],
 		sizes: [],
@@ -121,7 +121,7 @@ describe("ProductGrid featured free resources", () => {
 			name: "Featured Free Resource",
 			sku: "FREE-FEATURED",
 			slug: "featured-free-resource",
-			categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
+			categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
 			abTest: baseAbTest,
 			price: 0,
 			isFeaturedFreeResource: true,
@@ -137,7 +137,7 @@ describe("ProductGrid featured free resources", () => {
 			name: "Non-Featured Free Resource",
 			sku: "FREE-REGULAR",
 			slug: "non-featured-free-resource",
-			categories: [ProductCategory.FreeResources, ProductCategory.Workflows],
+			categories: [ProductCategory.FreeResources, ProductCategory.Strategy],
 			abTest: baseAbTest,
 			price: 0,
 			isFeaturedFreeResource: false,
@@ -150,11 +150,11 @@ describe("ProductGrid featured free resources", () => {
 
 		const paidProduct = buildProduct({
 			id: "paid-product",
-			name: "Paid Workflow",
+			name: "Paid Strategy Offer",
 			sku: "PAID-1",
-			slug: "paid-workflow",
+			slug: "paid-strategy-offer",
 			price: 99,
-			categories: [ProductCategory.Workflows],
+			categories: [ProductCategory.Strategy],
 			abTest: baseAbTest,
 		});
 
@@ -176,6 +176,6 @@ describe("ProductGrid featured free resources", () => {
 		});
 		expect(regularLinks).toHaveLength(1);
 
-		expect(screen.getByText("Paid Workflow")).toBeInTheDocument();
+		expect(screen.getByText("Paid Strategy Offer")).toBeInTheDocument();
 	});
 });

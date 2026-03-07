@@ -179,8 +179,8 @@ export default function IntakeForm() {
 		<div className="relative mx-auto max-w-3xl rounded-2xl border border-primary/40 bg-gradient-to-br from-white via-background to-primary-50 p-6 shadow-xl ring-1 ring-primary/10 transition-all sm:p-10 dark:bg-gradient-to-br dark:from-background dark:via-background-dark dark:to-primary/10">
 			<div className="-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20" />
 			<Header
-				title="Lead Orchestra Intake"
-				subtitle="Tell us about your business and the leads you need. We'll build your scraping and enrichment workflow."
+				title="Apply for a Free Slot"
+				subtitle="Apply for a free Launch MVP slot by showing what you are building, who it is for, what needs to ship first, and why your team is a strong fit for hands-on support."
 				size="md"
 				className="mb-10 text-center"
 			/>
@@ -251,7 +251,7 @@ export default function IntakeForm() {
 									<Loader2 className="h-5 w-5 animate-spin" /> Sending...
 								</span>
 							) : (
-								"Submit Request"
+								"Apply for Free Slot"
 							)}
 						</Button>
 					</form>

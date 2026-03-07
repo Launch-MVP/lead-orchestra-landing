@@ -4,32 +4,61 @@ export interface ConsultationStep {
 	description: string;
 }
 
-export const betaSignupSteps: ConsultationStep[] = [
+export const denverWorkshopSteps: ConsultationStep[] = [
 	{
 		number: 1,
-		title: "Request Lead Orchestra Access",
+		title: "Choose Your Workshop Tier",
 		description:
-			"Start your application and get 100 free high-intent leads. We only approve a limited number of operators so every member receives tailored support and direct influence over the roadmap.",
+			"Pick the Denver in-person workshop tier that matches your scope: MVP build, app plus landing page, or enterprise prototyping.",
 	},
 	{
 		number: 2,
-		title: "Unlock Your 100 Free Leads",
+		title: "Submit Deposit and Project Context",
 		description:
-			"Complete a short profile about your business goals. Unlock your Lead Orchestra perks 100 free leads, exclusive newsletter access, locked pricing, and bonus leads upon approval.",
+			"Pay the 10% seat-hold deposit and share enough product context for us to prepare the right workshop direction before kickoff.",
 	},
 	{
 		number: 3,
-		title: "Launch Your Lead Gen Pilot",
+		title: "Confirm Dates and Scope",
 		description:
-			"Once approved, we kick off a high-intent lead generation pilot tailored to your ICP. Optional automated outreach plan available to turn leads into booked calls.",
+			"We confirm the Denver dates, align on the workshop outcome, and tighten the version-one scope before the in-person build starts.",
 	},
 	{
 		number: 4,
-		title: "You're In!",
+		title: "Build and Launch",
 		description:
-			"Welcome aboard! Watch for your onboarding email with your 100 free leads, community access, and everything you need to automate your lead generation.",
+			"In the workshop we move through scope lock, design direction, build execution, launch prep, and handoff.",
 	},
 ];
+
+export const freeSlotApplicationSteps: ConsultationStep[] = [
+	{
+		number: 1,
+		title: "Apply for a Free Slot",
+		description:
+			"Submit the full Launch MVP application so we can understand the product, the market, the urgency, and whether your team is a strong fit.",
+	},
+	{
+		number: 2,
+		title: "Share Product and Launch Context",
+		description:
+			"Tell us what you are building, who it is for, what version one must include, and what needs to happen for the launch to count as a win.",
+	},
+	{
+		number: 3,
+		title: "Get Reviewed and Qualified",
+		description:
+			"We review the application and follow up with the right recommendation, whether that is a free slot, a paid workshop, or a scoped next step.",
+	},
+	{
+		number: 4,
+		title: "Move Into the Right Build Path",
+		description:
+			"If accepted, we coordinate the next step and move into the Launch MVP process with a clearer scope, timeline, and delivery recommendation.",
+	},
+];
+
+export const betaSignupSteps: ConsultationStep[] = freeSlotApplicationSteps;
 export const affiliateProgramSteps: ConsultationStep[] = [
 	{
 		number: 1,

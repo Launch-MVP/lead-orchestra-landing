@@ -4,11 +4,11 @@ import { legalDocuments } from "@/data/legal/legalDocuments";
 import type { SeoMeta } from "./seo";
 
 function resolveSiteOrigin(): string {
-	const fallback = DEFAULT_SEO.canonical ?? "https://dealscale.io";
+	const fallback = DEFAULT_SEO.canonical ?? "https://launchmvp.com";
 	const candidates = [
 		process.env.NEXT_PUBLIC_SITE_URL,
 		fallback,
-		"https://dealscale.io",
+		"https://launchmvp.com",
 	];
 
 	for (const candidate of candidates) {
@@ -18,9 +18,7 @@ function resolveSiteOrigin(): string {
 			if (parsed.protocol === "https:") {
 				return parsed.origin;
 			}
-		} catch {
-			continue;
-		}
+		} catch {}
 	}
 
 	// If no HTTPS origin found, fall back gracefully using the first valid URL
@@ -28,12 +26,10 @@ function resolveSiteOrigin(): string {
 		if (!candidate) continue;
 		try {
 			return new URL(candidate).origin;
-		} catch {
-			continue;
-		}
+		} catch {}
 	}
 
-	return "https://dealscale.io";
+	return "https://launchmvp.com";
 }
 
 const SITE_ORIGIN = resolveSiteOrigin();
@@ -80,11 +76,11 @@ export function buildLegalSeoMeta(doc: LegalDocument): SeoMeta {
 	const lastUpdatedIso = toIso8601(doc.lastUpdated);
 
 	const keywords = Array.from(
-		new Set([doc.title, "Deal Scale Legal Document", ...DEFAULT_SEO.keywords]),
+		new Set([doc.title, "Launch MVP Legal Document", ...DEFAULT_SEO.keywords]),
 	);
 
 	return {
-		title: `${doc.title} | Deal Scale`,
+		title: `${doc.title} | Launch MVP`,
 		description: doc.description,
 		canonical,
 		keywords,
@@ -127,7 +123,7 @@ export function buildLegalJsonLd(doc: LegalDocument): Record<string, unknown> {
 		},
 		publisher: {
 			"@type": "Organization",
-			name: "Deal Scale",
+			name: "Launch MVP",
 			url: DEFAULT_SEO.canonical,
 			logo: {
 				"@type": "ImageObject",

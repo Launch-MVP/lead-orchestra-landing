@@ -1,15 +1,9 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
+// Keep build-time typography local. next/font/google triggers network fetches during
+// `next build`, which makes local production builds brittle in restricted environments.
+export const sansFont = {
+	variable: "",
+} as const;
 
-export const sansFont = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-sans",
-	weight: ["300", "400", "500", "600", "700"],
-});
-
-export const monoFont = JetBrains_Mono({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-mono",
-	weight: ["400", "500", "600", "700"],
-});
+export const monoFont = {
+	variable: "",
+} as const;

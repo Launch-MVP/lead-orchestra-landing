@@ -1,4 +1,5 @@
 import type { BeehiivPost } from "@/types/behiiv";
+import { isBuildTimePrerender } from "@/utils/env";
 
 // Helper to get the base URL safely
 function getBaseUrl() {
@@ -12,6 +13,10 @@ function getBaseUrl() {
 		return `https://${process.env.RENDER_EXTERNAL_URL}`;
 	// * Final fallback: localhost
 	return `http://localhost:${process.env.PORT ?? 3000}`;
+}
+
+function isLocalServerFallback(baseUrl: string): boolean {
+	return /^http:\/\/localhost(?::\d+)?$/i.test(baseUrl);
 }
 
 /**
@@ -34,8 +39,12 @@ export async function getLatestBeehiivPosts(
 			process.env.NODE_ENV !== "production" &&
 			process.env.BEEHIIV_DEBUG !== "false";
 		const isServer = typeof window === "undefined";
+		const publicationId = process.env.NEXT_PUBLIC_BEEHIIV_NEWSLETTER_ID_V2;
 		const baseUrl = getBaseUrl();
 		const apiPath = "/api/beehiiv/posts";
+		const shouldSkipLocalServerFetch =
+			process.env.NODE_ENV === "production" && isLocalServerFallback(baseUrl);
+		const shouldSkipBuildTimeFetch = isServer && isBuildTimePrerender();
 
 		// Normalize options
 		const options: BeehiivPostsOptions =
@@ -59,6 +68,27 @@ export async function getLatestBeehiivPosts(
 			? `${baseUrl}${apiPath}${qs ? `?${qs}` : ""}`
 			: `${apiPath}${qs ? `?${qs}` : ""}`;
 
+		if (!publicationId) {
+			if (shouldLogDebug) {
+				// eslint-disable-next-line no-console
+				console.warn(
+					"[getLatestBeehiivPosts] Skipping Beehiiv fetch because NEXT_PUBLIC_BEEHIIV_NEWSLETTER_ID_V2 is not configured.",
+				);
+			}
+			return [];
+		}
+
+		// Avoid self-fetching localhost during `next build`, where no app server is available.
+		if (shouldSkipBuildTimeFetch || (isServer && shouldSkipLocalServerFetch)) {
+			if (shouldLogDebug) {
+				// eslint-disable-next-line no-console
+				console.warn(
+					"[getLatestBeehiivPosts] Skipping Beehiiv fetch during build-time prerender or because only localhost server fallback is available in production mode.",
+				);
+			}
+			return [];
+		}
+
 		if (shouldLogDebug) {
 			// eslint-disable-next-line no-console
 			console.log("[getLatestBeehiivPosts] Fetching from:", url);
@@ -67,6 +97,7 @@ export async function getLatestBeehiivPosts(
 		const res = await fetch(url, {
 			// Let Next.js cache per unique query using route's revalidate
 			next: { revalidate: 300 },
+			signal: AbortSignal.timeout(5000),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -95,17 +126,23 @@ export async function getLatestBeehiivPosts(
 			return { data: [] };
 		});
 
-		const posts = Array.isArray(data.data) ? data.data : [];
+		const posts: unknown[] = Array.isArray(data.data) ? data.data : [];
 
 		// Debug: show fetched posts summary for ALL posts (id, title, published_at)
 		if (shouldLogDebug) {
 			try {
-				const summary = posts.map((p: any) => ({
-					id: p?.id,
-					title: p?.title,
-					published_at:
-						p?.published_at ?? p?.publish_date ?? p?.displayed_date ?? null,
-				}));
+				const summary = posts.map((post) => {
+					const entry = post as Record<string, unknown>;
+					return {
+						id: entry.id,
+						title: entry.title,
+						published_at:
+							entry.published_at ??
+							entry.publish_date ??
+							entry.displayed_date ??
+							null,
+					};
+				});
 				// eslint-disable-next-line no-console
 				console.log(
 					`[getLatestBeehiivPosts] Received ${posts.length} post(s). Full summary:`,

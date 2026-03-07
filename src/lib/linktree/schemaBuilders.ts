@@ -9,7 +9,7 @@ import { SCHEMA_CONTEXT } from "@/utils/seo/schema/helpers";
  */
 export function buildLinkTreeItemListSchema(
 	items: LinkTreeItem[],
-	baseUrl = "https://dealscale.io/linktree",
+	baseUrl = "https://launchmvp.com/linktree",
 ): {
 	"@context": typeof SCHEMA_CONTEXT;
 	"@type": "ItemList";
@@ -35,9 +35,9 @@ export function buildLinkTreeItemListSchema(
 	return {
 		"@context": SCHEMA_CONTEXT,
 		"@type": "ItemList",
-		name: "DealScale Link Tree",
+		name: "Launch MVP Link Tree",
 		description:
-			"Quick access to DealScale's most important links, resources, and pages. Browse our products, services, events, blog posts, and more.",
+			"Quick access to Launch MVP's most important links, resources, and pages. Browse services, products, events, case studies, and more.",
 		itemListOrder: "https://schema.org/ItemListOrderAscending",
 		itemListElement: items.map((item, index) => {
 			// Resolve the actual destination URL

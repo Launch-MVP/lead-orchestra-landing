@@ -1,6 +1,11 @@
-const DEFAULT_HOST = 'https://leadorchestra.com';
+const DEFAULT_HOST = 'https://dealscale.io';
 const DEFAULT_KEY = 'fccf3556b5fa455699db2554f79a235e';
 const DEFAULT_ENDPOINT = 'https://www.bing.com/indexnow';
+const FETCH_TIMEOUT_MS = Number(process.env.INDEXNOW_SUBMIT_TIMEOUT_MS || 5000);
+
+function isDeployEnvironment(): boolean {
+	return Boolean(process.env.CI || process.env.VERCEL || process.env.RENDER || process.env.CF_PAGES);
+}
 
 function resolveHost(): string {
 	// Check INDEXNOW_HOST first, then NEXT_PUBLIC_SITE_URL
@@ -99,6 +104,11 @@ function shouldSkip(): boolean {
 		return true;
 	}
 
+	if (!isDeployEnvironment() && process.env.INDEXNOW_SUBMIT_FORCE !== '1') {
+		console.log('[indexnow] Skipping submission outside CI/deploy environment.');
+		return true;
+	}
+
 	return false;
 }
 
@@ -124,6 +134,7 @@ export async function submitIndexNow(): Promise<void> {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json; charset=utf-8' },
 		body: JSON.stringify(payload),
+		signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
 	});
 
 	if (response.ok) {

@@ -11,7 +11,12 @@ import ProductsClient from "./ProductsClient";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const seo = getStaticSeo("/products");
-	return mapSeoMetaToMetadata(seo);
+	return mapSeoMetaToMetadata({
+		...seo,
+		title: "Launch MVP Offers | Services, Notion Systems, and SEO/AEO Assets",
+		description:
+			"Browse Launch MVP offers for product strategy, in-person workshops, Notion operating systems, launch-content GPTs, and SEO/AEO assets.",
+	});
 }
 
 async function fetchProducts(): Promise<ProductType[]> {

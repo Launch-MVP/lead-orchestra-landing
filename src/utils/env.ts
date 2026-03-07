@@ -31,3 +31,17 @@ export function getTestBaseUrl() {
 	// * Final fallback
 	return "http://localhost:3000";
 }
+
+export function isBuildTimePrerender(): boolean {
+	const lifecycleEvent = process.env.npm_lifecycle_event ?? "";
+	const lifecycleScript = process.env.npm_lifecycle_script ?? "";
+	const nextPhase = process.env.NEXT_PHASE ?? "";
+	const buildWorker = process.env.__NEXT_PRIVATE_BUILD_WORKER ?? "";
+
+	return (
+		lifecycleEvent === "build" ||
+		lifecycleScript.includes("next build") ||
+		nextPhase === "phase-production-build" ||
+		buildWorker === "1"
+	);
+}

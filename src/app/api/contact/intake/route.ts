@@ -286,8 +286,8 @@ export async function POST(request: Request) {
 			customData: {
 				currency: "USD",
 				value: parseMidpointNumber(body.avgDealAmount),
-				contentName: "Lead Orchestra Intake",
-				contentCategory: "Lead Form",
+				contentName: "Launch MVP Free Slot Application",
+				contentCategory: "Application Form",
 			},
 		});
 

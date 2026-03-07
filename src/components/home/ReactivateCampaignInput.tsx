@@ -44,15 +44,15 @@ interface ReactivateCampaignInputProps {
 }
 
 const PLACEHOLDER_OPTIONS = [
-	"Scrape leads from Zillow",
-	"Extract data from any website",
-	"Normalize and export lead data",
-	"Scrape niche sources competitors miss",
-	"Export to CRM, CSV, or Database",
-	"Integrate with Zapier, Make, or n8n",
-	"Create lookalike audience",
-	"Scrape niche create lookalike audience",
-	"Extract leads create lookalike audience",
+	"Scope an AI MVP for your startup",
+	"Map the must-have user journey",
+	"Prioritize launch-critical features",
+	"Turn a product idea into a 3-day build plan",
+	"Outline integrations and analytics",
+	"Upload your notes, PRD, or site map",
+	"Define the fastest path to live users",
+	"Get a sharper MVP cut before you overbuild",
+	"Align product, design, and engineering in one plan",
 ];
 
 const PricingCheckoutDialog = dynamic(
@@ -133,7 +133,7 @@ export function ReactivateCampaignInput({
 
 		// Make search value optional - use default if empty
 		const workflowRequirements =
-			searchValue.trim() || "Scrape leads and export data";
+			searchValue.trim() || "Scope and launch an MVP";
 
 		console.log("[ReactivateCampaign] Calling API with:", {
 			url: searchValue.trim(),
@@ -145,31 +145,31 @@ export function ReactivateCampaignInput({
 		const initialSteps = [
 			{
 				id: "enrich",
-				label: skipTrace ? "Normalizing data" : "Preparing scrape job",
+				label: skipTrace ? "Organizing requirements" : "Preparing workshop",
 				icon: <Database className="h-4 w-4" />,
 				status: "pending" as const,
 			},
 			{
 				id: "activate",
-				label: "Scraping leads",
+				label: "Scoping core workflow",
 				icon: <Zap className="h-4 w-4" />,
 				status: "pending" as const,
 			},
 			{
 				id: "calling",
-				label: "Extracting data points",
+				label: "Defining key screens",
 				icon: <Database className="h-4 w-4" />,
 				status: "pending" as const,
 			},
 			{
 				id: "texting",
-				label: "Cleaning and validating",
+				label: "Prioritizing integrations",
 				icon: <CheckCircle2 className="h-4 w-4" />,
 				status: "pending" as const,
 			},
 			{
 				id: "complete",
-				label: "Export ready",
+				label: "Launch plan ready",
 				icon: <CheckCircle2 className="h-4 w-4" />,
 				status: "pending" as const,
 			},
@@ -209,7 +209,7 @@ export function ReactivateCampaignInput({
 		}
 
 		const workflowRequirements =
-			searchValue.trim() || "Scrape leads and export data";
+			searchValue.trim() || "Scope and launch an MVP";
 
 		// Update step function for activation
 		const updateStep = (stepId: string, status: "processing" | "completed") => {
@@ -285,10 +285,10 @@ export function ReactivateCampaignInput({
 				// Call completion callback
 				onActivationComplete?.(calculatedMetrics);
 
-				// Redirect to app.dealscale.io after a short delay
+				// Redirect to the pricing page after a short delay
 				setTimeout(() => {
-					console.log("[ReactivateCampaign] Redirecting to app.dealscale.io");
-					window.location.href = "https://app.dealscale.io";
+					console.log("[ReactivateCampaign] Redirecting to /pricing");
+					window.location.href = "/pricing";
 				}, 2000);
 			}, 1600);
 		} catch (error) {
@@ -417,8 +417,8 @@ export function ReactivateCampaignInput({
 									(uploadMode === "url" && !searchValue.trim() && !uploadedFile)
 								}
 								className="h-10 w-10 shrink-0 rounded-full bg-sky-500 p-0 text-white shadow-lg transition-all hover:bg-sky-600 hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
-								aria-label="Start scraping"
-								title="Start scraping"
+								aria-label="Start MVP scoping"
+								title="Start MVP scoping"
 							>
 								{isProcessing ? (
 									<Loader2 className="h-5 w-5 animate-spin" />
@@ -472,12 +472,12 @@ export function ReactivateCampaignInput({
 										<div className="space-y-3">
 											<div>
 												<h4 className="mb-2 font-semibold text-base text-white">
-													What is Enrichment?
+													What does this include?
 												</h4>
 												<p className="text-sm text-white/80 leading-relaxed">
-													Automatically enhance your contact data with verified
-													phone numbers, email addresses, and additional
-													metadata to improve data quality rate.
+													The workshop turns rough ideas, notes, and references
+													into a sharper MVP plan with feature priorities,
+													integrations, and a launch-ready scope.
 												</p>
 											</div>
 											<div>
@@ -487,23 +487,23 @@ export function ReactivateCampaignInput({
 												<ul className="space-y-1.5 text-sm text-white/80">
 													<li className="flex items-start gap-2">
 														<span className="mt-0.5 text-sky-400">✓</span>
-														<span>
-															Verified contact information (phone, email)
-														</span>
+														<span>Clear MVP scope and launch sequence</span>
 													</li>
 													<li className="flex items-start gap-2">
 														<span className="mt-0.5 text-sky-400">✓</span>
-														<span>Enhanced lead data for better targeting</span>
+														<span>Prioritized features and user flow</span>
 													</li>
 													<li className="flex items-start gap-2">
 														<span className="mt-0.5 text-sky-400">✓</span>
 														<span>
-															Higher conversion rates with accurate contacts
+															Integration and analytics recommendations
 														</span>
 													</li>
 													<li className="flex items-start gap-2">
 														<span className="mt-0.5 text-sky-400">✓</span>
-														<span>Time saved on manual data verification</span>
+														<span>
+															Cleaner handoff for design and engineering
+														</span>
 													</li>
 												</ul>
 											</div>
@@ -529,10 +529,10 @@ export function ReactivateCampaignInput({
 					<DialogContent className="border-sky-500/30 bg-slate-900/95 backdrop-blur-xl sm:max-w-md">
 						<DialogHeader>
 							<DialogTitle className="text-white">
-								Processing Scrape Job
+								Preparing Your MVP Workshop
 							</DialogTitle>
 							<DialogDescription className="text-white/70">
-								Processing your scrape job and preparing data export
+								Scoping your product, workflow, and launch-ready deliverables
 							</DialogDescription>
 						</DialogHeader>
 						<div className="mt-4">
@@ -546,10 +546,10 @@ export function ReactivateCampaignInput({
 					<DialogContent className="border-sky-500/30 bg-slate-900/95 backdrop-blur-xl sm:max-w-md [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white/80">
 						<DialogHeader>
 							<DialogTitle className="text-white">
-								Data Enrichment & Export
+								Workshop Scope & Deliverables
 							</DialogTitle>
 							<DialogDescription className="text-white/70">
-								Learn about our data enrichment and export features
+								Learn what the 3-day MVP workshop is designed to produce
 							</DialogDescription>
 						</DialogHeader>
 						<Tabs defaultValue="enrichment" className="w-full">
@@ -558,7 +558,7 @@ export function ReactivateCampaignInput({
 									value="enrichment"
 									className="text-white data-[state=active]:bg-sky-500 data-[state=active]:text-white"
 								>
-									Enrichment
+									Scope
 								</TabsTrigger>
 								<TabsTrigger
 									value="export"
@@ -570,12 +570,11 @@ export function ReactivateCampaignInput({
 							<TabsContent value="enrichment" className="space-y-3 pt-4">
 								<div>
 									<h4 className="mb-2 font-semibold text-base text-white">
-										What is Data Enrichment?
+										What gets scoped?
 									</h4>
 									<p className="text-sm text-white/80 leading-relaxed">
-										Automatically enhance your scraped data with verified phone
-										numbers, email addresses, and additional metadata to improve
-										data quality and completeness.
+										We define the core user path, MVP feature cut, dependencies,
+										and launch sequence so the build stays focused and usable.
 									</p>
 								</div>
 								<div>
@@ -585,19 +584,19 @@ export function ReactivateCampaignInput({
 									<ul className="space-y-1.5 text-sm text-white/80">
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Verified contact information (phone, email)</span>
+											<span>Core workflow and user journey</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Normalized data in Lead Standard Format (LSF)</span>
+											<span>Launch-critical features only</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>De-duplication and data validation</span>
+											<span>Integration and analytics requirements</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Time saved on manual data cleaning</span>
+											<span>Risk reduction before full development</span>
 										</li>
 									</ul>
 								</div>
@@ -605,50 +604,38 @@ export function ReactivateCampaignInput({
 							<TabsContent value="export" className="space-y-3 pt-4">
 								<div>
 									<h4 className="mb-2 font-semibold text-base text-white">
-										Export Your Data
+										What gets delivered?
 									</h4>
 									<p className="text-sm text-white/80 leading-relaxed">
-										Lead Orchestra exports scraped data to CRM, CSV/JSON,
-										Database, S3, or any system. Integrate with MCP protocol,
-										APIs, webhooks, and workflow engines like Kestra, Make,
-										Zapier, and n8n. Connect directly to CRMs, data warehouses,
-										and automation platforms.
+										You leave with a sharper MVP brief, implementation
+										direction, key flows, and the decisions needed to move into
+										build without wasted cycles.
 									</p>
 								</div>
 								<div>
 									<h5 className="mb-2 font-semibold text-sky-400 text-sm">
-										Export Options:
+										Typical outputs:
 									</h5>
 									<ul className="space-y-1.5 text-sm text-white/80">
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>
-												CSV and JSON exports for spreadsheets and tools
-											</span>
+											<span>Prioritized MVP feature list</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Direct Database and S3 integration</span>
+											<span>Critical user flow and launch sequence</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>
-												CRM integration (HubSpot, Salesforce, and more)
-											</span>
+											<span>Integration and data requirements</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>Workflow engines: Kestra, Make, Zapier, n8n</span>
+											<span>Build-ready implementation direction</span>
 										</li>
 										<li className="flex items-start gap-2">
 											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>REST API, webhooks, and MCP protocol support</span>
-										</li>
-										<li className="flex items-start gap-2">
-											<span className="mt-0.5 text-sky-400">✓</span>
-											<span>
-												GitHub Actions templates for CI/CD integration
-											</span>
+											<span>Cleaner handoff for product and engineering</span>
 										</li>
 									</ul>
 								</div>
@@ -697,9 +684,9 @@ export function ReactivateCampaignInput({
 							>
 								<ReactivateCampaignBadges
 									metrics={{
-										dollarAmount: 12500,
+										dollarAmount: 25000,
 										timeSavedHours: 100,
-										contactsActivated: 50,
+										contactsActivated: 12,
 										hobbyTimeHours: 15,
 									}}
 								/>

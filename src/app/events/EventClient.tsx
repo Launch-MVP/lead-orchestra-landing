@@ -42,7 +42,7 @@ export default function Events({ events }: EventsClientProps) {
 
 	return (
 		<>
-			<div className=" ">
+			<div className="pt-24 md:pt-32 lg:pt-40">
 				{/* <HeroSessionMonitorClientWithModal /> */}
 
 				<EventsFilter
@@ -56,10 +56,10 @@ export default function Events({ events }: EventsClientProps) {
 					isCategoryFiltered={activeCategory !== "all"}
 				/>
 				<CTASection
-					title="Want to attend our events?"
-					description="Join us for exciting discussions and networking opportunities."
-					buttonText="Register Now"
-					href="/contact"
+					title="Want to join the next Launch MVP event?"
+					description="Reserve a Denver workshop seat or apply for a free strategy slot to get scoped into the right build path."
+					buttonText="Book Denver Workshop"
+					href="/contact?tab=conversion"
 				/>
 			</div>
 		</>

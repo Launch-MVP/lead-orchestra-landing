@@ -13,6 +13,6 @@ describe("About manifesto schema injection", () => {
 		);
 		expect(script).not.toBeNull();
 		expect(script?.textContent).toContain("CreativeWorkSeries");
-		expect(script?.textContent).toContain("DealScale Blue Ocean Manifesto");
+		expect(script?.textContent).toContain("Launch MVP");
 	});
 });

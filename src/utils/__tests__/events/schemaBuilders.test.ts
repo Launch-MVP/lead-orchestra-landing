@@ -11,8 +11,8 @@ describe("schema builders", () => {
 		title: "AI Demo Day",
 		date: "2025-03-10",
 		time: "09:00",
-		description: "Discover how DealScale uses AI for modern deal management.",
-		externalUrl: "https://events.dealscale.io/ai-demo",
+		description: "Discover how Launch MVP scopes and ships products faster.",
+		externalUrl: "https://launchmvp.com/events/ai-demo",
 		category: "conference",
 		location: "Austin, TX",
 		accessType: "external",
@@ -26,7 +26,7 @@ describe("schema builders", () => {
 		expect(schema.itemListElement).toHaveLength(1);
 		expect(schema.itemListElement[0]).toEqual(
 			expect.objectContaining({
-				url: "https://dealscale.io/events/ai-demo",
+				url: "https://launchmvp.com/events/ai-demo",
 				position: 1,
 			}),
 		);

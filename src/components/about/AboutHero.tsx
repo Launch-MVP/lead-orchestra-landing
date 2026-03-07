@@ -21,7 +21,7 @@ export default function AboutHero({
 		}),
 	);
 
-	const resolvedTitle = title ?? hero?.title ?? "About Deal Scale";
+	const resolvedTitle = title ?? hero?.title ?? "About Launch MVP";
 	const resolvedSubtitle = subtitle ?? hero?.subtitle ?? "";
 
 	const isStoreLoading =
@@ -47,7 +47,7 @@ export default function AboutHero({
 					<div
 						className="h-full w-full"
 						style={{
-							background: "linear-gradient(135deg, #7f5af0 0%, #2cb67d 100%)",
+							background: "linear-gradient(135deg, #0f4c81 0%, #f2c57c 100%)",
 						}}
 					/>
 				</BlurFade>

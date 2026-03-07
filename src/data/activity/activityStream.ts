@@ -11,66 +11,68 @@ export type ActivityEvent = {
 /**
  * Curated activity feed for the FeatureSectionActivity component.
  *
- * The copy mirrors the Lead Orchestra scraping storyline used across the
- * live hero and service flows so the visuals remain consistent.
+ * The copy mirrors the Launch MVP workshop storyline used across the
+ * homepage so the visuals remain consistent.
  */
 export const activityStream: ActivityEvent[] = [
 	{
-		id: "scrape-job",
-		label: "Scraping Job",
-		actor: "Lead Orchestra MCP Engine",
+		id: "scope-lock",
+		label: "Scope Lock",
+		actor: "Launch MVP Workshop",
 		action:
-			"Scraped 248 leads from Zillow using MCP plugin, normalized and cleaned, exported to S3.",
-		timeAgo: "2m ago",
-		impact: "+248 leads",
-		tags: ["scraping", "mcp"],
+			"Locked the version-one flow around signup, onboarding, billing, and dashboard handoff.",
+		timeAgo: "3m ago",
+		impact: "Launch scope approved",
+		tags: ["scope", "mvp"],
 	},
 	{
-		id: "data-export",
-		label: "Data Export",
-		actor: "Export Engine",
+		id: "ux-review",
+		label: "UX Review",
+		actor: "Product Design Sprint",
 		action:
-			"Exported normalized lead data to Deal Scale for AI enrichment and scoring.",
-		timeAgo: "5m ago",
-		impact: "Export complete",
-		tags: ["export", "csv"],
+			"Reviewed the must-have screens, simplified the onboarding path, and queued UI direction for handoff.",
+		timeAgo: "8m ago",
+		impact: "Core screens aligned",
+		tags: ["ux", "handoff"],
 	},
 	{
-		id: "plugin-install",
-		label: "Plugin Installed",
-		actor: "Plugin Marketplace",
-		action: "Installed Realtor.com MCP plugin from community marketplace.",
-		timeAgo: "11m ago",
-		impact: "New source added",
-		tags: ["plugin", "mcp"],
-	},
-	{
-		id: "normalization",
-		label: "Data Normalization",
-		actor: "Normalization Engine",
+		id: "integration-plan",
+		label: "Integration Plan",
+		actor: "Systems Map",
 		action:
-			"Normalized 1,200 scraped records, deduplicated, and tagged with metadata.",
-		timeAgo: "18m ago",
-		impact: "1,200 normalized",
-		tags: ["normalization"],
+			"Confirmed auth, payments, analytics, and AI workflow integrations required for the launch sprint.",
+		timeAgo: "14m ago",
+		impact: "Stack decisions made",
+		tags: ["integrations", "architecture"],
 	},
 	{
-		id: "api-export",
-		label: "API Export",
-		actor: "API Bridge",
-		action: "Exported 500 leads via webhook to customer's data warehouse.",
-		timeAgo: "26m ago",
-		impact: "500 exported",
-		tags: ["api", "webhook"],
-	},
-	{
-		id: "scrape-report",
-		label: "Scraping Report",
-		actor: "Analytics Engine",
+		id: "build-status",
+		label: "Build Status",
+		actor: "Engineering Sprint",
 		action:
-			"Published weekly scraping performance report: 5,000+ leads scraped across 8 sources.",
-		timeAgo: "1h ago",
-		impact: "+5,000 leads",
-		tags: ["reporting", "analytics"],
+			"Shipped the critical path, connected the launch systems, and staged QA for deployment review.",
+		timeAgo: "22m ago",
+		impact: "Core build in progress",
+		tags: ["build", "launch"],
+	},
+	{
+		id: "qa-review",
+		label: "QA Review",
+		actor: "Launch Checklist",
+		action:
+			"Ran the release checklist covering analytics, deployment, edge cases, and launch-day fallback handling.",
+		timeAgo: "31m ago",
+		impact: "Launch risk reduced",
+		tags: ["qa", "deployment"],
+	},
+	{
+		id: "handoff-pack",
+		label: "Handoff Pack",
+		actor: "Founder Delivery",
+		action:
+			"Packaged repo notes, setup steps, roadmap priorities, and next decisions for the post-launch build phase.",
+		timeAgo: "44m ago",
+		impact: "Team ready to extend",
+		tags: ["handoff", "roadmap"],
 	},
 ];

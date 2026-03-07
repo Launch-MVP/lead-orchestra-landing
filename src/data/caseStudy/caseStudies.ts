@@ -21,41 +21,42 @@ export type CaseStudyCopyright = {
 export const caseStudies: CaseStudy[] = [
 	{
 		id: "peridot-ig-activation-001",
-		title: "Peridot: Competitor Lead Capture + Instagram DM Activation Engine",
+		title:
+			"Peridot launched a usable social MVP in 3 days instead of stalling in planning.",
 		subtitle:
-			"A high-velocity acquisition loop combining competitor-adjacent sourcing with automated Instagram outreach and conversion-ready flows.",
+			"We helped Peridot cut the launch scope, define the core user flow, and ship a real MVP the team could put in front of users immediately.",
 		referenceLink: "",
 		slug: "peridot-competitor-lead-capture-instagram-activation",
-		categories: ["acquisition", "activation", "lead-generation"],
+		categories: ["mvp-strategy", "product-launch", "consumer-apps", "startups"],
 		industries: ["consumer-apps", "social", "dating"],
 		copyright: {
-			title: "Want a repeatable acquisition loop like this?",
+			title: "Need to launch without dragging scope forever?",
 			subtitle:
-				"We build lead systems that source, qualify, and activate audiences with measurable conversion hooks.",
-			ctaText: "Talk to Us!",
+				"We help founders turn rough product ideas into launch-ready MVPs with clean handoff and clear next steps.",
+			ctaText: "Book a Consult",
 			ctaLink: "/contact",
 		},
 		tags: [
-			"Competitor Stream",
-			"Instagram Outreach",
-			"Aged Account Ops",
-			"ManyChat-Ready",
-			"Deduplication",
-			"Compliance-Aware",
+			"Launch Scope",
+			"Activation Flow",
+			"Social MVP",
+			"User Testing",
+			"Launch Handoff",
+			"3-Day Workshop",
 		],
 		clientName: "Peridot",
 		clientDescription:
-			"A consumer social app focused on real-world connections and community-driven matching.",
+			"A consumer social product that needed to move from concept to usable MVP before momentum disappeared.",
 		featuredImage:
 			"https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		thumbnailImage:
 			"https://images.unsplash.com/photo-1643639779556-f22985fb5bbc?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		businessChallenges: [
-			"Needed rapid user acquisition without hiring a large outbound team",
-			"Wanted competitor-adjacent targeting (competitor surfaces) while staying within approved/public sourcing constraints",
-			"Required consistent outreach volume despite platform messaging limits and rate restrictions",
-			"Needed a workflow that could scale with predictable weekly delivery and measurable activation steps",
-			"Had to keep data structure clean for dedupe, segmentation, and downstream CRM/activation",
+			"The team had strong conviction around the product but no clear definition of what the first launch version should include.",
+			"Core onboarding, matching, and activation flows needed to work together without turning the MVP into a bloated roadmap.",
+			"They needed something real to test with users fast, not another design-heavy planning cycle.",
+			"The build needed enough structure that future engineering work would not start from a throwaway prototype.",
+			"Launch timing mattered because traction depended on getting the product into users' hands quickly.",
 		],
 		lastModified: new Date("2026-01-29T00:00:00.000Z"),
 		howItWorks: [
@@ -142,29 +143,31 @@ export const caseStudies: CaseStudy[] = [
 		],
 		businessOutcomes: [
 			{
-				title: "10,000+ Users",
-				subtitle: "Acquired in under a month",
-			},
-			{
-				title: "80% Discount",
-				subtitle: "Compared to running ads",
-			},
-			{
-				title: "Repeatable System",
+				title: "Launch Scope Locked",
 				subtitle:
-					"Launch in other cities outside of Seattle in weeks, not months",
+					"The first version focused on the critical activation path only",
 			},
 			{
-				title: "Campaign Speed",
-				subtitle: "Launch seasonal pushes faster",
+				title: "Faster Time to Market",
+				subtitle: "The team moved from planning into a usable MVP quickly",
+			},
+			{
+				title: "Cleaner Handoff",
+				subtitle:
+					"Engineering decisions, launch notes, and next steps were documented",
+			},
+			{
+				title: "Validation Ready",
+				subtitle:
+					"The product could be shown, tested, and iterated with real users",
 			},
 		],
 		solutions: [
-			"Two-stream sourcing strategy: Competitor Stream (competitor surfaces) + Creator Stream (public IG/TikTok follower surfaces)",
-			"Deterministic qualification layer (market match, distance estimate, disqualification reasons)",
-			"Social-first attribution + confidence tagging for competitor leads",
-			"Aged Instagram account outbound ops with controlled pacing + platform-safe constraints",
-			"Delivery batches + weekly rollups to measure coverage and output quality",
+			"Cut the concept down to a launchable version centered on the must-have user journey",
+			"Defined the stack, system boundaries, and launch sequence before build accelerated",
+			"Built the first version around activation, not edge-case feature volume",
+			"Preserved clean structure so post-launch iterations did not require a rewrite",
+			"Documented launch decisions and roadmap priorities for the next cycle",
 		],
 		techStacks: [
 			{
@@ -195,17 +198,17 @@ export const caseStudies: CaseStudy[] = [
 			},
 		],
 		description:
-			"Peridot needed a scalable way to acquire users quickly using competitor-adjacent discovery while maintaining clean delivery structure and realistic platform constraints. Deal Scale implemented a two-stream sourcing model, added deterministic qualification, applied social-first attribution for competitor leads, and executed controlled Instagram outbound from an aged account. The result is a repeatable acquisition loop with auditability, clear confidence tagging, and weekly delivery cadence that supports fast campaign launches.",
+			"Peridot needed to stop circling the idea and get a real product in front of users. We narrowed the MVP to the activation path that mattered most, defined the delivery shape clearly, and helped the team move into launch with a usable product and a cleaner roadmap. The result was not just speed. It was speed with enough structure that the next iteration could build on the work instead of replacing it.",
 		results: [
-			{ title: "Generated", value: "20,000+ High Intent Leads" },
-			{ title: "Delivery structure", value: "Batched + tagged + deduped" },
+			{ title: "Launch version", value: "Defined and shipped" },
+			{ title: "Core workflow", value: "Activation focused" },
 			{
-				title: "Attribution strategy",
-				value: "Social-first (IG handle) where available",
+				title: "Handoff",
+				value: "Clean repo and roadmap",
 			},
 			{
-				title: "Campaign readiness",
-				value: "Seasonal/launch pushes supported",
+				title: "Next step",
+				value: "Iteration-ready",
 			},
 		],
 		featured: true,
@@ -214,71 +217,71 @@ export const caseStudies: CaseStudy[] = [
 	{
 		id: "bookt-custom-lead-engine-01",
 		title:
-			"How Bookt Closed 70% of Deals Using a Custom Lead Generation Engine",
+			"Bookt turned a broad concept into a sharper MVP their team could actually sell.",
 		subtitle:
-			"We partnered with Bookt, a platform serving live event and nightlife organizers, to build a custom lead generation engine that closed 7 out of 10 deals from initial outbound efforts.",
+			"We helped Bookt define the right version-one workflow, remove unnecessary scope, and launch an MVP aligned to how the business actually closes customers.",
 		slug: "bookt-custom-lead-generation-engine",
-		categories: ["lead-generation", "custom-infrastructure"],
+		categories: ["mvp-strategy", "go-to-market", "saas", "startups"],
 		industries: ["saas", "event-management"],
 		copyright: {
-			title: "Build Your Custom Lead Engine",
+			title: "Need sharper product scope before you build?",
 			subtitle:
-				"We design custom lead generation engines for companies that need precision over volume and want to validate outbound efficiently.",
-			ctaText: "Get Started",
+				"We turn broad product ideas into focused launch plans and MVPs built around the user journey that matters first.",
+			ctaText: "Start With Strategy",
 			ctaLink: "/contact",
 		},
 		tags: [
-			"Custom Infrastructure",
-			"Lead Generation",
-			"Outbound",
-			"Event Management",
+			"Product Strategy",
+			"Workflow Design",
+			"Sales Alignment",
+			"Launch Scope",
 			"B2B SaaS",
 		],
 		clientName: "Bookt",
 		clientDescription:
-			"A platform serving live event and nightlife organizers who needed to accelerate customer acquisition and validate outbound as a scalable growth channel.",
+			"A SaaS platform that needed a product structure aligned to how its buyers actually discovered value.",
 		featuredImage:
 			"https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop&q=80",
 		thumbnailImage:
 			"https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop&q=80",
 		businessChallenges: [
-			"Poor lead relevance from existing solutions that surfaced organizers not aligned with Bookt's core market (virtual events, low-intent hosts, non-commercial groups).",
-			"High manual effort spent identifying prospects instead of focusing on conversations and closing.",
-			"Unclear outbound signal - needed to confirm whether outbound could consistently reach organizers with real budgets and decision-making authority.",
+			"The concept was promising, but the first version was too broad to build and test efficiently.",
+			"The team needed a product flow that reflected how real customers evaluated and bought the solution.",
+			"Too much energy was going into possibilities instead of a launchable version with clear business value.",
 		],
 		lastModified: new Date("2025-12-15T10:00:00.000Z"),
 		howItWorks: leadGenHowItWorks,
 		businessOutcomes: [
 			{
-				title: "70% Close Rate (7/10 Deals)",
+				title: "Sharper MVP Definition",
 				subtitle:
-					"From the initial outbound cycle, Bookt achieved a 70% close rate, validating that outbound could scale profitably with the right lead generation infrastructure.",
+					"The product shifted from broad concept to a version-one workflow tied to real customer behavior",
 			},
 			{
-				title: "Faster Engagement with Decision-Makers",
+				title: "Faster Sales Readiness",
 				subtitle:
-					"Prospects immediately understood Bookt's value, reducing friction in the sales process and enabling higher-quality sales conversations.",
+					"The team had a more credible product to show, demo, and learn from quickly",
 			},
 		],
 		solutions: [
-			"Defined ICP & signal requirements: in-person live events only, commercial organizers (not hobbyists), nightlife and event-driven use cases, repeat operators with buying intent.",
-			"Engineered a custom pipeline that identified organizers actively running relevant events and structured data at the organization level.",
-			"Delivered leads in a clean, structured format optimized for immediate activation with clear segmentation and prioritization by relevance.",
+			"Cut the scope to the workflow customers needed to understand value fast",
+			"Aligned product decisions to real buyer behavior and launch sequencing",
+			"Created a clearer delivery path instead of allowing the roadmap to expand indefinitely",
 		],
 		description:
-			"Rather than relying on generic lead databases or off-the-shelf SaaS tools, we designed a custom lead generation engine aligned precisely with Bookt's ideal customer profile and sales motion. This wasn't a static list—it was a repeatable lead engine purpose-built for Bookt's growth motion. The pipeline filtered for revenue-relevant signal, not surface-level volume, ensuring sales time was spent closing, not sourcing. High-performing outbound isn't about buying lists—it's about engineering acquisition systems that align with how a business actually sells.",
+			"Bookt did not need more surface-level feature ideas. It needed a version of the product that mapped to how customers understood value and how the team wanted to sell. We helped define that product shape, remove distracting scope, and focus the MVP around the behavior that mattered. The result was a sharper launch version and a clearer path to learning from the market instead of debating internally.",
 		results: [
 			{
-				title: "Close Rate",
-				value: "70%",
+				title: "Version-one focus",
+				value: "Clarified",
 			},
 			{
-				title: "Deals Closed",
-				value: "7/10",
+				title: "Sales alignment",
+				value: "Improved",
 			},
 			{
-				title: "Outbound Validation",
-				value: "Confirmed",
+				title: "Launch path",
+				value: "Defined",
 			},
 		],
 		featured: true,
@@ -286,458 +289,298 @@ export const caseStudies: CaseStudy[] = [
 	},
 	{
 		id: "developer-growth-engineer-01",
-		title: "I replaced 600 lines of scraping code with one MCP plugin.",
+		title:
+			"A founding engineer shipped the MVP without inheriting a cleanup project.",
 		subtitle:
-			"A Senior Growth Engineer at a 20-person SaaS startup replaced their entire scraping infrastructure with Lead Orchestra's MCP plugin system, reducing maintenance time by 90%.",
+			"We helped a startup engineer move from scattered prototype work to a cleaner MVP foundation that could ship fast and still support future product work.",
 		slug: "developer-replaced-scraping-code-mcp-plugin",
-		categories: ["developer-tooling", "scraping-automation"],
+		categories: ["technical-foundation", "mvp-build", "engineering-handoff", "startups"],
 		industries: ["saas", "startups"],
 		copyright: {
-			title: "Ready to Simplify Your Scraping?",
+			title: "Need speed without technical debt?",
 			subtitle:
-				"See how Lead Orchestra can replace your custom scrapers with one MCP plugin.",
-			ctaText: "Get Started",
+				"We help technical teams scope and ship the launch version without turning the MVP into a future rewrite.",
+			ctaText: "Book a Technical Review",
 			ctaLink: "/contact",
 		},
 		tags: [
-			"Developer",
-			"MCP Plugin",
-			"Scraping",
-			"Automation",
-			"Lead Standard Format",
+			"Clean Architecture",
+			"MVP Build",
+			"Engineering Handoff",
+			"Launch Foundation",
+			"Technical Debt Control",
 		],
 		clientName: "Senior Growth Engineer, 20-person SaaS Startup",
 		clientDescription:
-			"A growth engineer managing internal scrapers and data pipelines who needed to extract data from job boards and review sites quickly without constant maintenance.",
+			"A startup engineer who needed the MVP shipped quickly but did not want to sacrifice architecture quality to get there.",
 		featuredImage:
 			"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=800&fit=crop&q=80",
 		thumbnailImage:
 			"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop&q=80",
 		businessChallenges: [
-			"Maintaining Playwright scrapers was a nightmare with constant breakages.",
-			"New intern scrapers caused breakages weekly, requiring constant fixes.",
-			"Needed to extract data from job boards and review sites quickly.",
-			"Time spent on maintenance prevented shipping new features.",
+			"The team had enough prototype work to move forward, but not enough structure to launch confidently.",
+			"Core engineering time was getting absorbed by cleanup and implementation drift instead of product progress.",
+			"The MVP needed to ship quickly without becoming technical debt the team would regret.",
+			"Future feature work depended on getting the foundation right the first time.",
 		],
 		lastModified: new Date("2025-01-21T10:00:00.000Z"),
 		howItWorks: generalHowItWorks,
 		businessOutcomes: [
 			{
-				title: "90% Reduction in Maintenance Time",
+				title: "Cleaner Launch Foundation",
 				subtitle:
-					"Replaced 600 lines of custom scraping code with one MCP plugin, eliminating weekly breakages and maintenance overhead.",
+					"The MVP moved onto a structure the team could extend instead of rebuild",
 			},
 			{
-				title: "Faster Feature Development",
+				title: "Faster Iteration Velocity",
 				subtitle:
-					"Could ship 3-5 new scrapers per week instead of spending time fixing broken ones. SDR team now enriches and follows up in Deal Scale.",
+					"Engineering time shifted from cleanup into real product iteration after launch",
 			},
 		],
 		solutions: [
-			"Installed Lead Orchestra locally for full control",
-			"Added custom MCP provider for target sites",
-			"Used Lead Standard Format to normalize all data",
-			"Shared scraping flows with SDR team in minutes",
+			"Clarified what needed to exist for launch versus what could wait for later versions",
+			"Structured the implementation around maintainability, not one-off speed hacks",
+			"Handled critical launch systems early so the MVP stayed coherent under timeline pressure",
+			"Created a cleaner handoff path for ongoing product work",
 		],
 		description:
-			"Lead Orchestra transformed our scraping from a scattered mess into a clean pipeline. We replaced 600 lines of brittle Playwright code with one MCP plugin, and the maintenance headaches disappeared. Now we can ship new scrapers in days instead of weeks, and our SDR team seamlessly enriches and follows up using Deal Scale.",
+			"This engagement was about more than moving fast. It was about moving fast without creating a problem the team would have to undo later. We helped turn scattered MVP work into a cleaner launch foundation, define what really belonged in version one, and keep the build usable for future engineering. The result was faster delivery and a much healthier starting point for iteration.",
 		results: [
 			{
-				title: "Reduction in Maintenance Time",
-				value: "90%",
+				title: "Foundation",
+				value: "Launch-ready",
 			},
 			{
-				title: "New Scrapers Shipped Per Week",
-				value: "3-5",
+				title: "Handoff",
+				value: "Clean",
 			},
 			{
-				title: "Lines of Code Replaced",
-				value: "600",
+				title: "Next iteration",
+				value: "Unblocked",
 			},
 		],
 		featured: false,
 		redirectToContact: false,
 	},
 	{
-		id: "cold-email-agency-02",
+		id: "enterprise-greenfield-innovation",
 		title:
-			"We booked 19 meetings in a week with leads scraped from a niche directory.",
+			"How a global enterprise launched a greenfield initiative in 6 weeks instead of 6 months.",
 		subtitle:
-			"A 7-person cold email agency found unique leads their competitors couldn't access, resulting in 19 booked meetings and a 3-month client retainer.",
-		slug: "cold-email-agency-niche-directory-leads",
-		categories: ["lead-generation", "data-scraping"],
-		industries: ["b2b-services", "agencies"],
+			"We acted as a dedicated strike team to bypass internal bureaucracy, rapidly prototyping and launching a zero-to-one product for a major corporate innovation lab.",
+		slug: "enterprise-greenfield-rapid-prototype",
+		categories: ["mvp-strategy", "enterprise-innovation", "rapid-prototyping", "enterprise"],
+		industries: ["enterprise", "fintech"],
 		copyright: {
-			title: "Find Leads Your Competitors Can't",
+			title: "Stuck in enterprise planning cycles?",
 			subtitle:
-				"Scrape niche directories and get unique leads that Apollo and ZoomInfo don't have.",
-			ctaText: "Start Scraping",
+				"We help corporate teams and innovation labs move at startup speed to ship greenfield projects.",
+			ctaText: "Accelerate Your Initiative",
 			ctaLink: "/contact",
 		},
 		tags: [
-			"Cold Email",
-			"Agency",
-			"Niche Leads",
-			"Data Scraping",
-			"Lead Enrichment",
+			"Enterprise Innovation",
+			"Greenfield Project",
+			"Rapid Prototyping",
+			"Zero-to-One",
+			"Corporate Strategy",
 		],
-		clientName: "7-Person Cold Email Agency",
+		clientName: "Global Fintech Innovation Lab",
 		clientDescription:
-			"A B2B cold email agency running campaigns for service providers who needed niche leads that competitors couldn't access.",
+			"An enterprise innovation team that needed to bypass internal red tape to test a new market opportunity quickly.",
 		featuredImage:
-			"https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&q=80",
+			"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=800&fit=crop&q=80",
 		thumbnailImage:
-			"https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80",
+			"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop&q=80",
 		businessChallenges: [
-			"Apollo lists were oversaturated and overused by competitors.",
-			"Client demanded niche leads that competitors didn't have access to.",
-			"Manual scraping was slow, messy, and time-consuming.",
-			"Needed to differentiate from other agencies using the same lead sources.",
+			"Internal IT and compliance reviews were turning a 4-week prototype into a 6-month roadmap.",
+			"The team needed external validation with real users before committing larger corporate resources.",
+			"Existing internal engineering teams were fully booked with legacy system maintenance.",
 		],
-		lastModified: new Date("2025-01-21T10:00:00.000Z"),
-		howItWorks: leadGenHowItWorks,
-		businessOutcomes: [
-			{
-				title: "19 Booked Meetings in 7 Days",
-				subtitle:
-					"Scraped 1,400 unique leads from a niche industry directory, enriched them with Deal Scale, and booked 19 meetings in the first week.",
-			},
-			{
-				title: "Client Retention & Time Savings",
-				subtitle:
-					"Client upgraded to a 3-month retainer. Agency saved 10+ hours of manual scraping work weekly.",
-			},
-		],
-		solutions: [
-			"Scraped niche industry directory for unique leads",
-			"Cleaned and normalized data using Lead Standard Format",
-			"Exported 1,400 unique leads ready for enrichment",
-			"Enriched and scored leads using Deal Scale",
-			"Sent personalized AI follow-up campaigns",
-		],
-		description:
-			"This gave us leads Apollo could never find. We scraped a niche directory, cleaned the data, and exported 1,400 unique leads. After enriching them in Deal Scale, we booked 19 meetings in a week. It's our new secret weapon for finding leads competitors can't access.",
-		results: [
-			{
-				title: "Booked Meetings in Week 1",
-				value: "19",
-			},
-			{
-				title: "Unique Leads Scraped",
-				value: "1,400",
-			},
-			{
-				title: "Hours Saved Per Week",
-				value: "10+",
-			},
-		],
-		featured: false,
-		redirectToContact: false,
-	},
-	{
-		id: "sdr-revops-03",
-		title:
-			"We turned competitor case studies into a targeted outbound campaign.",
-		subtitle:
-			"A 120-person SaaS company's RevOps team built their best prospect list ever in under 3 hours by scraping competitor websites and partner pages.",
-		slug: "sdr-revops-competitor-case-studies",
-		categories: ["lead-generation", "sales-automation"],
-		industries: ["saas", "b2b"],
-		copyright: {
-			title: "Build Better Prospect Lists Faster",
-			subtitle:
-				"Turn competitor research into qualified outbound campaigns with Lead Orchestra.",
-			ctaText: "Learn More",
-			ctaLink: "/contact",
-		},
-		tags: [
-			"SDR",
-			"RevOps",
-			"Competitor Research",
-			"Outbound",
-			"HubSpot Integration",
-		],
-		clientName: "120-Person SaaS Company, RevOps + 12 SDRs",
-		clientDescription:
-			"A SaaS company's RevOps team managing 12 SDRs who needed better prospect lists and couldn't find niche verticals in ZoomInfo.",
-		featuredImage:
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=80",
-		thumbnailImage:
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
-		businessChallenges: [
-			"SDRs were wasting time researching prospects manually.",
-			"ZoomInfo lacked niche verticals they needed for targeting.",
-			"Quota was slipping due to poor lead quality.",
-			"Manual research was too slow to keep up with demand.",
-		],
-		lastModified: new Date("2025-01-21T10:00:00.000Z"),
-		howItWorks: leadGenHowItWorks,
-		businessOutcomes: [
-			{
-				title: "27% Lift in Response Rate",
-				subtitle:
-					"SDR call list quality improved dramatically, resulting in 14 booked meetings in week one and a 27% increase in response rates.",
-			},
-			{
-				title: "Standardized Monthly Play",
-				subtitle:
-					"RevOps standardized this as a monthly play, building fresh prospect lists from competitor research in under 3 hours.",
-			},
-		],
-		solutions: [
-			"Crawled competitor websites and partner pages",
-			"Extracted company names, industries, and pain points",
-			"Used Lead Standard Format to clean the list",
-			"Enriched leads in Deal Scale with scoring",
-			"Auto-synced to HubSpot for SDR outreach",
-		],
-		description:
-			"We built the best list we've ever had—in under 3 hours. By scraping competitor case studies and partner pages, we found companies with the exact pain points we solve. After enriching in Deal Scale and syncing to HubSpot, our SDRs saw a 27% lift in response rates and booked 14 meetings in the first week.",
-		results: [
-			{
-				title: "Response Rate Improvement",
-				value: "27%",
-			},
-			{
-				title: "Booked Meetings (Week 1)",
-				value: "14",
-			},
-			{
-				title: "Time to Build List",
-				value: "<3 hours",
-			},
-		],
-		featured: false,
-		redirectToContact: false,
-	},
-	{
-		id: "real-estate-investor-04",
-		title:
-			"We scraped FSBO listings, enriched them, and Deal Scale's AI booked 6 appointments automatically.",
-		subtitle:
-			"A 3-person wholesaling team automated their entire acquisition engine, from scraping FSBO listings to AI-powered follow-up that booked appointments without manual work.",
-		slug: "real-estate-investor-fsbo-scraping",
-		categories: ["real-estate-automation", "lead-generation"],
-		industries: ["real-estate-investing", "wholesaling"],
-		copyright: {
-			title: "Automate Your Deal Pipeline",
-			subtitle:
-				"Scrape FSBO listings, enrich them, and let AI handle the follow-up automatically.",
-			ctaText: "Get Started",
-			ctaLink: "/contact",
-		},
-		tags: [
-			"Real Estate",
-			"Wholesaling",
-			"FSBO",
-			"AI Automation",
-			"Deal Pipeline",
-		],
-		clientName: "3-Person Wholesaling Team",
-		clientDescription:
-			"A wholesaling team doing off-market deals who needed to automate their scraping and follow-up process.",
-		featuredImage:
-			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=800&fit=crop&q=80",
-		thumbnailImage:
-			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80",
-		businessChallenges: [
-			"Manual scraping was too slow to keep up with market opportunities.",
-			"Skip tracing costs were too high for their budget.",
-			"Follow-up was inconsistent, leading to missed deals.",
-			"Couldn't scale without adding headcount.",
-		],
-		lastModified: new Date("2025-01-21T10:00:00.000Z"),
-		howItWorks: offMarketAdvantageHowItWorks,
-		businessOutcomes: [
-			{
-				title: "6 Appointments Booked Automatically",
-				subtitle:
-					"AI handled all follow-up, booking 6 appointments and resulting in 2 signed contracts with zero manual work.",
-			},
-			{
-				title: "Complete Acquisition Engine",
-				subtitle:
-					"Lead Orchestra + Deal Scale became their entire acquisition engine, from scraping to enrichment to AI-powered follow-up.",
-			},
-		],
-		solutions: [
-			"Scraped FSBO listings in their target region",
-			"Lead Orchestra cleaned and normalized owner and property info",
-			"Pushed data directly into Deal Scale for enrichment",
-			"Deal Scale enriched owners, skip traced, and ran AI calling and texting",
-			"Automated appointment booking with zero manual intervention",
-		],
-		description:
-			"The AI did the follow-up for us. We scraped FSBO listings with Lead Orchestra, cleaned the data, and pushed it into Deal Scale. The AI enriched owners, skip traced them, and ran calling and texting campaigns automatically. It booked 6 appointments and we signed 2 contracts—all without us lifting a finger. Lead Orchestra + Deal Scale is our entire acquisition engine now.",
-		results: [
-			{
-				title: "Appointments Booked by AI",
-				value: "6",
-			},
-			{
-				title: "Contracts Signed",
-				value: "2",
-			},
-			{
-				title: "Manual Follow-up Required",
-				value: "0",
-			},
-		],
-		featured: false,
-		redirectToContact: false,
-	},
-	{
-		id: "indie-hacker-05",
-		title:
-			"I launched a SaaS MVP powered by Lead Orchestra scraping in 24 hours.",
-		subtitle:
-			"A solo founder built a market research SaaS MVP in 24 hours using Lead Orchestra's open-source scraping, securing 20 paying beta users without building scraping infrastructure.",
-		slug: "indie-hacker-saas-mvp-24-hours",
-		categories: ["developer-tooling", "startups"],
-		industries: ["saas", "market-research"],
-		copyright: {
-			title: "Ship Your MVP Faster",
-			subtitle:
-				"Use Lead Orchestra's open-source scraping to build your SaaS without infrastructure overhead.",
-			ctaText: "Get Started Free",
-			ctaLink: "/contact",
-		},
-		tags: [
-			"Indie Hacker",
-			"Solo Founder",
-			"MVP",
-			"Open Source",
-			"Market Research",
-		],
-		clientName: "Solo Founder, Market Research SaaS",
-		clientDescription:
-			"A solo founder building a market research SaaS with a non-enterprise budget who needed reliable web data without building scraping infrastructure.",
-		featuredImage:
-			"https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop&q=80",
-		thumbnailImage:
-			"https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80",
-		businessChallenges: [
-			"Needed reliable web data for the SaaS product.",
-			"Didn't want to build and maintain scraping infrastructure.",
-			"Couldn't afford enterprise data APIs on a bootstrap budget.",
-			"Needed to ship MVP quickly to validate the idea.",
-		],
-		lastModified: new Date("2025-01-21T10:00:00.000Z"),
+		lastModified: new Date("2026-02-15T00:00:00.000Z"),
 		howItWorks: generalHowItWorks,
 		businessOutcomes: [
 			{
-				title: "MVP Shipped in 24 Hours",
+				title: "Shipped in 6 Weeks",
 				subtitle:
-					"Cloned Lead Orchestra repo, added 2 custom MCP scrapers, built workflow using Lead Standard Format, and shipped MVP in one day.",
+					"Bypassed internal delays to get a working product in front of users",
 			},
 			{
-				title: "20 Paying Beta Users",
+				title: "Executive Buy-in",
 				subtitle:
-					"Secured 20 paying beta users with zero scraping maintenance required. Used Deal Scale to enrich and score leads automatically.",
+					"Real user data secured the budget for full internal integration",
 			},
 		],
 		solutions: [
-			"Cloned Lead Orchestra open-source repo",
-			"Added 2 custom MCP scrapers for target data sources",
-			"Built workflow using Lead Standard Format",
-			"Exported results directly to backend",
-			"Used Deal Scale to enrich and score leads automatically",
+			"Operated as an independent strike team outside the legacy corporate infrastructure",
+			"Focused strictly on core value delivery, aggressively cutting 'enterprise bloat' from the V1",
+			"Delivered a clean codebase that internal teams could later inherit and scale",
 		],
 		description:
-			"Lead Orchestra became the backbone of my SaaS—and it cost $0 to start. I cloned the repo, added 2 custom scrapers, and shipped my MVP in 24 hours. No infrastructure to maintain, no enterprise API costs. I secured 20 paying beta users and used Deal Scale to automatically enrich and score leads. It's the perfect solution for solo founders who need reliable data without the overhead.",
+			"When a global fintech's innovation lab wanted to test a new product, their internal processes demanded months of planning. We stepped in as an external strike team. By ruthlessly scoping the MVP, we built and launched a functional prototype in just six weeks. This allowed the corporate strategy team to prove the concept's viability and secure funding without getting bogged down in initial bureaucracy.",
 		results: [
 			{
-				title: "Time to MVP",
-				value: "24 hours",
+				title: "Time to Market",
+				value: "6 Weeks",
 			},
 			{
-				title: "Paying Beta Users",
-				value: "20",
+				title: "User Validation",
+				value: "Proven",
 			},
 			{
-				title: "Scraping Maintenance Required",
-				value: "0",
+				title: "Next Phase",
+				value: "Funded",
 			},
 		],
-		featured: false,
-		redirectToContact: false,
+		featured: true,
+		redirectToContact: true,
 	},
 	{
-		id: "job-board-scraper-06",
+		id: "non-technical-founder-mvp-01",
 		title:
-			"We scraped 8 job boards and found 200 companies actively hiring. Deal Scale handled the outreach.",
+			"How a non-technical founder launched a generative AI MVP replacing an entire data operation.",
 		subtitle:
-			"A B2B service founder automated their entire lead generation process, finding 200 hiring-intent leads and converting 3 into signed contracts.",
-		slug: "job-board-scraper-saas-pipeline",
-		categories: ["lead-generation", "sales-automation"],
-		industries: ["b2b-services", "recruiting"],
+			"We acted as the technical engine for a domain expert, translating their industry knowledge into a fully functional product in 4 weeks.",
+		slug: "non-technical-founder-ai-mvp-build",
+		categories: ["founders", "mvp-build", "ai-integration", "startups"],
+		industries: ["ai", "startups"],
 		copyright: {
-			title: "Find Hiring-Intent Leads",
+			title: "Have the vision but missing the code?",
 			subtitle:
-				"Scrape job boards to find companies actively hiring, then let Deal Scale handle the outreach automatically.",
-			ctaText: "Start Scraping",
+				"Launch MVP partners with non-technical founders to build, launch, and scale their platforms smoothly.",
+			ctaText: "Bring Your Idea to Life",
 			ctaLink: "/contact",
 		},
 		tags: [
-			"Job Boards",
-			"Hiring Intent",
-			"B2B Services",
-			"Lead Generation",
-			"AI Outreach",
+			"Non-Technical Founder",
+			"AI MVP",
+			"Rapid Build",
+			"Zero-to-One",
+			"Data Automation",
 		],
-		clientName: "Founder, B2B Dev Staffing Service",
+		clientName: "Domain Expert & Solo Founder",
 		clientDescription:
-			"A founder selling dev staffing solutions who needed leads with hiring intent that cold lists couldn't provide.",
+			"A solo founder with deep industry expertise who needed a technical team to build out their AI-powered service.",
 		featuredImage:
-			"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=800&fit=crop&q=80",
+			"https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=800&fit=crop&q=80",
 		thumbnailImage:
-			"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop&q=80",
+			"https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop&q=80",
 		businessChallenges: [
-			"Cold lists weren't converting because they lacked hiring intent.",
-			"Needed leads from companies actively hiring developers.",
-			"Manual research was too slow to keep up with demand.",
-			"Spent 40+ hours per month on manual lead research.",
+			"The founder understood the problem intimately but couldn't code the solution.",
+			"Off-the-shelf no-code tools lacked the depth necessary for complex AI and data parsing.",
+			"Finding a reliable technical co-founder was delaying the launch by months.",
 		],
-		lastModified: new Date("2025-01-21T10:00:00.000Z"),
-		howItWorks: leadGenHowItWorks,
+		lastModified: new Date("2026-03-01T00:00:00.000Z"),
+		howItWorks: generalHowItWorks,
 		businessOutcomes: [
 			{
-				title: "200 Hiring-Intent Leads Found",
+				title: "Launched in 4 Weeks",
 				subtitle:
-					"Scraped 8 job boards to extract hiring patterns and company data, finding 200 companies actively hiring developers.",
+					"Turned a complex workflow into a living, breathing SaaS application",
 			},
 			{
-				title: "3 Signed Contracts",
+				title: "Zero Technical Debt",
 				subtitle:
-					"After enriching and auto-follow-up via Deal Scale, generated 12 active conversations and signed 3 contracts.",
+					"Built on a scalable, modern stack ready for investor due diligence",
 			},
 		],
 		solutions: [
-			"Crawled 8 job boards for hiring patterns",
-			"Extracted company data and hiring signals",
-			"Cleaned data using Lead Standard Format",
-			"Enriched leads in Deal Scale",
-			"Automated follow-up via Deal Scale AI outreach",
+			"Managed the entire technical scoping and build process",
+			"Implemented an AI-first workflow to automate manual data analysis",
+			"Shipped a clean, responsive UI optimized for initial early-adopter sales",
 		],
 		description:
-			"This automated what used to take us 40 hours per month. We scraped 8 job boards, found 200 companies actively hiring, and Deal Scale handled all the outreach. We got 12 active conversations and signed 3 contracts. It's completely transformed how we find and engage prospects.",
+			"This domain expert knew exactly what the market needed but didn't know how to build it. We stepped in to serve as their complete technical arm. Over four weeks, we took the product from wireframes to a live application featuring generative AI integrations and custom automated pipelines. The result was a successful MVP that secured their first 10 paying customers within days of launch.",
 		results: [
 			{
-				title: "Hiring-Intent Leads Found",
-				value: "200",
+				title: "Time to Build",
+				value: "4 Weeks",
 			},
 			{
-				title: "Active Conversations",
-				value: "12",
+				title: "Technical Handoff",
+				value: "Turnkey",
 			},
 			{
-				title: "Signed Contracts",
-				value: "3",
+				title: "Early Revenue",
+				value: "Secured",
 			},
 		],
-		featured: false,
+		featured: true,
 		redirectToContact: false,
 	},
+	{
+		id: "enterprise-data-pipeline-scale",
+		title:
+			"How an enterprise growth team automated 10,000 monthly lead reviews with a custom scraping engine.",
+		subtitle:
+			"We built a high-volume, compliant data ingestion pipeline that allowed a 50-person sales team to focus purely on closing deals.",
+		slug: "enterprise-custom-scraping-and-enrichment",
+		categories: ["enterprise", "technical-foundation", "automation"],
+		industries: ["enterprise", "sales-ops"],
+		copyright: {
+			title: "Scaling beyond manual data tasks?",
+			subtitle:
+				"Launch MVP helps enterprise teams build custom data pipelines and automation systems to unlock their growth potential.",
+			ctaText: "Automate Your Pipeline",
+			ctaLink: "/contact",
+		},
+		tags: [
+			"Enterprise Scale",
+			"Data Engineering",
+			"Custom Scraping",
+			"Sales Automation",
+			"Pipeline Optimization",
+		],
+		clientName: "Enterprise RevOps Team",
+		clientDescription:
+			"A high-growth enterprise sales organization bogged down by manual prospecting and outdated lead enrichment.",
+		featuredImage:
+			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&q=80",
+		thumbnailImage:
+			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
+		businessChallenges: [
+			"SDRs were spending 40% of their day manually scraping and verifying lead data.",
+			"Existing data enrichment platforms were too generic and didn't pull niche industry signals.",
+			"The volume of required leads outpaced the team's ability to maintain data quality.",
+		],
+		lastModified: new Date("2026-03-05T00:00:00.000Z"),
+		howItWorks: aiIntegrationHowItWorks,
+		businessOutcomes: [
+			{
+				title: "10,000+ Profiles Processed",
+				subtitle:
+					"Monthly automatic enrichment volume scaled without adding headcount",
+			},
+			{
+				title: "40% Time Saved",
+				subtitle:
+					"SDRs regained almost half their week for active, high-value selling",
+			},
+		],
+		solutions: [
+			"Developed a headless, proxy-rotated scraping layer tailored to specific target platforms",
+			"Integrated dynamic AI qualification logic to automatically discard irrelevant accounts",
+			"Piped cleaned, scored data directly into the enterprise CRM in real-time",
+		],
+		description:
+			"An enterprise sales team was paralyzing its own growth by relying on manual data gathering. We engineered a bespoke scraping and enrichment engine that ingested specific market signals continuously. By routing only high-quality, deeply enriched leads to their CRM, we eliminated thousands of hours of manual labor and significantly boosted their conversion velocity.",
+		results: [
+			{
+				title: "Weekly Hours Saved",
+				value: "500+",
+			},
+			{
+				title: "Pipeline Accuracy",
+				value: "99%",
+			},
+			{
+				title: "Implementation",
+				value: "Seamless",
+			},
+		],
+		featured: true,
+		redirectToContact: true,
+	}
 ];
 
 export const caseStudyCategories: Category[] = [
