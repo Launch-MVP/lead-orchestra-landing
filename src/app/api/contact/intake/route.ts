@@ -15,7 +15,148 @@ const notion = new Client({
 	auth: process.env.NOTION_API_KEY,
 });
 
-const DATABASE_ID = process.env.NOTION_DATABASE_ID || process.env.NOTION_DB_ID;
+const DATABASE_ID =
+	process.env.NOTION_LAUNCH_MVP_QUALIFICATION_DATABASE_ID ||
+	process.env.NOTION_DATABASE_ID ||
+	process.env.NOTION_DB_ID;
+
+const productStageLabelMap: Record<string, string> = {
+	idea: "Idea stage",
+	wireframes: "Wireframes or prototype",
+	partial_build: "Partially built MVP",
+	live_product: "Live product needs iteration",
+	enterprise_initiative: "Enterprise or internal initiative",
+};
+
+const productTypeLabelMap: Record<string, string> = {
+	landing_page: "Landing page",
+	web_app: "Web app",
+	mobile_app: "Mobile app",
+	marketplace: "Marketplace",
+	ai_assistant: "AI assistant or agent",
+	internal_tool: "Internal tool or ops system",
+	platform: "SaaS platform",
+};
+
+const teamSizeLabelMap: Record<string, string> = {
+	solo: "Solo founder",
+	"2-5": "2-5 people",
+	"6-15": "6-15 people",
+	"16-50": "16-50 people",
+	"50+": "50+ people",
+};
+
+const ownerLabelMap: Record<string, string> = {
+	Founder: "Founder",
+	Product: "Product lead",
+	Ops: "Ops lead",
+	Engineering: "Engineering lead",
+	Marketing: "Marketing lead",
+};
+
+const speedLabelMap: Record<string, string> = {
+	"3-5": "3-5 days",
+	"7-10": "7-10 days",
+	"2-4w": "2-4 weeks",
+	unsure: "Unsure",
+};
+
+const leadVolumeLabelMap: Record<string, string> = {
+	"0-500": "0-500 / month",
+	"500-2000": "500-2000 / month",
+	"2000+": "2000+ / month",
+};
+
+const avgDealLabelMap: Record<string, string> = {
+	unknown: "Unknown",
+	"<1000": "< $1000",
+	"1000-5000": "$1k-$5k",
+	"5000-10000": "$5k-$10k",
+	"10000+": "$10k+",
+};
+
+const dealsPerMonthLabelMap: Record<string, string> = {
+	unknown: "Unknown",
+	"0-5": "0-5",
+	"6-15": "6-15",
+	"16-50": "16-50",
+	"50+": "50+",
+};
+
+const conversionRateLabelMap: Record<string, string> = {
+	unknown: "Unknown",
+	"0-1": "0-1%",
+	"1-3": "1-3%",
+	"3-10": "3-10%",
+	"10+": "10%+",
+};
+
+const sourceKnowledgeLabelMap: Record<string, string> = {
+	known: "I know the sources",
+	unknown: "Not sure yet",
+};
+
+const highIntentSourceLabelMap: Record<string, string> = {
+	google_maps: "Google Maps categories",
+	directories: "Directories",
+	job_boards: "Job boards",
+	zillow_fsbo: "Zillow FSBO",
+	marketplaces: "Marketplaces",
+	linkedin: "LinkedIn searches",
+	other: "Other describe below",
+};
+
+const crmConnectionLabelMap: Record<string, string> = {
+	yes: "Yes",
+	no: "No",
+};
+
+const leadDeliveryDestinationLabelMap: Record<string, string> = {
+	google_sheet: "Google Sheet",
+	airtable: "Airtable",
+	email: "Email",
+	hubspot_later: "HubSpot later",
+};
+
+const acquisitionChannelLabelMap: Record<string, string> = {
+	ads: "Ads",
+	email: "Email",
+	organic: "Organic",
+	partnerships: "Partnerships",
+};
+
+const referralSourceLabelMap: Record<string, string> = {
+	genius_networking: "🌟 Genius Networking",
+	google: "Google / Search Engine",
+	social: "Social Media",
+	referral: "Friend or Colleague",
+	newsletter: "Newsletter",
+	podcast: "Podcast / Interview",
+	other: "Other",
+};
+
+const launchBlockerLabelMap: Record<string, string> = {
+	"Need integrations, auth, payments, or analytics":
+		"Need integrations auth payments or analytics",
+};
+
+const mapValue = (
+	value: unknown,
+	labelMap: Record<string, string>,
+): string | undefined => {
+	if (typeof value !== "string") return undefined;
+	return labelMap[value] || value;
+};
+
+const mapArrayValues = (
+	value: unknown,
+	labelMap: Record<string, string>,
+): string[] => {
+	if (!Array.isArray(value)) return [];
+	return value
+		.filter((entry): entry is string => typeof entry === "string")
+		.map((entry) => labelMap[entry] || entry);
+};
 
 export async function POST(request: Request) {
 	try {
@@ -66,7 +207,7 @@ export async function POST(request: Request) {
 		// * I've mapped the keys from intakeFormFields.ts to likely Notion Property names.
 
 		const properties: CreatePageParameters["properties"] = {
-			" Name": {
+			Name: {
 				title: [
 					{
 						text: {
@@ -79,64 +220,27 @@ export async function POST(request: Request) {
 					},
 				],
 			},
-			Email: {
-				rich_text: [
-					{
-						text: {
-							content: body.email || "",
-						},
-					},
-				],
-			},
-			"Business Type / Niche": {
-				multi_select: (body.businessType || []).map((v: string) => ({
-					name: v,
-				})),
-			},
-			"Avg Deal Amount ($)": {
-				number: parseMidpointNumber(body.avgDealAmount),
-			},
-			"Deals / Month": {
-				number: parseMidpointNumber(body.dealsPerMonth),
-			},
-			"Lead Volume / Month": {
-				number: parseMidpointNumber(body.leadVolumePerMonth),
-			},
-			"Conversion Rate %": {
-				number: parseMidpointNumber(body.conversionRate),
-			},
-			"Current CRM": {
-				rich_text: [
-					{
-						text: {
-							content: body.currentCrm || "",
-						},
-					},
-				],
-			},
-			"Existing Lead Lists?": {
-				multi_select: (body.existingLeadLists || []).map((v: string) => ({
-					name: v,
-				})),
-			},
-			"Who will be responsible for reviewing and acting on the leads?": {
-				select: body.leadOwner ? { name: body.leadOwner } : null,
-			},
-			"Main Pain Point(s)": {
-				multi_select: (body.painPoints || []).map((v: string) => ({ name: v })),
-			},
-			"Monthly Budget": {
-				select: body.monthlyBudget ? { name: body.monthlyBudget } : null,
-			},
-			"Priority Level": {
-				multi_select: (body.priorityLevel || []).map((v: string) => ({
-					name: v,
-				})),
-			},
-			"Start Date ": {
-				date: body.startDate ? { start: body.startDate } : null,
-			},
 		};
+		if (typeof body.email === "string" && body.email.trim().length > 0) {
+			properties.Email = { email: body.email.trim() };
+		}
+		if (typeof body.phone === "string" && body.phone.trim().length > 0) {
+			properties.Phone = { phone_number: body.phone.trim() };
+		}
+		if (
+			typeof body.companyName === "string" &&
+			body.companyName.trim().length > 0
+		) {
+			properties["Company / Brand"] = {
+				rich_text: [{ text: { content: body.companyName.trim() } }],
+			};
+		}
+		if (typeof body.website === "string" && body.website.trim().length > 0) {
+			properties["Website / Primary URL"] = { url: body.website.trim() };
+		}
+		if (body.noWebsite === true) {
+			properties["No Website Yet"] = { checkbox: true };
+		}
 		const addRichTextProperty = (propertyName: string, value: unknown) => {
 			if (typeof value !== "string" || value.trim().length === 0) {
 				return;
@@ -151,106 +255,132 @@ export async function POST(request: Request) {
 				],
 			};
 		};
+		const addSelectProperty = (propertyName: string, value: unknown) => {
+			const mappedValue = typeof value === "string" ? value.trim() : "";
+			if (mappedValue.length === 0) return;
+			properties[propertyName] = {
+				select: { name: mappedValue },
+			};
+		};
+		const addMultiSelectProperty = (
+			propertyName: string,
+			values: string[],
+		) => {
+			if (values.length === 0) return;
+			properties[propertyName] = {
+				multi_select: values.map((value) => ({ name: value })),
+			};
+		};
+
+		addSelectProperty(
+			"Current Product Stage",
+			mapValue(body.productStage, productStageLabelMap),
+		);
+		addSelectProperty(
+			"Product Type",
+			mapValue(body.productType, productTypeLabelMap),
+		);
+		addSelectProperty("Team Size", mapValue(body.teamSize, teamSizeLabelMap));
+		addRichTextProperty(
+			"What are you building and why now?",
+			body.productSummary,
+		);
+		addRichTextProperty(
+			"Must-have version-one features",
+			body.mustHaveFeatures,
+		);
+		addMultiSelectProperty(
+			"Business Model / Industry",
+			mapArrayValues(body.businessType, {}),
+		);
+		addSelectProperty("Budget Range", body.monthlyBudget);
+		addSelectProperty("Open To Paid Engagement", body.paidPilot);
+		addSelectProperty(
+			"Internal Owner",
+			mapValue(body.leadOwner, ownerLabelMap),
+		);
+		addSelectProperty("Start Speed", mapValue(body.speed, speedLabelMap));
+		addSelectProperty("Primary Customer Type", body.icpCategory);
+		addRichTextProperty(
+			"Describe the ideal customer or user",
+			body.icpDescription,
+		);
+		addSelectProperty(
+			"Target users / leads / signups in first 90 days",
+			mapValue(body.leadVolumePerMonth, leadVolumeLabelMap),
+		);
+		addSelectProperty(
+			"Expected customer value or contract size",
+			mapValue(body.avgDealAmount, avgDealLabelMap),
+		);
+		addSelectProperty(
+			"Expected new customers or conversions per month",
+			mapValue(body.dealsPerMonth, dealsPerMonthLabelMap),
+		);
+		addSelectProperty(
+			"Current or expected conversion rate",
+			mapValue(body.conversionRate, conversionRateLabelMap),
+		);
+		addSelectProperty(
+			"What result would make this launch successful?",
+			body.validationExpectation,
+		);
+		addSelectProperty(
+			"Do you know your launch or acquisition channels?",
+			mapValue(body.sourceKnowledge, sourceKnowledgeLabelMap),
+		);
+		addMultiSelectProperty(
+			"Primary launch channels or demand sources",
+			mapArrayValues(body.highIntentSources, highIntentSourceLabelMap),
+		);
+		addRichTextProperty("Current demand sources", body.currentLeadSources);
+		addRichTextProperty(
+			"Technical notes / constraints / requirements",
+			body.scrapingInstructions,
+		);
+		addSelectProperty("Current stack / CRM", body.currentCrm);
+		addSelectProperty(
+			"Connect into current systems?",
+			mapValue(body.crmConnection, crmConnectionLabelMap),
+		);
+		addSelectProperty(
+			"If no system exists where should deliverables go?",
+			mapValue(body.leadDeliveryDestination, leadDeliveryDestinationLabelMap),
+		);
+		addSelectProperty("Launch ops ready?", mapValue(body.leadOpsReady, crmConnectionLabelMap));
+		addSelectProperty(
+			"Primary acquisition channel",
+			mapValue(body.acquisitionChannel, acquisitionChannelLabelMap),
+		);
+		addMultiSelectProperty(
+			"Existing assets / inherited work",
+			mapArrayValues(body.existingLeadLists, {}),
+		);
+		addMultiSelectProperty(
+			"Main launch blockers",
+			mapArrayValues(body.painPoints, launchBlockerLabelMap),
+		);
+		addMultiSelectProperty(
+			"Interested services / offers",
+			mapArrayValues(body.interestedFeatures, {}),
+		);
+		if (typeof body.kickoffDate === "string" && body.kickoffDate.trim().length > 0) {
+			properties["Preferred kickoff date"] = {
+				date: { start: body.kickoffDate.trim() },
+			};
+		}
+		addSelectProperty(
+			"How did you hear about us?",
+			mapValue(body.referralSource, referralSourceLabelMap),
+		);
+		addSelectProperty("Application Status", "New");
+		addRichTextProperty("Decision Notes", body.notes);
 		addRichTextProperty("gclid", body.gclid);
 		addRichTextProperty("utm_source", body.utm_source);
 		addRichTextProperty("utm_campaign", body.utm_campaign);
 		addRichTextProperty("utm_term", body.utm_term);
 		addRichTextProperty("utm_content", body.utm_content);
 		addRichTextProperty("utm_icp", body.utm_icp);
-
-		// * Optional fields
-		if (body.phone) {
-			properties.Phone = {
-				rich_text: [
-					{
-						text: {
-							content: body.phone,
-						},
-					},
-				],
-			};
-		}
-		if (
-			typeof body.icpCategory === "string" &&
-			body.icpCategory.trim().length > 0
-		) {
-			properties["ICP Category"] = {
-				multi_select: [{ name: body.icpCategory.trim() }],
-			};
-		}
-		if (body.icpDescription) {
-			properties["Describe Your Ideal Customer Profile"] = {
-				rich_text: [{ text: { content: body.icpDescription } }],
-			};
-		}
-		if (
-			Array.isArray(body.highIntentSources) &&
-			body.highIntentSources.length > 0
-		) {
-			properties["High-Intent Lead Sources"] = {
-				rich_text: [{ text: { content: body.highIntentSources.join(", ") } }],
-			};
-		}
-		if (body.validationExpectation) {
-			properties["What is your expectation for initial validation?"] = {
-				select: { name: body.validationExpectation },
-			};
-		}
-		if (body.speed) {
-			properties[
-				"If approved, how soon can you actively work and test a new lead list?"
-			] = {
-				select: { name: body.speed },
-			};
-		}
-		if (body.scrapingInstructions) {
-			properties["Detailed Scraping Instructions ?"] = {
-				rich_text: [{ text: { content: body.scrapingInstructions } }],
-			};
-		}
-		if (
-			typeof body.crmConnection === "string" &&
-			body.crmConnection.trim().length > 0
-		) {
-			properties["Can we connect directly to your CRM?"] = {
-				select: { name: body.crmConnection.trim() },
-			};
-		}
-		if (body.interestedFeatures && body.interestedFeatures.length > 0) {
-			properties["Interested in these features?"] = {
-				multi_select: body.interestedFeatures.map((v: string) => ({
-					name: v,
-				})),
-			};
-		}
-		if (body.paidPilot) {
-			properties[
-				"Are you willing to pay for a small pilot to validate lead quality before scaling"
-			] = {
-				select: { name: body.paidPilot },
-			};
-		}
-		if (body.kickoffDate) {
-			properties["Schedule Kickoff Call"] = {
-				date: { start: body.kickoffDate },
-			};
-		}
-		if (body.website) {
-			properties["Company Website ?"] = {
-				url: body.website,
-			};
-		}
-		if (body.notes) {
-			properties.Notes = {
-				rich_text: [
-					{
-						text: {
-							content: String(body.notes),
-						},
-					},
-				],
-			};
-		}
 
 		let notionSynced = false;
 		if (!DATABASE_ID) {

@@ -48,10 +48,12 @@ import { GET } from "@/app/api/redirect/route";
 beforeEach(() => {
 	jest.clearAllMocks();
 	process.env.NOTION_KEY = "test-notion-key";
+	process.env.NOTION_REDIRECTS_ID = "redirects-db-test";
 });
 
 afterEach(() => {
 	process.env.NOTION_KEY = undefined;
+	process.env.NOTION_REDIRECTS_ID = undefined;
 });
 
 describe("redirect route with UTM parameter preservation", () => {
@@ -97,6 +99,21 @@ describe("redirect route with UTM parameter preservation", () => {
 	});
 
 	test("does not preserve internal redirect parameters (pageId, slug, isFile)", async () => {
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				properties: {
+					"Redirects (Calls)": {
+						type: "number",
+						number: 2,
+					},
+				},
+			}),
+		});
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+		});
+
 		const searchParams = new URLSearchParams();
 		searchParams.set("utm_source", "test-source");
 		searchParams.set("pageId", "test-page-123");
@@ -252,7 +269,7 @@ describe("redirect route with UTM parameter preservation", () => {
 
 		expect(response.status).toBe(400);
 		expect(json.ok).toBe(false);
-		expect(json.error).toBe("missing 'to'");
+		expect(json.error).toBe("missing 'to' or 'slug'");
 	});
 
 	test("handles invalid absolute URL", async () => {
@@ -299,5 +316,131 @@ describe("redirect route with UTM parameter preservation", () => {
 		// Incoming tracking params should take priority
 		expect(location).toContain("utm_source=new-source");
 		expect(location).not.toContain("utm_source=old-source");
+	});
+
+	test("resolves redirect destination from Notion by slug", async () => {
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				results: [
+					{
+						id: "page_slug_1",
+						properties: {
+							Slug: {
+								type: "title",
+								title: [{ plain_text: "launch-mvp" }],
+							},
+							Destination: {
+								type: "url",
+								url: "https://launchmvp.com/apply",
+							},
+						},
+					},
+				],
+			}),
+		});
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				properties: {
+					"Redirects (Calls)": {
+						type: "number",
+						number: 7,
+					},
+				},
+			}),
+		});
+		(global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true });
+
+		const url = new URL("https://example.com/api/redirect");
+		url.searchParams.set("slug", "launch-mvp");
+		const req = new NodeRequest(url.toString()) as unknown as Request;
+		const response = await GET(req);
+
+		expect(response.status).toBe(302);
+		expect(response.headers.get("location")).toBe("https://launchmvp.com/apply");
+		expect(global.fetch).toHaveBeenNthCalledWith(
+			1,
+			expect.stringMatching(/\/databases\/.+\/query$/),
+			expect.objectContaining({
+				method: "POST",
+			}),
+		);
+	});
+
+	test("fills stored utm params from Notion slug lookup but lets incoming tracking params win", async () => {
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				results: [
+					{
+						id: "page_slug_2",
+						properties: {
+							Slug: {
+								type: "title",
+								title: [{ plain_text: "free-slot" }],
+							},
+							Destination: {
+								type: "url",
+								url: "https://launchmvp.com/free-slot?utm_medium=destination-medium",
+							},
+							utm_source: {
+								type: "select",
+								select: { name: "notion-source" },
+							},
+							utm_campaign: {
+								type: "select",
+								select: { name: "notion-campaign" },
+							},
+						},
+					},
+				],
+			}),
+		});
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				properties: {
+					"Redirects (Calls)": {
+						type: "number",
+						number: 1,
+					},
+				},
+			}),
+		});
+		(global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true });
+
+		const url = new URL("https://example.com/api/redirect");
+		url.searchParams.set("slug", "free-slot");
+		url.searchParams.set("utm_campaign", "incoming-campaign");
+		url.searchParams.set("gclid", "incoming-gclid");
+		const req = new NodeRequest(url.toString()) as unknown as Request;
+		const response = await GET(req);
+		const location = response.headers.get("location");
+
+		expect(location).toContain("utm_source=notion-source");
+		expect(location).toContain("utm_campaign=incoming-campaign");
+		expect(location).toContain("utm_medium=destination-medium");
+		expect(location).toContain("gclid=incoming-gclid");
+		expect(location).not.toContain("utm_campaign=notion-campaign");
+	});
+
+	test("returns 404 when slug is not found in the redirects database", async () => {
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({
+				results: [],
+			}),
+		});
+
+		const url = new URL("https://example.com/api/redirect");
+		url.searchParams.set("slug", "missing-slug");
+		const req = new NodeRequest(url.toString()) as unknown as Request;
+		const response = await GET(req);
+		const json = await response.json();
+
+		expect(response.status).toBe(404);
+		expect(json.ok).toBe(false);
+		expect(json.error).toBe("redirect not found");
 	});
 });

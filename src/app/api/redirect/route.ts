@@ -1,20 +1,68 @@
+import { mapNotionPageToLinkTree } from "@/utils/notion/linktreeMapper";
+import type { NotionPage } from "@/utils/notion/notionTypes";
 import { mergeRedirectQueryParams } from "@/utils/tracking/redirectQuery";
 import { NextResponse } from "next/server";
 
 const NOTION_API_BASE = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
+const REDIRECTS_DATABASE_ID =
+	process.env.NOTION_REDIRECTS_ID || process.env.NOTION_REDIRECTS_DB_ID;
+
+const buildNotionHeaders = (): HeadersInit => ({
+	Authorization: `Bearer ${process.env.NOTION_KEY}`,
+	"Notion-Version": NOTION_VERSION,
+	"Content-Type": "application/json",
+});
 
 async function getNotionPage(pageId: string) {
 	const resp = await fetch(`${NOTION_API_BASE}/pages/${pageId}`, {
-		headers: {
-			Authorization: `Bearer ${process.env.NOTION_KEY}`,
-			"Notion-Version": NOTION_VERSION,
-		},
+		headers: buildNotionHeaders(),
 		cache: "no-store",
 	});
+	if (!resp || typeof resp.ok !== "boolean")
+		throw new Error(`Failed to retrieve page ${pageId}: invalid response`);
 	if (!resp.ok)
 		throw new Error(`Failed to retrieve page ${pageId}: ${resp.status}`);
 	return resp.json();
+}
+
+async function getRedirectBySlug(slug: string) {
+	if (!process.env.NOTION_KEY || !REDIRECTS_DATABASE_ID) return null;
+	const normalizedSlug = slug.trim().replace(/^\/+/, "");
+	if (!normalizedSlug) return null;
+
+	const resp = await fetch(
+		`${NOTION_API_BASE}/databases/${REDIRECTS_DATABASE_ID}/query`,
+		{
+			method: "POST",
+			headers: buildNotionHeaders(),
+			cache: "no-store",
+			body: JSON.stringify({
+				filter: {
+					property: "Slug",
+					title: {
+						equals: normalizedSlug,
+					},
+				},
+				page_size: 1,
+			}),
+		},
+	);
+
+	if (!resp || typeof resp.ok !== "boolean") {
+		throw new Error(`Failed to query redirects for slug ${normalizedSlug}`);
+	}
+	if (!resp.ok) {
+		throw new Error(
+			`Failed to query redirects for slug ${normalizedSlug}: ${resp.status}`,
+		);
+	}
+
+	const data = (await resp.json()) as { results?: NotionPage[] };
+	const page = data.results?.[0];
+	if (!page) return null;
+
+	return mapNotionPageToLinkTree(page);
 }
 
 async function incrementCalls(pageId: string) {
@@ -28,11 +76,7 @@ async function incrementCalls(pageId: string) {
 
 		await fetch(`${NOTION_API_BASE}/pages/${pageId}`, {
 			method: "PATCH",
-			headers: {
-				Authorization: `Bearer ${process.env.NOTION_KEY}`,
-				"Notion-Version": NOTION_VERSION,
-				"Content-Type": "application/json",
-			},
+			headers: buildNotionHeaders(),
 			body: JSON.stringify({
 				properties: {
 					[fieldName]: { number: nextVal },
@@ -48,13 +92,37 @@ async function incrementCalls(pageId: string) {
 export async function GET(req: Request) {
 	try {
 		const url = new URL(req.url);
-		const to = url.searchParams.get("to");
-		const pageId = url.searchParams.get("pageId");
+		let to = url.searchParams.get("to");
+		let pageId = url.searchParams.get("pageId");
+		const slug = url.searchParams.get("slug");
 		const isFile = url.searchParams.get("isFile");
+		let storedParams: Record<string, string | undefined> | undefined;
+
+		if (!to && slug) {
+			const redirectEntry = await getRedirectBySlug(slug);
+			if (!redirectEntry?.destination) {
+				return NextResponse.json(
+					{ ok: false, error: "redirect not found" },
+					{ status: 404 },
+				);
+			}
+			to = redirectEntry.destination;
+			pageId = pageId || redirectEntry.pageId;
+			storedParams = {
+				utm_source: redirectEntry.utm_source,
+				utm_medium: redirectEntry.utm_medium,
+				utm_campaign: redirectEntry.utm_campaign,
+				utm_content: redirectEntry.utm_content,
+				utm_term: redirectEntry.utm_term,
+				utm_offer: redirectEntry.utm_offer,
+				utm_icp: redirectEntry.utm_icp,
+				gclid: redirectEntry.gclid,
+			};
+		}
 
 		if (!to) {
 			return NextResponse.json(
-				{ ok: false, error: "missing 'to'" },
+				{ ok: false, error: "missing 'to' or 'slug'" },
 				{ status: 400 },
 			);
 		}
@@ -122,6 +190,7 @@ export async function GET(req: Request) {
 		const mergedRedirectTarget = mergeRedirectQueryParams({
 			destinationUrl: redirectTarget,
 			incomingSearchParams: url.searchParams,
+			storedParams,
 			skipIncomingKeys: ["to", "pageId", "slug", "isFile"],
 		});
 

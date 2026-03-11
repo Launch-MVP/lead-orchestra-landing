@@ -11,6 +11,9 @@ const mapBetaTesterApplicationMock = vi.hoisted(() =>
 
 vi.mock("next/navigation", () => ({
 	useRouter: () => ({ push: pushMock }),
+	useSearchParams: () => ({
+		get: () => null,
+	}),
 }));
 
 vi.mock("@hookform/resolvers/zod", () => ({
@@ -145,7 +148,7 @@ const mockOkResponse = () => ({
 	json: async () => ({}),
 });
 
-describe("contact form redirects", () => {
+describe("Launch MVP contact form redirects", () => {
 	beforeEach(() => {
 		window.localStorage.clear();
 		pushMock.mockReset();
@@ -157,7 +160,7 @@ describe("contact form redirects", () => {
 		vi.stubGlobal("fetch", vi.fn());
 	});
 
-	it("redirects intake submissions to /contact/thank-you", async () => {
+	it("redirects Launch MVP free-slot submissions to /contact/thank-you?source=intake", async () => {
 		window.history.pushState(
 			{},
 			"",
@@ -166,18 +169,34 @@ describe("contact form redirects", () => {
 
 		mockFormSubmission({
 			name: "Test Person",
+			companyName: "Launch MVP Co",
 			email: "test@example.com",
 			phone: "5551239999",
-			businessType: ["Real Estate"],
-			monthlyBudget: "$250-$1k",
-			priorityLevel: ["High"],
+			leadOwner: "Founder",
+			speed: "7-10",
+			businessType: ["🧑‍💻 Tech & SaaS Niche"],
+			icpCategory: "SaaS Founders",
+			icpDescription: "Founders testing internal workflow products.",
+			monthlyBudget: "$3k+",
+			paidPilot: "✅ Yes — paid pilot is fine",
+			leadVolumePerMonth: "500-2000",
+			avgDealAmount: "10000+",
+			dealsPerMonth: "16-50",
+			conversionRate: "3-10",
+			currentCrm: "HubSpot",
+			crmConnection: "yes",
+			validationExpectation: "Directional signal",
+			sourceKnowledge: "known",
+			painPoints: ["Need a clearer product strategy"],
+			interestedFeatures: ["MVP scoping session"],
+			referralSource: "google",
 		});
 		vi.mocked(fetch).mockResolvedValue(mockOkResponse() as Response);
 
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		fireEvent.click(screen.getByRole("button", { name: /submit request/i }));
+		fireEvent.click(screen.getByRole("button", { name: /apply for free slot/i }));
 
 		await waitFor(() => {
 			expect(pushMock).toHaveBeenCalledWith("/contact/thank-you?source=intake");
@@ -193,6 +212,45 @@ describe("contact form redirects", () => {
 		expect(payload.utm_icp).toBe("high-ticket");
 	});
 
+	it("redirects post-deposit qualification submissions to /contact/thank-you?source=deposit-and-intake", async () => {
+		mockFormSubmission({
+			name: "Test Person",
+			companyName: "Launch MVP Co",
+			email: "test@example.com",
+			phone: "5551239999",
+			leadOwner: "Founder",
+			speed: "3-5",
+			businessType: ["🧑‍💻 Tech & SaaS Niche"],
+			icpCategory: "SaaS Founders",
+			icpDescription: "Founders testing internal workflow products.",
+			monthlyBudget: "$5k - $10k",
+			paidPilot: "✅ Yes — paid pilot is fine",
+			leadVolumePerMonth: "500-2000",
+			avgDealAmount: "10000+",
+			dealsPerMonth: "16-50",
+			conversionRate: "3-10",
+			currentCrm: "HubSpot",
+			crmConnection: "yes",
+			validationExpectation: "Closed revenue",
+			sourceKnowledge: "known",
+			painPoints: ["Need full MVP build support"],
+			interestedFeatures: ["3-day in-person MVP build workshop"],
+			referralSource: "referral",
+		});
+		vi.mocked(fetch).mockResolvedValue(mockOkResponse() as Response);
+
+		const IntakeForm = (await import("../IntakeForm")).default;
+		render(<IntakeForm fromDeposit />);
+
+		fireEvent.click(screen.getByRole("button", { name: /apply for free slot/i }));
+
+		await waitFor(() => {
+			expect(pushMock).toHaveBeenCalledWith(
+				"/contact/thank-you?source=deposit-and-intake",
+			);
+		});
+	});
+
 	it("uses ICP URL param for utm_icp when present", async () => {
 		window.history.pushState(
 			{},
@@ -202,11 +260,25 @@ describe("contact form redirects", () => {
 
 		mockFormSubmission({
 			name: "Test Person",
+			companyName: "Launch MVP Co",
 			email: "test@example.com",
 			phone: "5551239999",
-			businessType: ["Real Estate"],
-			monthlyBudget: "$250-$1k",
-			priorityLevel: ["High"],
+			leadOwner: "Founder",
+			speed: "7-10",
+			businessType: ["🧑‍💻 Tech & SaaS Niche"],
+			monthlyBudget: "$3k+",
+			paidPilot: "✅ Yes — paid pilot is fine",
+			leadVolumePerMonth: "500-2000",
+			avgDealAmount: "10000+",
+			dealsPerMonth: "16-50",
+			conversionRate: "3-10",
+			currentCrm: "HubSpot",
+			crmConnection: "yes",
+			validationExpectation: "Directional signal",
+			sourceKnowledge: "known",
+			painPoints: ["Need a clearer product strategy"],
+			interestedFeatures: ["MVP scoping session"],
+			referralSource: "google",
 			icpCategory: "State-ICP",
 		});
 		vi.mocked(fetch).mockResolvedValue(mockOkResponse() as Response);
@@ -214,7 +286,7 @@ describe("contact form redirects", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		fireEvent.click(screen.getByRole("button", { name: /submit request/i }));
+		fireEvent.click(screen.getByRole("button", { name: /apply for free slot/i }));
 
 		await waitFor(() => {
 			expect(pushMock).toHaveBeenCalledWith("/contact/thank-you?source=intake");
@@ -243,7 +315,7 @@ describe("contact form redirects", () => {
 		render(<ContactForm />);
 
 		fireEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
+			screen.getByRole("button", { name: /send details/i }),
 		);
 
 		await waitFor(() => {

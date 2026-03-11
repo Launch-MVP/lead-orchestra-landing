@@ -160,9 +160,9 @@ const TEMPLATE_FEAR = pickPersonaField("fear");
 const TEMPLATE_HOPE = pickPersonaField("hope");
 
 export const LIVE_VIDEO: HeroVideoConfig = {
-	src: "https://app.supademo.com/embed/cmhjlwt7i0jk4u1hm0scmf39w?embed_v=2&utm_source=embed",
-	poster: "/supademos/svgs/supademo-thumbnail.png",
-	provider: "supademo",
+	src: "https://www.youtube.com/embed/qh3NGpYRG3I?rel=0&controls=1&modestbranding=1",
+	poster: "/images/workshop_thumbnail.png",
+	provider: "youtube",
 };
 
 export const LIVE_COPY = resolveHeroCopy(

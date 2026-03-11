@@ -117,10 +117,12 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		expect(screen.getByText(/High-intent lead sources/)).toBeInTheDocument();
+		expect(
+			screen.getByText(/Primary launch channels or demand sources/),
+		).toBeInTheDocument();
 		expect(
 			screen.queryByText(
-				"Where do you currently get leads (or what lists do you use)?",
+				"How are you currently getting users, leads, or demand?",
 			),
 		).not.toBeInTheDocument();
 	});
@@ -138,7 +140,11 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		const IntakeForm = (await import("../IntakeForm")).default;
 		render(<IntakeForm />);
 
-		expect(screen.getByText(/Where should leads go\?/)).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				/If there is no existing system, where should deliverables go\?/,
+			),
+		).toBeInTheDocument();
 	});
 
 	it("shows leadOpsReady only when leadVolumePerMonth=2000+", async () => {
@@ -156,7 +162,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 
 		expect(
 			screen.getByText(
-				/Do you have an SDR\/team or automation running already\?/,
+				/Do you already have a team or process ready to support launch\?/,
 			),
 		).toBeInTheDocument();
 	});
@@ -175,7 +181,7 @@ describe("IntakeForm conditional visibility (e2e)", () => {
 		render(<IntakeForm />);
 
 		expect(
-			screen.getByText(/What acquisition channel will you use\?/),
+			screen.getByText(/What acquisition channel matters most\?/),
 		).toBeInTheDocument();
 	});
 });

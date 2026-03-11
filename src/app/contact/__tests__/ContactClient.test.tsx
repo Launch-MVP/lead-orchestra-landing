@@ -57,6 +57,11 @@ vi.mock("@/components/home/Testimonials", () => ({
 	),
 }));
 
+vi.mock("@/lib/analytics/meta-events-client", () => ({
+	__esModule: true,
+	trackMetaServerEvent: vi.fn().mockResolvedValue(undefined),
+}));
+
 vi.mock("next-auth/react", () => ({
 	__esModule: true,
 	useSession: () => ({ data: null }),
@@ -139,19 +144,19 @@ describe("ContactClient", () => {
 		expect(screen.queryByTestId("conversion-form")).not.toBeInTheDocument();
 	});
 
-	it("updates URL when tab is switched", async () => {
-		const pushMock = vi.fn();
-		useRouterMock.mockReturnValue({ push: pushMock });
-		useSearchParamsMock.mockReturnValue(new URLSearchParams());
-		useDataModuleMock.mockImplementation((_k, selector) => selector({ status: "ready" }));
-		
+	it("shows the qualification flow directly when tab=prequalification is in the URL", async () => {
+		useRouterMock.mockReturnValue({ push: vi.fn() });
+		useSearchParamsMock.mockReturnValue(
+			new URLSearchParams("tab=prequalification"),
+		);
+		useDataModuleMock.mockImplementation((_k, selector) =>
+			selector({ status: "ready" }),
+		);
+
 		const ContactClient = await loadContactClient();
 		render(<ContactClient />);
-		
-		const prequalificationTab = screen.getByRole("tab", { name: /Consultation Form/i });
-		import("@testing-library/react").then(({ fireEvent }) => {
-			fireEvent.click(prequalificationTab);
-			expect(pushMock).toHaveBeenCalledWith("/contact?tab=prequalification", { scroll: false });
-		});
+
+		expect(screen.getByTestId("intake-form")).toBeInTheDocument();
+		expect(screen.queryByTestId("conversion-form")).not.toBeInTheDocument();
 	});
 });

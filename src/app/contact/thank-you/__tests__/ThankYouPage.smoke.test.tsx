@@ -7,6 +7,10 @@ vi.mock("../ThankYouTrackingClient", () => ({
 	ThankYouTrackingClient: () => <div data-testid="thank-you-tracking-client" />,
 }));
 
+vi.mock("../ScheduleCountdown", () => ({
+	ScheduleCountdown: () => <div data-testid="schedule-countdown" />,
+}));
+
 describe("Contact thank-you page (smoke)", () => {
 	it("renders success messaging and CTA links", () => {
 		render(<ContactThankYouPage />);
@@ -21,9 +25,19 @@ describe("Contact thank-you page (smoke)", () => {
 			"href",
 			"/",
 		);
-		expect(
-			screen.getByRole("link", { name: "Submit Another Response" }),
-		).toHaveAttribute("href", "/contact");
+	});
+
+	it("links to Cal.com for consultation (not Notion)", () => {
+		render(<ContactThankYouPage />);
+
+		const consultLink = screen.getByRole("link", {
+			name: "Schedule Consultation",
+		});
+		expect(consultLink).toBeInTheDocument();
+		expect(consultLink).toHaveAttribute(
+			"href",
+			expect.stringContaining("cal.com"),
+		);
+		expect(consultLink).toHaveAttribute("target", "_blank");
 	});
 });
-

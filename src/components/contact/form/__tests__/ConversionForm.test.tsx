@@ -7,6 +7,9 @@ const useRouterMock = vi.hoisted(() => vi.fn());
 
 vi.mock("next/navigation", () => ({
 	useRouter: useRouterMock,
+	useSearchParams: () => ({
+		get: () => null,
+	}),
 }));
 
 vi.mock("sonner", () => ({
@@ -15,74 +18,114 @@ vi.mock("sonner", () => ({
 	},
 }));
 
-vi.mock("@/components/ui/select", () => ({
-	Select: ({
+vi.mock("next/link", () => ({
+	__esModule: true,
+	default: ({
 		children,
-		onValueChange,
-		value,
-		placeholder,
+		...props
 	}: {
 		children?: ReactNode;
-		onValueChange?: (value: string) => void;
-		value?: string;
-		placeholder?: string;
-	}) => (
-		<div data-testid="mock-select-container">
-			<input
-				data-testid="mock-select"
-				value={value}
-				onChange={(e) => onValueChange?.(e.target.value)}
-				aria-label={placeholder}
-			/>
-			{children}
-		</div>
-	),
-	SelectTrigger: ({ children }: { children?: ReactNode }) => <>{children}</>,
-	SelectValue: ({ placeholder }: { placeholder?: string }) => (
-		<span>{placeholder}</span>
-	),
-	SelectContent: ({ children }: { children?: ReactNode }) => <>{children}</>,
-	SelectItem: ({
+		href: string;
+	}) => <a {...props}>{children}</a>,
+}));
+
+vi.mock("@/components/ui/dialog", () => ({
+	Dialog: ({
 		children,
-		value,
+		open,
 	}: {
-		children?: ReactNode;
-		value?: string;
-	}) => (
-		<div data-testid="mock-select-item" data-value={value}>
-			{children}
-		</div>
+		children: ReactNode;
+		open?: boolean;
+	}) => (open ? <div>{children}</div> : null),
+	DialogContent: ({ children }: { children: ReactNode }) => (
+		<div>{children}</div>
+	),
+	DialogHeader: ({ children }: { children: ReactNode }) => <>{children}</>,
+	DialogTitle: ({ children }: { children: ReactNode }) => (
+		<h2>{children}</h2>
+	),
+	DialogDescription: ({ children }: { children: ReactNode }) => (
+		<p>{children}</p>
 	),
 }));
 
-vi.mock("@/components/ui/MultiSelectDropdown", () => ({
-	default: ({
-		options,
+vi.mock("@/components/home/pricing/PricingCheckoutDialog", () => ({
+	__esModule: true,
+	default: () => <div data-testid="pricing-checkout-dialog" />,
+}));
+
+vi.mock("@/components/contact/form/IntakeForm", () => ({
+	__esModule: true,
+	default: () => <div data-testid="intake-form" />,
+}));
+
+vi.mock("@/components/common/Header", () => ({
+	__esModule: true,
+	default: ({ title }: { title: string }) => <h2>{title}</h2>,
+}));
+
+vi.mock("@/utils/seo/fbpixel", () => ({
+	generateMetaEventId: () => "evt_test_123",
+	trackIntakeFormStart: vi.fn(),
+	trackIntakeFormSubmit: vi.fn(),
+}));
+
+vi.mock("@/lib/analytics/meta-events-client", () => ({
+	trackMetaServerEvent: vi.fn(),
+}));
+
+vi.mock("@/components/contact/form/attributionFields", () => ({
+	getAttributionFieldsFromUrl: (url: string) => {
+		const u = new URL(url, "http://localhost");
+		const result: Record<string, string> = {};
+		for (const key of ["gclid", "utm_source", "utm_campaign", "utm_term", "utm_content", "utm_icp"]) {
+			const v = u.searchParams.get(key);
+			if (v) result[key] = v;
+		}
+		return result;
+	},
+	resolveReferralFromUrlOrState: () => null,
+	resolveUtmIcpFromUrlOrState: (_url: string, fallback?: string) => {
+		const u = new URL(_url, "http://localhost");
+		return u.searchParams.get("utm_icp") ?? fallback ?? null;
+	},
+}));
+
+vi.mock("lucide-react", () => ({
+	CheckCircle2: () => null,
+	Loader2: () => null,
+}));
+
+vi.mock("@/components/ui/select", () => ({
+	Select: ({
+		onValueChange,
+		defaultValue,
 		value,
-		onChange,
+		children,
 	}: {
-		options: Array<{ value: string; label: string }>;
-		value: string[];
-		onChange: (next: string[]) => void;
+		onValueChange: (v: string) => void;
+		defaultValue?: string;
+		value?: string;
+		children: ReactNode;
 	}) => (
-		<div data-testid="mock-multiselect">
-			{options.map((opt) => (
-				<label key={opt.value}>
-					<input
-						type="checkbox"
-						checked={value.includes(opt.value)}
-						onChange={() => {
-							const newValue = value.includes(opt.value)
-								? value.filter((v) => v !== opt.value)
-								: [...value, opt.value];
-							onChange(newValue);
-						}}
-					/>
-					{opt.label}
-				</label>
-			))}
-		</div>
+		<select
+			data-testid="mock-select"
+			value={value || defaultValue || ""}
+			onChange={(e) => onValueChange(e.target.value)}
+		>
+			{children}
+		</select>
 	),
+	SelectTrigger: ({ children }: { children: ReactNode }) => <>{children}</>,
+	SelectValue: () => null,
+	SelectContent: ({ children }: { children: ReactNode }) => <>{children}</>,
+	SelectItem: ({
+		value,
+		children,
+	}: {
+		value: string;
+		children: ReactNode;
+	}) => <option value={value}>{children}</option>,
 }));
 
 describe("ConversionForm", () => {
@@ -93,26 +136,32 @@ describe("ConversionForm", () => {
 		window.localStorage.clear();
 		useRouterMock.mockReturnValue({ push: pushMock });
 
-		global.fetch = vi.fn().mockResolvedValue({
-			ok: true,
-			json: async () => ({ success: true }),
+		global.fetch = vi.fn().mockImplementation((url) => {
+			if (url === "/api/stripe/intent") {
+				return Promise.resolve({
+					ok: true,
+					json: async () => ({ clientSecret: "secret_123" }),
+				});
+			}
+			return Promise.resolve({
+				ok: true,
+				json: async () => ({ success: true }),
+			});
 		});
 	});
 
 	it("renders all required fields", () => {
 		render(<ConversionForm />);
 
-		// Use getAllByText for labels that might have multiple occurrences (label + description)
+		expect(screen.getByText(/Denver Workshop Deposit/i)).toBeInTheDocument();
+		expect(screen.getByText(/Denver Workshop Tier/i)).toBeInTheDocument();
 		expect(screen.getAllByText(/Name/i)[0]).toBeInTheDocument();
 		expect(screen.getAllByText(/Email/i)[0]).toBeInTheDocument();
-		expect(
-			screen.getAllByText(/Website \/ primary URL/i)[0],
-		).toBeInTheDocument();
-		expect(screen.getAllByText(/Monthly Budget/i)[0]).toBeInTheDocument();
-		expect(screen.getByText(/Submit Application/i)).toBeInTheDocument();
+		expect(screen.getByText(/Website \/ Product URL/i)).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /Reserve Seat/i })).toBeInTheDocument();
 	});
 
-	it("submits the form successfully and redirects", async () => {
+	it("submits the form successfully and triggers Stripe intent", async () => {
 		window.history.pushState(
 			{},
 			"",
@@ -121,56 +170,56 @@ describe("ConversionForm", () => {
 
 		render(<ConversionForm />);
 
-		// Fill text fields - use placeholder or display value if label is ambiguous
 		fireEvent.change(screen.getByPlaceholderText(/Your name/i), {
 			target: { value: "John Doe" },
 		});
-		fireEvent.change(screen.getByPlaceholderText(/Email\.\.\./i), {
+		fireEvent.change(screen.getByPlaceholderText(/you@company\.com/i), {
 			target: { value: "john@example.com" },
 		});
 		fireEvent.change(screen.getByPlaceholderText(/https:\/\/example\.com/i), {
 			target: { value: "https://example.com" },
 		});
+		fireEvent.change(screen.getByPlaceholderText(/Best number/i), {
+			target: { value: "555-123-4567" },
+		});
+		fireEvent.change(screen.getByPlaceholderText(/Company or project name/i), {
+			target: { value: "Test Co" },
+		});
+		fireEvent.change(screen.getByPlaceholderText(/Describe the MVP/i), {
+			target: { value: "A new saas product for testing" },
+		});
 
-		// Fill multiselect (Business Type)
-		const businessCheck = screen.getByLabelText(/🏘️Real Estate/i);
-		fireEvent.click(businessCheck);
-
-		// Fill selects
 		const selects = screen.getAllByTestId("mock-select");
-		// monthlyBudget, speed, icpCategory
-		fireEvent.change(selects[0], { target: { value: "$3k+" } });
-		fireEvent.change(selects[1], { target: { value: "Immediately" } });
-		fireEvent.change(selects[2], { target: { value: "SaaS Founders" } });
+		// First select: selectedTier
+		fireEvent.change(selects[0], { target: { value: "in-person-app-launch" } });
+		// Second select: referralSource
+		fireEvent.change(selects[1], { target: { value: "google" } });
 
 		// Submit
-		fireEvent.click(screen.getByText(/Submit Application/i));
+		fireEvent.click(screen.getByRole("button", { name: /Reserve Seat/i }));
 
 		await waitFor(() => {
+			// Check if /api/contact was called (lead capture)
 			expect(global.fetch).toHaveBeenCalledWith(
-				"/api/contact/intake",
+				"/api/contact",
 				expect.objectContaining({
 					method: "POST",
 				}),
 			);
-			expect(pushMock).toHaveBeenCalledWith(
-				"/contact/thank-you?source=conversion",
+			// Check if /api/stripe/intent was called
+			expect(global.fetch).toHaveBeenCalledWith(
+				"/api/stripe/intent",
+				expect.objectContaining({
+					method: "POST",
+				}),
 			);
 		});
 
-		const requestInit = vi.mocked(global.fetch).mock.calls[0]?.[1] as
-			| RequestInit
-			| undefined;
-		const payload = JSON.parse(requestInit.body);
-		expect(payload.gclid).toBe("test-gclid");
-		expect(payload.utm_source).toBe("google");
-		expect(payload.utm_campaign).toBe("spring");
-		expect(payload.utm_term).toBe("lead-gen");
-		expect(payload.utm_content).toBe("cta-a");
-		expect(payload.utm_icp).toBe("b2b-saas");
+		// Check if Stripe dialog appeared
+		expect(screen.getByTestId("pricing-checkout-dialog")).toBeInTheDocument();
 	});
 
-	it("falls back utm_icp to selected icpCategory when URL has no icp param", async () => {
+	it("falls back utm_icp to selectedTier when URL has no icp param", async () => {
 		window.history.pushState(
 			{},
 			"",
@@ -182,33 +231,40 @@ describe("ConversionForm", () => {
 		fireEvent.change(screen.getByPlaceholderText(/Your name/i), {
 			target: { value: "John Doe" },
 		});
-		fireEvent.change(screen.getByPlaceholderText(/Email\.\.\./i), {
+		fireEvent.change(screen.getByPlaceholderText(/you@company\.com/i), {
 			target: { value: "john@example.com" },
 		});
 		fireEvent.change(screen.getByPlaceholderText(/https:\/\/example\.com/i), {
 			target: { value: "https://example.com" },
 		});
-
-		const businessCheck = screen.getByLabelText(/🏘️Real Estate/i);
-		fireEvent.click(businessCheck);
+		fireEvent.change(screen.getByPlaceholderText(/Best number/i), {
+			target: { value: "555-123-4567" },
+		});
+		fireEvent.change(screen.getByPlaceholderText(/Company or project name/i), {
+			target: { value: "Test Co" },
+		});
+		fireEvent.change(screen.getByPlaceholderText(/Describe the MVP/i), {
+			target: { value: "A new saas product for testing" },
+		});
 
 		const selects = screen.getAllByTestId("mock-select");
-		fireEvent.change(selects[0], { target: { value: "$3k+" } });
-		fireEvent.change(selects[1], { target: { value: "Immediately" } });
-		fireEvent.change(selects[2], { target: { value: "SaaS Founders" } });
+		fireEvent.change(selects[0], { target: { value: "in-person-app-launch" } });
+		fireEvent.change(selects[1], { target: { value: "google" } });
 
-		fireEvent.click(screen.getByText(/Submit Application/i));
+		fireEvent.click(screen.getByRole("button", { name: /Reserve Seat/i }));
 
 		await waitFor(() => {
-			expect(pushMock).toHaveBeenCalledWith(
-				"/contact/thank-you?source=conversion",
+			expect(global.fetch).toHaveBeenCalledWith(
+				"/api/contact",
+				expect.any(Object),
 			);
 		});
 
-		const requestInit = vi.mocked(global.fetch).mock.calls[0]?.[1] as
-			| RequestInit
-			| undefined;
-		const payload = JSON.parse(requestInit.body);
-		expect(payload.utm_icp).toBe("SaaS Founders");
+		const calls = vi.mocked(global.fetch).mock.calls;
+		const contactCall = calls.find(call => call[0] === "/api/contact");
+		expect(contactCall).toBeDefined();
+		const requestInit = contactCall![1] as RequestInit;
+		const payload = JSON.parse(requestInit.body as string);
+		expect(payload.utm_icp).toBe("in-person-app-launch");
 	});
 });

@@ -952,22 +952,24 @@ const CallDemoInteractive = () => {
 							</p>
 						</div>
 						<div className="flex flex-col gap-6">
-							<div className="grid auto-rows-[minmax(0,max-content)] gap-4 text-slate-600 text-sm sm:grid-cols-2 lg:grid-cols-3 dark:text-white/70">
+							<div className="grid auto-rows-[1fr] gap-5 text-slate-600 text-sm sm:grid-cols-2 lg:grid-cols-3 dark:text-white/70">
 								{AI_OUTREACH_STUDIO_FEATURES.map((feature, index) => (
 									<div
 										key={feature.title}
 										className={cn(
-											"h-auto self-start rounded-xl border border-slate-200/70 bg-white/75 p-4 text-center shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5",
+											"flex h-full flex-col justify-start overflow-hidden rounded-xl border border-slate-200/70 bg-white/75 p-6 text-center shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50 dark:hover:bg-slate-800/80",
 											// Center the 4th card (index 3) when it's on its own row
 											index === 3 && "lg:col-start-2 lg:col-end-3",
 										)}
 									>
-										<h3 className="font-semibold text-slate-900 text-sm uppercase tracking-[0.18em] dark:text-white">
-											{feature.title}
-										</h3>
-										<p className="mt-2 text-slate-600 text-xs leading-relaxed dark:text-white/70">
-											{feature.description}
-										</p>
+										<div className="relative z-10 flex h-full flex-col">
+											<h3 className="font-bold text-slate-900 text-sm uppercase tracking-[0.18em] dark:text-white">
+												{feature.title}
+											</h3>
+											<p className="mt-4 flex-1 text-pretty font-medium text-slate-600 text-xs leading-relaxed dark:text-slate-300">
+												{feature.description}
+											</p>
+										</div>
 									</div>
 								))}
 							</div>
