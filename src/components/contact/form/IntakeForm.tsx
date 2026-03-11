@@ -3,13 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import Header from "@/components/common/Header";
 import {
 	getAttributionFieldsFromUrl,
+	resolveReferralFromUrlOrState,
 	resolveUtmIcpFromUrlOrState,
 } from "@/components/contact/form/attributionFields";
 import {
@@ -37,14 +38,33 @@ import {
 	trackIntakeFormSubmit,
 } from "@/utils/seo/fbpixel";
 
-export default function IntakeForm() {
+export interface IntakeFormProps {
+	prefilledData?: Partial<IntakeFormValues>;
+	fromDeposit?: boolean;
+}
+
+export default function IntakeForm({
+	prefilledData,
+	fromDeposit,
+}: IntakeFormProps = {}) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
 	const form = useForm<IntakeFormValues>({
 		resolver: zodResolver(intakeFormSchema),
-		defaultValues: {},
+		defaultValues: {
+			...prefilledData,
+			// Ensure checkboxes have defined boolean types to prevent react-hook-form controlled/uncontrolled warnings
+			noWebsite: prefilledData?.noWebsite ?? false,
+		},
 	});
+
+	useEffect(() => {
+		const referral = resolveReferralFromUrlOrState(window.location.href);
+		if (referral) {
+			form.setValue("referralSource", referral);
+		}
+	}, [form]);
 
 	const noWebsite = form.watch("noWebsite") === true;
 	const sourceKnowledge = form.watch("sourceKnowledge");
@@ -87,6 +107,7 @@ export default function IntakeForm() {
 			"sourceKnowledge",
 			"painPoints",
 			"interestedFeatures",
+			"referralSource",
 		]);
 
 		return (fieldName: string) => {
@@ -165,8 +186,13 @@ export default function IntakeForm() {
 					? data.priorityLevel[0]
 					: undefined,
 				eventId: metaEventId,
+				referralSource: data.referralSource,
 			});
-			router.push("/contact/thank-you?source=intake");
+			router.push(
+				fromDeposit
+					? "/contact/thank-you?source=deposit-and-intake"
+					: "/contact/thank-you?source=intake",
+			);
 		} catch (err) {
 			console.error("Submission failed:", err);
 			toast.error("Submission failed. Please try again.");

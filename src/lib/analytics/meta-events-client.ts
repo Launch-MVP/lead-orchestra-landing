@@ -17,6 +17,7 @@ interface TrackMetaServerEventInput {
 	firstName?: string;
 	lastName?: string;
 	phone?: string;
+	customData?: Record<string, unknown>;
 }
 
 export const trackMetaServerEvent = async (

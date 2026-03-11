@@ -519,7 +519,10 @@ const productStageOptions = [
 	{ value: "wireframes", label: "Wireframes or prototype" },
 	{ value: "partial_build", label: "Partially built MVP" },
 	{ value: "live_product", label: "Live product, needs iteration" },
-	{ value: "enterprise_initiative", label: "Enterprise or internal initiative" },
+	{
+		value: "enterprise_initiative",
+		label: "Enterprise or internal initiative",
+	},
 ];
 
 const productTypeOptions = [
@@ -609,6 +612,16 @@ const acquisitionChannelOptions = [
 	{ value: "partnerships", label: "Partnerships" },
 ];
 
+export const referralSourceOptions = [
+	{ value: "genius_networking", label: "🌟 Genius Networking" },
+	{ value: "google", label: "Google / Search Engine" },
+	{ value: "social", label: "Social Media (LinkedIn, X, Facebook, etc.)" },
+	{ value: "referral", label: "Friend or Colleague" },
+	{ value: "newsletter", label: "Newsletter" },
+	{ value: "podcast", label: "Podcast / Interview" },
+	{ value: "other", label: "Other" },
+];
+
 // * Zod Schema
 export const intakeFormSchema = z
 	.object({
@@ -688,6 +701,7 @@ export const intakeFormSchema = z
 			.min(1, "Interested features are required"),
 		startDate: z.string().optional(),
 		priorityLevel: z.array(z.string()).optional(),
+		referralSource: z.string().min(1, "Please let us know how you found us"),
 	})
 	.superRefine((data, ctx) => {
 		// Website: required unless "noWebsite" checked
@@ -827,7 +841,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select product stage...",
 		value: "",
-		description: "Tell us where the product stands today so we can scope correctly.",
+		description:
+			"Tell us where the product stands today so we can scope correctly.",
 		onChange: () => {},
 		options: productStageOptions,
 	},
@@ -847,7 +862,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select team size...",
 		value: "",
-		description: "Helps us gauge decision velocity, handoff needs, and support level.",
+		description:
+			"Helps us gauge decision velocity, handoff needs, and support level.",
 		onChange: () => {},
 		options: teamSizeOptions,
 	},
@@ -855,7 +871,8 @@ export const intakeFormFields: FieldConfig[] = [
 		name: "productSummary",
 		label: "What are you building and why now?",
 		type: "textarea",
-		placeholder: "Describe the product, the user, and what outcome you want to create...",
+		placeholder:
+			"Describe the product, the user, and what outcome you want to create...",
 		value: "",
 		minLength: 20,
 		description:
@@ -866,7 +883,8 @@ export const intakeFormFields: FieldConfig[] = [
 		name: "mustHaveFeatures",
 		label: "Must-have version-one features",
 		type: "textarea",
-		placeholder: "List the core workflows or features that absolutely need to ship first...",
+		placeholder:
+			"List the core workflows or features that absolutely need to ship first...",
 		value: "",
 		minLength: 10,
 		description:
@@ -920,7 +938,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Founder, operator, or teammate responsible for decisions and follow-through.",
+		description:
+			"Founder, operator, or teammate responsible for decisions and follow-through.",
 		onChange: () => {},
 		options: [
 			{ value: "Founder", label: "Founder" },
@@ -972,7 +991,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Used to understand demand assumptions and post-launch expectations.",
+		description:
+			"Used to understand demand assumptions and post-launch expectations.",
 		onChange: () => {},
 		options: leadVolumeOptions,
 	},
@@ -982,7 +1002,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Choose the closest revenue value per customer, contract, or client.",
+		description:
+			"Choose the closest revenue value per customer, contract, or client.",
 		onChange: () => {},
 		options: avgDealValueOptions,
 	},
@@ -1028,7 +1049,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Pick one. We will tailor the follow-up questions based on your answer.",
+		description:
+			"Pick one. We will tailor the follow-up questions based on your answer.",
 		onChange: () => {},
 		options: sourceKnowledgeOptions,
 	},
@@ -1059,7 +1081,8 @@ export const intakeFormFields: FieldConfig[] = [
 		name: "scrapingInstructions",
 		label: "Technical notes, constraints, or build requirements",
 		type: "textarea",
-		placeholder: "Share stack preferences, integrations, compliance needs, references, or anything we should factor into scope...",
+		placeholder:
+			"Share stack preferences, integrations, compliance needs, references, or anything we should factor into scope...",
 		value: "",
 		description:
 			"Use this for stack preferences, APIs, auth, payments, analytics, platform requirements, reference products, or non-negotiables.",
@@ -1071,7 +1094,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Examples: HubSpot, Airtable, spreadsheet, existing app, or none yet.",
+		description:
+			"Examples: HubSpot, Airtable, spreadsheet, existing app, or none yet.",
 		onChange: () => {},
 		options: [
 			{ value: "HubSpot", label: "HubSpot" },
@@ -1088,7 +1112,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "This affects integration scope, build time, and handoff complexity.",
+		description:
+			"This affects integration scope, build time, and handoff complexity.",
 		onChange: () => {},
 		options: crmConnectionYesNoOptions,
 	},
@@ -1108,7 +1133,8 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "select",
 		placeholder: "Select...",
 		value: "",
-		description: "Required only for higher-volume launch or demand assumptions.",
+		description:
+			"Required only for higher-volume launch or demand assumptions.",
 		onChange: () => {},
 		options: leadOpsReadyOptions,
 	},
@@ -1127,7 +1153,8 @@ export const intakeFormFields: FieldConfig[] = [
 	// Optional questions
 	{
 		name: "existingLeadLists",
-		label: "Do you already have assets, data, or product work we should inherit?",
+		label:
+			"Do you already have assets, data, or product work we should inherit?",
 		type: "multiselect",
 		placeholder: "Optional...",
 		value: [],
@@ -1161,7 +1188,8 @@ export const intakeFormFields: FieldConfig[] = [
 		name: "notes",
 		label: "Anything else we should know?",
 		type: "textarea",
-		placeholder: "Share anything else that affects scope, urgency, approvals, or handoff...",
+		placeholder:
+			"Share anything else that affects scope, urgency, approvals, or handoff...",
 		value: "",
 		description:
 			"Add context around urgency, team dynamics, references, blockers, or anything else that matters.",
@@ -1173,8 +1201,17 @@ export const intakeFormFields: FieldConfig[] = [
 		type: "date",
 		placeholder: "Preferred kickoff date...",
 		value: "",
-		description:
-			"If you qualify, when would you ideally want to start?",
+		description: "If you qualify, when would you ideally want to start?",
 		onChange: () => {},
+	},
+	{
+		name: "referralSource",
+		label: "How did you hear about us?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Please let us know where you found us.",
+		onChange: () => {},
+		options: referralSourceOptions,
 	},
 ];

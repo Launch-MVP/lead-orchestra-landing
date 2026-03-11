@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import {
 	getAttributionFieldsFromUrl,
+	resolveReferralFromUrlOrState,
 	resolveUtmIcpFromUrlOrState,
 } from "../attributionFields";
 
@@ -12,7 +13,7 @@ describe("attributionFields", () => {
 
 	it("reads tracking fields including utm_icp from URL", () => {
 		const result = getAttributionFieldsFromUrl(
-			"https://example.com/contact?gclid=abc&wbraid=w1&gbraid=g1&msclkid=m1&fbclid=f1&utm_source=google&utm_medium=cpc&utm_campaign=spring&utm_term=lead&utm_content=hero&utm_icp=b2b",
+			"https://example.com/contact?gclid=abc&wbraid=w1&gbraid=g1&msclkid=m1&fbclid=f1&utm_source=google&utm_medium=cpc&utm_campaign=spring&utm_term=lead&utm_content=hero&utm_icp=b2b&ref=genius_networking",
 		);
 
 		expect(result).toEqual({
@@ -27,6 +28,7 @@ describe("attributionFields", () => {
 			utm_term: "lead",
 			utm_content: "hero",
 			utm_icp: "b2b",
+			referral: "genius_networking",
 		});
 	});
 
@@ -85,5 +87,31 @@ describe("attributionFields", () => {
 		);
 
 		expect(result).toBe("SaaS Founders");
+	});
+
+	describe("resolveReferralFromUrlOrState", () => {
+		it("resolves from URL 'ref' param", () => {
+			const result = resolveReferralFromUrlOrState(
+				"https://example.com/contact?ref=genius_networking",
+				"some-state",
+			);
+			expect(result).toBe("genius_networking");
+		});
+
+		it("falls back to state if no URL param is present", () => {
+			const result = resolveReferralFromUrlOrState(
+				"https://example.com/contact",
+				"some-state",
+			);
+			expect(result).toBe("some-state");
+		});
+
+		it("resolves from URL 'referral' param over state", () => {
+			const result = resolveReferralFromUrlOrState(
+				"https://example.com/contact?referral=other_source",
+				"some-state",
+			);
+			expect(result).toBe("other_source");
+		});
 	});
 });

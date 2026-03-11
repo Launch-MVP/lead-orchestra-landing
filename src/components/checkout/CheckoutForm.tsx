@@ -55,6 +55,9 @@ export interface CheckoutFormProps {
 	postTrialAmount?: number;
 	payButtonLabel?: string;
 	getPayButtonLabel?: (params: PayButtonLabelParams) => string;
+	customReturnUrl?: string;
+	redirectStrategy?: "always" | "if_required";
+	onPaymentSuccess?: () => void;
 }
 
 export default function CheckoutForm({
@@ -69,6 +72,9 @@ export default function CheckoutForm({
 	postTrialAmount,
 	payButtonLabel,
 	getPayButtonLabel,
+	customReturnUrl,
+	redirectStrategy = "always",
+	onPaymentSuccess,
 }: CheckoutFormProps) {
 	const stripe = useStripe();
 	const elements = useElements();
@@ -210,43 +216,60 @@ export default function CheckoutForm({
 		setLoading(true);
 		const stripeToast = startStripeToast("Processing payment…");
 		try {
-			const returnUrl = new URL(`${window.location.origin}/success`);
-			if (isTrial) {
-				returnUrl.searchParams.append("title", "Trial Activated");
-				returnUrl.searchParams.append(
-					"subtitle",
-					`You're all set! ${plan.name} will continue at ${formatPrice(
-						postTrialAmount ?? plan.price[planType].amount,
-					)} after your trial.`,
-				);
+			const returnUrl = customReturnUrl
+				? new URL(customReturnUrl, window.location.origin)
+				: new URL(`${window.location.origin}/success`);
+
+			if (!customReturnUrl) {
+				if (isTrial) {
+					returnUrl.searchParams.append("title", "Trial Activated");
+					returnUrl.searchParams.append(
+						"subtitle",
+						`You're all set! ${plan.name} will continue at ${formatPrice(
+							postTrialAmount ?? plan.price[planType].amount,
+						)} after your trial.`,
+					);
+				} else {
+					returnUrl.searchParams.append("title", "Payment Successful!");
+					returnUrl.searchParams.append(
+						"subtitle",
+						`Your payment for the ${plan.name} plan has been processed.`,
+					);
+				}
+				returnUrl.searchParams.append("ctaText", "Go to Dashboard");
+				returnUrl.searchParams.append("ctaHref", "/dashboard");
+			}
+
+			if (isSetupMode) {
+				const { error, setupIntent } = await stripe.confirmSetup({
+					elements,
+					confirmParams: {
+						return_url: returnUrl.toString(),
+					},
+					redirect: redirectStrategy as "always" | "if_required",
+				});
+
+				if (error) throw error;
+
+				if (setupIntent && setupIntent.status === "succeeded") {
+					if (onPaymentSuccess) onPaymentSuccess();
+				}
 			} else {
-				returnUrl.searchParams.append("title", "Payment Successful!");
-				returnUrl.searchParams.append(
-					"subtitle",
-					`Your payment for the ${plan.name} plan has been processed.`,
-				);
-			}
-			returnUrl.searchParams.append("ctaText", "Go to Dashboard");
-			returnUrl.searchParams.append("ctaHref", "/dashboard");
+				const { error, paymentIntent } = await stripe.confirmPayment({
+					elements,
+					confirmParams: {
+						return_url: returnUrl.toString(),
+					},
+					redirect: redirectStrategy as "always" | "if_required",
+				});
 
-			const { error } = isSetupMode
-				? await stripe.confirmSetup({
-						elements,
-						confirmParams: {
-							return_url: returnUrl.toString(),
-						},
-					})
-				: await stripe.confirmPayment({
-						elements,
-						confirmParams: {
-							return_url: returnUrl.toString(),
-						},
-					});
+				if (error) throw error;
 
-			if (error) {
-				throw error;
+				if (paymentIntent && paymentIntent.status === "succeeded") {
+					if (onPaymentSuccess) onPaymentSuccess();
+				}
 			}
-			onSuccess();
+
 			stripeToast.success(
 				isTrial
 					? "Your free trial is locked in. No charge today!"

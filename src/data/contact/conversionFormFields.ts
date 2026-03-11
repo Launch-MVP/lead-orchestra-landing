@@ -25,7 +25,8 @@ export const denverWorkshopTiers = [
 	},
 ] as const;
 
-export type DenverWorkshopTierValue = (typeof denverWorkshopTiers)[number]["value"];
+export type DenverWorkshopTierValue =
+	(typeof denverWorkshopTiers)[number]["value"];
 
 export const denverWorkshopTierMap = Object.fromEntries(
 	denverWorkshopTiers.map((tier) => [tier.value, tier]),
@@ -54,11 +55,25 @@ export const quickApplySchema = z.object({
 	utm_term: z.string().optional(),
 	utm_content: z.string().optional(),
 	utm_icp: z.string().optional(),
+	referralSource: z.string().min(1, "Please tell us how you heard about us"),
 });
 
 export type QuickApplyValues = z.infer<typeof quickApplySchema>;
 
 export const quickApplyFields: FieldConfig[] = [
+	{
+		name: "selectedTier",
+		label: "🔥 Denver Workshop Tier",
+		type: "select",
+		placeholder: "Select workshop tier",
+		value: "",
+		description: "Deposit is 10% of the selected discounted workshop price.",
+		onChange: () => {},
+		options: denverWorkshopTiers.map((tier) => ({
+			value: tier.value,
+			label: `${tier.label} · $${tier.totalPrice.toLocaleString()} total · $${tier.depositAmount.toLocaleString()} deposit`,
+		})),
+	},
 	{
 		name: "name",
 		label: "Name",
@@ -105,26 +120,33 @@ export const quickApplyFields: FieldConfig[] = [
 		onChange: () => {},
 	},
 	{
-		name: "selectedTier",
-		label: "Denver workshop tier",
-		type: "select",
-		placeholder: "Select workshop tier",
-		value: "",
-		description: "Deposit is 10% of the selected discounted workshop price.",
-		onChange: () => {},
-		options: denverWorkshopTiers.map((tier) => ({
-			value: tier.value,
-			label: `${tier.label} · $${tier.totalPrice.toLocaleString()} total · $${tier.depositAmount.toLocaleString()} deposit`,
-		})),
-	},
-	{
 		name: "projectSummary",
 		label: "What do you want to build in Denver?",
 		type: "textarea",
-		placeholder: "Describe the MVP, app, or prototype you want to work through in person...",
+		placeholder:
+			"Describe the MVP, app, or prototype you want to work through in person...",
 		value: "",
 		minLength: 12,
-		description: "Give us enough context to prepare before your seat is confirmed.",
+		description:
+			"Give us enough context to prepare before your seat is confirmed.",
 		onChange: () => {},
+	},
+	{
+		name: "referralSource",
+		label: "How did you hear about us?",
+		type: "select",
+		placeholder: "Select...",
+		value: "",
+		description: "Please let us know where you found us.",
+		onChange: () => {},
+		options: [
+			{ value: "genius_networking", label: "🌟 Genius Networking" },
+			{ value: "google", label: "Google / Search Engine" },
+			{ value: "social", label: "Social Media (LinkedIn, X, Facebook, etc.)" },
+			{ value: "referral", label: "Friend or Colleague" },
+			{ value: "newsletter", label: "Newsletter" },
+			{ value: "podcast", label: "Podcast / Interview" },
+			{ value: "other", label: "Other" },
+		],
 	},
 ];

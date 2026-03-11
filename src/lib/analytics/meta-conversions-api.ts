@@ -25,6 +25,7 @@ interface MetaCapiCustomDataInput {
 	value?: number;
 	contentName?: string;
 	contentCategory?: string;
+	customProperties?: Record<string, unknown>;
 }
 
 export interface MetaCapiEventInput {
@@ -45,7 +46,10 @@ interface MetaCapiConfig {
 }
 
 export const generateServerEventId = (): string => {
-	if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+	if (
+		typeof crypto !== "undefined" &&
+		typeof crypto.randomUUID === "function"
+	) {
 		return crypto.randomUUID();
 	}
 
@@ -117,7 +121,9 @@ export const resolveClientIp = (request: Request): string | undefined => {
 	return undefined;
 };
 
-const parseCookieHeader = (cookieHeader: string | null): Record<string, string> => {
+const parseCookieHeader = (
+	cookieHeader: string | null,
+): Record<string, string> => {
 	if (!cookieHeader) {
 		return {};
 	}
@@ -168,7 +174,10 @@ export const resolveEventSourceUrl = (
 
 export const buildMetaUserDataFromRequest = (
 	request: Request,
-	input: Pick<MetaCapiUserDataInput, "email" | "phone" | "firstName" | "lastName">,
+	input: Pick<
+		MetaCapiUserDataInput,
+		"email" | "phone" | "firstName" | "lastName"
+	>,
 ): MetaCapiUserDataInput => {
 	const { fbc, fbp } = resolveMetaCookieValues(request);
 	return {
@@ -206,7 +215,8 @@ export const sendMetaConversionEvent = async (
 		const userData = new bizSdk.UserData();
 		if (input.userData?.email) userData.setEmail(input.userData.email);
 		if (input.userData?.phone) userData.setPhone(input.userData.phone);
-		if (input.userData?.firstName) userData.setFirstName(input.userData.firstName);
+		if (input.userData?.firstName)
+			userData.setFirstName(input.userData.firstName);
 		if (input.userData?.lastName) userData.setLastName(input.userData.lastName);
 		if (input.userData?.clientIpAddress) {
 			userData.setClientIpAddress(input.userData.clientIpAddress);
@@ -229,6 +239,9 @@ export const sendMetaConversionEvent = async (
 		}
 		if (input.customData?.contentCategory) {
 			customData.setContentCategory(input.customData.contentCategory);
+		}
+		if (input.customData?.customProperties) {
+			customData.setCustomProperties(input.customData.customProperties);
 		}
 
 		const serverEvent = new bizSdk.ServerEvent()

@@ -27,6 +27,7 @@ interface MetaClientEventBody {
 	firstName?: string;
 	lastName?: string;
 	phone?: string;
+	customData?: Record<string, unknown>;
 }
 
 export async function POST(request: Request) {
@@ -60,6 +61,11 @@ export async function POST(request: Request) {
 			phone: body.phone,
 		});
 
+		const customData =
+			typeof body.customData === "object" && body.customData !== null
+				? body.customData
+				: undefined;
+
 		const metaResult = await sendMetaConversionEvent({
 			eventName,
 			eventId,
@@ -67,6 +73,7 @@ export async function POST(request: Request) {
 			actionSource: "website",
 			testEventCode: resolvedTestEventCode,
 			userData,
+			customData: customData ? { customProperties: customData } : undefined,
 		});
 
 		return NextResponse.json(

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ThankYouTrackingClient } from "./ThankYouTrackingClient";
 import { ScheduleCountdown } from "./ScheduleCountdown";
+import { ThankYouTrackingClient } from "./ThankYouTrackingClient";
 
 export const metadata = {
 	title: "Thank You | Deal Scale",
@@ -8,7 +8,8 @@ export const metadata = {
 		"Thank you for submitting your application. We will review your details and contact you by email if accepted.",
 };
 
-const CONSULTATION_URL = "https://calendar.notion.so/meet/cyberoni/em2w42l93";
+const CONSULTATION_URL =
+	"https://cal.com/cyber-oni-solutions-inc/mvp-consultation";
 
 export default function ContactThankYouPage() {
 	return (
@@ -36,7 +37,7 @@ export default function ContactThankYouPage() {
 						href={CONSULTATION_URL}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center justify-center rounded-lg border border-primary/30 px-5 py-3 font-medium text-foreground transition-colors hover:bg-primary/5 shadow-sm"
+						className="inline-flex items-center justify-center rounded-lg border border-primary/30 px-5 py-3 font-medium text-foreground shadow-sm transition-colors hover:bg-primary/5"
 					>
 						Schedule Consultation
 					</a>

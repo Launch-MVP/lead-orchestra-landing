@@ -6,6 +6,7 @@ import {
 	ContactSteps,
 } from "@/components/contact/form/ContactSteps";
 import IntakeForm from "@/components/contact/form/IntakeForm";
+import { resolveReferralFromUrlOrState } from "@/components/contact/form/attributionFields";
 import { Newsletter } from "@/components/contact/newsletter/Newsletter";
 import { ScheduleMeeting } from "@/components/contact/schedule/ScheduleMeeting";
 import TrustedByMarquee from "@/components/contact/utils/TrustedByScroller";
@@ -49,14 +50,21 @@ const Contact = () => {
 	const [activeTab, setActiveTab] = useState(
 		urlTab === "prequalification" ? "prequalification" : "conversion",
 	);
+	const [upsellActive, setUpsellActive] = useState(false);
 
 	// * Fire ViewContent pixel event on mount
 	useEffect(() => {
 		const eventId = generateMetaEventId();
+		const referral =
+			typeof window !== "undefined"
+				? resolveReferralFromUrlOrState(window.location.href)
+				: undefined;
+
 		event(
 			"ViewContent",
 			{
 				content_name: "Contact Page",
+				referral_source: referral,
 			},
 			{ eventID: eventId },
 		);
@@ -65,6 +73,7 @@ const Contact = () => {
 			eventId,
 			eventSourceUrl:
 				typeof window !== "undefined" ? window.location.href : undefined,
+			customData: referral ? { referral_source: referral } : undefined,
 		});
 	}, []);
 
@@ -354,23 +363,18 @@ const Contact = () => {
 							onValueChange={handleTabChange}
 							className="w-full"
 						>
-							<TabsList className="mb-8 p-1">
-								<TabsTrigger value="conversion" className="flex-1">
-									Denver Workshop Deposit
-								</TabsTrigger>
-								<TabsTrigger value="prequalification" className="flex-1">
-									Apply for Free Slot
-								</TabsTrigger>
-							</TabsList>
+							{/* Tab bar hidden — free slot is only reachable via post-deposit upsell */}
 							<TabsContent value="conversion" className="mt-0 outline-none">
-								<ConversionForm />
+								<ConversionForm onUpsellActive={setUpsellActive} />
 							</TabsContent>
-							<TabsContent
-								value="prequalification"
-								className="mt-0 outline-none"
-							>
-								<IntakeForm />
-							</TabsContent>
+							{!upsellActive && (
+								<TabsContent
+									value="prequalification"
+									className="mt-0 outline-none"
+								>
+									<IntakeForm />
+								</TabsContent>
+							)}
 						</Tabs>
 					</div>
 					<div className="flex flex-col lg:col-span-5">

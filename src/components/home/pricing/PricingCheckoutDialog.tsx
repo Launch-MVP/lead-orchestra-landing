@@ -22,6 +22,9 @@ type PricingCheckoutDialogProps = {
 	mode: CheckoutMode;
 	context: CheckoutContext;
 	postTrialAmount?: number;
+	customReturnUrl?: string;
+	redirectStrategy?: "always" | "if_required";
+	onPaymentSuccess?: () => void;
 };
 
 const stripePromise = (() => {
@@ -44,6 +47,9 @@ export default function PricingCheckoutDialog({
 	mode,
 	context,
 	postTrialAmount,
+	customReturnUrl,
+	redirectStrategy,
+	onPaymentSuccess,
 }: PricingCheckoutDialogProps) {
 	useEffect(() => {
 		const { body } = document;
@@ -103,6 +109,9 @@ export default function PricingCheckoutDialog({
 						mode={mode}
 						context={context}
 						postTrialAmount={postTrialAmount}
+						customReturnUrl={customReturnUrl}
+						redirectStrategy={redirectStrategy}
+						onPaymentSuccess={onPaymentSuccess}
 						onSuccess={onClose}
 					/>
 				</Elements>

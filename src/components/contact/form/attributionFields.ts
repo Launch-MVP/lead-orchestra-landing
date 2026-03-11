@@ -10,6 +10,7 @@ export interface IntakeAttributionFields {
 	utm_term?: string;
 	utm_content?: string;
 	utm_icp?: string;
+	referral?: string;
 }
 
 const TRACKING_KEYS = [
@@ -24,6 +25,7 @@ const TRACKING_KEYS = [
 	"utm_term",
 	"utm_content",
 	"utm_icp",
+	"referral",
 ] as const;
 
 const ICP_URL_KEYS = ["utm_icp", "icp", "icpCategory", "icp_type"] as const;
@@ -48,6 +50,16 @@ const readFromUrl = (url: string): IntakeAttributionFields => {
 			if (value) {
 				result[key] = value;
 			}
+		}
+
+		const referral = toNonEmptyString(
+			parsed.searchParams.get("referral") ??
+				parsed.searchParams.get("ref") ??
+				parsed.searchParams.get("source"),
+		);
+
+		if (referral) {
+			result.referral = referral;
 		}
 
 		return result;
@@ -138,6 +150,33 @@ export const resolveUtmIcpFromUrlOrState = (
 				return value;
 			}
 		}
+		return selected;
+	} catch {
+		return selected;
+	}
+};
+
+export const resolveReferralFromUrlOrState = (
+	url: string,
+	selectedReferral?: string,
+): string | undefined => {
+	const selected = toNonEmptyString(selectedReferral ?? null);
+
+	try {
+		const parsed = new URL(url);
+		const referralKeys = ["referral", "ref", "source"] as const;
+		for (const key of referralKeys) {
+			const value = toNonEmptyString(parsed.searchParams.get(key));
+			if (value) {
+				return value;
+			}
+		}
+
+		const stored = readStoredAttribution();
+		if (stored.referral) {
+			return stored.referral;
+		}
+
 		return selected;
 	} catch {
 		return selected;
