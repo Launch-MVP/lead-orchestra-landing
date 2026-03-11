@@ -17,6 +17,7 @@ import { Iphone } from "@/components/ui/iphone";
 import { LayoutGrid } from "@/components/ui/layout-grid";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import { default_cal_slug } from "@/data/constants/booking";
 import {
 	AI_OUTREACH_STUDIO_ANCHOR,
 	AI_OUTREACH_STUDIO_DESCRIPTION,
@@ -25,7 +26,6 @@ import {
 	AI_OUTREACH_STUDIO_TAGLINE,
 	buildPersonaAiOutreachStudioSeo,
 } from "@/data/home/aiOutreachStudio";
-import { default_cal_slug } from "@/data/constants/booking";
 import { DEFAULT_PERSONA_KEY, PERSONA_LABELS } from "@/data/personas/catalog";
 import demoTranscript from "@/data/transcripts";
 import { cn } from "@/lib/utils";
@@ -536,7 +536,7 @@ const CallDemoInteractive = () => {
 													);
 													return (
 														<div
-															key={`${message.sender}-${index}`}
+															key={`${message.sender}-${message.text.substring(0, 20)}`}
 															data-message-index={index}
 															className={cn(
 																"flex w-full",
@@ -957,7 +957,7 @@ const CallDemoInteractive = () => {
 									<div
 										key={feature.title}
 										className={cn(
-											"flex h-full flex-col justify-start overflow-hidden rounded-xl border border-slate-200/70 bg-white/75 p-6 text-center shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50 dark:hover:bg-slate-800/80",
+											"hover:-translate-y-1 flex h-full flex-col justify-start overflow-hidden rounded-xl border border-slate-200/70 bg-white/75 p-6 text-center shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50 dark:hover:bg-slate-800/80",
 											// Center the 4th card (index 3) when it's on its own row
 											index === 3 && "lg:col-start-2 lg:col-end-3",
 										)}
