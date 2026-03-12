@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					strategy="afterInteractive"
 				/>
 			</head>
-			<body className="theme-lead-orchestra theme-dealscale min-h-screen bg-background font-sans antialiased">
+			<body className="theme-pilot-spring min-h-screen bg-background font-sans antialiased">
 				<SchemaInjector schema={KNOWLEDGE_GRAPH_SCHEMA} />
 				<AppProviders
 					clarityProjectId={clarityProjectId}

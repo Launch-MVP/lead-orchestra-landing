@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+import { AboutUsSection } from "@/components/about/AboutUsSection";
 import TrustedByScroller from "@/components/contact/utils/TrustedByScroller";
 import { FeatureShowcase } from "@/components/demos/real-time-analytics/FeatureShowcase";
 import { REAL_TIME_FEATURES } from "@/components/demos/real-time-analytics/feature-config";
@@ -32,7 +36,6 @@ import { companyLogos } from "@/data/service/slug_data/trustedCompanies";
 import { getLatestBeehiivPosts } from "@/lib/beehiiv/getPosts";
 import { exitIntentEnabled } from "@/lib/config/exitIntent";
 import { cn } from "@/lib/utils";
-import type { BeehiivPost } from "@/types/behiiv";
 import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
 import {
 	SchemaInjector,
@@ -42,11 +45,6 @@ import {
 	getTestimonialReviewData,
 } from "@/utils/seo/schema";
 import { getStaticSeo } from "@/utils/seo/staticSeo";
-import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-// Below-the-fold components (lazy load with dynamic imports for code splitting)
-import { AboutUsSection } from "@/components/about/AboutUsSection";
 const CaseStudyGrid = dynamic(
 	() => import("@/components/case-studies/CaseStudyGrid"),
 	{
@@ -225,7 +223,7 @@ const InstagramFallback = () => (
 		{THREE_KEYS.map((token) => (
 			<div
 				key={`insta-fallback-${token}`}
-				className="aspect-square rounded-3xl border border-white/10 bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-yellow-400/30"
+				className="aspect-square rounded-3xl border border-white/10 bg-gradient-to-br from-primary/20 via-slate-500/10 to-accent/30"
 			/>
 		))}
 	</div>
@@ -291,7 +289,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	const enrichedSeo = mapSeoMetaToMetadata({
 		...seo,
-		title: "Launch MVP | Launch a Real MVP in 3 Days",
+		title: "Pilot Spring | Launch a Real MVP in 3 Days",
 		description: combinedDescription,
 		keywords: combinedKeywords,
 	});
@@ -326,7 +324,7 @@ const Index = async ({
 	const currentPage = pageParam ? Number.parseInt(pageParam, 10) || 1 : 1;
 
 	// Paginate the case studies
-	const paginatedCaseStudies = paginate(
+	const _paginatedCaseStudies = paginate(
 		caseStudies,
 		currentPage,
 		CASE_STUDY_PAGE_SIZE,
@@ -359,10 +357,10 @@ const Index = async ({
 	} = getTestimonialReviewData();
 	const blogSchema = buildBlogSchema({
 		canonicalUrl: `${canonicalUrl}/blogs`,
-		name: homepageSeo.title ? `${homepageSeo.title} Blog` : "Launch MVP Blog",
+		name: homepageSeo.title ? `${homepageSeo.title} Blog` : "Pilot Spring Blog",
 		description:
 			homepageSeo.description ??
-			"Launch MVP insights on product strategy, MVP execution, launch planning, and shipping without technical debt.",
+			"Pilot Spring insights on product strategy, MVP execution, launch planning, and shipping without technical debt.",
 		posts,
 	});
 	const heroServiceSchema = buildServiceSchema({
@@ -381,7 +379,7 @@ const Index = async ({
 		reviews: testimonialReviews,
 	});
 	const aiOutreachServiceSchema = buildServiceSchema({
-		name: `${AI_OUTREACH_STUDIO_SEO.name} by Launch MVP`,
+		name: `${AI_OUTREACH_STUDIO_SEO.name} by Pilot Spring`,
 		description: aiOutreachNarrative,
 		url: `${canonicalUrl}#${AI_OUTREACH_STUDIO_ANCHOR}`,
 		serviceType: "MVP Development",
@@ -434,12 +432,10 @@ const Index = async ({
 				lazy={false}
 				fallbackLabel="Launch System"
 			>
-				<>
-					<FeatureSectionActivity />
-					<div className="mt-12">
-						<FeatureShowcase features={REAL_TIME_FEATURES} />
-					</div>
-				</>
+				<FeatureSectionActivity />
+				<div className="mt-12">
+					<FeatureShowcase features={REAL_TIME_FEATURES} />
+				</div>
 			</SectionWrapper>
 			<Separator className="w-full border-white/10" />
 			<SectionWrapper
@@ -480,7 +476,7 @@ const Index = async ({
 					testimonials={generalDealScaleTestimonials}
 					title={"What Founders and Product Teams Say"}
 					subtitle={
-						"Hear how founders, startup teams, and innovation leaders used Launch MVP to move from idea to usable product faster."
+						"Hear how founders, startup teams, and innovation leaders used Pilot Spring to move from idea to usable product faster."
 					}
 				/>
 			</SectionWrapper>

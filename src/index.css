@@ -4,10 +4,26 @@
 
 @layer base {
 	:root {
-		--font-sans: "Aptos", "Segoe UI", "Helvetica Neue";
-		--font-mono: "Cascadia Code", "JetBrains Mono", "SFMono-Regular";
+		--font-heading: "Bahnschrift", "Aptos Display", "Segoe UI Variable Display",
+			"Segoe UI", "Helvetica Neue";
+		--font-sans: "Aptos", "Aptos Narrow", "Segoe UI Variable Text", "Segoe UI",
+			"Helvetica Neue";
+		--font-mono: "Cascadia Mono", "Cascadia Code", "JetBrains Mono",
+			"SFMono-Regular";
 		font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
 			BlinkMacSystemFont, "Segoe UI", sans-serif;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading), ui-sans-serif, system-ui, -apple-system,
+			BlinkMacSystemFont, "Segoe UI", sans-serif;
+		font-weight: 650;
+		letter-spacing: -0.02em;
 	}
 
 	code,
@@ -74,14 +90,15 @@
 		--shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07); /* glassy shadow */
 	}
 
-	/* Launch MVP Theme - Light Mode */
+	/* Pilot Spring Theme - Light Mode */
+	.theme-pilot-spring-light,
 	.theme-lead-orchestra-light,
 	.theme-dealscale-light {
 		--radius: 0.75rem;
 		--lo-primary: 216 100% 57%; /* Signal Blue */
 		--lo-teal: 216 100% 57%;
 		--lo-purple: 216 100% 57%;
-		--lo-orange: 40 89% 61%; /* Amber */
+		--lo-orange: 95 54% 53%; /* Spring Green */
 		--lo-green: 142 56% 45%;
 		--lo-sapphire: 216 100% 57%;
 		--lo-violet: 210 20% 8%; /* Obsidian */
@@ -95,16 +112,16 @@
 		--lo-success: 142 56% 45%;
 		--lo-error: 0 72% 51%;
 		--lo-info: 216 100% 57%;
-		--lo-warning: 40 89% 61%;
+		--lo-warning: 95 54% 53%;
 		--brand-primary: 216 100% 57%;
 		--brand-primary-hover: 216 100% 50%;
-		--brand-accent: 40 89% 61%;
-		--brand-accent-hover: 40 89% 55%;
-		--brand-warm: 40 89% 61%;
-		--brand-warm-hover: 40 89% 55%;
+		--brand-accent: 95 54% 53%;
+		--brand-accent-hover: 95 52% 47%;
+		--brand-warm: 95 54% 53%;
+		--brand-warm-hover: 95 52% 47%;
 		--primary: 216 100% 57%;
 		--primary-foreground: 0 0% 100%;
-		--accent: 40 89% 61%;
+		--accent: 95 54% 53%;
 		--accent-foreground: 210 20% 8%;
 		--tertiary: 210 20% 8%;
 		--tertiary-foreground: 60 24% 96%;
@@ -121,7 +138,7 @@
 		--card-foreground: 210 20% 8%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 210 20% 8%;
-		--secondary: 213 100% 97%;
+		--secondary: 210 20% 94%;
 		--secondary-foreground: 210 20% 8%;
 		--muted: 60 16% 92%;
 		--muted-foreground: 221 13% 46%;
@@ -134,14 +151,15 @@
 		--shadow: 0 10px 40px 0 rgba(16, 20, 24, 0.08);
 	}
 
-	/* Launch MVP Theme - Dark Mode */
+	/* Pilot Spring Theme - Dark Mode */
+	.theme-pilot-spring,
 	.theme-lead-orchestra,
 	.theme-dealscale {
 		--radius: 0.75rem;
 		--lo-primary: 216 100% 57%;
 		--lo-teal: 216 100% 57%;
 		--lo-purple: 216 100% 57%;
-		--lo-orange: 40 89% 61%;
+		--lo-orange: 95 54% 53%;
 		--lo-green: 142 56% 45%;
 		--lo-sapphire: 216 100% 57%;
 		--lo-violet: 60 24% 96%;
@@ -155,16 +173,16 @@
 		--lo-success: 142 56% 45%;
 		--lo-error: 0 84% 60%;
 		--lo-info: 216 100% 57%;
-		--lo-warning: 40 89% 61%;
+		--lo-warning: 95 54% 53%;
 		--brand-primary: 216 100% 57%;
 		--brand-primary-hover: 216 100% 62%;
-		--brand-accent: 40 89% 61%;
-		--brand-accent-hover: 40 89% 66%;
-		--brand-warm: 40 89% 61%;
-		--brand-warm-hover: 40 89% 66%;
+		--brand-accent: 95 54% 53%;
+		--brand-accent-hover: 95 50% 58%;
+		--brand-warm: 95 54% 53%;
+		--brand-warm-hover: 95 50% 58%;
 		--primary: 216 100% 57%;
 		--primary-foreground: 0 0% 100%;
-		--accent: 40 89% 61%;
+		--accent: 95 54% 53%;
 		--accent-foreground: 210 20% 8%;
 		--tertiary: 60 24% 96%;
 		--tertiary-foreground: 210 20% 8%;
@@ -181,7 +199,7 @@
 		--card-foreground: 60 24% 96%;
 		--popover: 220 16% 12%;
 		--popover-foreground: 60 24% 96%;
-		--secondary: 216 54% 18%;
+		--secondary: 214 19% 18%;
 		--secondary-foreground: 60 24% 96%;
 		--muted: 220 14% 16%;
 		--muted-foreground: 221 13% 46%;
@@ -222,16 +240,20 @@
 		);
 	}
 
-	/* Launch MVP theme gradients */
+	/* Pilot Spring theme gradients */
+	.theme-pilot-spring body.dark,
 	.theme-lead-orchestra body.dark,
 	.theme-dealscale body.dark,
+	.dark .theme-pilot-spring body,
 	.dark .theme-lead-orchestra body,
 	.dark .theme-dealscale body {
 		background: linear-gradient(180deg, #101418 0%, #0b0f13 100%);
 	}
 
+	.theme-pilot-spring-light body:not(.dark),
 	.theme-lead-orchestra-light body:not(.dark),
 	.theme-dealscale-light body:not(.dark),
+	.light .theme-pilot-spring-light body,
 	.light .theme-lead-orchestra-light body,
 	.light .theme-dealscale-light body {
 		background: linear-gradient(180deg, #f7f7f2 0%, #eceee7 100%);
@@ -247,23 +269,35 @@
 
 @layer components {
 	.glass-card {
-		@apply border border-white/20 bg-white/40 shadow-lg backdrop-blur-2xl;
+		@apply border shadow-lg backdrop-blur-2xl;
+		border-color: rgba(102, 112, 133, 0.18);
+		background-color: rgba(247, 247, 242, 0.72);
 		background-image: linear-gradient(
-			135deg,
-			rgba(255, 255, 255, 0.4) 0%,
-			rgba(255, 255, 255, 0.15) 100%
+			145deg,
+			rgba(247, 247, 242, 0.92) 0%,
+			rgba(255, 255, 255, 0.62) 52%,
+			rgba(122, 201, 67, 0.1) 100%
 		);
 	}
 	.dark .glass-card {
-		@apply border border-black/20 bg-black/30 shadow-lg backdrop-blur-2xl;
+		@apply border shadow-lg backdrop-blur-2xl;
+		border-color: rgba(102, 112, 133, 0.24);
+		background-color: rgba(16, 20, 24, 0.74);
 		background-image: linear-gradient(
-			135deg,
-			rgba(30, 30, 40, 0.4) 0%,
-			rgba(30, 30, 40, 0.1) 100%
+			145deg,
+			rgba(16, 20, 24, 0.88) 0%,
+			rgba(22, 28, 34, 0.82) 52%,
+			rgba(122, 201, 67, 0.14) 100%
 		);
 	}
 	.neo-blur {
-		@apply border border-black/10 bg-white/40 backdrop-blur-2xl dark:border-white/10 dark:bg-black/40;
+		@apply border backdrop-blur-2xl;
+		border-color: rgba(102, 112, 133, 0.16);
+		background-color: rgba(247, 247, 242, 0.68);
+	}
+	.dark .neo-blur {
+		border-color: rgba(102, 112, 133, 0.24);
+		background-color: rgba(16, 20, 24, 0.68);
 	}
 }
 
@@ -283,11 +317,11 @@
 	}
 
 	.text-glow {
-		text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+		text-shadow: 0 0 18px rgba(36, 124, 255, 0.35);
 	}
 
 	.text-glow-sm {
-		text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+		text-shadow: 0 0 10px rgba(36, 124, 255, 0.3);
 	}
 }
 

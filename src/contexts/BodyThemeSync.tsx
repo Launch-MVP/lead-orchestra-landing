@@ -1,20 +1,16 @@
 "use client";
-import { useTheme } from "@/contexts/theme-context";
 import { useEffect } from "react";
 
+import { useTheme } from "@/contexts/theme-context";
+
 /**
- * Syncs the body class between theme-dealscale and theme-dealscale-light
- * according to the resolved theme from context. Place this at the root layout.
- */
-/**
- * Syncs the body class between theme-lead-orchestra/theme-dealscale and theme-lead-orchestra-light/theme-dealscale-light
- * according to the resolved theme from context. Also syncs both theme classes for compatibility.
- * Place this at the root layout.
+ * Syncs the body class between Pilot Spring dark and light theme variants.
+ * Old theme classes are still removed for compatibility with legacy markup.
  */
 export default function BodyThemeSync() {
 	const { resolvedTheme } = useTheme();
 	useEffect(() => {
-		// Remove all theme classes (both old and new for compatibility)
+		// Remove all theme classes, including legacy brand classes.
 		document.body.classList.remove(
 			"theme-cyberoni",
 			"theme-cyberoni-light",
@@ -22,17 +18,16 @@ export default function BodyThemeSync() {
 			"theme-lead-orchestra-light",
 			"theme-dealscale",
 			"theme-dealscale-light",
+			"theme-pilot-spring",
+			"theme-pilot-spring-light",
 		);
-		// Add both Lead Orchestra and Deal Scale theme classes for compatibility
+
 		if (resolvedTheme === "dark") {
-			document.body.classList.add("theme-lead-orchestra", "theme-dealscale");
+			document.body.classList.add("theme-pilot-spring");
 		} else {
-			document.body.classList.add(
-				"theme-lead-orchestra-light",
-				"theme-dealscale-light",
-			);
+			document.body.classList.add("theme-pilot-spring-light");
 		}
-		// Sync <html> dark class for Tailwind dark mode
+
 		const html = document.documentElement;
 		if (resolvedTheme === "dark") {
 			html.classList.add("dark");
