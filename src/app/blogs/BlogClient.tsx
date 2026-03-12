@@ -3,6 +3,8 @@ import BlogGrid from "@/components/blog/BlogGrid";
 import BlogSidebar from "@/components/blog/BlogSidebar";
 import { CTASection } from "@/components/common/CTASection";
 import { NewsletterEmailInput } from "@/components/contact/newsletter/NewsletterEmailInput";
+import { HeroOffering } from "@/components/home/HeroOffering";
+import { HeroCta } from "@/components/home/heros/HeroCta";
 import Hero from "@/components/home/heros/Hero";
 import { toast } from "@/components/ui/use-toast";
 import { useBlogSearch } from "@/hooks/beehiiv/use-blog-search";
@@ -11,7 +13,7 @@ import type { BeehiivPost } from "@/types/behiiv";
 import { Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
-import { offerImg } from "../newsletter/NewsletterClient";
+import { offerImg } from "@/data/layout/nav";
 
 const DEFAULT_PAGE_SIZE = 12;
 
@@ -114,20 +116,47 @@ function BlogContent() {
 		);
 	}
 
+// Local Hero for the Blog Page without the background gradients
+function BlogHero(props: React.ComponentProps<typeof Hero>) {
+	return (
+		<div className="relative flex flex-col px-4 pt-12 sm:px-6 lg:px-8 lg:pt-16 xl:px-12">
+			<div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+				<HeroOffering
+					image={props.image}
+					imageAlt={props.imageAlt}
+					className="order-1 lg:order-2"
+				/>
+				<HeroCta
+					badgeLeft={props.badgeLeft}
+					badgeRight={props.badgeRight}
+					headline={props.headline}
+					subheadline={props.subheadline}
+					highlight={props.highlight}
+					ctaVariant={props.ctaVariant}
+					ctaForm={props.ctaForm}
+					className="order-2 lg:order-1"
+				/>
+			</div>
+		</div>
+	);
+}
+
 	return (
 		<>
-			<div className="bg-background-dark/90 pt-6 pb-8 sm:pt-10">
-				<Hero
-					badgeLeft="Investor Insights"
-					badgeRight="AI-Powered Strategies"
-					headline="Get an Unfair Advantage"
-					subheadline="Join our newsletter for exclusive strategies on finding lookalike off-market deals with similarity-driven features, automating seller outreach, and getting a first look at the AI tools top investors use to build their pipelines."
-					highlight="in Your Market"
-					ctaVariant="form"
-					ctaForm={<NewsletterEmailInput />}
-					image={offerImg}
-					imageAlt="AI-powered investing resources shown across devices"
-				/>
+			<div className="py-12 sm:py-16 md:py-20 lg:py-24">
+				<div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+					<BlogHero
+						badgeLeft="Launch Systems"
+						badgeRight="Build Notes"
+						headline="Build Your MVP"
+						subheadline="Join the Pilot Spring newsletter for exclusive build notes on automating lead capture, product delivery frameworks, and getting a first look at the templates we use to build pipelines faster."
+						highlight="Without Overbuilding"
+						ctaVariant="form"
+						ctaForm={<NewsletterEmailInput />}
+						image={offerImg}
+						imageAlt="Pilot Spring build systems and product delivery notes"
+					/>
+				</div>
 			</div>
 			<div className="px-6 py-12 lg:px-8">
 				<div className="mx-auto max-w-7xl">

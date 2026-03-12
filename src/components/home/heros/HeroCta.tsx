@@ -1,7 +1,7 @@
 // Usage: For mobile-first image/text ordering, use this in a parent flex container with flex-col (mobile) and flex-row (desktop), placing the visual before <HeroCta /> for mobile.
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import type React from "react";
+import * as React from "react";
 import { toast } from "sonner";
 
 export interface HeroCtaProps {
@@ -71,7 +71,7 @@ export const HeroCta: React.FC<HeroCtaProps> = ({
 			</span>
 
 			{/* Subheadline */}
-			<p className="mb-6 max-w-md text-center text-base text-black sm:mb-10 sm:text-lg lg:max-w-xl lg:text-left lg:text-xl xl:max-w-2xl dark:text-white/70">
+			<p className="mb-6 max-w-md text-center text-base text-black sm:mb-10 sm:text-lg lg:max-w-xl lg:text-left lg:text-xl xl:max-w-3xl 2xl:max-w-4xl dark:text-white/70">
 				{subheadline}
 			</p>
 
