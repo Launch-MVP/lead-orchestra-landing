@@ -1,9 +1,8 @@
+import { XMLParser } from "fast-xml-parser";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { XMLParser } from "fast-xml-parser";
-
 const SITE_URL = "https://launchmvp.com";
-const BEEHIIV_FEED = "https://rss.beehiiv.com/feeds/rsU6YI0l4Z.xml";
+const BEEHIIV_FEED = "https://rss.beehiiv.com/feeds/tSZMDggJoV.xml";
 // Try multiple YouTube feed formats - YouTube may have changed their feed URLs
 // Note: Channel ID should include the -A suffix: UCphkra97DMNIAIvA1y8hZ-A
 const YOUTUBE_CHANNEL_ID =
@@ -421,7 +420,7 @@ ${itemsXml}
 };
 
 export default async function handler(
-	req: NextApiRequest,
+	_req: NextApiRequest,
 	res: NextApiResponse,
 ) {
 	// Try YouTube feeds in order until one works
