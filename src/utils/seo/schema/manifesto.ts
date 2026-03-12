@@ -37,13 +37,13 @@ export function buildManifestoSchema(
 		"@context": SCHEMA_CONTEXT,
 		"@type": "CreativeWorkSeries",
 		"@id": seriesId,
-		name: options.name ?? "Launch MVP Manifesto",
+		name: options.name ?? "Pilot Spring Manifesto",
 		headline:
 			options.description ??
-			"Ten-part manifesto outlining how Launch MVP helps founders scope, build, and launch products with cleaner execution.",
+			"Ten-part manifesto outlining how Pilot Spring helps founders scope, build, and launch products with cleaner execution.",
 		description:
 			options.description ??
-			"Discover how Launch MVP turns product clarity, launch systems, and execution discipline into real shipped outcomes.",
+			"Discover how Pilot Spring turns product clarity, launch systems, and execution discipline into real shipped outcomes.",
 		url: baseUrl,
 		inLanguage: "en-US",
 		author: {

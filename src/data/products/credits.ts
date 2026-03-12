@@ -73,7 +73,7 @@ export const creditProducts: ProductType[] = [
 			{
 				question: "What is an AI Credit used for?",
 				answer:
-					"AI Credits are consumed by Launch MVP workflows that rely on model usage, prompt execution, automation steps, and internal AI-assisted product operations.",
+					"AI Credits are consumed by Pilot Spring workflows that rely on model usage, prompt execution, automation steps, and internal AI-assisted product operations.",
 			},
 			{
 				question: "Do these credits expire?",

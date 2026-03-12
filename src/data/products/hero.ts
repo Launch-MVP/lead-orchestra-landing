@@ -93,22 +93,22 @@ export const DEFAULT_GRID: HeroGridItem[] = [
 		label: "Service Packages",
 		categoryId: "services",
 		description:
-			"Browse the current Launch MVP offers, from scoping sessions to build workshops and support.",
+			"Browse the current Pilot Spring offers, from scoping sessions to build workshops and support.",
 		link: "/products#category=services",
-		ariaLabel: "Explore Launch MVP service packages",
+		ariaLabel: "Explore Pilot Spring service packages",
 		colSpan: 1,
 		rowSpan: 1,
 	},
 ];
 export const defaultHeroProps: ProductHeroProps = {
-	headline: "Launch MVP ",
+	headline: "Pilot Spring ",
 	highlight: "Offers",
 	subheadline:
-		"Browse Launch MVP offers across strategy, in-person workshops, specialist support, Notion systems, and SEO/AEO launch assets. Each lane is built to help founders move from idea to launch with less drag and cleaner execution.",
+		"Browse Pilot Spring offers across strategy, in-person workshops, specialist support, Notion systems, and SEO/AEO launch assets. Each lane is built to help founders move from idea to launch with less drag and cleaner execution.",
 	grid: DEFAULT_GRID,
 	testimonial: {
 		quote:
 			'"The best launch system is the one that helps you ship, explain, and improve the product without rebuilding the whole operation every month."',
-		author: "Launch MVP workshop principle",
+		author: "Pilot Spring workshop principle",
 	},
 };

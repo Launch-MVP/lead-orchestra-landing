@@ -24,7 +24,7 @@ export default function AboutUsClient() {
 
 			<CTASection
 				title="Need a clearer path to version one?"
-				description="Launch MVP helps founders scope the right product, ship faster, and avoid turning early momentum into cleanup debt."
+				description="Pilot Spring helps founders scope the right product, ship faster, and avoid turning early momentum into cleanup debt."
 				buttonText="Book Free Consultation"
 				href="/contact"
 			/>

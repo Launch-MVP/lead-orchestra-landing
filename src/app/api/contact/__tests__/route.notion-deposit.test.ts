@@ -36,7 +36,7 @@ beforeAll(async () => {
 	({ POST } = await import("../route"));
 });
 
-describe("POST /api/contact Launch MVP deposit Notion sync", () => {
+describe("POST /api/contact Pilot Spring deposit Notion sync", () => {
 	beforeEach(() => {
 		mockedPagesCreate.mockReset();
 		mockedPagesCreate.mockResolvedValue({ id: "page_1" });
@@ -60,7 +60,7 @@ describe("POST /api/contact Launch MVP deposit Notion sync", () => {
 			gclid: "gclid_deposit",
 			utm_source: "google",
 			utm_campaign: "deposit_flow",
-			utm_term: "launch mvp",
+			utm_term: "Pilot Spring",
 			utm_content: "deposit_variant_a",
 			utm_icp: "founders",
 			message: [

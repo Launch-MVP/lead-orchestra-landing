@@ -416,7 +416,7 @@ export async function POST(request: Request) {
 			customData: {
 				currency: "USD",
 				value: parseMidpointNumber(body.avgDealAmount),
-				contentName: "Launch MVP Free Slot Application",
+				contentName: "Pilot Spring Free Slot Application",
 				contentCategory: "Application Form",
 			},
 		});

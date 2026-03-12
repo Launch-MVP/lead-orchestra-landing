@@ -11,14 +11,14 @@ export type ActivityEvent = {
 /**
  * Curated activity feed for the FeatureSectionActivity component.
  *
- * The copy mirrors the Launch MVP workshop storyline used across the
+ * The copy mirrors the Pilot Spring workshop storyline used across the
  * homepage so the visuals remain consistent.
  */
 export const activityStream: ActivityEvent[] = [
 	{
 		id: "scope-lock",
 		label: "Scope Lock",
-		actor: "Launch MVP Workshop",
+		actor: "Pilot Spring Workshop",
 		action:
 			"Locked the version-one flow around signup, onboarding, billing, and dashboard handoff.",
 		timeAgo: "3m ago",

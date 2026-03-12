@@ -1,12 +1,12 @@
 <poml>
   <metadata>
-    <title>Launch MVP Lead Qualification Scoring Orchestrator</title>
+    <title>Pilot Spring Lead Qualification Scoring Orchestrator</title>
     <version>1.0</version>
     <output_format>json</output_format>
   </metadata>
 
   <input name="intake_json">
-    <!-- Paste the Launch MVP intake submission JSON here -->
+    <!-- Paste the Pilot Spring intake submission JSON here -->
   </input>
 
   <let name="SCORE_MAX">100</let>
@@ -40,7 +40,7 @@
   ]]></let>
 
   <task name="match_scoring">
-    <description>Deterministic scoring from Launch MVP intake fields.</description>
+    <description>Deterministic scoring from Pilot Spring intake fields.</description>
 
     <instruction>
       Compute budget_score (0-18):
@@ -153,7 +153,7 @@
   <task name="ai_scoring">
     <description>Use AI to score ICP clarity, launch specificity, readiness, and risks.</description>
     <system>
-      You are a strict qualification analyst for Launch MVP. Score only from the provided intake JSON. Be conservative and evidence-based.
+      You are a strict qualification analyst for Pilot Spring. Score only from the provided intake JSON. Be conservative and evidence-based.
     </system>
     <task>
       <context>
@@ -208,7 +208,7 @@
   </task>
 
   <task name="final_decision">
-    <description>Combine deterministic and AI scoring for final Launch MVP qualification.</description>
+    <description>Combine deterministic and AI scoring for final Pilot Spring qualification.</description>
     <instruction>
       Steps:
       1) hard_dq_hits present -> status = "DISQUALIFIED"

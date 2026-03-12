@@ -29,7 +29,7 @@ export default function AboutValues() {
 			<div className="container mx-auto px-4">
 				<Header
 					title="Our Values"
-					subtitle="The operating principles behind how Launch MVP scopes, builds, and hands off product work."
+					subtitle="The operating principles behind how Pilot Spring scopes, builds, and hands off product work."
 					className="mb-12 md:mb-16"
 				/>
 				<div className="grid gap-6 md:grid-cols-2">

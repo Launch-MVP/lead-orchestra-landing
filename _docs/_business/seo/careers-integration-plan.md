@@ -2,7 +2,7 @@
 
 ## Overview
 
-Integrate the approved Zoho Recruit careers page (`https://dealscale.zohorecruit.com/jobs/Careers`) into Launch MVP's SEO, AEO, and discoverability infrastructure to maximize organic visibility for job postings.
+Integrate the approved Zoho Recruit careers page (`https://dealscale.zohorecruit.com/jobs/Careers`) into Pilot Spring's SEO, AEO, and discoverability infrastructure to maximize organic visibility for job postings.
 
 ## Current State
 
@@ -81,8 +81,8 @@ export async function generateMetadata(): Promise<Metadata> {
         
         return {
                 ...mapSeoMetaToMetadata(seo),
-                title: "Careers at Launch MVP - Join Our Team",
-                description: "Explore open roles at Launch MVP. We're building founder-first AI products and launch systems. Join us in shaping the future of product delivery.",
+                title: "Careers at Pilot Spring - Join Our Team",
+                description: "Explore open roles at Pilot Spring. We're building founder-first AI products and launch systems. Join us in shaping the future of product delivery.",
                 alternates: {
                         canonical: CAREERS_URL, // Point canonical to external URL
                 },
@@ -95,15 +95,15 @@ export async function generateMetadata(): Promise<Metadata> {
                         },
                 },
                 openGraph: {
-                        title: "Careers at Launch MVP",
+                        title: "Careers at Pilot Spring",
                         description: "Join our team and help build the future of real estate technology.",
                         url: CAREERS_URL,
                         type: "website",
                 },
                 twitter: {
                         card: "summary_large_image",
-                        title: "Careers at Launch MVP",
-                        description: "Explore open roles at Launch MVP.",
+                        title: "Careers at Pilot Spring",
+                        description: "Explore open roles at Pilot Spring.",
                 },
         };
 }
@@ -205,7 +205,7 @@ export function buildJobPostingSchema(input: JobPostingInput): JobPostingSchema 
                 hiringOrganization: {
                         "@type": "Organization",
                         "@id": ORGANIZATION_ID,
-                        name: input.hiringOrganizationName || "Launch MVP",
+                        name: input.hiringOrganizationName || "Pilot Spring",
                         sameAs: "https://www.dealscale.io",
                 },
                 jobLocation: input.location && !input.location.remote ? {
@@ -328,8 +328,8 @@ export default async function CareersPage() {
         const jobsItemList: ItemListSchema = {
                 "@context": "https://schema.org",
                 "@type": "ItemList",
-                name: "Launch MVP Job Openings",
-                description: "Current open positions at Launch MVP",
+                name: "Pilot Spring Job Openings",
+                description: "Current open positions at Pilot Spring",
                 numberOfItems: jobs.length,
                 itemListElement: jobs.map((job, index) => ({
                         "@type": "ListItem",
@@ -350,7 +350,7 @@ export default async function CareersPage() {
                         ))}
                         
                         <div className="container">
-                                <h1>Careers at Launch MVP</h1>
+                                <h1>Careers at Pilot Spring</h1>
                                 <p>Join us in revolutionizing real estate technology.</p>
                                 
                                 <div className="jobs-list">
@@ -382,9 +382,9 @@ Add to `_docs/_business/aeo/plan.md`:
 ### Careers & Hiring Intent
 
 - **FAQ Content**: Create FAQ sections answering common questions:
-  - "What jobs are available at Launch MVP?"
+  - "What jobs are available at Pilot Spring?"
   - "How do I apply for a position?"
-  - "What benefits does Launch MVP offer?"
+  - "What benefits does Pilot Spring offer?"
   - "What is the interview process like?"
 
 - **Conversational Content**: Add structured answers about:

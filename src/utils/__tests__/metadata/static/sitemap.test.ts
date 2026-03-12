@@ -19,7 +19,7 @@ jest.mock("@/utils/seo/dynamic/case-studies", () => ({
 	getSeoMetadataForCaseStudy: jest.fn().mockResolvedValue({
 		canonical: "https://launchmvp.com/case-studies/ai-outreach",
 		title: "AI Outreach Case Study",
-		description: "How Launch MVP accelerates delivery.",
+		description: "How Pilot Spring accelerates delivery.",
 		keywords: ["ai", "outreach"],
 		image: "https://launchmvp.com/images/case-study.jpg",
 		changeFrequency: "monthly",

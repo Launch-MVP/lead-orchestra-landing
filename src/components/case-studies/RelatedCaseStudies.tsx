@@ -16,7 +16,7 @@ const RelatedCaseStudies = ({ studies }: RelatedCaseStudiesProps) => {
 			<div className="mx-auto max-w-7xl">
 				<SectionHeading
 					title="Related Case Studies"
-					description="See how teams used Launch MVP to define version one, ship faster, and avoid expensive rebuilds."
+					description="See how teams used Pilot Spring to define version one, ship faster, and avoid expensive rebuilds."
 					centered={true}
 				/>
 

@@ -56,7 +56,7 @@ const ServicesSection = (props: ServicesSectionProps) => {
 	);
 
 	const {
-		title = "Launch MVP Services",
+		title = "Pilot Spring Services",
 		subtitle = "Strategy, build help, in-person workshops, specialist support, and launch assets for founders shipping fast.",
 		showTabs = [
 			SERVICE_CATEGORIES.STRATEGY,

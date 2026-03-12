@@ -21,7 +21,7 @@ export default function AboutHero({
 		}),
 	);
 
-	const resolvedTitle = title ?? hero?.title ?? "About Launch MVP";
+	const resolvedTitle = title ?? hero?.title ?? "About Pilot Spring";
 	const resolvedSubtitle = subtitle ?? hero?.subtitle ?? "";
 
 	const isStoreLoading =

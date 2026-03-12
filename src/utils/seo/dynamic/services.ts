@@ -39,7 +39,7 @@ export function getSeoMetadataForService(
 	const ogImage =
 		integrations?.[0]?.libraries?.[0]?.customSvg || "/banners/Feature.png";
 	return {
-		title: `${title || service.title} | Service | Launch MVP`,
+		title: `${title || service.title} | Service | Pilot Spring`,
 		description: description || service.description || "Service details.",
 		canonical: pageUrl,
 		keywords: service.categories || [],

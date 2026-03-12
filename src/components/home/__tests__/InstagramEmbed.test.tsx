@@ -13,7 +13,7 @@ describe("InstagramEmbed", () => {
 		render(<InstagramEmbed />);
 
 		const loader = screen.getByTestId("instagram-embed-loading");
-		const iframe = screen.getByTitle("Launch MVP Instagram feed");
+		const iframe = screen.getByTitle("Pilot Spring Instagram feed");
 
 		expect(loader).toBeInTheDocument();
 		expect(loader).toHaveAttribute("aria-hidden", "false");
@@ -26,7 +26,7 @@ describe("InstagramEmbed", () => {
 	it("points the iframe to the configured Instagram embed", () => {
 		render(<InstagramEmbed />);
 
-		const iframe = screen.getByTitle("Launch MVP Instagram feed");
+		const iframe = screen.getByTitle("Pilot Spring Instagram feed");
 
 		expect(iframe).toHaveAttribute(
 			"src",

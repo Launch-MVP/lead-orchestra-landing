@@ -5,7 +5,7 @@ export const notionInvestorCrmABTests = defineAbTests([
 		id: "ab-test-notion-crm-v1",
 		name: "Notion Founder CRM Copy Test",
 		description:
-			"Testing copy variants for the founder CRM template in a Launch MVP context.",
+			"Testing copy variants for the founder CRM template in a Pilot Spring context.",
 		variants: [
 			{
 				name: "V1 - Organization & Control",
@@ -134,11 +134,11 @@ export const notionStartupOsABTests = defineAbTests([
 				name: "V1 - All-in-One System",
 				percentage: 50,
 				copy: {
-					cta: "Get the Launch MVP Workspace",
+					cta: "Get the Pilot Spring Workspace",
 					buttonCta: "Get the OS",
 					tagline: "One Workspace for Product and Launch.",
 					subtitle:
-						"The complete Notion workspace for Launch MVP teams managing product scope, marketing, hiring, fundraising, and launch execution.",
+						"The complete Notion workspace for Pilot Spring teams managing product scope, marketing, hiring, fundraising, and launch execution.",
 					whatsInItForMe:
 						"Stop switching between a dozen apps. This OS centralizes your entire startup's operations, saving you time and money.",
 					target_audience:
@@ -146,7 +146,7 @@ export const notionStartupOsABTests = defineAbTests([
 					pain_point:
 						"Information is scattered across too many different tools, creating confusion and inefficiency.",
 					solution:
-						"Our Launch MVP OS integrates product, launch, and operating functions into one interconnected Notion workspace.",
+						"Our Pilot Spring OS integrates product, launch, and operating functions into one interconnected Notion workspace.",
 					highlights: [
 						"Manage everything in one place",
 						"Stop paying for multiple tools",

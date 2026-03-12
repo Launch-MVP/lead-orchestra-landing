@@ -206,7 +206,7 @@ export default function IntakeForm({
 			<div className="-z-10 absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-focus/10 opacity-60 blur-lg dark:from-primary/30 dark:to-focus/20" />
 			<Header
 				title="Apply for a Free Slot"
-				subtitle="Apply for a free Launch MVP slot by showing what you are building, who it is for, what needs to ship first, and why your team is a strong fit for hands-on support."
+				subtitle="Apply for a free Pilot Spring slot by showing what you are building, who it is for, what needs to ship first, and why your team is a strong fit for hands-on support."
 				size="md"
 				className="mb-10 text-center"
 			/>

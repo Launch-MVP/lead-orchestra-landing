@@ -132,7 +132,7 @@ export function buildEventsItemListSchema(events: NormalizedEvent[]) {
 	return {
 		"@context": SCHEMA_CONTEXT,
 		"@type": "ItemList",
-		name: "Launch MVP Events",
+		name: "Pilot Spring Events",
 		itemListOrder: ITEM_LIST_ORDER_ASC,
 		itemListElement: events.map((event, index) => ({
 			"@type": "ListItem",

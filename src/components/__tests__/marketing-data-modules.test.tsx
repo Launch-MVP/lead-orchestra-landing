@@ -303,7 +303,7 @@ describe("marketing components use data modules", () => {
 		const [techStackProps] = techStackCall;
 		expect(techStackProps).toMatchObject({
 			title: "Delivery Stack",
-			description: expect.stringContaining("Launch MVP"),
+			description: expect.stringContaining("Pilot Spring"),
 			stacks: expect.any(Array),
 		});
 		expect(techStackProps.stacks.length).toBeGreaterThan(0);

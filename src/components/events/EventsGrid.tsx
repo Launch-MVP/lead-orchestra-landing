@@ -35,7 +35,7 @@ const EventsGrid: React.FC<EventsGridProps> = ({
 							<SectionHeading
 								title="Upcoming Events"
 								centered
-								description="See upcoming Launch MVP workshops, founder sessions, and in-person build events."
+								description="See upcoming Pilot Spring workshops, founder sessions, and in-person build events."
 							/>
 
 							<Suspense
@@ -63,7 +63,7 @@ const EventsGrid: React.FC<EventsGridProps> = ({
 							<SectionHeading
 								title="Past Events"
 								centered
-								description="Browse previous Launch MVP workshops, founder sessions, and product-launch events."
+								description="Browse previous Pilot Spring workshops, founder sessions, and product-launch events."
 								className="mt-16 md:mt-20"
 							/>
 

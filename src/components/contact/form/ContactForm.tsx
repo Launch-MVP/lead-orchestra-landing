@@ -175,7 +175,7 @@ export default function ContactForm({
 			}
 
 			trackLead({
-				contentName: "Launch MVP Inquiry",
+				contentName: "Pilot Spring Inquiry",
 				contentCategory: "Beta Tester",
 				currency: "USD",
 				value: 0,

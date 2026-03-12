@@ -36,7 +36,7 @@ describe("POST /api/contact/intake parsing (e2e)", () => {
 		mockedPagesCreate.mockResolvedValue({ id: "page_1" });
 	});
 
-	it("maps Launch MVP intake fields into the qualification Notion schema", async () => {
+	it("maps Pilot Spring intake fields into the qualification Notion schema", async () => {
 		const payload = {
 			name: "Jane Doe",
 			companyName: "Acme Inc",

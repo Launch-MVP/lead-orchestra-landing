@@ -61,7 +61,7 @@ export function FeatureTimelineTable({
 			<CardHeader className="gap-2">
 				<CardTitle className="text-balance text-2xl">Service Roadmap</CardTitle>
 				<CardDescription className="text-pretty">
-					A transparent view of what Launch MVP offers today, what is in limited
+					A transparent view of what Pilot Spring offers today, what is in limited
 					pilot mode, and the service lines we are building next for founders,
 					startups, and product teams.
 				</CardDescription>

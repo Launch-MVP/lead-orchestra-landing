@@ -9,7 +9,7 @@ vi.mock("@/utils/seo/staticSeo", async (importOriginal) => {
 		getStaticSeo,
 		defaultSeo: {
 			canonical: "https://launchmvp.com",
-			title: "Launch MVP",
+			title: "Pilot Spring",
 			description: "Default description",
 		},
 	};
@@ -18,7 +18,7 @@ vi.mock("@/utils/seo/staticSeo", async (importOriginal) => {
 vi.mock("@/utils/seo/mapSeoMetaToMetadata", () => ({
 	__esModule: true,
 	mapSeoMetaToMetadata: vi.fn((seo) => ({
-		title: seo.title || "Launch MVP",
+		title: seo.title || "Pilot Spring",
 		description: seo.description || "Default description",
 		alternates: {
 			canonical: seo.canonical || "https://launchmvp.com",
@@ -33,13 +33,13 @@ const mockedGetStaticSeo = vi.mocked(getStaticSeo);
 
 describe("LinkTree Page Metadata", () => {
 	const mockSeo = {
-		title: "Link Tree | Launch MVP",
+		title: "Link Tree | Pilot Spring",
 		description:
-			"Quick access to Launch MVP's most important links, resources, and pages.",
+			"Quick access to Pilot Spring's most important links, resources, and pages.",
 		canonical: "https://launchmvp.com/linktree",
 		keywords: ["links", "resources"],
 		image: "/banners/main.png",
-		siteName: "Launch MVP",
+		siteName: "Pilot Spring",
 		type: "website" as const,
 	};
 
@@ -51,14 +51,14 @@ describe("LinkTree Page Metadata", () => {
 	it("generates metadata with correct title", async () => {
 		const metadata = await generateMetadata();
 
-		expect(metadata.title).toBe("Link Tree | Launch MVP");
+		expect(metadata.title).toBe("Link Tree | Pilot Spring");
 	});
 
 	it("generates metadata with correct description", async () => {
 		const metadata = await generateMetadata();
 
 		expect(metadata.description).toContain(
-			"Explore Launch MVP's curated collection of links",
+			"Explore Pilot Spring's curated collection of links",
 		);
 		expect(metadata.description).toContain(
 			"services, products, case studies, events, and founder resources",
@@ -69,9 +69,9 @@ describe("LinkTree Page Metadata", () => {
 		const metadata = await generateMetadata();
 
 		expect(metadata.openGraph).toEqual({
-			title: "Launch MVP Link Tree",
+			title: "Pilot Spring Link Tree",
 			description:
-				"Quick access to Launch MVP's most important links, resources, and pages.",
+				"Quick access to Pilot Spring's most important links, resources, and pages.",
 			url: "https://launchmvp.com/linktree",
 			type: "website",
 		});
@@ -82,8 +82,8 @@ describe("LinkTree Page Metadata", () => {
 
 		expect(metadata.twitter).toEqual({
 			card: "summary_large_image",
-			title: "Launch MVP Link Tree",
-			description: "Quick access to Launch MVP's resources and pages.",
+			title: "Pilot Spring Link Tree",
+			description: "Quick access to Pilot Spring's resources and pages.",
 		});
 	});
 

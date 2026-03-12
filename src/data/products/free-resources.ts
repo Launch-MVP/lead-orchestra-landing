@@ -70,7 +70,7 @@ export const freeResourceProducts: ProductType[] = [
 			{
 				question: "How often is the workbook updated?",
 				answer:
-					"We refresh the templates quarterly with the latest technology trends and development assumptions we use internally at Launch MVP.",
+					"We refresh the templates quarterly with the latest technology trends and development assumptions we use internally at Pilot Spring.",
 			},
 		],
 		resource: workbookResource,
@@ -113,9 +113,9 @@ export const freeResourceProducts: ProductType[] = [
 	},
 	{
 		id: "tinthe-investpros-handbook",
-		name: "Launch MVP Operating Handbook",
+		name: "Pilot Spring Operating Handbook",
 		description:
-			"Download the full Launch MVP operating handbook covering development frameworks, launch playbooks, and team rituals for scaling your product.",
+			"Download the full Pilot Spring operating handbook covering development frameworks, launch playbooks, and team rituals for scaling your product.",
 		price: 0,
 		sku: "FREE-RESOURCE-HANDBOOK-001",
 		slug: "tinthe-investpros-handbook",
@@ -129,7 +129,7 @@ export const freeResourceProducts: ProductType[] = [
 			{
 				question: "What topics does the handbook cover?",
 				answer:
-					"The handbook walks through Launch MVP's product scoping funnels, sprint reporting cadences, and standard operating procedures for development teams.",
+					"The handbook walks through Pilot Spring's product scoping funnels, sprint reporting cadences, and standard operating procedures for development teams.",
 			},
 			{
 				question: "How often is the handbook updated?",
@@ -144,7 +144,7 @@ export const freeResourceProducts: ProductType[] = [
 		id: "market-metrics-snapshot",
 		name: "Tech Validation Snapshot Toolkit",
 		description:
-			"Access Launch MVP's live market metrics dashboard that curates up-to-date competitors, tech stack trends, and feature insights for new products.",
+			"Access Pilot Spring's live market metrics dashboard that curates up-to-date competitors, tech stack trends, and feature insights for new products.",
 		price: 0,
 		sku: "FREE-RESOURCE-MARKET-001",
 		slug: "market-metrics-snapshot",
@@ -162,7 +162,7 @@ export const freeResourceProducts: ProductType[] = [
 			{
 				question: "What data sources power the dashboard?",
 				answer:
-					"The toolkit blends competitor analysis, market data, and Launch MVP's proprietary product database to highlight emerging opportunities.",
+					"The toolkit blends competitor analysis, market data, and Pilot Spring's proprietary product database to highlight emerging opportunities.",
 			},
 			{
 				question: "Does the snapshot update automatically?",

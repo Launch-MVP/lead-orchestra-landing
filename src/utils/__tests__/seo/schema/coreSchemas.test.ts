@@ -83,7 +83,7 @@ describe("core schema builders", () => {
 
 	it("builds a Product schema with normalized assets", () => {
 		const schema = buildProductSchema({
-			name: "Launch MVP OS",
+			name: "Pilot Spring OS",
 			description: "Operating system for founders shipping a real version one.",
 			url: buildAbsoluteUrl("/products/launch-mvp-os"),
 			sku: "LMVP-OS-001",

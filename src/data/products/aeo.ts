@@ -43,7 +43,7 @@ export const aeoProducts: ProductType[] = [
 		id: "free-aeo-content-calendar",
 		name: "Free Launch AEO Content Calendar (30/60/90 Days)",
 		description:
-			"A free AEO-first content calendar for Launch MVP founders who want answer-first content that supports product launches, founder authority, and AI-search visibility.",
+			"A free AEO-first content calendar for Pilot Spring founders who want answer-first content that supports product launches, founder authority, and AI-search visibility.",
 		price: 0,
 		sku: "AEO-CALENDAR-FREE-001",
 		slug: "free-aeo-content-calendar",
@@ -74,7 +74,7 @@ export const aeoProducts: ProductType[] = [
 			{
 				question: "Does it include internal linking guidance?",
 				answer:
-					"Yes. Each post includes internal-link prompts so your Launch MVP site becomes a stronger, connected knowledge base over time.",
+					"Yes. Each post includes internal-link prompts so your Pilot Spring site becomes a stronger, connected knowledge base over time.",
 			},
 		],
 		resource: aeoCalendarResource,
@@ -83,7 +83,7 @@ export const aeoProducts: ProductType[] = [
 	// Tier 1: Downloadable Template
 	{
 		id: "aeo-landing-page-template",
-		name: "Launch MVP AEO Landing Page Template",
+		name: "Pilot Spring AEO Landing Page Template",
 		description:
 			"An Answer Engine Optimized landing page template built for founders launching MVP offers, workshops, and specialist services. Includes structured data, FAQ schema, semantic HTML, and conversion-ready layouts.",
 		price: 97,
@@ -134,9 +134,9 @@ export const aeoProducts: ProductType[] = [
 	// Tier 2: Done-For-You Service
 	{
 		id: "aeo-landing-page-dfy-service",
-		name: "Launch MVP AEO Landing Page Done-For-You",
+		name: "Pilot Spring AEO Landing Page Done-For-You",
 		description:
-			"Let Launch MVP build your Answer Engine Optimized landing page from scratch. Includes discovery, design, structured data, copywriting, and deployment for founders who need a credible launch surface fast.",
+			"Let Pilot Spring build your Answer Engine Optimized landing page from scratch. Includes discovery, design, structured data, copywriting, and deployment for founders who need a credible launch surface fast.",
 		price: 1497,
 		sku: "AEO-DFY-001",
 		slug: "aeo-landing-page-dfy-service",

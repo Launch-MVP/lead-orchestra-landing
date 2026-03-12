@@ -201,7 +201,7 @@ export function ConnectAnythingHero(): JSX.Element {
 				centerContent={
 					<Image
 						src="/logos/DealScale%20Transparent%20Logo/Deal%20Scale%20No%20Text.png"
-						alt="Launch MVP core mark"
+						alt="Pilot Spring core mark"
 						width={56}
 						height={56}
 						priority={false}
@@ -259,7 +259,7 @@ export function ConnectAnythingHero(): JSX.Element {
 					transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
 					className="mt-5 max-w-3xl text-slate-900 text-sm drop-shadow-[0_6px_14px_rgba(15,23,42,0.2)] md:text-base dark:text-slate-100/85"
 				>
-					Launch MVP is designed to ship quickly without locking you into a
+					Pilot Spring is designed to ship quickly without locking you into a
 					brittle build. We connect the systems that matter, keep the
 					architecture clean, and hand over a product your team can extend after
 					launch.

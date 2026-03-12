@@ -10,7 +10,7 @@ export const events: Event[] = [
 		date: "2026-03-28",
 		time: "09:00 - 17:00",
 		description:
-			"A hands-on in-person Launch MVP workshop in Denver for founders who need to scope, design, and ship a usable MVP in three focused days. We align on the product, lock the scope, and move into real build execution with landing page, analytics, and launch handoff.",
+			"A hands-on in-person Pilot Spring workshop in Denver for founders who need to scope, design, and ship a usable MVP in three focused days. We align on the product, lock the scope, and move into real build execution with landing page, analytics, and launch handoff.",
 		thumbnailImage:
 			"https://www.housingwire.com/wp-content/uploads/2024/03/The-main-stage-at-HousingWires-2023-housing-conference_2.png?w=1024",
 		category: "workshop",
@@ -27,7 +27,7 @@ export const events: Event[] = [
 		date: "2026-01-16",
 		time: "11:00 - 12:30",
 		description:
-			"A live Launch MVP session for startup founders on cutting scope, defining the version-one user flow, and avoiding expensive overbuild before a product launch.",
+			"A live Pilot Spring session for startup founders on cutting scope, defining the version-one user flow, and avoiding expensive overbuild before a product launch.",
 		thumbnailImage:
 			"https://www.housingwire.com/wp-content/uploads/2024/03/The-main-stage-at-HousingWires-2023-housing-conference_2.png?w=1024",
 		category: "strategy session",

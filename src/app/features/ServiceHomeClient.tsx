@@ -78,7 +78,7 @@ export default function ServiceHomeClient() {
 			<section className="px-6 md:py-20 lg:px-8">
 				<div className="mx-auto max-w-7xl">
 					<ServicesSection
-						title="Launch MVP Services"
+						title="Pilot Spring Services"
 						subtitle="Strategy, workshops, build support, and specialist execution for founders who need to ship fast without accumulating cleanup debt."
 						showTabs={[
 							SERVICE_CATEGORIES.STRATEGY,
@@ -104,16 +104,16 @@ export default function ServiceHomeClient() {
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
 			<TechStackSection
 				title="Delivery Stack"
-				description="See the tools, systems, and product infrastructure Launch MVP uses to scope, build, launch, measure, and support MVPs across web, mobile, AI, analytics, and handoff."
+				description="See the tools, systems, and product infrastructure Pilot Spring uses to scope, build, launch, measure, and support MVPs across web, mobile, AI, analytics, and handoff."
 				stacks={resolvedStacks}
 			/>
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
 			{bentoStatus === "ready" && resolvedBentoFeatures.length > 0 ? (
 				<BentoPage
 					features={resolvedBentoFeatures}
-					title={"Why Founders Choose Launch MVP"}
+					title={"Why Founders Choose Pilot Spring"}
 					subtitle={
-						"Launch MVP combines product strategy, build execution, launch support, and specialist engineering help so you can move from idea to shipped product with less drag."
+						"Pilot Spring combines product strategy, build execution, launch support, and specialist engineering help so you can move from idea to shipped product with less drag."
 					}
 				/>
 			) : (
@@ -124,7 +124,7 @@ export default function ServiceHomeClient() {
 			)}
 			<div className="my-12">
 				<Header
-					title="How Launch MVP Delivers"
+					title="How Pilot Spring Delivers"
 					subtitle="A transparent view of current services, delivery focus, and what is being expanded next."
 				/>
 				<FeatureTimelineTable rows={resolvedTimeline} />
@@ -132,7 +132,7 @@ export default function ServiceHomeClient() {
 			</div>
 			<CTASection
 				title="Ready to Launch Your MVP?"
-				description="Launch MVP helps founders scope the right version one, ship faster, and bring in the right specialist support when the product needs deeper execution."
+				description="Pilot Spring helps founders scope the right version one, ship faster, and bring in the right specialist support when the product needs deeper execution."
 				buttonText="Book a Service"
 				href="/contact"
 			/>

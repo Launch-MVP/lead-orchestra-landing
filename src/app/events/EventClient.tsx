@@ -56,7 +56,7 @@ export default function Events({ events }: EventsClientProps) {
 					isCategoryFiltered={activeCategory !== "all"}
 				/>
 				<CTASection
-					title="Want to join the next Launch MVP event?"
+					title="Want to join the next Pilot Spring event?"
 					description="Reserve a Denver workshop seat or apply for a free strategy slot to get scoped into the right build path."
 					buttonText="Book Denver Workshop"
 					href="/contact?tab=conversion"

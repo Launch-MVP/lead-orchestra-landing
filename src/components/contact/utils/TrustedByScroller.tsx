@@ -164,7 +164,7 @@ const TrustedByMarquee: React.FC<TrustedByMarqueeProps> = ({
 					<div className="mb-4 text-center">
 						<Header
 							title="Trusted by founders and product teams moving fast"
-							subtitle="Launch MVP helps teams cut scope, ship the core workflow, and hand off a launch-ready product without planning drag."
+							subtitle="Pilot Spring helps teams cut scope, ship the core workflow, and hand off a launch-ready product without planning drag."
 						/>
 					</div>
 				)}

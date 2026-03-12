@@ -22,7 +22,7 @@ const viewConfig: Record<AuthView, { title: string; subtitle: string }> = {
 		subtitle: "Sign in to pick up right where you left off.",
 	},
 	signup: {
-		title: "Create your Launch MVP account",
+		title: "Create your Pilot Spring account",
 		subtitle: "We'll confirm everything by email or SMS after you finish.",
 	},
 	reset: {

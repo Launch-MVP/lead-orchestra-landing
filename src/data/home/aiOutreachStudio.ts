@@ -16,7 +16,7 @@ export const AI_OUTREACH_STUDIO_HEADING = "3-Day MVP Workshop";
 export const AI_OUTREACH_STUDIO_TAGLINE =
 	"Scope, build, and launch your MVP in 3 days.";
 export const AI_OUTREACH_STUDIO_DESCRIPTION =
-	"Launch MVP combines product strategy, UX direction, production-ready engineering, integrations, analytics, and launch support so founders can ship a real MVP fast without bloated scope or avoidable technical debt.";
+	"Pilot Spring combines product strategy, UX direction, production-ready engineering, integrations, analytics, and launch support so founders can ship a real MVP fast without bloated scope or avoidable technical debt.";
 
 export const AI_OUTREACH_STUDIO_FEATURES: FeatureHighlight[] = [
 	{
@@ -42,7 +42,7 @@ export const AI_OUTREACH_STUDIO_FEATURES: FeatureHighlight[] = [
 ] as const;
 
 export const AI_OUTREACH_STUDIO_KEYWORDS = [
-	"Launch MVP",
+	"Pilot Spring",
 	"3 day MVP",
 	"MVP workshop",
 	"MVP development",
@@ -119,7 +119,7 @@ export const buildPersonaAiOutreachStudioSeo = ({
 	const personaLabel = resolvePersonaLabel(persona);
 	const personaGoal = resolvePersonaGoal(persona, goal);
 	const personaHeadline = `${AI_OUTREACH_STUDIO_TAGLINE} for ${personaLabel}`;
-	const personaDescription = `Launch MVP helps ${toLowerFragment(
+	const personaDescription = `Pilot Spring helps ${toLowerFragment(
 		personaLabel,
 	)} teams ${toLowerFragment(personaGoal)}. ${AI_OUTREACH_STUDIO_DESCRIPTION}`;
 

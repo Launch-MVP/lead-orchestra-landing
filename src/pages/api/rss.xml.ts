@@ -33,7 +33,7 @@ export default async function handler(
 		res
 			.status(502)
 			.send(
-				'<?xml version="1.0" encoding="UTF-8"?><rss><channel><title>Launch MVP Feed Error</title><description>RSS temporarily unavailable.</description></channel></rss>',
+				'<?xml version="1.0" encoding="UTF-8"?><rss><channel><title>Pilot Spring Feed Error</title><description>RSS temporarily unavailable.</description></channel></rss>',
 			);
 	}
 }

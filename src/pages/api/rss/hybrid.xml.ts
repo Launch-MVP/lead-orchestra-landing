@@ -92,7 +92,7 @@ const buildBeehiivEntries = (feedXml: string): HybridEntry[] => {
 			const description =
 				item.description ??
 				item["content:encoded"] ??
-				"Latest update from the Launch MVP blog.";
+				"Latest update from the Pilot Spring blog.";
 			const guidValue =
 				typeof item.guid === "object" && item.guid?._text
 					? String(item.guid._text)
@@ -109,7 +109,7 @@ const buildBeehiivEntries = (feedXml: string): HybridEntry[] => {
 				.filter((category: string): category is string => Boolean(category));
 
 			return {
-				title: title || "Launch MVP Blog Update",
+				title: title || "Pilot Spring Blog Update",
 				link: link || `${SITE_URL}/blog`,
 				description: description.toString(),
 				pubDate: normalizeDate(item.pubDate),
@@ -206,7 +206,7 @@ const buildYouTubeEntries = (feedXml: string): HybridEntry[] => {
 								entry.title?.["#text"]?.toString?.().trim() ||
 								entry.title?.toString?.().trim() ||
 								entry.title ||
-								"Launch MVP Video Update";
+								"Pilot Spring Video Update";
 							const description =
 								entry["media:group"]?.["media:description"]?.[
 									"#text"
@@ -249,7 +249,7 @@ const buildYouTubeEntries = (feedXml: string): HybridEntry[] => {
 					entry.title?.["#text"]?.toString?.().trim() ||
 					entry.title?.toString?.().trim() ||
 					entry.title ||
-					"Launch MVP Video Update";
+					"Pilot Spring Video Update";
 				const description =
 					entry["media:group"]?.["media:description"]?.[
 						"#text"
@@ -345,8 +345,8 @@ const buildGitHubEntries = (feedXml: string): HybridEntry[] => {
 		const description =
 			typeof content === "string"
 				? content.replace(/<[^>]+>/g, "").substring(0, 500) ||
-					"Latest activity from the Launch MVP organization on GitHub."
-				: "Latest activity from the Launch MVP organization on GitHub.";
+					"Latest activity from the Pilot Spring organization on GitHub."
+				: "Latest activity from the Pilot Spring organization on GitHub.";
 		const published = entry.published || entry.updated;
 		const author = entry.author?.name || "TechWithTy";
 
@@ -388,10 +388,10 @@ const buildChannelXml = (entries: HybridEntry[]): string => {
 						: `${SITE_URL}/blog`;
 			const sourceName =
 				entry.source === "youtube"
-					? "Launch MVP YouTube"
+					? "Pilot Spring YouTube"
 					: entry.source === "github"
-						? "Launch MVP GitHub"
-						: "Launch MVP Blog";
+						? "Pilot Spring GitHub"
+						: "Pilot Spring Blog";
 
 			return `<item>
 	<title>${sanitize(entry.title)}</title>
@@ -410,7 +410,7 @@ const buildChannelXml = (entries: HybridEntry[]): string => {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-	<title>Launch MVP Hybrid Feed</title>
+	<title>Pilot Spring Hybrid Feed</title>
 	<link>${SITE_URL}</link>
 	<description>Unified feed combining DealScale blog posts, YouTube videos, and GitHub activity.</description>
 	<language>en-us</language>
@@ -540,7 +540,7 @@ export default async function handler(
 		res
 			.status(502)
 			.send(
-				'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Launch MVP Hybrid Feed Error</title><description>Hybrid feed temporarily unavailable.</description></channel></rss>',
+				'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Pilot Spring Hybrid Feed Error</title><description>Hybrid feed temporarily unavailable.</description></channel></rss>',
 			);
 	}
 }

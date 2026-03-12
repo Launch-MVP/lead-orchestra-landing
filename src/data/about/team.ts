@@ -7,7 +7,7 @@ export const teamMembers: TeamMember[] = [
 		photoUrl: "/company/c-suite/Ty.jpg",
 		joined: "Founder",
 		expertise: ["Product Strategy", "AI Workflows", "Full-Stack Architecture"],
-		bio: "Ty leads the product and delivery model behind Launch MVP, combining founder strategy, full-stack build decisions, and AI workflow implementation to help teams get to a usable version one faster.",
+		bio: "Ty leads the product and delivery model behind Pilot Spring, combining founder strategy, full-stack build decisions, and AI workflow implementation to help teams get to a usable version one faster.",
 		linkedin: "https://www.linkedin.com/in/-techwithty/", // Placeholder
 	},
 	{
@@ -29,7 +29,7 @@ export const teamMembers: TeamMember[] = [
 			"DevOps & Reliability",
 			"Production Infrastructure",
 		],
-		bio: "Marco owns the backend and release discipline that keeps Launch MVP builds stable. He focuses on APIs, environments, deployment reliability, and the handoff quality founders need after launch.",
+		bio: "Marco owns the backend and release discipline that keeps Pilot Spring builds stable. He focuses on APIs, environments, deployment reliability, and the handoff quality founders need after launch.",
 		linkedin: "https://www.linkedin.com/in/marcowong/", // Placeholder
 	},
 ];

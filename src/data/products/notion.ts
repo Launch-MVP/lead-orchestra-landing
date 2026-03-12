@@ -21,7 +21,7 @@ export const notionProducts: ProductType[] = [
 		slug: "notion-investor-crm",
 		licenseName: LicenseType.Proprietary,
 		description:
-			"A Launch MVP-ready Notion CRM for tracking investors, partners, prospects, and key launch conversations in one founder-friendly workspace.",
+			"A Pilot Spring-ready Notion CRM for tracking investors, partners, prospects, and key launch conversations in one founder-friendly workspace.",
 		categories: [ProductCategory.Notion],
 		images: ["/products/notion-2.png"],
 		types: [{ name: "Notion Template", value: "notion-template", price: 79 }],
@@ -72,14 +72,14 @@ export const notionProducts: ProductType[] = [
 	},
 	{
 		id: "notion-startup-os",
-		name: "Notion Launch MVP OS",
+		name: "Notion Pilot Spring OS",
 		price: 129,
 		sku: "NOTION-STARTUP-OS",
 		abTest: notionStartupOsABTests[0],
 		slug: "notion-startup-os",
 		licenseName: LicenseType.Proprietary,
 		description:
-			"An all-in-one Notion workspace for Launch MVP teams. Includes dashboards for product scope, launch planning, GTM, fundraising, hiring, and delivery handoff.",
+			"An all-in-one Notion workspace for Pilot Spring teams. Includes dashboards for product scope, launch planning, GTM, fundraising, hiring, and delivery handoff.",
 		categories: [ProductCategory.Notion],
 		images: ["/products/notion-2.png"],
 		types: [
@@ -94,7 +94,7 @@ export const notionProducts: ProductType[] = [
 				answer: "Yes, it's flexible for individuals or teams of any size.",
 			},
 			{
-				question: "How does this fit Launch MVP?",
+				question: "How does this fit Pilot Spring?",
 				answer:
 					"It gives founders one operating system for scoping the product, managing the build, and coordinating launch activity without tool sprawl.",
 			},

@@ -14,7 +14,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/blogs",
 		{
-			title: "Insights | Launch MVP",
+			title: "Insights | Pilot Spring",
 			descriptionIncludes: "product strategy",
 			canonical: "https://launchmvp.com/blogs",
 			image: DEFAULT_SEO.image,
@@ -25,7 +25,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/contact",
 		{
-			title: "Contact | Launch MVP",
+			title: "Contact | Pilot Spring",
 			descriptionIncludes: "in-person workshops",
 			canonical: "https://launchmvp.com/contact",
 			image: DEFAULT_SEO.image,
@@ -36,7 +36,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/case-studies",
 		{
-			title: "Case Studies | Launch MVP",
+			title: "Case Studies | Pilot Spring",
 			descriptionIncludes: "scope, ship, and iterate",
 			canonical: "https://launchmvp.com/case-studies",
 			image: "/banners/CaseStudy2.png",
@@ -47,7 +47,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/cookies",
 		{
-			title: "Cookie Policy | Launch MVP",
+			title: "Cookie Policy | Pilot Spring",
 			descriptionIncludes: "uses cookies and similar technologies",
 			canonical: "https://launchmvp.com/cookies",
 			image: DEFAULT_SEO.image,
@@ -58,7 +58,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/events",
 		{
-			title: "Events | Launch MVP",
+			title: "Events | Pilot Spring",
 			descriptionIncludes: "founder sessions",
 			canonical: "https://launchmvp.com/events",
 			image: DEFAULT_SEO.image,
@@ -67,7 +67,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/faqs",
 		{
-			title: "Launch MVP FAQ | Workshops, Build Support, and Launch Systems",
+			title: "Pilot Spring FAQ | Workshops, Build Support, and Launch Systems",
 			descriptionIncludes: "strategy sessions",
 			canonical: "https://launchmvp.com/faq",
 			image: DEFAULT_SEO.image,
@@ -76,7 +76,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/portfolio",
 		{
-			title: "Portfolio | Launch MVP",
+			title: "Portfolio | Pilot Spring",
 			descriptionIncludes: "MVP builds",
 			canonical: "https://launchmvp.com/portfolio",
 			image: DEFAULT_SEO.image,
@@ -85,7 +85,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/privacy",
 		{
-			title: "Privacy Policy | Launch MVP",
+			title: "Privacy Policy | Pilot Spring",
 			descriptionIncludes: "protects your personal information",
 			canonical: "https://launchmvp.com/privacy",
 			image: DEFAULT_SEO.image,
@@ -96,7 +96,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/tos",
 		{
-			title: "Terms of Service | Launch MVP",
+			title: "Terms of Service | Pilot Spring",
 			descriptionIncludes: "workshops",
 			canonical: "https://launchmvp.com/tos",
 			image: DEFAULT_SEO.image,
@@ -105,7 +105,7 @@ const cases: Array<[string, StaticSeoExpectation]> = [
 	[
 		"/features",
 		{
-			title: "Services | Launch MVP",
+			title: "Services | Pilot Spring",
 			descriptionIncludes: "embedded engineering support",
 			canonical: "https://launchmvp.com/features",
 			image: "/banners/Feature.png",

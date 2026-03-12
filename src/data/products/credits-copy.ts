@@ -25,7 +25,7 @@ export const AIConversationCreditsABTest = defineAbTests([
 					fear: "You hit a usage wall in the middle of launch prep, internal testing, or customer-facing AI flows.",
 					hope: "Your product team can keep shipping, testing, and iterating without the AI layer becoming the bottleneck.",
 					solution:
-						"AI Credits are a flexible usage balance for Launch MVP products and AI-enabled workflows, with simple top-ups and no forced monthly expiry.",
+						"AI Credits are a flexible usage balance for Pilot Spring products and AI-enabled workflows, with simple top-ups and no forced monthly expiry.",
 					highlights: [
 						"Supports AI product features",
 						"Works across launch workflows",

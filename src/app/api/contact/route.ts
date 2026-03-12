@@ -109,7 +109,7 @@ const syncLaunchMvpDepositToNotion = async (
 					text: {
 						content:
 							titleParts.join(" - ") ||
-							(typeof body.email === "string" ? body.email : "Launch MVP Deposit"),
+							(typeof body.email === "string" ? body.email : "Pilot Spring Deposit"),
 					},
 				},
 			],
@@ -153,7 +153,7 @@ const syncLaunchMvpDepositToNotion = async (
 		return true;
 	} catch (error: unknown) {
 		console.error(
-			"[contact] Launch MVP deposit Notion sync failed; continuing with successful contact response.",
+			"[contact] Pilot Spring deposit Notion sync failed; continuing with successful contact response.",
 			error,
 		);
 		return false;

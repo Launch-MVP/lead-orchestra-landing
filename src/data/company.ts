@@ -1,10 +1,10 @@
 import type { FooterProps } from "@/components/layout/Footer";
 
 export const companyData: FooterProps = {
-	companyName: "Launch MVP",
+	companyName: "Pilot Spring",
 	companyLegalName: "Deal Scale LLC",
 	companyDescription:
-		"Launch MVP helps founders scope, build, and launch real products faster through strategy sessions, in-person workshops, specialist support, and launch-ready systems.",
+		"Pilot Spring helps founders scope, build, and launch real products faster through strategy sessions, in-person workshops, specialist support, and launch-ready systems.",
 	socialLinks: {
 		linkedin: "https://www.linkedin.com/company/deal-scale/",
 		facebook: "https://www.facebook.com/profile.php?id=61576707389189",

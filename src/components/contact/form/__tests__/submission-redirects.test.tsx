@@ -148,7 +148,7 @@ const mockOkResponse = () => ({
 	json: async () => ({}),
 });
 
-describe("Launch MVP contact form redirects", () => {
+describe("Pilot Spring contact form redirects", () => {
 	beforeEach(() => {
 		window.localStorage.clear();
 		pushMock.mockReset();
@@ -160,7 +160,7 @@ describe("Launch MVP contact form redirects", () => {
 		vi.stubGlobal("fetch", vi.fn());
 	});
 
-	it("redirects Launch MVP free-slot submissions to /contact/thank-you?source=intake", async () => {
+	it("redirects Pilot Spring free-slot submissions to /contact/thank-you?source=intake", async () => {
 		window.history.pushState(
 			{},
 			"",
@@ -169,7 +169,7 @@ describe("Launch MVP contact form redirects", () => {
 
 		mockFormSubmission({
 			name: "Test Person",
-			companyName: "Launch MVP Co",
+			companyName: "Pilot Spring Co",
 			email: "test@example.com",
 			phone: "5551239999",
 			leadOwner: "Founder",
@@ -215,7 +215,7 @@ describe("Launch MVP contact form redirects", () => {
 	it("redirects post-deposit qualification submissions to /contact/thank-you?source=deposit-and-intake", async () => {
 		mockFormSubmission({
 			name: "Test Person",
-			companyName: "Launch MVP Co",
+			companyName: "Pilot Spring Co",
 			email: "test@example.com",
 			phone: "5551239999",
 			leadOwner: "Founder",
@@ -260,7 +260,7 @@ describe("Launch MVP contact form redirects", () => {
 
 		mockFormSubmission({
 			name: "Test Person",
-			companyName: "Launch MVP Co",
+			companyName: "Pilot Spring Co",
 			email: "test@example.com",
 			phone: "5551239999",
 			leadOwner: "Founder",

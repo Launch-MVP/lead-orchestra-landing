@@ -25,7 +25,7 @@ export const legalDocuments: LegalDocument[] = [
 		slug: "privacy-policy",
 		title: "Privacy Policy",
 		description:
-			"How Launch MVP collects, uses, and protects your personal information.",
+			"How Pilot Spring collects, uses, and protects your personal information.",
 		lastUpdated: "2024-07-23",
 		content: privacyPolicyMarkdown,
 		source: "fallback",
@@ -35,7 +35,7 @@ export const legalDocuments: LegalDocument[] = [
 		slug: "terms-of-service",
 		title: "Terms of Service",
 		description:
-			"Your legal agreement for using Launch MVP's website, workshops, services, and digital assets.",
+			"Your legal agreement for using Pilot Spring's website, workshops, services, and digital assets.",
 		lastUpdated: "2024-07-23",
 		content: termsOfServiceMarkdown,
 		source: "fallback",
@@ -45,7 +45,7 @@ export const legalDocuments: LegalDocument[] = [
 		slug: "cookie-policy",
 		title: "Cookie Policy",
 		description:
-			"How Launch MVP uses cookies and similar technologies across the site and service experience.",
+			"How Pilot Spring uses cookies and similar technologies across the site and service experience.",
 		lastUpdated: "2024-07-23",
 		content: cookiesPolicyMarkdown,
 		source: "fallback",

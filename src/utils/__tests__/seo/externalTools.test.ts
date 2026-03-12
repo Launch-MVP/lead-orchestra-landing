@@ -14,7 +14,7 @@ describe("external tools SEO utilities", () => {
 		const meta = getExternalToolSeo("/external-tools/roi-simulator");
 
 		expect(meta).toMatchObject({
-			title: "ROI Simulator | Launch MVP",
+			title: "ROI Simulator | Pilot Spring",
 			canonical: "https://app.dealscale.io/roi-simulator",
 			keywords: expect.arrayContaining(["roi calculator"]),
 			priority: 0.85,
@@ -75,12 +75,12 @@ describe("external tools SEO utilities", () => {
 					text: "Analyze yearly ROI and payback period in the results panel.",
 				},
 			],
-			tools: ["Launch MVP ROI simulator"],
+			tools: ["Pilot Spring ROI simulator"],
 		});
 
 		expect(schema["@type"]).toBe("HowTo");
 		expect(schema.step).toHaveLength(3);
-		expect(schema.tool).toContain("Launch MVP ROI simulator");
+		expect(schema.tool).toContain("Pilot Spring ROI simulator");
 	});
 
 	it("maps marketing slug to canonical app domain", () => {
@@ -90,7 +90,7 @@ describe("external tools SEO utilities", () => {
 
 	it("builds Product schema for external tool upsell blocks", () => {
 		const schema = buildExternalToolProductSchema({
-			name: "Launch MVP Pro",
+			name: "Pilot Spring Pro",
 			description:
 				"Unlock saved ROI scenarios, launch planning support, and delivery systems.",
 			url: "https://launchmvp.com/pricing",

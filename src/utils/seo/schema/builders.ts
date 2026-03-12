@@ -38,9 +38,9 @@ import type {
 const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	{
 		"@type": "Review",
-		name: "Founder · Launch MVP",
+		name: "Founder · Pilot Spring",
 		reviewBody:
-			"Launch MVP helped us cut scope fast and ship a usable product our team could put in front of users immediately.",
+			"Pilot Spring helped us cut scope fast and ship a usable product our team could put in front of users immediately.",
 		author: {
 			"@type": "Person",
 			name: "Founder",
@@ -58,7 +58,7 @@ const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	},
 	{
 		"@type": "Review",
-		name: "Product Lead · Launch MVP",
+		name: "Product Lead · Pilot Spring",
 		reviewBody:
 			"The workshop clarified the right version-one flow and saved us from an expensive rebuild.",
 		author: {
@@ -78,7 +78,7 @@ const AUTHORITY_REVIEW_SCHEMAS: ReviewSchema[] = [
 	},
 	{
 		"@type": "Review",
-		name: "Startup Operator · Launch MVP",
+		name: "Startup Operator · Pilot Spring",
 		reviewBody:
 			"We moved from vague planning to a cleaner launch roadmap with real engineering decisions and a usable handoff.",
 		author: {
@@ -137,7 +137,7 @@ export const buildOrganizationSchema = (): OrganizationSchema => {
 		url: defaultSeo.canonical,
 		description: companyData.companyDescription,
 		sameAs: buildSocialProfiles(),
-		alternateName: ["Launch MVP", "LaunchMVP", "launchmvp.com"],
+		alternateName: ["Pilot Spring", "LaunchMVP", "launchmvp.com"],
 		foundingDate: "2024-03-01",
 		founder: {
 			"@type": "Person",
@@ -204,10 +204,10 @@ export const buildSoftwareApplicationSchema =
 		"@context": SCHEMA_CONTEXT,
 		"@type": "SoftwareApplication",
 		"@id": `${defaultSeo.canonical}#software`,
-		name: "Launch MVP",
+		name: "Pilot Spring",
 		description:
 			defaultSeo.description ??
-			"Launch MVP helps founders scope, build, and launch products with cleaner execution and handoff.",
+			"Pilot Spring helps founders scope, build, and launch products with cleaner execution and handoff.",
 		url: defaultSeo.canonical,
 		image: buildAbsoluteUrl("/images/marketplace/ai-automations.png"),
 		applicationCategory: "BusinessApplication",
@@ -236,9 +236,9 @@ export const buildDatasetSchema = (): DatasetSchema => ({
 	"@context": SCHEMA_CONTEXT,
 	"@type": "Dataset",
 	"@id": `${buildAbsoluteUrl("/products")}#dataset`,
-	name: "Launch MVP Planning and Delivery Dataset",
+	name: "Pilot Spring Planning and Delivery Dataset",
 	description:
-		"Structured planning artifacts, delivery systems, launch templates, and product execution assets used across Launch MVP offers.",
+		"Structured planning artifacts, delivery systems, launch templates, and product execution assets used across Pilot Spring offers.",
 	url: buildAbsoluteUrl("/products"),
 	license: buildAbsoluteUrl("/tos"),
 	provider: {
@@ -328,7 +328,7 @@ export const buildKnowledgeGraphSchema = () => {
 				"@type": "PropertyValue",
 				name: "CoreNarrative",
 				value:
-					"Launch MVP helps founders move from idea to usable product with tighter scope, cleaner execution, and a launch-ready handoff.",
+					"Pilot Spring helps founders move from idea to usable product with tighter scope, cleaner execution, and a launch-ready handoff.",
 			},
 			{
 				"@type": "PropertyValue",
@@ -350,7 +350,7 @@ export const buildKnowledgeGraphSchema = () => {
 
 	const knowledgeGraphSoftware = {
 		...software,
-		name: "Launch MVP Delivery Platform",
+		name: "Pilot Spring Delivery Platform",
 		applicationCategory: [
 			"Product Development Service",
 			"MVP Delivery",
@@ -389,9 +389,9 @@ export const buildKnowledgeGraphSchema = () => {
 	const knowledgeGraphVideo = {
 		"@type": "VideoObject",
 		"@id": `${defaultSeo.canonical}#video`,
-		name: "How Launch MVP Turns Scope Into a Build Plan",
+		name: "How Pilot Spring Turns Scope Into a Build Plan",
 		description:
-			"Short demo showing how Launch MVP turns product scope, integrations, and launch decisions into a build-ready plan.",
+			"Short demo showing how Pilot Spring turns product scope, integrations, and launch decisions into a build-ready plan.",
 		thumbnailUrl: defaultSeo.image,
 		uploadDate: "2025-10-01",
 		embedUrl: "https://www.youtube.com/embed/launch-mvp-demo",
@@ -403,9 +403,9 @@ export const buildKnowledgeGraphSchema = () => {
 	const sitemapDataFeed = {
 		"@type": "DataFeed",
 		"@id": `${defaultSeo.canonical}#sitemap`,
-		name: "Launch MVP Sitemap Feed",
+		name: "Pilot Spring Sitemap Feed",
 		description:
-			"Dynamic list of Launch MVP pages, products, case studies, and events.",
+			"Dynamic list of Pilot Spring pages, products, case studies, and events.",
 		dataFeedElement: [
 			{
 				"@type": "DataFeedItem",

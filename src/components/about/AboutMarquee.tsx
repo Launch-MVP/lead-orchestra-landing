@@ -12,7 +12,7 @@ const reviews = [
 	{
 		name: "Marcus H.",
 		username: "@booktco",
-		body: "We had too many ideas and not enough sequencing. Launch MVP helped us choose the right version one instead of the most ambitious one.",
+		body: "We had too many ideas and not enough sequencing. Pilot Spring helped us choose the right version one instead of the most ambitious one.",
 		img: "https://avatar.vercel.sh/marcush",
 	},
 	{

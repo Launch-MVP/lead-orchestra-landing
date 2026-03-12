@@ -1,7 +1,7 @@
 import { timeline } from "../timeline";
 import { timelineSummary } from "../timelineSummary";
 
-describe("Launch MVP manifesto timeline", () => {
+describe("Pilot Spring manifesto timeline", () => {
 	const expectedSections = [
 		"1. Why We Exist",
 		"2. What We Actually Do",

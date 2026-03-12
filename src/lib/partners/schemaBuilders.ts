@@ -42,7 +42,7 @@ export function buildPartnersItemListSchema(partners: CompanyLogoDictType) {
 	return {
 		"@context": SCHEMA_CONTEXT,
 		"@type": "ItemList",
-		name: "Launch MVP Partner Directory",
+		name: "Pilot Spring Partner Directory",
 		itemListOrder: "https://schema.org/ItemListOrderAscending",
 		itemListElement: entries.map(([slug, partner], index) => {
 			const url = resolvePartnerUrl(slug, partner.link);

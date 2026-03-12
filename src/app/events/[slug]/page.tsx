@@ -80,13 +80,13 @@ export async function generateMetadata({
 
 	const canonical = buildEventUrl(event.slug);
 	return {
-		title: `${event.title} | Launch MVP Events`,
+		title: `${event.title} | Pilot Spring Events`,
 		description: event.description,
 		alternates: {
 			canonical,
 		},
 		openGraph: {
-			title: `${event.title} | Launch MVP Events`,
+			title: `${event.title} | Pilot Spring Events`,
 			description: event.description,
 			url: canonical,
 			type: "website",
@@ -96,7 +96,7 @@ export async function generateMetadata({
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: `${event.title} | Launch MVP Events`,
+			title: `${event.title} | Pilot Spring Events`,
 			description: event.description,
 			images: event.thumbnailImage ? [event.thumbnailImage] : undefined,
 		},
@@ -224,8 +224,8 @@ export default async function EventDetailPage({ params }: EventPageProps) {
 						</Button>
 					</GlassCard>
 					<CTASection
-						title="Looking for more Launch MVP events?"
-						description="Track upcoming workshops, founder sessions, and in-person build offers from Launch MVP."
+						title="Looking for more Pilot Spring events?"
+						description="Track upcoming workshops, founder sessions, and in-person build offers from Pilot Spring."
 						buttonText="View all events"
 						href="/events"
 					/>

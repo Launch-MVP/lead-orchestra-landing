@@ -11,9 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	return {
 		...metadata,
-		title: "Careers at Launch MVP",
+		title: "Careers at Pilot Spring",
 		description:
-			"Explore open roles at Launch MVP and help founders ship better products, launch systems, and AI-powered experiences.",
+			"Explore open roles at Pilot Spring and help founders ship better products, launch systems, and AI-powered experiences.",
 		alternates: {
 			canonical: CAREERS_PORTAL_URL,
 		},
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			},
 		},
 		openGraph: {
-			title: "Careers at Launch MVP",
+			title: "Careers at Pilot Spring",
 			description:
 				"Join the team building founder-focused product strategy, launch systems, and AI-powered MVP delivery.",
 			url: CAREERS_PORTAL_URL,
@@ -34,8 +34,8 @@ export async function generateMetadata(): Promise<Metadata> {
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "Careers at Launch MVP",
-			description: "Explore open roles at Launch MVP.",
+			title: "Careers at Pilot Spring",
+			description: "Explore open roles at Pilot Spring.",
 		},
 	};
 }

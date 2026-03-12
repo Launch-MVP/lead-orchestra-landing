@@ -36,7 +36,7 @@ export const freeSlotApplicationSteps: ConsultationStep[] = [
 		number: 1,
 		title: "Apply for a Free Slot",
 		description:
-			"Submit the full Launch MVP application so we can understand the product, the market, the urgency, and whether your team is a strong fit.",
+			"Submit the full Pilot Spring application so we can understand the product, the market, the urgency, and whether your team is a strong fit.",
 	},
 	{
 		number: 2,
@@ -54,7 +54,7 @@ export const freeSlotApplicationSteps: ConsultationStep[] = [
 		number: 4,
 		title: "Move Into the Right Build Path",
 		description:
-			"If accepted, we coordinate the next step and move into the Launch MVP process with a clearer scope, timeline, and delivery recommendation.",
+			"If accepted, we coordinate the next step and move into the Pilot Spring process with a clearer scope, timeline, and delivery recommendation.",
 	},
 ];
 

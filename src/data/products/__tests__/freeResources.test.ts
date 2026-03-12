@@ -36,7 +36,7 @@ describe("free resource catalog", () => {
 		expect(values).toContain("data");
 	});
 
-	it("maps launch MVP resource categories to at least one product", () => {
+	it("maps Pilot Spring resource categories to at least one product", () => {
 		const categories: ProductCategory[] = [
 			ProductCategory.Strategy,
 			ProductCategory.Support,

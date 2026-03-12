@@ -56,7 +56,7 @@ const PixelatedVoiceOverlayComponent = ({
 	onEnableInteractive,
 	onDisableInteractive,
 	title = "3-Day MVP Delivery: Scoped, Sequenced, Ready to Launch",
-	subtitle = "Launch MVP workshop walkthrough",
+	subtitle = "Pilot Spring workshop walkthrough",
 	onImageSelect,
 	onImageReset,
 	hasCustomImage = false,
@@ -474,7 +474,7 @@ const PixelatedVoiceOverlayComponent = ({
 							</span>
 							<p className="max-w-md text-slate-600 text-sm dark:text-white/70">
 								Compare loose planning against a launch-ready workshop outcome
-								to see how Launch MVP turns vague ideas into a buildable
+								to see how Pilot Spring turns vague ideas into a buildable
 								product.
 							</p>
 						</div>

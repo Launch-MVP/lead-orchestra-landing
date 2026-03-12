@@ -94,7 +94,7 @@ export const navItems: NavItem[] = [
 				href: "/newsletter",
 				icon: FileTextIcon,
 				image: offerImg,
-				ctaTitle: "Launch MVP Newsletter",
+				ctaTitle: "Pilot Spring Newsletter",
 				ctaSubtitle:
 					"Get actionable tips, product scoping advice, and ready-to-use resources for launching your MVP faster.",
 				ctaButton: {

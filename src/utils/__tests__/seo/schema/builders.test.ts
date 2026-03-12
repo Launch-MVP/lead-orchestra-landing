@@ -12,12 +12,12 @@ describe("schema builders", () => {
 	const baseCaseStudy: CaseStudy = {
 		id: "example",
 		title: "Example Case Study",
-		subtitle: "How Launch MVP helped a team ship faster",
+		subtitle: "How Pilot Spring helped a team ship faster",
 		slug: "example-case-study",
 		categories: ["automation", "real-estate"],
 		industries: ["real-estate"],
 		copyright: {
-			title: "Work with Launch MVP",
+			title: "Work with Pilot Spring",
 			subtitle: "Ship without the rebuild",
 			ctaText: "Get started",
 			ctaLink: "/contact",
@@ -36,7 +36,7 @@ describe("schema builders", () => {
 			},
 		],
 		solutions: ["AI nurture"],
-		description: "Launch MVP clarified scope and accelerated delivery.",
+		description: "Pilot Spring clarified scope and accelerated delivery.",
 		results: [
 			{
 				title: "Increase in qualified meetings",
@@ -96,8 +96,8 @@ describe("schema builders", () => {
 	it("builds FAQPage schema from FAQ items", () => {
 		const faqs: FAQItem[] = [
 			{
-				question: "What is Launch MVP?",
-				answer: "Launch MVP helps founders ship usable products faster.",
+				question: "What is Pilot Spring?",
+				answer: "Pilot Spring helps founders ship usable products faster.",
 			},
 			{
 				question: "Do you integrate with CRMs?",
@@ -107,7 +107,7 @@ describe("schema builders", () => {
 
 		const schema = buildFAQPageSchema({
 			canonicalUrl: "https://launchmvp.com/features",
-			name: "Launch MVP Services FAQs",
+			name: "Pilot Spring Services FAQs",
 			description: "Answers to common service questions.",
 			faqs,
 		});
@@ -159,7 +159,7 @@ describe("schema builders", () => {
 
 		const schema = buildBlogSchema({
 			canonicalUrl: "https://launchmvp.com/blogs",
-			name: "Launch MVP Blog",
+			name: "Pilot Spring Blog",
 			description: "Insights on MVP delivery and launch systems.",
 			posts,
 		});

@@ -1060,7 +1060,7 @@ export const CatalogPricing = ({
 											"Executive sponsor for AI governance sign-off",
 											"Secure cloud or on-prem budget for private deployment",
 											"Dedicated technical contact for integrations",
-											"Annual compliance review cadence with the Launch MVP team",
+											"Annual compliance review cadence with the Pilot Spring team",
 										]
 									}
 									onPrimary={() => router.push("/contact")}

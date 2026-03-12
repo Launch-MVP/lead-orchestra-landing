@@ -29,7 +29,7 @@ export const HERO_COPY_INPUT: HeroCopy = {
 		problem: "overbuilding the wrong MVP",
 		solution: "launching a real product in 3 days",
 		fear: "your launch keeps slipping",
-		socialProof: "Join founders using Launch MVP to ship faster.",
+		socialProof: "Join founders using Pilot Spring to ship faster.",
 		benefit: "Launch a usable MVP",
 		time: "3",
 	},
@@ -70,7 +70,7 @@ export const CTA_MICROCOPY =
 
 export const HERO_TRIAL_PLAN = {
 	id: "dynamic-hero-basic",
-	name: "Launch MVP",
+	name: "Pilot Spring",
 };
 
 export const createHeroTrialPlan = (): Plan => ({

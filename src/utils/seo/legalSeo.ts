@@ -76,11 +76,11 @@ export function buildLegalSeoMeta(doc: LegalDocument): SeoMeta {
 	const lastUpdatedIso = toIso8601(doc.lastUpdated);
 
 	const keywords = Array.from(
-		new Set([doc.title, "Launch MVP Legal Document", ...DEFAULT_SEO.keywords]),
+		new Set([doc.title, "Pilot Spring Legal Document", ...DEFAULT_SEO.keywords]),
 	);
 
 	return {
-		title: `${doc.title} | Launch MVP`,
+		title: `${doc.title} | Pilot Spring`,
 		description: doc.description,
 		canonical,
 		keywords,
@@ -123,7 +123,7 @@ export function buildLegalJsonLd(doc: LegalDocument): Record<string, unknown> {
 		},
 		publisher: {
 			"@type": "Organization",
-			name: "Launch MVP",
+			name: "Pilot Spring",
 			url: DEFAULT_SEO.canonical,
 			logo: {
 				"@type": "ImageObject",

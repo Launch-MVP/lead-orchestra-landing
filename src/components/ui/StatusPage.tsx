@@ -26,8 +26,8 @@ export function StatusPage({ type, className = "" }: StatusPageProps) {
 	const subtitle =
 		searchParams.get("subtitle") ||
 		(isSuccess
-			? "Your Launch MVP request has been recorded successfully."
-			: "There was a problem processing your Launch MVP request.");
+			? "Your Pilot Spring request has been recorded successfully."
+			: "There was a problem processing your Pilot Spring request.");
 	const ctaText =
 		searchParams.get("ctaText") ||
 		(isSuccess ? "View Services" : "Back to Pricing");

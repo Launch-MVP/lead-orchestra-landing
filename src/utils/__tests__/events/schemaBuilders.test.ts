@@ -11,7 +11,7 @@ describe("schema builders", () => {
 		title: "AI Demo Day",
 		date: "2025-03-10",
 		time: "09:00",
-		description: "Discover how Launch MVP scopes and ships products faster.",
+		description: "Discover how Pilot Spring scopes and ships products faster.",
 		externalUrl: "https://launchmvp.com/events/ai-demo",
 		category: "conference",
 		location: "Austin, TX",

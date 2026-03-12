@@ -4,11 +4,11 @@ import { mapSeoMetaToMetadata } from "@/utils/seo/mapSeoMetaToMetadata";
 describe("mapSeoMetaToMetadata manifesto integration", () => {
 	it("generates seeAlso links for manifesto sections", () => {
 		const metadata = mapSeoMetaToMetadata({
-			title: "About Launch MVP",
+			title: "About Pilot Spring",
 			description:
-				"Discover the Launch MVP manifesto and founder delivery model.",
+				"Discover the Pilot Spring manifesto and founder delivery model.",
 			canonical: "https://launchmvp.com/about",
-			keywords: ["Launch MVP", "about"],
+			keywords: ["Pilot Spring", "about"],
 			image: "/og-image.png",
 			manifestoSections: timelineSummary,
 		});

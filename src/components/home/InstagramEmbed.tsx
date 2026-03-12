@@ -23,8 +23,8 @@ const InstagramEmbed = ({ className }: InstagramEmbedProps) => {
 		<section className={cn("px-4 py-12 sm:px-6 lg:px-8", className)}>
 			<div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8">
 				<Header
-					title="Launch MVP in real life"
-					subtitle="Watch raw build moments, founder breakthroughs, workshop clips, and behind-the-scenes product sprints from the Launch MVP community. Every post shows how founders and product teams cut scope, ship faster, and turn ideas into real launch-ready products."
+					title="Pilot Spring in real life"
+					subtitle="Watch raw build moments, founder breakthroughs, workshop clips, and behind-the-scenes product sprints from the Pilot Spring community. Every post shows how founders and product teams cut scope, ship faster, and turn ideas into real launch-ready products."
 					size="lg"
 					className="text-center"
 				/>
@@ -70,11 +70,11 @@ const InstagramEmbed = ({ className }: InstagramEmbedProps) => {
 									isDark ? "border-white/30" : "border-[hsl(var(--border))]",
 								)}
 							/>
-							<span>Loading the latest Launch MVP posts…</span>
+							<span>Loading the latest Pilot Spring posts…</span>
 						</div>
 					</div>
 					<iframe
-						title="Launch MVP Instagram feed"
+						title="Pilot Spring Instagram feed"
 						src={INSTAGRAM_EMBED_URL}
 						className="relative mx-auto min-h-[420px] w-full max-w-3xl rounded-2xl border-0"
 						style={{

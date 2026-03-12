@@ -188,7 +188,7 @@ const CallHandoffCard = ({
 							className="size-full object-cover"
 						/>
 					</div>
-					<h3 className="font-semibold text-lg">Launch MVP Sprint Plan</h3>
+					<h3 className="font-semibold text-lg">Pilot Spring Sprint Plan</h3>
 					<p className="text-slate-300 text-sm">
 						Your scope, stack, and launch plan are ready. Accept and we&apos;ll
 						walk through the build path and next steps.

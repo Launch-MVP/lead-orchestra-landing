@@ -30,10 +30,10 @@ export const AboutUsSection: React.FC = () => (
 					Our Mission
 				</span>
 				<h2 className="mb-4 font-bold text-3xl text-foreground sm:text-4xl">
-					About <span className="text-primary">Launch MVP</span>
+					About <span className="text-primary">Pilot Spring</span>
 				</h2>
 				<p className="mb-6 max-w-lg text-base text-muted-foreground dark:text-gray-300">
-					Launch MVP helps founders and product teams stop circling ideas and
+					Pilot Spring helps founders and product teams stop circling ideas and
 					start shipping real products. We scope the critical workflow, design
 					the launch path, build the core systems, wire the right integrations,
 					and package a clean handoff so the MVP can go live in days instead of

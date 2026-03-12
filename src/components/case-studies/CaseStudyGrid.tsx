@@ -33,7 +33,7 @@ interface CaseStudyGridProps {
 
 const DEFAULT_TITLE = "Case Studies";
 const DEFAULT_SUBTITLE =
-	"See how founders and product teams used Launch MVP to cut scope, ship the core workflow, and get a real product in front of users fast.";
+	"See how founders and product teams used Pilot Spring to cut scope, ship the core workflow, and get a real product in front of users fast.";
 
 const CaseStudyGrid: React.FC<CaseStudyGridProps> = ({
 	caseStudies,

@@ -87,13 +87,13 @@ That means Notion values are fill-only defaults, except where the destination is
 
 ## Example Rows
 
-### Launch MVP qualification
+### Pilot Spring qualification
 
 | Slug | Destination | utm_source | utm_campaign |
 |---|---|---|---|
 | `launch-mvp-qualification` | `https://launchmvp.com/contact?tab=prequalification` | `notion` | `launch_mvp_redirects` |
 
-### Launch MVP deposit
+### Pilot Spring deposit
 
 | Slug | Destination | utm_source | utm_campaign |
 |---|---|---|---|

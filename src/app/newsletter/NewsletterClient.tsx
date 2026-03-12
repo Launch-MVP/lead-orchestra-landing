@@ -28,12 +28,12 @@ const PERSONA_NEWSLETTER_HERO: Record<
 	developer: {
 		headline: "Build Faster With Better Systems",
 		subheadline:
-			"Join the Launch MVP newsletter for workflow templates, architecture notes, integration patterns, and launch checklists that help developers ship MVPs without overbuilding.",
+			"Join the Pilot Spring newsletter for workflow templates, architecture notes, integration patterns, and launch checklists that help developers ship MVPs without overbuilding.",
 	},
 	agency: {
 		headline: "Sharpen Client Delivery",
 		subheadline:
-			"Get Launch MVP delivery systems, client handoff templates, launch checklists, and productized-service ideas that help agencies move from vague scope to shipped outcomes.",
+			"Get Pilot Spring delivery systems, client handoff templates, launch checklists, and productized-service ideas that help agencies move from vague scope to shipped outcomes.",
 	},
 	startup: {
 		headline: "Build Your MVP Faster",
@@ -43,7 +43,7 @@ const PERSONA_NEWSLETTER_HERO: Record<
 	enterprise: {
 		headline: "Systemize Product Delivery",
 		subheadline:
-			"Get Launch MVP operating systems for product teams, including implementation frameworks, integration planning, handoff standards, and AI workflow patterns for internal delivery.",
+			"Get Pilot Spring operating systems for product teams, including implementation frameworks, integration planning, handoff standards, and AI workflow patterns for internal delivery.",
 	},
 };
 
@@ -119,11 +119,11 @@ export default function NewsletterClient({ posts }: { posts: BeehiivPost[] }) {
 				badgeRight="Build Notes"
 				headline={heroContent.headline}
 				subheadline={heroContent.subheadline}
-				highlight="with Launch MVP"
+				highlight="with Pilot Spring"
 				ctaVariant="form"
 				ctaForm={<NewsletterEmailInput />}
 				image={offerImg}
-				imageAlt="Launch MVP build systems and product delivery notes"
+				imageAlt="Pilot Spring build systems and product delivery notes"
 			/>
 			{showLogosError ? (
 				<div className="mx-auto my-12 max-w-5xl text-center text-destructive">
@@ -153,7 +153,7 @@ export default function NewsletterClient({ posts }: { posts: BeehiivPost[] }) {
 					testimonials={testimonials}
 					title={"What Our Clients Say"}
 					subtitle={
-						"Hear how founders and product teams moved faster with Launch MVP."
+						"Hear how founders and product teams moved faster with Pilot Spring."
 					}
 				/>
 			) : showTestimonialsEmptyReady ? (

@@ -121,7 +121,7 @@ const HERO_COPY_V7 = {
 	},
 	demo_mode: {
 		enabled: true,
-		headline_variant: "3-Day MVP Workshop - See Launch MVP in Action",
+		headline_variant: "3-Day MVP Workshop - See Pilot Spring in Action",
 		cta: "Start Launch Walkthrough",
 	},
 	metadata: {

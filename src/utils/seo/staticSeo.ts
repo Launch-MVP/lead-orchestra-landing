@@ -37,9 +37,9 @@ export const staticSeoMeta: Record<string, SeoMeta> = {
 	"/products": STATIC_SEO_META["/products"] ?? {
 		priority: 0.8,
 		changeFrequency: "weekly",
-		title: "Products | Launch MVP",
+		title: "Products | Pilot Spring",
 		description:
-			"Browse Launch MVP offers, systems, templates, and specialist support for founders shipping products.",
+			"Browse Pilot Spring offers, systems, templates, and specialist support for founders shipping products.",
 		canonical: `${SITE_URL}/products`,
 		image: DEFAULT_SEO.image,
 		keywords: [...DEFAULT_SEO.keywords, "products", "shop", "catalog"],

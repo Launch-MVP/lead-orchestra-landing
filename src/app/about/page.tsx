@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 const MANIFESTO_SCHEMA = buildManifestoSchema(timelineSummary, {
 	url: "/about",
-	name: "Launch MVP Founder Manifesto",
+	name: "Pilot Spring Founder Manifesto",
 });
 
 // * Generate metadata for the about page

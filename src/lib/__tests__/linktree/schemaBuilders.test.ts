@@ -37,8 +37,8 @@ describe("linktree schema builder", () => {
 
 		expect(schema["@context"]).toBe("https://schema.org");
 		expect(schema["@type"]).toBe("ItemList");
-		expect(schema.name).toBe("Launch MVP Link Tree");
-		expect(schema.description).toContain("Quick access to Launch MVP's");
+		expect(schema.name).toBe("Pilot Spring Link Tree");
+		expect(schema.description).toContain("Quick access to Pilot Spring's");
 		expect(schema.itemListOrder).toBe(
 			"https://schema.org/ItemListOrderAscending",
 		);

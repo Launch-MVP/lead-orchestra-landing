@@ -454,7 +454,7 @@ const MobileNav = ({
 						width={520}
 						height={120}
 						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
-						alt="Launch MVP"
+						alt="Pilot Spring"
 						className="block h-auto w-full dark:hidden"
 					/>
 					{/* Dark mode logo */}
@@ -462,7 +462,7 @@ const MobileNav = ({
 						width={520}
 						height={120}
 						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
-						alt="Launch MVP"
+						alt="Pilot Spring"
 						className="hidden h-auto w-full dark:block"
 					/>
 				</div>
@@ -610,7 +610,7 @@ export default function Navbar() {
 						{/* Light mode logo */}
 						<Image
 							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
-							alt="Launch MVP"
+							alt="Pilot Spring"
 							width={400}
 							height={100}
 							priority
@@ -619,7 +619,7 @@ export default function Navbar() {
 						{/* Dark mode logo */}
 						<Image
 							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
-							alt="Launch MVP"
+							alt="Pilot Spring"
 							width={400}
 							height={100}
 							priority

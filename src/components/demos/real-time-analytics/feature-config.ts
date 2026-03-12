@@ -55,7 +55,7 @@ const realTimeFeaturesSeed = [
 			"We turn the product idea into a defined launch version with clear user flows, architecture decisions, and a realistic sprint plan.",
 		media: {
 			src: "/demo/static/charts/tab-1/baseline-kpis-top.png",
-			alt: "Launch MVP scoping dashboard showing readiness, priorities, and launch planning.",
+			alt: "Pilot Spring scoping dashboard showing readiness, priorities, and launch planning.",
 		},
 		chart: {
 			heading: "Launch readiness vs. target scope",

@@ -265,7 +265,7 @@ const ProductCardNew = (props: CardProps) => {
 				onClick={handleMonetizeMarketplaceClick}
 				title={monetizeInfo.title}
 				subtitle={monetizeInfo.subtitle}
-				ariaLabel={`${monetizeInfo.title} with Launch MVP`}
+				ariaLabel={`${monetizeInfo.title} with Pilot Spring`}
 				className={className}
 			/>
 		);

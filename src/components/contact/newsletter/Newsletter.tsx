@@ -29,7 +29,7 @@ const PERSONA_N8N_CONTENT: Record<
 	}
 > = {
 	developer: {
-		title: "Launch MVP Build Systems",
+		title: "Pilot Spring Build Systems",
 		description:
 			"Workflow templates, architecture notes, integration patterns, and launch checklists for developers shipping MVPs with less drag.",
 		features: [
@@ -40,7 +40,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	agency: {
-		title: "Launch MVP Delivery Systems",
+		title: "Pilot Spring Delivery Systems",
 		description:
 			"Client delivery systems, service packaging ideas, and launch checklists for agencies turning messy scope into shipped outcomes.",
 		features: [
@@ -51,7 +51,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	startup: {
-		title: "Launch MVP Build Notes",
+		title: "Pilot Spring Build Notes",
 		description:
 			"Build notes, scope-cut frameworks, launch systems, and founder templates for startups trying to ship a real MVP fast without overbuilding.",
 		features: [
@@ -62,7 +62,7 @@ const PERSONA_N8N_CONTENT: Record<
 		],
 	},
 	enterprise: {
-		title: "Launch MVP Operating Systems",
+		title: "Pilot Spring Operating Systems",
 		description:
 			"Operating frameworks for product teams standardizing launch execution, implementation quality, and AI workflow delivery across the stack.",
 		features: [
@@ -170,7 +170,7 @@ export const Newsletter = () => {
 					{n8nContent.title}
 				</h2>
 				<p className="mx-auto max-w-2xl text-black dark:text-white/70">
-					{n8nContent.description} Join the Launch MVP newsletter for practical
+					{n8nContent.description} Join the Pilot Spring newsletter for practical
 					systems, sharper execution patterns, and founder-ready insights. No
 					fluff, just what helps teams ship.
 				</p>

@@ -16,7 +16,7 @@ export const timeline: TimelineEntry[] = [
 					detached from a real customer outcome.
 				</p>
 				<p>
-					Launch MVP was built for the stage where the idea is alive, but the
+					Pilot Spring was built for the stage where the idea is alive, but the
 					product still needs pressure-tested scope, cleaner decisions, and a
 					faster path to something real.
 				</p>
@@ -82,7 +82,7 @@ export const timeline: TimelineEntry[] = [
 		content: (
 			<div className={cardClass}>
 				<p>
-					A Launch MVP engagement should end with more than a pitch deck or a
+					A Pilot Spring engagement should end with more than a pitch deck or a
 					pretty mockup. The work should reduce ambiguity and move the product
 					closer to an actual launch.
 				</p>
@@ -119,7 +119,7 @@ export const timeline: TimelineEntry[] = [
 		content: (
 			<div className={cardClass}>
 				<p>
-					Launch MVP is evolving into a tighter founder delivery system with
+					Pilot Spring is evolving into a tighter founder delivery system with
 					more workshop paths, better launch assets, and clearer specialist
 					support after the initial build.
 				</p>

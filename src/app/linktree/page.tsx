@@ -15,20 +15,20 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	return {
 		...mapSeoMetaToMetadata(seo),
-		title: "Link Tree | Launch MVP",
+		title: "Link Tree | Pilot Spring",
 		description:
-			"Explore Launch MVP's curated collection of links. Quick access to services, products, case studies, events, and founder resources in one place.",
+			"Explore Pilot Spring's curated collection of links. Quick access to services, products, case studies, events, and founder resources in one place.",
 		openGraph: {
-			title: "Launch MVP Link Tree",
+			title: "Pilot Spring Link Tree",
 			description:
-				"Quick access to Launch MVP's most important links, resources, and pages.",
+				"Quick access to Pilot Spring's most important links, resources, and pages.",
 			url: baseUrl,
 			type: "website",
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "Launch MVP Link Tree",
-			description: "Quick access to Launch MVP's resources and pages.",
+			title: "Pilot Spring Link Tree",
+			description: "Quick access to Pilot Spring's resources and pages.",
 		},
 	};
 }

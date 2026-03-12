@@ -44,7 +44,7 @@ export async function generateMetadata({
 					alt: product.name,
 				},
 			],
-			siteName: "Launch MVP",
+			siteName: "Pilot Spring",
 			type: "website",
 		},
 		twitter: {

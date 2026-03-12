@@ -10,7 +10,7 @@ export const timelineSummary: ManifestoSectionSummary[] = [
 		title: "1. Why We Exist",
 		subtitle: "Too many founders spend months circling version one",
 		summary:
-			"Launch MVP exists to help founders escape endless planning and move toward a real product faster.",
+			"Pilot Spring exists to help founders escape endless planning and move toward a real product faster.",
 		anchor: "why-we-exist",
 	},
 	{
@@ -46,7 +46,7 @@ export const timelineSummary: ManifestoSectionSummary[] = [
 		subtitle:
 			"More workshop paths, stronger launch support, sharper specialist help",
 		summary:
-			"Launch MVP is expanding into a broader founder delivery system built around fast scope, focused execution, and cleaner post-launch support.",
+			"Pilot Spring is expanding into a broader founder delivery system built around fast scope, focused execution, and cleaner post-launch support.",
 		anchor: "where-this-is-going",
 	},
 ];

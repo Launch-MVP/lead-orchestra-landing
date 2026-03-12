@@ -2,9 +2,9 @@ import type { FAQItem } from "@/types/faq";
 
 export const faqItems: FAQItem[] = [
 	{
-		question: "What is Launch MVP?",
+		question: "What is Pilot Spring?",
 		answer:
-			"Launch MVP is a productized MVP build service for founders and innovation teams. The core offer is the 3-Day MVP Workshop: we scope the product, define the critical user flow, build the launch version, wire the key integrations, and hand over a production-ready foundation your team can extend.",
+			"Pilot Spring is a productized MVP build service for founders and innovation teams. The core offer is the 3-Day MVP Workshop: we scope the product, define the critical user flow, build the launch version, wire the key integrations, and hand over a production-ready foundation your team can extend.",
 	},
 	{
 		question: "Who is this built for?",

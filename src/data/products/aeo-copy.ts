@@ -4,7 +4,7 @@ export const freeAeoContentCalendarABTest = defineAbTests([
 	{
 		id: "ab-test-aeo-calendar-v1",
 		name: "Free Launch AEO Content Calendar Copy",
-		description: "Copy for the Launch MVP AEO content calendar.",
+		description: "Copy for the Pilot Spring AEO content calendar.",
 		variants: [
 			{
 				name: "V1 - Visibility Focus",
@@ -14,7 +14,7 @@ export const freeAeoContentCalendarABTest = defineAbTests([
 					buttonCta: "Download Free Calendar",
 					tagline: "Plan Launch Content for AI Search.",
 					subtitle:
-						"A 90-day content calendar designed to help Launch MVP founders publish answer-first content that shows up in AI search.",
+						"A 90-day content calendar designed to help Pilot Spring founders publish answer-first content that shows up in AI search.",
 					whatsInItForMe:
 						"You get a practical content plan that supports founder authority, product education, and AI-search visibility around the launch.",
 					target_audience: "Founders, content marketers, and launch teams.",
@@ -52,7 +52,7 @@ export const aeoLandingPageTemplateABTest = defineAbTests([
 					buttonCta: "Get the Template",
 					tagline: "Launch Pages That AI Can Read.",
 					subtitle:
-						"A conversion-focused landing page template pre-configured with the schema and structure AI systems need to understand your Launch MVP offer.",
+						"A conversion-focused landing page template pre-configured with the schema and structure AI systems need to understand your Pilot Spring offer.",
 					whatsInItForMe:
 						"Save build time and skip the technical guesswork of structuring a launch page for both humans and AI systems.",
 					target_audience: "Founders, developers, and growth teams.",
@@ -86,7 +86,7 @@ export const aeoLandingPageDfyServiceABTest = defineAbTests([
 				name: "V1 - Expert Implementation",
 				percentage: 100,
 				copy: {
-					cta: "Let Launch MVP Build It",
+					cta: "Let Pilot Spring Build It",
 					buttonCta: "Book Discovery Call",
 					tagline: "Your Launch Surface, AI Optimized.",
 					subtitle:

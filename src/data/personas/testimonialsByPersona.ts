@@ -14,11 +14,11 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			name: "Noah Kim",
 			role: "CTO, B2B Workflow Startup",
 			content:
-				"Launch MVP gave us speed without the usual prototype debt. They scoped the core flows, shipped the product, and handed over a codebase my team was comfortable extending immediately.",
+				"Pilot Spring gave us speed without the usual prototype debt. They scoped the core flows, shipped the product, and handed over a codebase my team was comfortable extending immediately.",
 			problem:
 				"We had product clarity but kept losing time to setup work, architecture decisions, and a bloated feature list. Shipping fast without creating a rewrite was the hard part.",
 			solution:
-				"Launch MVP cut the scope to the real user path, wired the core systems, and delivered a clean implementation with documentation and handoff. We launched faster and kept engineering standards intact.",
+				"Pilot Spring cut the scope to the real user path, wired the core systems, and delivered a clean implementation with documentation and handoff. We launched faster and kept engineering standards intact.",
 			rating: 5,
 			company: "B2B Workflow Startup",
 		},
@@ -28,7 +28,7 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			name: "Eli Navarro",
 			role: "Founding Engineer, Vertical SaaS",
 			content:
-				"Most shops say they move fast, but they usually hand you cleanup work. Launch MVP shipped something we could actually build on. The architecture, auth flow, billing, and analytics were all thought through.",
+				"Most shops say they move fast, but they usually hand you cleanup work. Pilot Spring shipped something we could actually build on. The architecture, auth flow, billing, and analytics were all thought through.",
 			problem:
 				"Our backlog was full of foundational work that was blocking user testing. We needed help shipping the MVP without inheriting a fragile codebase.",
 			solution:
@@ -48,7 +48,7 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			problem:
 				"I did not have a technical cofounder or the bandwidth to manage a full freelance team. Every proposal I got was vague about what would actually be delivered.",
 			solution:
-				"Launch MVP turned the idea into a defined build, kept the sprint focused, and shipped the parts that mattered for launch instead of burying us in optional features.",
+				"Pilot Spring turned the idea into a defined build, kept the sprint focused, and shipped the parts that mattered for launch instead of burying us in optional features.",
 			rating: 5,
 			company: "Operations Software Startup",
 		},
@@ -78,7 +78,7 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			problem:
 				"We were stuck between discovery and delivery. The concept was solid, but we were losing time debating features, flows, and what counted as version one.",
 			solution:
-				"Launch MVP handled the scope cut, build plan, and implementation so we could get real product feedback instead of continuing to speculate.",
+				"Pilot Spring handled the scope cut, build plan, and implementation so we could get real product feedback instead of continuing to speculate.",
 			rating: 5,
 			company: "Seed-Stage SaaS Startup",
 		},
@@ -104,7 +104,7 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			name: "Morgan Lee",
 			role: "Director of Innovation, Enterprise SaaS",
 			content:
-				"We needed a fast pilot without dragging the core product team into another side project. Launch MVP gave us a usable prototype, analytics, and a clear decision point for what should be funded next.",
+				"We needed a fast pilot without dragging the core product team into another side project. Pilot Spring gave us a usable prototype, analytics, and a clear decision point for what should be funded next.",
 			problem:
 				"New product bets were dying in planning because internal teams were fully allocated. We needed a focused pilot that could be evaluated quickly.",
 			solution:
@@ -122,7 +122,7 @@ export const personaTestimonials: Record<PersonaKey, PersonaTestimonial[]> = {
 			problem:
 				"We had strong internal interest but no appetite for a six-month discovery process. The risk was spending too long debating a product nobody had used.",
 			solution:
-				"Launch MVP turned the concept into a pilot fast enough for stakeholder review and structured the next steps so internal teams could take over intelligently.",
+				"Pilot Spring turned the concept into a pilot fast enough for stakeholder review and structured the next steps so internal teams could take over intelligently.",
 			rating: 5,
 			company: "Internal Venture Studio",
 		},

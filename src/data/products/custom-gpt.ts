@@ -37,7 +37,7 @@ export const customGptProducts: ProductType[] = [
 		id: "custom-blog-gpt-template",
 		name: "Self-Serve Launch Content GPT Template",
 		description:
-			"A deterministic content workflow for Launch MVP founders publishing answer-first posts, launch explainers, and founder-led authority content. Includes the GPT config, prompt playbook, output spec, internal-link rules, and CTA placement logic.",
+			"A deterministic content workflow for Pilot Spring founders publishing answer-first posts, launch explainers, and founder-led authority content. Includes the GPT config, prompt playbook, output spec, internal-link rules, and CTA placement logic.",
 		price: 199,
 		sku: "GPT-BLOG-TEMPLATE-001",
 		slug: "custom-blog-gpt-template",
@@ -78,7 +78,7 @@ export const customGptProducts: ProductType[] = [
 		id: "custom-blog-gpt-build-standard",
 		name: "Custom Launch Content GPT - Standard Build",
 		description:
-			"We ingest your brand docs, sitemap, offers, and launch positioning to build a custom GPT that writes on-brand, on-offer, and on-structure for your Launch MVP content engine.",
+			"We ingest your brand docs, sitemap, offers, and launch positioning to build a custom GPT that writes on-brand, on-offer, and on-structure for your Pilot Spring content engine.",
 		price: 4500,
 		sku: "GPT-BLOG-SERVICE-STD",
 		slug: "custom-blog-gpt-standard",

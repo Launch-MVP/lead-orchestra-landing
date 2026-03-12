@@ -63,8 +63,8 @@ const ServicePageClient: React.FC<ServicePageClientProps> = ({ service }) => {
 			<Separator className="mx-auto my-16 max-w-7xl border-white/10" />
 			<BentoPage
 				features={MainBentoFeatures}
-				title="Why Founders Choose Launch MVP"
-				subtitle="Launch MVP combines strategy, execution, launch support, and specialist help so version one ships faster with less cleanup debt."
+				title="Why Founders Choose Pilot Spring"
+				subtitle="Pilot Spring combines strategy, execution, launch support, and specialist help so version one ships faster with less cleanup debt."
 			/>
 			<Separator className="mx-auto my-8 max-w-7xl border-white/10" />
 			<section className="container">

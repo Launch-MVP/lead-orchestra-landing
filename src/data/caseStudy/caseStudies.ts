@@ -447,7 +447,7 @@ export const caseStudies: CaseStudy[] = [
 		copyright: {
 			title: "Have the vision but missing the code?",
 			subtitle:
-				"Launch MVP partners with non-technical founders to build, launch, and scale their platforms smoothly.",
+				"Pilot Spring partners with non-technical founders to build, launch, and scale their platforms smoothly.",
 			ctaText: "Bring Your Idea to Life",
 			ctaLink: "/contact",
 		},
@@ -520,7 +520,7 @@ export const caseStudies: CaseStudy[] = [
 		copyright: {
 			title: "Scaling beyond manual data tasks?",
 			subtitle:
-				"Launch MVP helps enterprise teams build custom data pipelines and automation systems to unlock their growth potential.",
+				"Pilot Spring helps enterprise teams build custom data pipelines and automation systems to unlock their growth potential.",
 			ctaText: "Automate Your Pipeline",
 			ctaLink: "/contact",
 		},

@@ -93,13 +93,13 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
 
   <document id="launch_mvp_specific_context">
     Current brand/system context that future one-shot copy updates must preserve and verify:
-    - The active offer is Launch MVP, not Lead Orchestra or Deal Scale, unless the user explicitly asks to keep or restore those brands on specific pages.
+    - The active offer is Pilot Spring, not Lead Orchestra or Deal Scale, unless the user explicitly asks to keep or restore those brands on specific pages.
     - The default in-person flagship offer is a Denver-based 3-day MVP build workshop.
     - "Bootcamp" language should be treated as stale unless explicitly requested; prefer "workshop".
     - Default timeline framing for the flagship offer is 3 days, not weeks.
     - "Features" language may need to be reframed as "services" when the surrounding page is describing delivery offers rather than software capabilities.
 
-    Launch MVP pricing / offer structure that copy updates must respect unless the user overrides it:
+    Pilot Spring pricing / offer structure that copy updates must respect unless the user overrides it:
     - Pricing tabs include monthly, one-time, and in-person.
     - In-person offers are distinct, discount-framed workshop tiers with Denver positioning.
     - The pricing page may show compare-at pricing, limited-time discounts, corner ribbons, and Denver-specific badges.
@@ -115,14 +115,14 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
 
     Product catalog context that copy refreshes must explicitly include:
     - Notion Systems are real products in this repo and must not be omitted from launch/product catalog updates.
-    - SEO/AEO products should remain present and should be optimized for Launch MVP positioning unless explicitly removed.
+    - SEO/AEO products should remain present and should be optimized for Pilot Spring positioning unless explicitly removed.
     - Credits remain in the catalog and may need AI / MVP-specific copy, not removal.
     - Product category copy should distinguish between templates, services, workshops, support, and specialist staffing.
 
     Events page context:
-    - Events should reflect Launch MVP workshops, founder sessions, launch/product strategy events, and related offerings.
+    - Events should reflect Pilot Spring workshops, founder sessions, launch/product strategy events, and related offerings.
     - The events page should include an upcoming Denver workshop entry when relevant to the current offer set.
-    - Replace stale scraping/data-conference language if the brand scope has changed to Launch MVP.
+    - Replace stale scraping/data-conference language if the brand scope has changed to Pilot Spring.
 
     Tracking / analytics context:
     - Do not remove or silently break GTM / dataLayer / gtag-sensitive CTA behavior when editing product, pricing, or contact copy modules.
@@ -131,7 +131,7 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
     Stale-language verification themes:
     - Lead Orchestra
     - Deal Scale / DealScale
-    - scraping / scraper / lead scraping when the page is supposed to be Launch MVP-focused
+    - scraping / scraper / lead scraping when the page is supposed to be Pilot Spring-focused
     - "consultation" when the actual flow is a deposit hold or free-slot application
     - weeks/bootcamp phrasing when the offer is now framed as a 3-day workshop
   </document>
@@ -174,7 +174,7 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
         - Group files by domain (data/seo/app/components/ui/etc.)
         - Explicitly list "embedded copy hotspots" where text is inline instead of imported from src/data
         - Explicitly list "mounted homepage hotspots" for every visible section on the landing page
-        - If the brief implies Launch MVP positioning, explicitly inventory:
+        - If the brief implies Pilot Spring positioning, explicitly inventory:
           - pricing tabs/cards/ribbons
           - contact page tabs/forms/whats-next modules
           - banner/footer CTA modules
@@ -242,7 +242,7 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
           - Descriptions are present and non-duplicative across major pages (best effort)
           - No accidental removal of metadataBase or canonical domain config unless requested
         - Product catalog sanity checks:
-          - Confirm category-driven product pages still include applicable Notion products, SEO/AEO products, credits, and any Launch MVP-specific items mentioned in the brief
+          - Confirm category-driven product pages still include applicable Notion products, SEO/AEO products, credits, and any Pilot Spring-specific items mentioned in the brief
         - Conversion-flow sanity checks:
           - Confirm deposit-oriented CTAs still point to deposit/reservation flows
           - Confirm free-slot/application CTAs still point to qualification flows
@@ -284,7 +284,7 @@ description: AI-assisted update of ALL site copy (src/data + SEO + app/component
         - src/data/caseStudy/caseStudies.ts
         - src/data/personas/catalog.ts
 
-        Required non-homepage verification targets for Launch MVP offer refreshes:
+        Required non-homepage verification targets for Pilot Spring offer refreshes:
         - src/components/layout/BetaStickyBanner.tsx
         - src/components/layout/FooterBetaCta.tsx
         - src/app/contact/ContactClient.tsx
