@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({
 							<Link href="/" className="w-full max-w-[200px] lg:max-w-none">
 								{/* Light mode logo */}
 								<Image
-									src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
+									src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Light%20Mode.png"
 									alt="Pilot Spring"
 									width={300}
 									height={76}
@@ -96,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
 								/>
 								{/* Dark mode logo */}
 								<Image
-									src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
+									src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Dark%20Mode.png"
 									alt="Pilot Spring"
 									width={300}
 									height={76}

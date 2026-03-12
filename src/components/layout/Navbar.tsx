@@ -453,7 +453,7 @@ const MobileNav = ({
 					<Image
 						width={520}
 						height={120}
-						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
+						src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Light%20Mode.png"
 						alt="Pilot Spring"
 						className="block h-auto w-full dark:hidden"
 					/>
@@ -461,7 +461,7 @@ const MobileNav = ({
 					<Image
 						width={520}
 						height={120}
-						src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
+						src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Dark%20Mode.png"
 						alt="Pilot Spring"
 						className="hidden h-auto w-full dark:block"
 					/>
@@ -609,7 +609,7 @@ export default function Navbar() {
 					<Link href="/" className="z-20 flex shrink-0 items-center">
 						{/* Light mode logo */}
 						<Image
-							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Light%20Mode.png"
+							src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Light%20Mode.png"
 							alt="Pilot Spring"
 							width={400}
 							height={100}
@@ -618,7 +618,7 @@ export default function Navbar() {
 						/>
 						{/* Dark mode logo */}
 						<Image
-							src="/logos/launch_mvp/Launch%20MVP%20Horizontal%20Dark%20Mode.png"
+							src="/logos/pilot_spring/Pilot%20Spring%20Horizontal%20Dark%20Mode.png"
 							alt="Pilot Spring"
 							width={400}
 							height={100}
